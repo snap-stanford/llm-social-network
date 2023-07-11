@@ -61,4 +61,5 @@ def parse_network_from_gpt_output(node_fn, edge_fn,
 
 if __name__ == '__main__':
     # could change this to read from command line
-    parse_network_from_gpt_output('nodes.txt', 'network3.txt')  
+    parse_network_from_gpt_output('nodes.txt', 'network3.txt')
+    # maya was here
