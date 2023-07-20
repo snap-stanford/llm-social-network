@@ -1,9 +1,7 @@
 import matplotlib.pyplot as plt
 import networkx as nx
 import os
-
-PATH_TO_TEXT_FILES = './text-files'  # folder holding text files, typically GPT output
-PATH_TO_SAVED_PLOTS = './saved-plots'  # folder holding plots, eg, network figures
+from constants_and_utils import *
 
 def parse_network_from_gpt_output(node_fn, edge_fn, 
                                   drop_isolates=True, draw_network=True):
@@ -45,17 +43,8 @@ def parse_network_from_gpt_output(node_fn, edge_fn,
         G.remove_nodes_from(isolates)
     # draw network
     if draw_network:
-        nx.draw_networkx(G, pos=nx.spring_layout(G, seed=0))
-        plt.axis("off")  # turn off axis
-        axis = plt.gca()
-        axis.set_xlim([1.1*x for x in axis.get_xlim()])  # add padding so that node labels aren't cut off
-        axis.set_ylim([1.1*y for y in axis.get_ylim()])
-        plt.tight_layout()
-
         fig_fn = edge_fn.split('.', 1)[0] + '.png'  # get filename without extension
-        fig_path = os.path.join(PATH_TO_SAVED_PLOTS, fig_fn)
-        print('Saved network drawing in ', fig_path)
-        plt.savefig(fig_path)
+        draw_and_save_network_plot(G, fig_fn)
     return G     
 
 
