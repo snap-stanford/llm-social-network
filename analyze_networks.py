@@ -1,8 +1,9 @@
 import networkx as nx
 import os
-from constants_and_utils import *
 import matplotlib.pyplot as plt
 import numpy as np
+from constants_and_utils import *
+from generatepersonas import *
 
 def load_list_of_graphs(prefix, start_seed, end_seed, directed=True):
     """
@@ -86,30 +87,33 @@ def get_edge_summary(list_of_G):
     plt.show()
 
 
-def compute_cross_proportions(G, ratio=True):
+def compute_cross_proportions(G, personas, demo_keys, ratio=True):
     """
     Compute homophily as proportion of edges that are cross-relations,
     per demographic variable.
     If ratio is true, divide by expected proportions.
     """
-    props = _compute_cross_proportions(G)
+    props = _compute_cross_proportions(G, personas, demo_keys)
     if ratio:
+        # get expected proportions of cross-relations from complete graph
         complete = nx.complete_graph(G.nodes(), create_using=nx.DiGraph())
-        exp_props = _compute_cross_proportions(complete)
+        exp_props = _compute_cross_proportions(complete, personas, demo_keys)
         props /= exp_props
     return props
 
-def _compute_cross_proportions(G):
+def _compute_cross_proportions(G, personas, demo_keys):
     """
     Helper function to compute the proportion of edges in the graph that are 
     cross-relations, per demographic variable.
     """
     # count cross-relationships in graph
-    crs = np.zeros(len(DEMO_KEYS))
+    crs = np.zeros(len(demo_keys))
     for source, target in G.edges():
-        demo1 = PERSONAS[source.replace('-', ' ')].split(', ')
-        demo2 = PERSONAS[target.replace('-', ' ')].split(', ')
-        for d, k in enumerate(DEMO_KEYS):
+        demo1 = personas[source.replace('-', ' ')]
+        assert len(demo1) == len(demo_keys)
+        demo2 = personas[target.replace('-', ' ')]
+        assert len(demo2) == len(demo_keys)
+        for d, k in enumerate(demo_keys):
             if k == 'age':  # take absolute difference for age
                 crs[d] += abs(int(demo1[d]) - int(demo2[d]))
             else:
@@ -118,33 +122,42 @@ def _compute_cross_proportions(G):
     props = crs / len(G.edges())  # get proportion of edges
     return props
 
-def summarize_network_metrics(list_of_G, funcs, func_labels):
+def compute_cross_proportions_within_demo(G, personas, demo_keys, demo):
+    """
+    TODO: return a matrix of type1-type2 ratios (eg, Man-Man, Man-Woman, Man-Nonbinary, etc).
+    These should still be ratios, ie, actual proportions divided by expected proportions.
+    """
+    pass
+
+def summarize_network_metrics(list_of_G, personas, demo_keys, funcs, func_labels):
     """
     Summarize mean and 95% of network metrics over list of graphs, 
     including cross ratios, average degree, clustering, etc.
     """
     all_metrics = []
     for G in list_of_G:
-        metrics = list(compute_cross_proportions(G))
+        metrics = list(compute_cross_proportions(G, personas, demo_keys))
         for f in funcs:
             metrics.append(f(G))
         all_metrics.append(metrics)
     all_metrics = np.array(all_metrics)
-    assert all_metrics.shape == (len(list_of_G), len(DEMO_KEYS)+len(funcs))
-    for i, m in enumerate(DEMO_KEYS + func_labels):
+    assert all_metrics.shape == (len(list_of_G), len(demo_keys)+len(funcs)), all_metrics.shape
+    for i, m in enumerate(demo_keys + func_labels):
         metric_over_graphs = all_metrics[:, i]  # get vector of metric over graphs
         lower = np.percentile(metric_over_graphs, 5)
         upper = np.percentile(metric_over_graphs, 95)
-        if i < len(DEMO_KEYS):
+        if i < len(demo_keys):
             m += ' cross-relation ratio'
-        print('%s: %.3f (90%% CI, %.3f-%.3f)' % (m, np.mean(metric_over_graphs), lower, upper))
+        print('%s: %.3f (%.3f-%.3f)' % (m, np.mean(metric_over_graphs), lower, upper))
 
 if __name__ == '__main__':
     # llm-network: third person
     # first-person: first person
     # second-person: second person
-    list_of_G = load_list_of_graphs('llm-network', 0, 50)
-    # get_edge_summary(list_of_G)
-    funcs = [nx.number_of_edges, nx.average_clustering, prop_nodes_in_giant_component]
-    func_labels = ['num edges', 'clustering coef', 'prop nodes in largest connected component']
-    summarize_network_metrics(list_of_G, funcs, func_labels)
+    list_of_G = load_list_of_graphs('second-person-n30', 0, 3)
+    get_edge_summary(list_of_G)
+    fn = os.path.join(PATH_TO_TEXT_FILES, 'personas_30.txt')
+    personas, demo_keys = load_personas_as_dict(fn, verbose=False)
+    funcs = [nx.density, nx.average_clustering, prop_nodes_in_giant_component]
+    func_labels = ['density', 'clustering coef', 'prop nodes in largest connected component']
+    summarize_network_metrics(list_of_G, personas, demo_keys, funcs, func_labels)
