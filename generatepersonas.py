@@ -5,7 +5,7 @@ from constants_and_utils import *
 DEMO_DESCRIPTIONS = {'gender': 'Man, Woman, or Nonbinary',
                      'age': '18-65',
                      'race/ethnicity': 'White, Black, Latino, Asian, Native American/Alaska Native, or Native Hawaiian',
-                     'religion': 'Protestant, Catholic, Jewish, Muslim, or Unreligious',
+                     'religion': 'Protestant, Catholic, Jewish, Muslim, Hindu, Buddhist, or Unreligious',
                      'political affiliation': 'Liberal, Conservative, Moderate, Independent'}
 GENERIC = {'name': 'John Smith',
            'gender': 'Man',
@@ -108,10 +108,10 @@ def convert_persona_to_string(name, personas, demo_keys, demos_to_include='all')
 
 
 if __name__ == '__main__':
-    n = 30
+    n = 50
     demos_to_include = ['gender', 'age', 'race/ethnicity', 'religion', 'political affiliation']
     # test generation
-    generate_personas(n, demos_to_include, save_response=True)
+    # generate_personas(n, demos_to_include, save_response=True)
     # test loading
     fn = os.path.join(PATH_TO_TEXT_FILES, f'personas_{n}.txt')
     print(load_personas_as_dict(fn))
