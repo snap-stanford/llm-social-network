@@ -1,0 +1,31 @@
+Name - gender, age, race/ethnicity, religion, political affiliation
+1. Emily Johnson - Woman, 28, Black, Unreligious, Liberal
+2. Miguel Rodriguez - Man, 40, Latino, Catholic, Conservative
+3. Sophia Chen - Woman, 22, Asian, Unreligious, Liberal
+4. David Martinez - Man, 45, Latino, Catholic, Moderate
+5. Maya Washington - Woman, 32, Black, Protestant, Conservative
+6. Muhammad Ahmed - Man, 50, Muslim, Conservative
+7. Olivia Thompson - Woman, 18, White, Unreligious, Liberal
+8. Isaac Lee - Man, 27, Asian, Protestant, Moderate
+9. Amanda Scott - Woman, 40, White, Catholic, Moderate
+10. Juan Ramirez - Man, 35, Latino, Catholic, Conservative
+11. Jasmine Kim - Woman, 23, Asian, Unreligious, Liberal
+12. Michael Johnson - Man, 45, Black, Protestant, Conservative
+13. Isabella Santos - Woman, 31, Latino, Catholic, Moderate
+14. Ahmed Ali - Man, 30, Muslim, Liberal
+15. Grace Anderson - Woman, 20, White, Protestant, Liberal
+16. Ethan Nguyen - Man, 29, Asian, Unreligious, Moderate
+17. Ashley Davis - Woman, 42, Black, Protestant, Conservative
+18. Carlos Hernandez - Man, 52, Latino, Catholic, Moderate
+19. Lily Wong - Woman, 25, Asian, Unreligious, Liberal
+20. Daniel Wilson - Man, 48, White, Protestant, Conservative
+21. Sofia Lopez - Woman, 33, Latino, Catholic, Moderate
+22. Aisha Khan - Nonbinary, 38, Muslim, Liberal
+23. Chloe Baker - Woman, 21, White, Protestant, Moderate
+24. Ryan Kim - Man, 33, Asian, Unreligious, Conservative
+25. Brianna Thompson - Woman, 44, Black, Protestant, Moderate
+26. Alejandro Garcia - Man, 55, Latino, Catholic, Conservative
+27. Mia Nguyen - Woman, 26, Asian, Unreligious, Liberal
+28. Benjamin Davis - Man, 43, White, Protestant, Moderate
+29. Gabriela Martinez - Woman, 30, Latino, Catholic, Conservative
+30. Jordan Taylor - Nonbinary, 24, Black, Unreligious, Liberal
