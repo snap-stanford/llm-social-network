@@ -1,3 +1,4 @@
+import argparse
 import os
 import openai
 import networkx as nx
@@ -5,25 +6,39 @@ import time
 import matplotlib.pyplot as plt
 from constants_and_utils import *
 
-def generate_prompt_for_person(name, perspective='third'):
+def generate_string_with_demos(name, demos_to_include):
+    """
+    Generate string for person, specifying which demographics to include (if any).
+    """
+    demo_vals = PERSONAS[name].split(', ')
+    demo2val = dict(zip(DEMO_KEYS, demo_vals))
+    s = name
+    if len(demos_to_include) > 0:
+        s += ' - '
+        demo_vals_to_include = [demo2val[d] if d != 'age' else f'age {demo2val[d]}' for d in demos_to_include]
+        s += ', '.join(demo_vals_to_include)
+    return s
+
+def generate_prompt_for_person(name, perspective='second', demos_to_include=DEMO_KEYS):
     """
     Generate prompt for person.
     """
     assert perspective in {'first', 'second', 'third'}, f'Not a valid perspective: {perspective}'
     assert name in PERSONAS
-    demo = PERSONAS[name]
-    if perspective == 'third':  # third person
-        prompt = f'{name} is a {demo}. Which of the following people will {name} become friends with?\n'
-        friends_prefix = 'Friends'
-    elif perspective == 'second':  # second person
-        prompt = f'You are {name} - {demo}. Which of the following people will you become friends with?\n'
-        friends_prefix = 'Your friends'
-    else:
-        prompt = f'I am {name} - {demo}. Which of the following people will I become friends with?\n'
+    person_str = generate_string_with_demos(name, demos_to_include)
+    if perspective == 'first':  # first person
+        prompt = f'I am {person_str}. Which of the following people will I become friends with?\n'
         friends_prefix = 'My friends:'
-    for n, d in PERSONAS.items():
+    elif perspective == 'second':  # second person
+        prompt = f'You are {person_str}. Which of the following people will you become friends with?\n'
+        friends_prefix = 'Your friends'
+    else:  # third person
+        prompt = f'This is {person_str}. Which of the following people will {name} become friends with?\n'
+        friends_prefix = 'Friends'
+
+    for n in PERSONAS:
         if name != n:
-            prompt += f'{n} - {d}\n'
+            prompt += generate_string_with_demos(n, demos_to_include) + '\n'
     prompt += f'{friends_prefix}:\n1.'  # begin numbered list
     return prompt
 
@@ -85,10 +100,13 @@ def construct_network(max_tries=10, save_prefix=None, prompt_kwargs={}):
     return G
 
 if __name__ == "__main__":
-    # nohup python3 -u llm-as-agent.py > llm-as-agent.out 2>&1 &
-    prompt_kwargs = {'perspective': 'second'}
-    for s in range(50):
-        print(f'=== SEED {s} ===')
-        G = construct_network(save_prefix=f'second-person-{s}',
-                              prompt_kwargs=prompt_kwargs)
-        print()
+    # Example call: 
+    # nohup python3 -u llm-as-agent.py 60 > second-person-60-v2.out 2>&1 & 
+    parser = argparse.ArgumentParser()
+    parser.add_argument('seed', type=int)
+    parser.add_argument('--perspective', type=str, choices=['first', 'second', 'third'], default='second')
+    args = parser.parse_args()
+
+    prefix = f'{args.perspective}-person-{args.seed}'
+    print('Prefix:', prefix)
+    G = construct_network(save_prefix=prefix, prompt_kwargs={'perspective': args.perspective})
