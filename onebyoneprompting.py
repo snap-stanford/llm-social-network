@@ -49,9 +49,9 @@ def GPTGeneratedGraph(people_list):
                 completion = ""
                 completion = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=[{"role": "system", "content": content}], temperature = .6)
                 connections = completion.choices[0].message['content']
-                print("Prompt:", content, "\n", "GPT Response:", connections)
+                #print("Prompt:", content, "\n", "GPT Response:", connections)
                 pairs = connections.split('\n')
-                print("Existing connections", previous_connections)
+                #print("Existing connections", previous_connections)
                 for pair in pairs:
                     if ', ' not in pair:
                         continue
@@ -93,6 +93,5 @@ def GPTGeneratedGraph(people_list):
                        'avg_shortest_path_length': avg_shortest_path_length,
                        'diameter': diameter,
                        'degree_distribution': degree_distribution}
-            #print("nice!")
         return G, metrics
     raise e
