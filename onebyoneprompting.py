@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import time
 import numpy as np
 
-openai.api_key = "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"
+openai.api_key = "OPENAI_API_KEY"
 people_list = ["Emma Thompson - Female, 30, White, Independent",
                "Malik Johnson - Male, 45, Black, Liberal",
                "Sofia Rodriguez - Female, 22, Latino, Moderate",
