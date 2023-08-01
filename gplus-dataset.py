@@ -6,6 +6,8 @@ import time
 import matplotlib.pyplot as plt
 import re
 import itertools
+import pandas as pd
+from ethnicolr import census_ln, pred_census_ln
 
 """
 Construct full network from a list of ego networks from Facebook, Google+, or Twitter.
@@ -13,19 +15,35 @@ Calculate homophily along demographic dimensions provided.
 """
 
 PATH_TO_TEXT_FILES = '/Users/ejw675/Downloads/llm-social-network/gplus-dataset/gplus'
+ETHNICITIES = ['pctwhite', 'pctblack', 'pctapi', 'pctaian', 'pct2prace', 'pcthispanic']
 
 def merge_similar_features(dim, val):
     if (dim == 'job_title'):
-        punctuation = [',', '.', ':', '&', '+', '-', '/']
+        punctuation = [',', '.', ':', '&', '+', '-', '/', '\\n']
         for p in punctuation:
-            val.strip(p)
+            val = val.replace(p, '')
     
     if (dim == 'place'):
         if (val.find(',') != -1):
             city, country = val.split(',', 1)
             val = city
+        val = val.rstrip('\n')
+        val = val.rstrip('\\n')
+        
+    if (dim == 'last_name'):
+        name = [{'name': val}]
+        df = pd.DataFrame(name)
+        df = census_ln(df, 'name')
+        
+        actual_ethnicity = ''
+        greatest = 0
+        for ethnicity in ETHNICITIES:
+            if ((df.at[0, ethnicity] != '(S)') and (float(df.at[0, ethnicity]) > greatest)):
+                actual_ethnicity = ethnicity[3:]
+                greatest = float(df.at[0, ethnicity])
+        val = actual_ethnicity
 
-    return dim + ':' + val
+    return (dim + ':' + val).lower()
 
 def load_features_as_dict(ego_node_id):
     feat_names = os.path.join(PATH_TO_TEXT_FILES, ego_node_id+'.featnames')
@@ -45,7 +63,6 @@ def load_features_as_dict(ego_node_id):
             features[i] = feat
     
     dimensions = [*set(dimensions)]
-    print('Dimensions from load_features_as_dict:', dimensions)
     return features, dimensions
 
 def load_users_as_dict(ego_node_id, features, dimensions):
@@ -65,27 +82,29 @@ def load_users_as_dict(ego_node_id, features, dimensions):
             i = 0
             while (i < len(binary_features)):
                 if (binary_features[i] == '1'):
-                    list_features.append(features[str(i)])
-                    
                     dim, val = features[str(i)].split(':', 1)
-                    if dim in temp_dimensions:
-                        temp_dimensions.remove(dim)
+                    if (val != ''):
+                        list_features.append(features[str(i)])
+                        if dim in temp_dimensions:
+                            temp_dimensions.remove(dim)
                 i += 1
             
             if (len(temp_dimensions) == 0):
                 personas[user_id] = list_features
     return personas
 
-def construct_graph(ego_node_id, users):
-    edge_list = os.path.join(PATH_TO_TEXT_FILES, ego_node_id+'.edges')
+def construct_graph(users):
+    edge_list = os.path.join(PATH_TO_TEXT_FILES, 'gplus_combined.txt')
     assert os.path.isfile(edge_list)
     
     G = nx.DiGraph()
     valid_nodes = []
     for key in users:
         valid_nodes.append(key)
-    G.add_nodes_from(valid_nodes)
+    for node in valid_nodes:
+        G.add_nodes_from(valid_nodes)
     
+    i = 0
     with open(edge_list, 'r') as f:
         lines = f.readlines()
         for l in lines:
@@ -93,6 +112,9 @@ def construct_graph(ego_node_id, users):
             u2 = u2.rstrip('\n')
             if ((u1 in valid_nodes) and (u2 in valid_nodes)):
                 G.add_edge(u1, u2)
+        i += 1
+        if (isinstance((i // 10000), int)):
+            print('Processed first', i, 'edges.')
     
     return G
     
@@ -101,18 +123,21 @@ def compute_cross_proportions(G, users, dimensions):
         return ['Graph is empty.']
     cr = {}
     for dim in dimensions:
-        cr[dim] = 0
+        cr[dim] = len(G.edges())
 
     for source, target in G.edges():
+        remaining_dim = []
+        remaining_dim.extend(dimensions)
         demo1 = users[source]
         demo2 = users[target]
         for feat1 in demo1:
             for feat2 in demo2:
                 dim1, val1 = feat1.split(':', 1)
                 dim2, val2 = feat2.split(':', 1)
-                if ((dim1 == dim2) & (val1 != val2)):
-                    cr[dim1] += 1
-    
+                if ((dim1 == dim2) and (remaining_dim.count(dim1) == 1) and ((val1 != '') and (val2 != '')) and (val1 == val2)):
+                        cr[dim1] -= 1
+                        remaining_dim.remove(dim1)
+
     props = {}
     for dim in cr:
         props[dim] = cr[dim] / len(G.edges())
@@ -136,36 +161,81 @@ def compute_homophily(G, users, dimensions):
             homophily[dim] = None
         
     return homophily
+    
+def merge_networks(graph_list):
+    if (len(graph_list) == 1):
+        return graph_list[0]
+    if (len(graph_list) == 0):
+        return nx.DiGraph()
+    
+    first_half = merge_networks(graph_list[0:len(graph_list) // 2])
+    second_half = merge_networks(graph_list[len(graph_list) // 2:])
+    
+    return nx.compose(first_half, second_half)
 
 if __name__ == "__main__":
     dir_list = os.listdir(PATH_TO_TEXT_FILES)
     ego_nodes = []
     for file in dir_list:
         ego_node_id, desc = file.split('.')
-        ego_nodes.append(ego_node_id)
-    ego_nodes = [*set(ego_nodes)]
-    
-    full_network = nx.DiGraph()
+        if (desc == 'featnames'):
+            ego_nodes.append(ego_node_id)
+
     full_users = {}
-    
+    processed_user_ids = []
+
     i = 0
-    while (i < 25):
+    while (i < len(ego_nodes)):
         ego_node_id = ego_nodes[i]
-    
+        processed_user_ids.append(ego_nodes[i])
+
         features, dimensions = load_features_as_dict(ego_node_id)
         users = load_users_as_dict(ego_node_id, features, dimensions)
         full_users.update(users)
-        
-        G = construct_graph(ego_node_id, full_users)
-        print(G)
-        
-        full_network = nx.compose(G, full_network)
-        
-        print('Added ego network #', i, 'of', ego_node_id)
-        
+
+        print('Processed nodes in ego network of', ego_node_id, '-', i, 'total ego networks processed.')
+
         i += 1
+
+    user_path = os.path.join(PATH_TO_TEXT_FILES, str(i) + '_full_users')
+    text_file = open(user_path, 'w')
+    text_file.write('{}'.format(full_users))
+    text_file.close
+        
+#    ego_graph_list = []
+#
+#    for ego_node_id in processed_user_ids:
+#        G = construct_graph(ego_node_id, full_users)
+#        print(G)
+#
+#        ego_graph_list.append(G)
+#
+#        print('Created ego graph with edges from', ego_node_id)
+#
+#    full_network = merge_networks(ego_graph_list)
+#    print(full_network)
+
+#    full_users = {}
+#    user_path = os.path.join(PATH_TO_TEXT_FILES, '132_full_users')
+#    with open (user_path, 'r') as f:
+#        lines = f.readlines()
+#        full_users = eval(lines[0])
+
+    print('Constructing graph.')
+    full_network = construct_graph(full_users)
     
+    network_path = os.path.join(PATH_TO_TEXT_FILES, 'full_network')
+    text_file = open(network_path, 'w')
+    text_file.write('{}'.format(full_network))
+    text_file.close
+
     print(full_network)
+    dimensions = ['gender', 'institution', 'job_title', 'last_name', 'place', 'job_title']
+    
     print('Dimensions:', dimensions)
     homophily = compute_homophily(full_network, full_users, dimensions)
     print(homophily)
+
+    print('density:', {nx.density(full_network)})
+    
+    # save network and users in a text file
