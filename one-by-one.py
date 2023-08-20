@@ -5,7 +5,7 @@ import networkx as nx
 import time
 import matplotlib.pyplot as plt
 import random
-from constantsand_utils import *
+from constants_and_utils import *
 
 PATH_TO_TEXT_FILES = '/Users/ejw675/Downloads/llm-social-network/text-files'
 
@@ -23,7 +23,7 @@ def load_personas_as_dict(personas_fn):
 
     return personas
     
-def parse_gpt_output(output, ego_friend, existing_personas, prompt):
+def parse_gpt_output(G, output, ego_friend, prompt):
     pairs = []
     if ('\n' in output):
         lines = output.split('\n')
@@ -38,7 +38,7 @@ def parse_gpt_output(output, ego_friend, existing_personas, prompt):
                 p1, p2 = line.split(', ')
                 p1 = p1.strip('(')
                 p2 = p2.strip(')')
-                if (((p1 not in existing_personas) and (p1 != ego_friend)) or ((p2 not in existing_personas) and (p2 != ego_friend))):
+                if (((p1 not in G.nodes) and (p1 != ego_friend)) or ((p2 not in G.nodes) and (p2 != ego_friend))):
                     print('Unsupported format:', line)
                     error()
                 pairs.append([p1, p2])
@@ -51,31 +51,46 @@ def parse_gpt_output(output, ego_friend, existing_personas, prompt):
                 index, line = line.split('. ')
             if (line == ego_friend):
                 continue
-            if (line not in existing_personas):
+            if (line not in G.nodes):
                 print('Unsupported format:', line)
                 error()
             pairs.append([line, ego_friend])
     return pairs
     
-def get_message(existing_edges, existing_personas, personas, person, format, perspective, rand):
+def get_existing_personas_as_str(G, personas, rand='on'):
+    names = []
+    for node in G.nodes:
+        names.append(node.replace('-', ' '))
+    if (rand == 'on'):
+        random.shuffle(names)
+        
+    s = ''
+    for name in names:
+        s += name + ' - '
+        for demo in personas[name]:
+            s += demo + ', '
+        s = s[:len(s)-2]
+        s += '\n'
+    return s
+
+def get_existing_connections_as_str(G, rand='on'):
+    edges = []
+    for edge in G.edges:
+        edges.add(edge)
+    if (rand=='on'):
+        random.shuffle(edges)
+    
+    s = ''
+    for edge in edges:
+        s += '(' + edge[0] + ', ' + edge[1] + ')\n'
+    
+def get_message(G, personas, person, format, perspective, rand):
     # shuffle and format presentation of existing personas
-    if (rand=='on'): existing_personas = shuffle_dict(existing_personas)
-    existing_personas_str = ''
-    for item in existing_personas:
-        existing_personas_str += item + ' - '
-        for demo in existing_personas[item]:
-            existing_personas_str += demo + ', '
-        existing_personas_str = existing_personas_str[:len(existing_personas_str)-2]
-            
-    message = 'The following list of people make up a social network:\n' + existing_personas_str
+    message = 'The following list of people make up a social network:\n' + get_existing_personas_as_str(G, personas, rand)
         
     # shuffle and format presentation of existing edges
-    if (len(existing_edges) > 0):
-        if (rand=='on'): random.shuffle(existing_edges)
-        existing_edges_str = ''
-        for edge in existing_edges:
-            existing_edges_str += '(' + edge[0] + ', ' + edge[1] + ')\n'
-        message += '\nAmong them, these pairs of people are already friends:\n' + existing_edges_str + '\n'
+    if (len(G.edges()) > 0):
+        message += '\nAmong them, these pairs of people are already friends:\n' + get_existing_connections_as_str(G, rand='on')
             
     # differentiate perspectives
     if (perspective=='first'):
@@ -96,7 +111,7 @@ def get_message(existing_edges, existing_personas, personas, person, format, per
         if (perspective=='second'): message = message.replace('will form', 'will you form')
             
     # base case for first newcomer
-    if (len(existing_personas) == 0):
+    if (len(G.nodes) == 0):
         message = 'I will provide you names one by one and ask you questions about their social connections. The first name is ' + person + '. So far, they have no friends. Can you do that?'
         
     return message
@@ -110,14 +125,12 @@ def generate_network(personas, format, perspective, rand):
     if (rand=='on'): personas = shuffle_dict(personas)
     
     G = nx.Graph()
-    existing_edges = [] # existing edges in network
-    existing_personas = {} # existing personas in network
     
     for person in personas:
         G.add_node(person.replace(' ', '-'))
-        print('\n', len(existing_personas), 'people are already in the network. \n Now prompting with', person)
+        print('\n', len(G.nodes), 'people are already in the network. \n Now prompting with', person)
         
-        message = get_message(existing_edges, existing_personas, personas, person, format, perspective, rand)
+        message = get_message(G, personas, person, format, perspective, rand)
         print('Prompt: \n', message)
         
         # get and parse chatGPT response
@@ -133,19 +146,16 @@ def generate_network(personas, format, perspective, rand):
                 completion = openai.ChatCompletion.create(
                     model="gpt-3.5-turbo",
                     messages=[{"role": "system", "content": message}],
-                    temperature = .8)
-                content = completion.choices[0].message['content']
+                    temperature = DEFAULT_TEMPERATURE)
+                content = extract_gpt_output(response)
                 print('GPT response:\n', content)
                 
-                # parse GPT output and update existing_personas
-                if (len(existing_personas) == 0):
-                    existing_personas[person] = personas[person]
+                # parse GPT output
+                if (len(G.nodes) == 0):
                     break
-                pairs = parse_gpt_output(content, person, existing_personas, format)
-                existing_edges += pairs
+                pairs = parse_gpt_output(G, content, person, format)
                 for pair in pairs:
                     G.add_edge(pair[0].replace(' ', '-'), pair[1].replace(' ', '-'))
-                existing_personas[person] = personas[person]
                 break
             except:
                 print(f"Error. Retrying in {duration} seconds.")
@@ -156,16 +166,68 @@ def generate_network(personas, format, perspective, rand):
             error('Exceeded 10 tries.')
         
     return G
+    
+"""
+Two functions below for iterating one-by-one:
+1. iterative_update_per_persona updates the graph for each GPT query, using the newly outputted edges for the next persona's query. (Serina's pseudocode reflects this.)
+2. iterative_update_per_network updates the graph after querying for every persona in the network, using the old graph's edges in all queries.
+"""
+    
+def iterative_update_per_persona(G, max_num_iterations, threshold):
+    for k in max_num_iterations:
+        num_added_edges = 0
+        num_dropped_edges = 0
+        for p in personas:
+            old_p_edges = G.edges(p)
+            G.remove(old_p_edges)
+            prompt = 'You are {p}. Which of the following people will you become friends with?' + get_existing_personas_as_str(G, personas) + 'Existing friendships are:' + get_existing_edges_as_str(G) + 'Your friends: 1.'
+            response = openai.ChatCompletion.create(
+                    model="gpt-3.5-turbo",
+                    messages=[{"role": "system", "content": message}],
+                    temperature = DEFAULT_TEMPERATURE)
+            content = extract_gpt_output(response)
+            print('GPT response:\n', content)
+            new_p_edges = parse_gpt_output(content)
+            G.add(new_p_edges)
+            num_added_edges += len(new_p_edges - old_p_edges)
+            num_dropped_edges += len(old_p_edges - new_p_edges)
+        if ((num_added_edges + num_dropped_edges) / ((len(G.nodes) * (len(G.nodes) - 1))) < threshold):
+            break
+            
+    return G
+
+def iterative_update_per_network(G, max_num_iterations, threshold):
+    for k in max_num_iterations:
+        newG = nx.Graph()
+        for p in personas:
+            oldG = G
+            old_p_edges = oldG.edges(p)
+            oldG.remove(old_p_edges)
+            prompt = 'You are {p}. Which of the following people will you become friends with?' + get_existing_personas_as_str(oldG, personas) + 'Existing friendships are:' + get_existing_edges_as_str(oldG) + 'Your friends: 1.'
+            response = openai.ChatCompletion.create(
+                    model="gpt-3.5-turbo",
+                    messages=[{"role": "system", "content": message}],
+                    temperature = DEFAULT_TEMPERATURE)
+            content = extract_gpt_output(response)
+            print('GPT response:\n', content)
+            new_p_edges = parse_gpt_output(content)
+            newG.add(new_p_edges)
+        if (compute_edge_distance(G, newG) < threshold):
+            break
+        G = newG
+        
+    return G
         
 if __name__ == "__main__":
     personas = load_personas_as_dict('personas_12.txt')
+    G = generate_network(personas, format='pairs', perspective='second', rand='off')
     
-    i = 150
-    while (i < 151):
-        G = generate_network(personas, format='pairs', perspective='second', rand='off')
-        network_path = os.path.join(PATH_TO_TEXT_FILES, 'one-by-one-not-random' + str(i) + '.adj')
-        text_file = open(network_path, 'wb')
-        nx.write_adjlist(G, text_file)
-        text_file.close
-        print('Saved network', str(i), 'in', network_path)
-        i += 1
+    max_num_iterations = 30
+    threshold = 0.05
+    G = iterative_update_per_persona(G, max_num_iterations, threshold)
+    
+    network_path = os.path.join(PATH_TO_TEXT_FILES, 'one-by-one-iterative' + '.adj')
+    text_file = open(network_path, 'wb')
+    nx.write_adjlist(G, text_file)
+    text_file.close
+    print('Saved network in', network_path)
