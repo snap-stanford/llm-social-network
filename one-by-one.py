@@ -5,6 +5,7 @@ import networkx as nx
 import time
 import matplotlib.pyplot as plt
 import random
+from constantsand_utils import *
 
 PATH_TO_TEXT_FILES = '/Users/ejw675/Downloads/llm-social-network/text-files'
 
@@ -55,15 +56,6 @@ def parse_gpt_output(output, ego_friend, existing_personas, prompt):
                 error()
             pairs.append([line, ego_friend])
     return pairs
-    
-def shuffle_dict(dict):
-    temp = list(dict.keys())
-    random.shuffle(temp)
-    shuffled_dict = {}
-    for item in temp:
-        shuffled_dict[item] = dict[item]
-        
-    return shuffled_dict
     
 def get_message(existing_edges, existing_personas, personas, person, format, perspective, rand):
     # shuffle and format presentation of existing personas

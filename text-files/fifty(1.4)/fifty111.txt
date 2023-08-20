@@ -1,0 +1,8 @@
+{
+  "index": 0,
+  "message": {
+    "role": "assistant",
+    "content": "-Ethan Davis, Emma Johnson \n-Mia Brown, Harper Thompson \n-Samuel Davis, Ethan Patel \n-Hannah Thompson, James Lee \n-Zoe Johnson, Noah Martinez \n-Chloe Thompson, Liam Thompson\n-Victoria Garcia, Ava Rodriguez \n-Matthew Wilson, Emily Nguyen \n-Natalie Nguyen, Sophia Nguyen \n-Oliver Jackson, Clarence Dewsweepers \n-Henry Davis, Joseph Coolcat\n-William Johnson, Frank Matharu-Young \n-Aidan Patel, Calvin Ablegrave\n-Sofia Rodriguez,Integer Simplicenum-Fieryesian\n-Dana Markways,Rowana Macrosse\n-Mewar Youngedave\u200bunardi,EmmaNatalia Gooeycat\u021b\u200bimigliison \n-Emma Robbin-Ray,Fedo Antonweeshahridgeagheralta Albanueulavymanor\n-Ellen Korvik-Thepestry\tEdward Terabermuinclavecelfedagarakov\t\n-Poma Arthur VanCaragatsano-Marcoux\tSpezrro Majdnexuo-Waldo\n-Larity Rakitzortsrow-Smith  Brady Rankja\tInterpascalina Garright\t\n-Rienoto Biniplabetriatuptnik-Snydeb\u2014lyn\tLitzmannpearrappinger Cunninghamout\u00e4nley-Otlalf Thestana-Rikrcanovaery"
+  },
+  "finish_reason": "stop"
+}

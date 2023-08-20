@@ -1,0 +1,8 @@
+{
+  "index": 0,
+  "message": {
+    "role": "assistant",
+    "content": "- Emma Johnson, Olivia Chen\n- Emma Johnson, Isabella Wright\n- Emma Johnson, Sophia Nguyen\n- Emma Johnson, Amelia Garcia\n- Emma Johnson, Evelyn Chen\n- Emma Johnson, Sofia Rodriguez\n- Noah Martinez, Benjamin Kim\n- Noah Martinez, Elizabeth Martinez\n- Noah Martinez, Victoria Garcia\n- Noah Martinez, Alex Jacob Peters"
+  },
+  "finish_reason": "stop"
+}

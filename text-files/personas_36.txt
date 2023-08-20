@@ -1,0 +1,37 @@
+0. Name - gender, age, race/ethnicity, religion, political affiliation
+1. Emily Johnson - Woman, 29, Black, Baptist, Liberal
+2. Carlos Martinez - Man, 40, Latino, Catholic, Conservative
+3. Sophia Chen - Woman, 22, Asian, Buddhist, Liberal
+4. Mohammed Ahmed - Man, 45, Middle Eastern, Muslim, Conservative
+5. Olivia Rodriguez - Woman, 32, Latina, Catholic, Liberal
+6. Ethan Thompson - Man, 26, White, Unreligious, Moderate
+7. Isabella Kim - Woman, 30, Asian, Protestant, Conservative
+8. Ahmed Hassan - Man, 58, Middle Eastern, Muslim, Liberal
+9. Mia Brown - Woman, 19, Black, Baptist, Liberal
+10. William Nguyen - Man, 65, Asian, Buddhist, Conservative
+11. Sofia Garcia - Woman, 31, Latina, Catholic, Liberal
+12. Gabriel Silva - Man, 24, Latino, Catholic, Liberal
+13. Emily Patel - Woman, 33, Asian, Hindu, Liberal
+14. Abdul Rahman - Man, 42, Middle Eastern, Muslim, Conservative
+15. Ava Johnson - Woman, 28, Black, Baptist, Liberal
+16. Lucas Nguyen - Man, 20, Asian, Buddhist, Liberal
+17. Emma Thompson - Woman, 38, White, Unreligious, Moderate
+18. Jacob Kim - Man, 27, Asian, Protestant, Conservative
+19. Fatima Ahmed - Woman, 44, Middle Eastern, Muslim, Liberal
+20. Madison Brown - Woman, 21, Black, Baptist, Liberal
+21. Daniel Martinez - Man, 39, Latino, Catholic, Conservative
+22. Olivia Chen - Woman, 23, Asian, Buddhist, Liberal
+23. Ahmed Mohammed - Man, 43, Middle Eastern, Muslim, Conservative
+24. Sophia Rodriguez - Woman, 30, Latina, Catholic, Liberal
+25. David Thompson - Man, 25, White, Unreligious, Moderate
+26. Emily Kim - Woman, 29, Asian, Protestant, Conservative
+27. Hassan Ahmed - Man, 54, Middle Eastern, Muslim, Liberal
+28. Ava Brown - Woman, 18, Black, Baptist, Liberal
+29. Joshua Nguyen - Man, 31, Asian, Buddhist, Conservative
+30. Mia Johnson - Woman, 36, Latina, Catholic, Liberal
+31. Samuel Silva - Man, 23, Latino, Catholic, Liberal
+32. Sophia Patel - Woman, 32, Asian, Hindu, Liberal
+33. Mohammed Rahman - Man, 47, Middle Eastern, Muslim, Conservative
+34. Olivia Johnson - Woman, 27, Black, Baptist, Liberal
+35. Alexander Nguyen - Man, 33, Asian, Buddhist, Liberal
+36. Isabella Thompson - Woman, 39, White, Unreligious, Moderate

@@ -1,0 +1,8 @@
+{
+  "index": 0,
+  "message": {
+    "role": "assistant",
+    "content": "(Mia Green, Emma Thompson)\n(Sofia Rodriguez, Emma Thompson)\n(Ryan Chen, Emma Thompson)\n(Xavier Littlebear, Emma Thompson)\n(Lily Wong, Emma Thompson)\n(Hannah Smith, Emma Thompson)\n(Ethan Kim, Emma Thompson)\n(Carlos Santos, Emma Thompson)\n(Malik Johnson, Sofia Rodriguez)\n(Ryan Chen, Sofia Rodriguez)\n(Lily Wong, Sofia Rodriguez)\n(Malikah Hussein, Sofia Rodriguez)\n(Ethan Kim, Sofia Rodriguez)\n(Carlos Santos, Sofia Rodriguez)\n(Alejandro Ramirez, Sofia Rodriguez)\n(Ryan Chen, Malik Johnson)\n(Xavier Littlebear, Malik Johnson)\n(Lily Wong, Malik Johnson)\n(Hannah Smith, Malik Johnson)\n(Ethan Kim, Malik Johnson)\n(Carlos Santos, Malik Johnson)\n(Malik Johnson, Alejandro Ramirez)\n(Xavier Littlebear, Mia Green)\n(Lily Wong, Mia Green)\n(Hannah Smith, Mia Green)\n(Ethan Kim, Mia Green)\n(Carlos Santos, Mia Green)\n(Xavier Littlebear, Lily Wong)\n(Hannah Smith, Lily Wong)\n(Ethan Kim, Lily Wong)\n(Carlos Santos, Lily Wong)\n(Hannah Smith, Xavier Littlebear)\n(Ethan Kim, Xavier Littlebear)\n(Carlos Santos, Xavier Littlebear)\n(Hannah Smith, Lily Wong)\n(Ethan Kim, Lily Wong)\n(Carlos Santos, Lily Wong)\n(Hannah Smith, Ethan Kim)\n(Carlos Santos, Ethan Kim)\n(Ryan Chen, Carlos Santos)"
+  },
+  "finish_reason": "stop"
+}

@@ -1,0 +1,8 @@
+{
+  "index": 0,
+  "message": {
+    "role": "assistant",
+    "content": "- Emma Wilson, Alexander Patel,\n- Sophia Lee, Christopher Lee,\n- Olivia Chen, Madison Chen,\n- Liam Thompson, Harper Thompson,\n- Ava Rodriguez, Zoey Martinez,\n- Lucas Lee, Roether Tsang,\n- Isabela Wright, Zoey Martinez,\n- Ethan Davis, Rohter Tsang,\n- Sophia Nguyen, Tion Jensen,\n- Jackson Smith, Eli Wolfe,"
+  },
+  "finish_reason": "stop"
+}

@@ -1,0 +1,52 @@
+#parsenetwork.py
+# GMT Mon Jul 24 23:57:29 2023
+# 
+Emma-Johnson Olivia-Chen Sophia-Nguyen Isabella-Wright Mia-Brown Charlotte-Johnson Harper-Thompson Abigail-Thompson Grace-Johnson Chloe-Thompson Hannah-Thompson Zoe-Johnson
+Noah-Martinez Ava-Rodriguez Ethan-Davis Michael-Smith Matthew-Wilson Andrew-Smith Joshua-Wilson
+Olivia-Chen Emma-Johnson Sophia-Nguyen Isabella-Wright Mia-Brown Charlotte-Johnson Harper-Thompson Abigail-Thompson Grace-Johnson Chloe-Thompson Hannah-Thompson Zoe-Johnson
+Liam-Thompson Lucas-Lee Aiden-Patel Benjamin-Kim James-Lee Joseph-Jackson Christopher-Lee
+Ava-Rodriguez Noah-Martinez Ethan-Davis Michael-Smith Matthew-Wilson Andrew-Smith Joshua-Wilson
+Lucas-Lee Liam-Thompson Aiden-Patel Benjamin-Kim James-Lee Joseph-Jackson Christopher-Lee
+Isabella-Wright Emma-Johnson Olivia-Chen Sophia-Nguyen Mia-Brown Charlotte-Johnson Harper-Thompson Abigail-Thompson Grace-Johnson Chloe-Thompson Hannah-Thompson Zoe-Johnson
+Ethan-Davis Noah-Martinez Ava-Rodriguez Michael-Smith Matthew-Wilson Andrew-Smith Joshua-Wilson
+Sophia-Nguyen Emma-Johnson Olivia-Chen Isabella-Wright Mia-Brown Charlotte-Johnson Harper-Thompson Abigail-Thompson Grace-Johnson Chloe-Thompson Hannah-Thompson Zoe-Johnson
+Jackson-Smith Benjamin-Kim James-Lee Joseph-Jackson
+Mia-Brown Emma-Johnson Olivia-Chen Isabella-Wright Sophia-Nguyen Charlotte-Johnson Harper-Thompson Abigail-Thompson Grace-Johnson Chloe-Thompson Hannah-Thompson Zoe-Johnson
+Aiden-Patel Liam-Thompson Lucas-Lee Benjamin-Kim James-Lee Joseph-Jackson Christopher-Lee
+Charlotte-Johnson Emma-Johnson Olivia-Chen Sophia-Nguyen Isabella-Wright Mia-Brown Harper-Thompson Abigail-Thompson Grace-Johnson Chloe-Thompson Hannah-Thompson Zoe-Johnson
+Oliver-Jackson Benjamin-Kim James-Lee Joseph-Jackson
+Amelia-Garcia Benjamin-Kim James-Lee Joseph-Jackson
+Benjamin-Kim Jackson-Smith Oliver-Jackson Amelia-Garcia James-Lee Joseph-Jackson Christopher-Lee
+Harper-Thompson Emma-Johnson Olivia-Chen Isabella-Wright Mia-Brown Charlotte-Johnson Abigail-Thompson Grace-Johnson Chloe-Thompson Hannah-Thompson Zoe-Johnson
+Henry-Davis Samuel-Davis
+Elizabeth-Martinez Zoey-Martinez
+Michael-Smith Noah-Martinez Ava-Rodriguez Ethan-Davis Matthew-Wilson Andrew-Smith Joshua-Wilson
+Evelyn-Chen Madison-Chen
+William-Johnson Benjamin-Johnson
+Sofia-Rodriguez Lily-Rodriguez
+James-Lee Liam-Thompson Lucas-Lee Aiden-Patel Benjamin-Kim Joseph-Jackson Christopher-Lee
+Abigail-Thompson Emma-Johnson Olivia-Chen Isabella-Wright Mia-Brown Charlotte-Johnson Harper-Thompson Grace-Johnson Chloe-Thompson Hannah-Thompson Zoe-Johnson
+Daniel-Davis Samuel-Davis
+Emily-Nguyen Natalie-Nguyen
+Matthew-Wilson Noah-Martinez Ava-Rodriguez Ethan-Davis Michael-Smith Andrew-Smith Joshua-Wilson
+Scarlett-Brown Avery-Brown
+Alexander-Patel Aiden-Patel Ethan-Patel
+Grace-Johnson Emma-Johnson Olivia-Chen Isabella-Wright Mia-Brown Charlotte-Johnson Harper-Thompson Abigail-Thompson Chloe-Thompson Hannah-Thompson Zoe-Johnson
+Joseph-Jackson Liam-Thompson Lucas-Lee Benjamin-Kim James-Lee Christopher-Lee
+Victoria-Garcia Amelia-Garcia
+David-Kim Benjamin-Kim James-Lee Joseph-Jackson
+Chloe-Thompson Emma-Johnson Olivia-Chen Isabella-Wright Mia-Brown Charlotte-Johnson Harper-Thompson Abigail-Thompson Grace-Johnson Hannah-Thompson Zoe-Johnson
+Samuel-Davis Henry-Davis
+Zoey-Martinez Elizabeth-Martinez
+Andrew-Smith Noah-Martinez Ava-Rodriguez Ethan-Davis Michael-Smith Matthew-Wilson Joshua-Wilson
+Madison-Chen Evelyn-Chen
+Benjamin-Johnson William-Johnson
+Lily-Rodriguez Sofia-Rodriguez
+Christopher-Lee Liam-Thompson Lucas-Lee Aiden-Patel Benjamin-Kim James-Lee Joseph-Jackson
+Hannah-Thompson Emma-Johnson Olivia-Chen Isabella-Wright Mia-Brown Charlotte-Johnson Harper-Thompson Abigail-Thompson Grace-Johnson Chloe-Thompson Zoe-Johnson
+Natalie-Nguyen Emily-Nguyen
+Joshua-Wilson Noah-Martinez Ava-Rodriguez Ethan-Davis Michael-Smith Matthew-Wilson Andrew-Smith
+Avery-Brown Scarlett-Brown
+Ethan-Patel
+Zoe-Johnson Emma-Johnson Olivia-Chen Isabella-Wright Mia-Brown Charlotte-Johnson Harper-Thompson Abigail-Thompson Grace-Johnson Chloe-Thompson Hannah-Thompson
+Isaac-Jackson

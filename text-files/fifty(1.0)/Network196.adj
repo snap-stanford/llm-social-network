@@ -1,0 +1,56 @@
+#parsenetwork.py
+# GMT Tue Jul 25 00:04:19 2023
+# 
+Emma-Johnson Olivia-Chen Lucas-Lee Sophia-Nguyen Jackson-Smith Mia-Brown Aiden-Patel Charlotte-Johnson Oliver-Jackson Amelia-Garcia Benjamin-Kim Harper-Thompson Henry-Davis Elizabeth-Martinez Michael-Smith Evelyn-Chen Sofia-Rodriguez Emily-Nguyen Matthew-Wilson Scarlett-Brown Alexander-Patel Grace-Johnson Benjamin-Johnson Hannah-Thompson Natalie-Nguyen Joshua-Wilson Avery-Brown Zoe-Johnson
+Noah-Martinez Ava-Rodriguez Ethan-Davis Daniel-Davis Hannah-Thompson Michael-Smith Alexander-Patel Ethan-Patel Joshua-Wilson Emma-Wilson Sophia-Lee Madrid-Chen
+Olivia-Chen Emma-Johnson Lucas-Lee Sophia-Nguyen Jackson-Smith Mia-Brown Aiden-Patel Charlotte-Johnson Oliver-Jackson Amelia-Garcia Benjamin-Kim Harper-Thompson Henry-Davis Elizabeth-Martinez Michael-Smith Evelyn-Chen Sofia-Rodriguez Emily-Nguyen Matthew-Wilson Scarlett-Brown Alexander-Patel Grace-Johnson Benjamin-Johnson Hannah-Thompson Natalie-Nguyen Joshua-Wilson Avery-Brown Zoe-Johnson
+Liam-Thompson Ava-Rodriguez Ethan-Davis Daniel-Davis Hannah-Thompson Michael-Smith Alexander-Patel Ethan-Patel Joshua-Wilson Emma-Wilson Sophia-Lee Madison-Chen
+Ava-Rodriguez Noah-Martinez Ethan-Davis Daniel-Davis Hannah-Thompson Michael-Smith Alexander-Patel Ethan-Patel Joshua-Wilson Emma-Wilson Sophia-Lee Madison-Chen
+Lucas-Lee Emma-Johnson Olivia-Chen Sophia-Nguyen Jackson-Smith Mia-Brown Aiden-Patel Charlotte-Johnson Oliver-Jackson Amelia-Garcia Benjamin-Kim Harper-Thompson Henry-Davis Elizabeth-Martinez Michael-Smith Evelyn-Chen Sofia-Rodriguez Emily-Nguyen Matthew-Wilson Scarlett-Brown Alexander-Patel Grace-Johnson Benjamin-Johnson Hannah-Thompson Natalie-Nguyen Joshua-Wilson Avery-Brown Zoe-Johnson
+Isabella-Wright Harper-Thompson Elizabeth-Martinez Matthew-Wilson Zoe-Johnson
+Ethan-Davis Ava-Rodriguez Noah-Martinez Daniel-Davis Hannah-Thompson Michael-Smith Alexander-Patel Ethan-Patel Joshua-Wilson Emma-Wilson Sophia-Lee Madison-Chen Isabella-Wright Oliver-Jackson Henry-Davis Emily-Nguyen Benjamin-Kim Harper-Thompson Evelyn-Chen Sofia-Rodriguez Matthew-Wilson Scarlett-Brown Grace-Johnson Benjamin-Johnson Natalie-Nguyen Avery-Brown Zoey-Martinez
+Sophia-Nguyen Emily-Nguyen Emma-Johnson Olivia-Chen Lucas-Lee Jackson-Smith Mia-Brown Aiden-Patel Charlotte-Johnson Oliver-Jackson Amelia-Garcia Benjamin-Kim Harper-Thompson Henry-Davis Elizabeth-Martinez Michael-Smith Evelyn-Chen Sofia-Rodriguez Matthew-Wilson Scarlett-Brown Alexander-Patel Grace-Johnson Benjamin-Johnson Hannah-Thompson Natalie-Nguyen Joshua-Wilson Avery-Brown Zoe-Johnson
+Jackson-Smith Emma-Johnson Olivia-Chen Lucas-Lee Sophia-Nguyen Mia-Brown Aiden-Patel Charlotte-Johnson Oliver-Jackson Amelia-Garcia Benjamin-Kim Harper-Thompson Henry-Davis Elizabeth-Martinez Michael-Smith Evelyn-Chen Sofia-Rodriguez Emily-Nguyen Matthew-Wilson Scarlett-Brown Alexander-Patel Grace-Johnson Benjamin-Johnson Hannah-Thompson Natalie-Nguyen Joshua-Wilson Avery-Brown Zoe-Johnson
+Mia-Brown Emma-Johnson Olivia-Chen Lucas-Lee Sophia-Nguyen Jackson-Smith Aiden-Patel Charlotte-Johnson Oliver-Jackson Amelia-Garcia Benjamin-Kim Harper-Thompson Henry-Davis Elizabeth-Martinez Michael-Smith Evelyn-Chen Sofia-Rodriguez Emily-Nguyen Matthew-Wilson Scarlett-Brown Alexander-Patel Grace-Johnson Benjamin-Johnson Hannah-Thompson Natalie-Nguyen Joshua-Wilson Avery-Brown Zoe-Johnson
+Aiden-Patel Emma-Johnson Olivia-Chen Lucas-Lee Sophia-Nguyen Jackson-Smith Mia-Brown Charlotte-Johnson Oliver-Jackson Amelia-Garcia Benjamin-Kim Harper-Thompson Henry-Davis Elizabeth-Martinez Michael-Smith Evelyn-Chen Sofia-Rodriguez Emily-Nguyen Matthew-Wilson Scarlett-Brown Alexander-Patel Grace-Johnson Benjamin-Johnson Hannah-Thompson Natalie-Nguyen Joshua-Wilson Avery-Brown Zoe-Johnson
+Charlotte-Johnson Emma-Johnson Olivia-Chen Lucas-Lee Sophia-Nguyen Jackson-Smith Mia-Brown Aiden-Patel Oliver-Jackson Amelia-Garcia Benjamin-Kim Harper-Thompson Henry-Davis Elizabeth-Martinez Michael-Smith Evelyn-Chen Sofia-Rodriguez Emily-Nguyen Matthew-Wilson Scarlett-Brown Alexander-Patel Grace-Johnson Benjamin-Johnson Hannah-Thompson Natalie-Nguyen Joshua-Wilson Avery-Brown Zoe-Johnson
+Oliver-Jackson Emma-Johnson Olivia-Chen Lucas-Lee Sophia-Nguyen Jackson-Smith Mia-Brown Aiden-Patel Charlotte-Johnson Amelia-Garcia Benjamin-Kim Harper-Thompson Henry-Davis Elizabeth-Martinez Michael-Smith Evelyn-Chen Sofia-Rodriguez Emily-Nguyen Matthew-Wilson Scarlett-Brown Alexander-Patel Grace-Johnson Benjamin-Johnson Hannah-Thompson Natalie-Nguyen Joshua-Wilson Avery-Brown Zoe-Johnson
+Amelia-Garcia Emma-Johnson Olivia-Chen Lucas-Lee Sophia-Nguyen Jackson-Smith Mia-Brown Aiden-Patel Charlotte-Johnson Oliver-Jackson Benjamin-Kim Harper-Thompson Henry-Davis Elizabeth-Martinez Michael-Smith Evelyn-Chen Sofia-Rodriguez Emily-Nguyen Matthew-Wilson Scarlett-Brown Alexander-Patel Grace-Johnson Benjamin-Johnson Hannah-Thompson Natalie-Nguyen Joshua-Wilson Avery-Brown Zoe-Johnson
+Benjamin-Kim Emma-Johnson Olivia-Chen Lucas-Lee Sophia-Nguyen Jackson-Smith Mia-Brown Aiden-Patel Charlotte-Johnson Oliver-Jackson Amelia-Garcia Harper-Thompson Henry-Davis Elizabeth-Martinez Michael-Smith Evelyn-Chen Sofia-Rodriguez Emily-Nguyen Matthew-Wilson Scarlett-Brown Alexander-Patel Grace-Johnson Benjamin-Johnson Hannah-Thompson Natalie-Nguyen Joshua-Wilson Avery-Brown Zoe-Johnson
+Harper-Thompson Emma-Johnson Olivia-Chen Lucas-Lee Sophia-Nguyen Jackson-Smith Mia-Brown Aiden-Patel Charlotte-Johnson Oliver-Jackson Amelia-Garcia Benjamin-Kim Henry-Davis Elizabeth-Martinez Michael-Smith Evelyn-Chen Sofia-Rodriguez Emily-Nguyen Matthew-Wilson Scarlett-Brown Alexander-Patel Grace-Johnson Benjamin-Johnson Hannah-Thompson Natalie-Nguyen Joshua-Wilson Avery-Brown Zoe-Johnson
+Henry-Davis Isabella-Wright Emma-Davis Ava-Rodriguez Noah-Martinez Daniel-Davis Hannah-Thompson Michael-Smith Alexander-Patel Ethan-Patel Joshua-Wilson Samuel-Davis Ethan-Davis Natalie-Nguyen
+Elizabeth-Martinez Emma-Johnson Olivia-Chen Lucas-Lee Sophia-Nguyen Jackson-Smith Mia-Brown Aiden-Patel Charlotte-Johnson Amelia-Garcia Benjamin-Kim Harper-Thompson Henry-Davis Michael-Smith Evelyn-Chen Sofia-Rodriguez Emily-Nguyen Matthew-Wilson Scarlett-Brown Alexander-Patel Grace-Johnson Benjamin-Johnson Hannah-Thompson Natalie-Nguyen Joshua-Wilson Avery-Brown Zoe-Johnson
+Michael-Smith Ethan-Davis Daniel-Davis Hannah-Thompson Alexander-Patel
+Evelyn-Chen
+William-Johnson
+Sofia-Rodriguez
+James-Lee
+Abigail-Thompson
+Daniel-Davis
+Emily-Nguyen
+Matthew-Wilson
+Scarlett-Brown
+Alexander-Patel
+Grace-Johnson
+Joseph-Jackson
+Victoria-Garcia
+David-Kim
+Chloe-Thompson
+Samuel-Davis
+Zoey-Martinez
+Andrew-Smith
+Madison-Chen
+Benjamin-Johnson
+Lily-Rodriguez
+Christopher-Lee
+Hannah-Thompson
+Natalie-Nguyen
+Joshua-Wilson
+Avery-Brown
+Ethan-Patel
+Zoe-Johnson
+Isaac-Jackson
+Emma-Wilson
+Sophia-Lee
+Madrid-Chen
+Emma-Davis

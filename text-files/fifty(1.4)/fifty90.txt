@@ -1,0 +1,8 @@
+{
+  "index": 0,
+  "message": {
+    "role": "assistant",
+    "content": "- Emma Johnson, Noah Martinez,\n- Megan Johnson, Peyton Wall,\n- Marissa Johnson, Anthony Wallis."
+  },
+  "finish_reason": "stop"
+}

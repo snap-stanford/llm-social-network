@@ -1,0 +1,175 @@
+#parsenetwork.py
+# GMT Tue Jul 25 16:48:51 2023
+# 
+Alex-Johnson
+Olivia-Martinez
+Ethan-Thompson
+Maya-Nguyen
+Samuel-Davis
+Gabriela-Hernandez
+Daniel-Lee
+Sophia-Clark
+Jackson-Mitchell
+Isabella-Rodriguez
+David-Kim
+Mia-Thompson
+Jacob-Ramirez
+Ava-Patel
+Matthew-Foster
+Sofia-Silva
+Lucas-Chen
+Amelia-Wright
+Elijah-Scott
+Camila-Gonzalez
+Joshua-Wu
+Harper-Baker
+Michael-Roberts
+Penelope-Lopez
+Matthew-Nguyen
+Charlotte-Thompson
+Noah-Hill
+Valentina-Torres
+Daniel-Kim
+Grace-Mitchell
+Benjamin-Hernandez
+Luna-Patel
+Christopher-Turner
+Victoria-Smith
+Ryan-Martinez
+Harper-Johnson
+Elijah-Davis
+Penelope-Rodriguez
+Andrew-Chen
+Mia-Wilson
+Alexander-Clark
+Emily-Nguyen
+Elijah-Thompson
+Sofia-Rivera
+James-Lee
+Ava-Martin
+Mason-Mitchell
+Emma-Lopez
+Ethan-Kim
+Mia-Baker
+Noah-Roberts
+Sofia-Torres
+Daniel-Johnson
+Olivia-Thompson
+Jacob-Davis
+Isabella-Gonzalez
+Ethan-Wu
+Ava-Wright
+Michael-Scott
+Sofia-Lopez
+Noah-Kim
+Emily-Hernandez
+Alexander-Turner
+Mia-Smith
+William-Martinez
+Emma-Johnson
+Elijah-Wilson
+Sofia-Rodriguez
+David-Chen
+Olivia-Wilson
+Benjamin-Scott
+Ava-Turner
+Samuel-Lee
+Isabella-Martin
+Ethan-Johnson
+Emma-Gonzalez
+Daniel-Wu
+Alexander-Roberts
+Sophia-Smith
+Samuel-Martinez
+Emily-Davis
+Benjamin-Turner
+Olivia-Torres
+Mia-Wright
+Alexander-Scott
+Ava-Ramirez
+Sofia-Baker
+Ethan-Wilson
+Mia-Gonzalez
+Olivia-Smith
+Alexander-Davis
+Emma-Hernandez
+Benjamin-Thompson
+Sofia-Johnson
+Elijah-Turner
+Mia-Torres
+1.-Alex-Johnson Maya-Nguyen
+2.-Olivia-Martinez Ethan-Thompson
+3.-Ethan-Thompson Maya-Nguyen
+4.-Maya-Nguyen Sophia-Clark
+5.-Samuel-Davis Emma-Wilson
+Emma-Wilson
+6.-Gabriela-Hernandez Benjamin-Hernandez
+7.-Daniel-Lee Sofia-Silva
+8.-Sophia-Clark Jackson-Mitchell
+9.-Jackson-Mitchell Isabella-Rodriguez
+10.-Isabella-Rodriguez David-Kim
+11.-David-Kim Mia-Thompson
+12.-Mia-Thompson Jacob-Ramirez
+13.-Jacob-Ramirez Ava-Patel
+14.-Ava-Patel Matthew-Foster
+15.-Matthew-Foster Sofia-Silva
+16.-Sofia-Silva Lucas-Chen
+17.-Lucas-Chen Amelia-Wright
+18.-Amelia-Wright Elijah-Scott
+19.-Elijah-Scott Camila-Gonzalez
+20.-Camila-Gonzalez Joshua-Wu
+21.-Joshua-Wu Harper-Baker
+22.-Harper-Baker Michael-Roberts
+23.-Michael-Roberts Penelope-Lopez
+24.-Penelope-Lopez Matthew-Nguyen
+25.-Matthew-Nguyen Charlotte-Thompson
+26.-Charlotte-Thompson Noah-Hill
+27.-Noah-Hill Valentina-Torres
+28.-Daniel-Kim Grace-Mitchell
+29.-Grace-Mitchell Benjamin-Hernandez
+30.-Benjamin-Hernandez Luna-Patel
+31.-Luna-Patel Christopher-Turner
+32.-Christopher-Turner Victoria-Smith
+33.-Victoria-Smith Ryan-Martinez
+34.-Ryan-Martinez Harper-Johnson
+35.-Harper-Johnson Elijah-Davis
+36.-Elijah-Davis Penelope-Rodriguez
+37.-Andrew-Chen Mia-Wilson
+38.-Mia-Wilson Alexander-Clark
+39.-Alexander-Clark Emily-Nguyen
+40.-Elijah-Thompson Sofia-Rivera
+41.-Sofia-Rivera James-Lee
+42.-Ava-Martin Mason-Mitchell
+43.-Mason-Mitchell Emma-Lopez
+44.-Emma-Lopez Ethan-Kim
+45.-Ethan-Kim Mia-Baker
+46.-Noah-Roberts Sofia-Torres
+47.-Sofia-Torres Daniel-Johnson
+48.-Olivia-Thompson Jacob-Davis
+49.-Jacob-Davis Isabella-Gonzalez
+50.-Ethan-Wu Ava-Wright
+51.-Ava-Wright Michael-Scott
+52.-Sofia-Lopez Noah-Kim
+53.-Noah-Kim Emily-Hernandez
+54.-Alexander-Turner Mia-Smith
+55.-Mia-Smith William-Martinez
+56.-Emma-Johnson Elijah-Wilson
+57.-Elijah-Wilson Sofia-Rodriguez
+58.-David-Chen Olivia-Wilson
+59.-Olivia-Wilson Benjamin-Scott
+60.-Benjamin-Scott Ava-Turner
+61.-Samuel-Lee Emma-Gonzalez
+62.-Emma-Gonzalez Daniel-Wu
+63.-Daniel-Wu Alexander-Roberts
+64.-Sophia-Smith Samuel-Martinez
+65.-Samuel-Martinez Emily-Davis
+66.-Benjamin-Turner Olivia-Torres
+67.-Olivia-Torres Mia-Wright
+68.-Alexander-Scott Ava-Ramirez
+69.-Ava-Ramirez Sofia-Baker
+70.-Sofia-Baker Ethan-Wilson
+71.-Ethan-Wilson Mia-Gonzalez
+72.-Olivia-Smith Alexander-Davis
+73.-Alexander-Davis Emma-Hernandez
+74.-Benjamin-Thompson Sofia-Johnson
+75.-Sofia-Johnson Elijah-Turner

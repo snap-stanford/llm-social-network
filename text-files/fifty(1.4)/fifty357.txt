@@ -1,0 +1,8 @@
+{
+  "index": 0,
+  "message": {
+    "role": "assistant",
+    "content": "Here is a possible list of friendship pairs:\n\n- Emma Johnson, Sofia Rodriguez\n- Noah Martinez, Ava Rodriguez\n- Olivia Chen, Lucas Lee\n- Liam Thompson, Lucas Lee\n- Ava Rodriguez, Natalie Nguyen\n- Lucas Lee, Natalie Nguyen\n- Isabella Wright, Emma Johnson\n- Ethan Davis, Noah Martinez\n- Sophia Nguyen, Olivia Chen\n- Jackson Smith, Liam Thompson\n- Mia Brown, Ethan Davis\n- Aiden Patel, Benjamin Johnson\n- Charlotte Johnson, Ella Rodriguez\n- Oliver Jackson, Charlotte Johnson\n- Amelia Garcia, Oliver Jackson\n- Benjamin Kim, Chloe Thompson\n- Harper Thompson, Oliver Jackson\n- Henry Davis, Alexander Patel\n- Elizabeth Martinez, Isaac Jackson\n- Michael Smith, Emma Johnson\n- Evelyn Chen, Hannah Thompson\n- William Johnson, Zoey Martinez\n- Sofia Rodriguez, Joseph Jackson\n- James Lee, Benjamin Kim\n- Abigail Thompson, Grace Johnson\n- Daniel Davis, Joshua Wilson\n- Emily Nguyen, Madison Chen\n- Matthew Wilson, Benjamin Johnson\n- Scarlett Brown, Joshua Wilson\n- Alexander Patel, Joseph Jackson\n- Grace Johnson, Natalie Nguyen\n- Joseph Jackson, Joseph Jackson\n- Victoria Garcia, Ethan Patel\n- David Kim, Natalie Nguyen\n- Chloe Thompson, Ella Rodriguez\n- Samuel Davis, Natalie Nguyen\n- Andrew Smith, Olivia Chen\n- Madison Chen, Andrew Smith\n- Benjamin Johnson, Avery Brown\n- Lily Rodriguez, Hannah Thompson\n- Christopher Lee, Lucas Lee\n- Hannah Thompson, Alexander Patel\n- Natalie Nguyen, Emily Nguyen\n- Joshua Wilson, David Kim\n- Avery Brown, Joseph Jackson\n- Ethan Patel, Benjamin Kim\n- Zoe Johnson, Grace Johnson\n- Isaac Jackson, Joseph Jackson"
+  },
+  "finish_reason": "stop"
+}

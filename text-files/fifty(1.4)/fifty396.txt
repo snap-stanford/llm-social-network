@@ -1,0 +1,8 @@
+{
+  "index": 0,
+  "message": {
+    "role": "assistant",
+    "content": "- Olivia Chen, Ava Rodriguez\n- Lucas Lee, Olivia Chen\n- Jackson Smith, Emma Wilson\n- Harvey Wilson, Harvey Garcia\n- Michael Smith, Samuel Strong\n- Daniel Johnson, Charlotte Martinez\n- Timothy Taylor, Matthew Lee"
+  },
+  "finish_reason": "stop"
+}

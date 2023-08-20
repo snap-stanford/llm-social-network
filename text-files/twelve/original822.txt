@@ -1,0 +1,8 @@
+{
+  "index": 0,
+  "message": {
+    "role": "assistant",
+    "content": "- Emma Thompson, Sofia Rodriguez\n- Emma Thompson, Mia Green\n- Emma Thompson, Hannah Smith\n- Emma Thompson, Carlos Santos\n- Emma Thompson, Alejandro Ramirez\n- Emma Thompson, Malikah Hussein\n- Emma Thompson, Malik Johnson\n- Malik Johnson, Sofia Rodriguez\n- Malik Johnson, Mia Green\n- Malik Johnson, Lily Wong\n- Malik Johnson, Alejandro Ramirez\n- Malik Johnson, Malikah Hussein\n- Malik Johnson, Carlos Santos\n- Sofia Rodriguez, Mia Green\n- Sofia Rodriguez, Hannah Smith\n- Sofia Rodriguez, Carlos Santos\n- Sofia Rodriguez, Alejandro Ramirez\n- Sofia Rodriguez, Malikah Hussein\n- Sofia Rodriguez, Ryan Chen\n- Sofia Rodriguez, Xavier Littlebear\n- Mia Green, Hannah Smith\n- Mia Green, Carlos Santos\n- Mia Green, Alejandro Ramirez\n- Mia Green, Malikah Hussein\n- Mia Green, Ryan Chen\n- Mia Green, Xavier Littlebear\n- Lily Wong, Ryan Chen\n- Lily Wong, Xavier Littlebear\n- Alejandro Ramirez, Ryan Chen\n- Alejandro Ramirez, Xavier Littlebear\n- Hannah Smith, Xavier Littlebear\n- Carlos Santos, Xavier Littlebear\n- Carlos Santos, Malikah Hussein\n- Ethan Kim, Carlos Santos\n- Ethan Kim, Malikah Hussein"
+  },
+  "finish_reason": "stop"
+}

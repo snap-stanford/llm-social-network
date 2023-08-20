@@ -1,0 +1,8 @@
+{
+  "index": 0,
+  "message": {
+    "role": "assistant",
+    "content": "- Emma Johnson, Sophia Lee\n- Olivia Chen, Mia Brown\n- Ava Rodriguez, Benjamin Kim\n- Isabella Wright, Jonathan Jackson\n- Sophia Nguyen, Lily Rodriguez\n- Mia Brown, Benjamin Johnson\n- Charlotte Johnson, Evelyn Chen\n- Oliver Jackson, William Johnson"
+  },
+  "finish_reason": "stop"
+}

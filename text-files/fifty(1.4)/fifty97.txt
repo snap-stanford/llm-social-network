@@ -1,0 +1,8 @@
+{
+  "index": 0,
+  "message": {
+    "role": "assistant",
+    "content": "- Emma Johnson, Sophia Lee\n- Noah Martinez, Ava Rodriguez\n- Olivia Chen, Lucas Lee\n- Liam Thompson, Isabella Wright\n- Ava Rodriguez, Lucas Lee\n- Lucas Lee, Sofia Rodriguez\n- Isabella Wright, Eva"
+  },
+  "finish_reason": "stop"
+}

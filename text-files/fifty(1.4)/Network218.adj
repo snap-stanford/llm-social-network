@@ -1,0 +1,183 @@
+#parsenetwork.py
+# GMT Tue Jul 25 00:09:00 2023
+# 
+Emma-Johnson Lucas-Lee Charlotte-Johnson Michael-Smith Madison-Chen
+Noah-Martinez Ava-Rodriguez Ethan-Davis Oliver-Jackson Matthew-Wilson
+Olivia-Chen Lucas-Lee Charlotte-Johnson Alex-Patel
+Liam-Thompson Elizabeth-Martinez Jennifer-Martinez Hugo-Rodriguez Sam-Davis
+Ava-Rodriguez Emma-Johnson Mia-Brown Nathaniel-Rodriguez
+Lucas-Lee Olivia-Chen Evelyn-Chen Grace-Johnson Emily-Nguyen
+Isabella-Wright Aiden-Patel Ethan-Davis Ariel-Pike
+Ethan-Davis
+Sophia-Nguyen Lucas-Lee Emma-Johnson Olivia-Chen Ethan-Davis
+Jackson-Smith Alex-Patel Grace-Johnson Madison-Chen Daniel-Davis
+Mia-Brown Mia-Brown Lola-Kim Ethan-Singh Julia-Smith
+Aiden-Patel Emma-Johnson Lily-Rodriguez Jackie-Chen Lorenzo-Martinez
+Charlotte-Johnson Lucas-Lee Matthew-Wilson Elizabeth-Johnson Emily-Yu
+Oliver-Jackson Olivia-Brown Andrea-Smith Anna-Zhang Aaron-Jackson
+Amelia-Garcia Elizabeth-Johnson Nathaniel-Rodriguez Audrey-Garcia Mateo-Rodriguez
+Benjamin-Kim Joel-Walker Claire-Williams Nathan-Miller Dylan-Lee
+Harper-Thompson Sofia-Rodriguez Lola-Kim Amanda-Thompson Antony-Smith
+Henry-Davis Isabella-Wright Pascal-Lee Scarlett-Brown Samuel-Davis
+Elizabeth-Martinez Alejandro-Martinez Valentina-Rodriguez Caroline-Garcia Santiago-Bravo
+Michael-Smith Sophia-Nguyen Aiden-Patel Adam-Smith Eva-Gomez
+Evelyn-Chen Jenna-Turner Fred-Foster Becky-Hill Millie-Peterson
+William-Johnson Charlotte-Harris Benjamin-Thomas Krystal-Garcia Jazmin-Gutierrez
+Sofia-Rodriguez Ethan-Davis Benjamin-Thomas Emily-Riley Ian-Mitchell
+James-Lee Taylor-Allen Elena-Robinson Mason-Smith Sofia-Rodriguez
+Abigail-Thompson Samantha-White Liam-Kim Elsa-Turner Athena-Patel
+Daniel-Davis Jaxon-Thompson Mark-Brown Julia-Cooper Lily-Ward
+Emily-Nguyen Kaiden-Lewis Lila-Nelson Eliza-Carter Jake-Mitchell
+Matthew-Wilson Lola-Kim Sariah-Morrison Max-Robinson Quentin-Lopez
+Scarlett-Brown Aaliyah-Jenkins Jeremiah-Turner Chloe-Ramirez Jace-Hall
+Alexander-Patel Theresa-Henderson Leo-Hall Samuel-Green Parker-Simon
+Grace-Johnson Isaiah-Thompson Ember-Stephens Karin-Fernandez Luisa-Porter
+Joseph-Jackson Emma-Johnson Charlotte-Johnson Elizabeth-Johnson Madison-Chen
+Victoria-Garcia Benjamin-Lewis Lea-Alexander Sylvia-Ross Logan-Gray
+David-Kim Nathan-Brown Julius-Hill Aaron-Ross Ariana-Armstrong
+Chloe-Thompson Gareth-Drake Ryan-Cruz Elijah-Campbell Ethan-Turner
+Samuel-Davis Annabelle-Ross Grace-Gonzalez Lila-Barnes Owen-Griffin
+Zoey-Martinez Noah-Martinez Oliver-Jackson Samantha-Davis Gavin-Lee
+Andrew-Smith Olivia-Green Priya-Mason Karissa-Griffin Diego-Chavez
+Madison-Chen Emma-Johnson Olivia-Chen Noah-Martinez Alex-Patel
+Benjamin-Johnson Jade-Wilson Bella-Sanchez Matias-Torres Kaila-Tucker
+Lily-Rodriguez Anthony-Wallace Andrew-Bryant Michaela-Wagner Ruairi-Harvey
+Christopher-Lee Stefanie-Tanner Leo-Bailey Kaelyn-Thomas Hiromi-Nakamura
+Hannah-Thompson Dominic-Roberts Juliet-Gordon Margot-Cooper Jack-Walsh
+Natalie-Nguyen Valencia-Fuller Jasper-Gibson Destiny-Ramos Scott-Torres
+Joshua-Wilson Mia-Brown Abigail-Thompson Kylie-Moore Logan-Patterson
+Avery-Brown Alan-Davis Delilah-Gordon Amy-Martin Logan-Porter
+Ethan-Patel Anna-Turner Miles-Lewis Luna-Walker Isabella-Cox
+Zoe-Johnson Sofia-Brown Evan-Patel Julia-Scott Leo-Parker
+Isaac-Jackson Eliza-Campbell Maya-Kumar Ali-Khan
+Alex-Patel
+Jennifer-Martinez
+Hugo-Rodriguez
+Sam-Davis
+Nathaniel-Rodriguez
+Ariel-Pike
+Lola-Kim
+Ethan-Singh
+Julia-Smith
+Jackie-Chen
+Lorenzo-Martinez
+Elizabeth-Johnson
+Emily-Yu
+Olivia-Brown
+Andrea-Smith
+Anna-Zhang
+Aaron-Jackson
+Audrey-Garcia
+Mateo-Rodriguez
+Joel-Walker
+Claire-Williams
+Nathan-Miller
+Dylan-Lee
+Amanda-Thompson
+Antony-Smith
+Pascal-Lee
+Alejandro-Martinez
+Valentina-Rodriguez
+Caroline-Garcia
+Santiago-Bravo
+Adam-Smith
+Eva-Gomez
+Jenna-Turner
+Fred-Foster
+Becky-Hill
+Millie-Peterson
+Charlotte-Harris
+Benjamin-Thomas
+Krystal-Garcia
+Jazmin-Gutierrez
+Emily-Riley
+Ian-Mitchell
+Taylor-Allen
+Elena-Robinson
+Mason-Smith
+Samantha-White
+Liam-Kim
+Elsa-Turner
+Athena-Patel
+Jaxon-Thompson
+Mark-Brown
+Julia-Cooper
+Lily-Ward
+Kaiden-Lewis
+Lila-Nelson
+Eliza-Carter
+Jake-Mitchell
+Sariah-Morrison
+Max-Robinson
+Quentin-Lopez
+Aaliyah-Jenkins
+Jeremiah-Turner
+Chloe-Ramirez
+Jace-Hall
+Theresa-Henderson
+Leo-Hall
+Samuel-Green
+Parker-Simon
+Isaiah-Thompson
+Ember-Stephens
+Karin-Fernandez
+Luisa-Porter
+Benjamin-Lewis
+Lea-Alexander
+Sylvia-Ross
+Logan-Gray
+Nathan-Brown
+Julius-Hill
+Aaron-Ross
+Ariana-Armstrong
+Gareth-Drake
+Ryan-Cruz
+Elijah-Campbell
+Ethan-Turner
+Annabelle-Ross
+Grace-Gonzalez
+Lila-Barnes
+Owen-Griffin
+Samantha-Davis
+Gavin-Lee
+Olivia-Green
+Priya-Mason
+Karissa-Griffin
+Diego-Chavez
+Jade-Wilson
+Bella-Sanchez
+Matias-Torres
+Kaila-Tucker
+Anthony-Wallace
+Andrew-Bryant
+Michaela-Wagner
+Ruairi-Harvey
+Stefanie-Tanner
+Leo-Bailey
+Kaelyn-Thomas
+Hiromi-Nakamura
+Dominic-Roberts
+Juliet-Gordon
+Margot-Cooper
+Jack-Walsh
+Valencia-Fuller
+Jasper-Gibson
+Destiny-Ramos
+Scott-Torres
+Kylie-Moore
+Logan-Patterson
+Alan-Davis
+Delilah-Gordon
+Amy-Martin
+Logan-Porter
+Anna-Turner
+Miles-Lewis
+Luna-Walker
+Isabella-Cox
+Sofia-Brown
+Evan-Patel
+Julia-Scott
+Leo-Parker
+Eliza-Campbell
+Maya-Kumar
+Ali-Khan

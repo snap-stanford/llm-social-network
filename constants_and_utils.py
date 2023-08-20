@@ -57,3 +57,12 @@ def prop_nodes_in_giant_component(G):
     """
     largest_cc = max(nx.connected_components(G.to_undirected()), key=len)
     return len(largest_cc) / len(G.nodes())
+
+def shuffle_dict(dict):
+    temp = list(dict.keys())
+    random.shuffle(temp)
+    shuffled_dict = {}
+    for item in temp:
+        shuffled_dict[item] = dict[item]
+        
+    return shuffled_dict

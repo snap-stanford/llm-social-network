@@ -1,0 +1,8 @@
+{
+  "index": 0,
+  "message": {
+    "role": "assistant",
+    "content": "- Emma Johnson, Jackson Smith\n- Ella Thompson, Joshua Wilson\n- Hana Rodriguez, Ethan Davis\n- Sofia Johnson, Benjamin Kim\n- Lily Brown, Lucy Thompson\n- Chloe Wright, Marcus Martinez\n- Sophie Wilson, Ethan Patel\n- Amelia Garcia, Daniel Davis\n- Ava Brown, James Lee\n- Madison Smith, Benjamin Johnson\n- Harper Thompson, Jesus Martinez\n- Savannah Davis, Michael Smith\n- Avery Thomas, Lucas Lee"
+  },
+  "finish_reason": "stop"
+}

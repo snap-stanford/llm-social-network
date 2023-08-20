@@ -1,0 +1,8 @@
+{
+  "index": 0,
+  "message": {
+    "role": "assistant",
+    "content": "(Daniel Kim, Maya Nguyen), (Gabriela Hernandez, Olivia Martinez), (Sofia Silva, Matthew Foster), (Sophia Clark, Ethan Thompson), (Noah Hill, Mia Thompson), (Matthew Nguyen, Ava Patel), (Luna Patel, David Kim), (Charlotte Thompson, Jacob Ramirez), (Elijah Scott, Penelope Lopez), (Benjamin Hernandez, Valentina Torres), (Christopher Turner, Victoria Smith), (Ryan Martinez, Isabella Rodriguez), (James Lee, Harper Baker), (Daniel Johnson, Mia Wilson), (Emily Nguyen, Ava Martin), (Alexander Turner, Mia Smith), (Olivia Thompson, Ethan Wu), (Olivia Wilson, Noah Kim), (Ava Turner, Benjamin Scott), (Samuel Lee, Sofia Lopez), (Isabella Martin, Emma Gonzalez), (Ethan Johnson, Daniel Wu), (Emma Gonzalez, Alexander Roberts), (Sophia Smith, Samuel Martinez), (Olivia Torres, Emily Davis), (Alexander Scott, Ava Ramirez), (Sofia Baker, Ethan Wilson), (Mia Gonzalez, Olivia Smith), (Alexander Davis, Emma Hernandez), (Benjamin Thompson, Sofia Johnson), (Elijah Turner, Mia Torres)"
+  },
+  "finish_reason": "stop"
+}

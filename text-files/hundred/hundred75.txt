@@ -1,0 +1,8 @@
+{
+  "index": 0,
+  "message": {
+    "role": "assistant",
+    "content": "(Mia Thompson, Emma Wilson)\n(Gabriela Hernandez, Olivia Martinez)\n(Lucas Chen, Daniel Lee)\n(Sophia Clark, Ethan Thompson)\n(Samuel Davis, Maya Nguyen)\n(Michael Roberts, Samuel Davis)\n(Ava Patel, Mia Thompson)\n(Noah Hill, Valentina Torres)\n(Matthew Nguyen, Sofia Silva)\n(Sofia Clark, Amelia Wright)\n(Christopher Turner, Victoria Smith)\n(Ryan Martinez, Penelope Rodriguez)\n(Harper Johnson, Charlotte Thompson)\n(Alexander Clark, Elijah Scott)\n(Luna Patel, Mia Wilson)\n(Alexander Davis, Noah Hill)"
+  },
+  "finish_reason": "stop"
+}

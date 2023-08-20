@@ -1,0 +1,20 @@
+(Linda Martinez, Emily Lopez) - Both are young, Latina, students and could bond over shared college experiences.
+(Linda Martinez, Carlos Alvarez) - Shared Latino background and political affiliation.
+(Richie Garcia, Paul Mensah) - Both are Republicans with blue-collar jobs.
+(Richie Garcia, Juan Torres) - Shared Latino background and political affiliation.
+(Katie Johnson, Laura Smith) - Both are homemakers, around the same age, and share a political affiliation.
+(Katie Johnson, Victoria Dumas) - Shared political affiliation and demographic.
+(Maria Hernandez, Isabel Rodriguez) - Both are Latina, lawyers, and around the same age.
+(Maria Hernandez, Cindy Santos) - Both are Republican women in their fifties.
+(Paul Mensah, James Brown) - Both are black men in their sixties.
+(Victoria Dumas, Rebecca Wilson) - Both are white women in their thirties with financial jobs.
+(George Sanchez, Carlos Alvarez) - Shared Latino background and political affiliation.
+(George Sanchez, Juan Torres) - Both are Latino men with medical jobs.
+(Cindy Santos, Mei Chen) - Both are Asian women who own shops.
+(Emily Lopez, Carlos Alvarez) - Both are young, Latino, and have similar political beliefs.
+(Laura Smith, Rebecca Wilson) - Both are white Republican women.
+(Isabel Rodriguez, Mei Chen) - Both are female attorneys.
+(James Brown, Paul Mensah) - Shared age demographic and profession in service industry.
+(Rebecca Wilson, Victoria Dumas) - Both are women in their thirties with jobs in finance.
+(Juan Torres, Richie Garcia) - Shared Latino background and political affiliation.
+(Mei Chen, Cindy Santos) - Both are Asian women who run their own businesses.

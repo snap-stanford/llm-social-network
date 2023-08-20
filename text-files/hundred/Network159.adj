@@ -1,0 +1,101 @@
+#parsenetwork.py
+# GMT Tue Jul 25 16:48:51 2023
+# 
+Alex-Johnson
+Olivia-Martinez Ethan-Thompson Maya-Nguyen
+Ethan-Thompson Maya-Nguyen
+Maya-Nguyen
+Samuel-Davis Gabriela-Hernandez Daniel-Lee Sophia-Clark Jackson-Mitchell Isabella-Rodriguez
+Gabriela-Hernandez Daniel-Lee Sophia-Clark Jackson-Mitchell Isabella-Rodriguez
+Daniel-Lee Jackson-Mitchell Isabella-Rodriguez
+Sophia-Clark Jackson-Mitchell Isabella-Rodriguez
+Jackson-Mitchell Isabella-Rodriguez
+Isabella-Rodriguez
+David-Kim Mia-Thompson
+Mia-Thompson
+Jacob-Ramirez Ava-Patel Matthew-Foster Sofia-Silva Lucas-Chen
+Ava-Patel Matthew-Foster Sofia-Silva Lucas-Chen
+Matthew-Foster Sofia-Silva Lucas-Chen
+Sofia-Silva Lucas-Chen
+Lucas-Chen
+Amelia-Wright Elijah-Scott
+Elijah-Scott Camila-Gonzalez Joshua-Wu Harper-Baker Michael-Roberts
+Camila-Gonzalez Joshua-Wu Harper-Baker Michael-Roberts
+Joshua-Wu Harper-Baker Michael-Roberts
+Harper-Baker Michael-Roberts
+Michael-Roberts
+Penelope-Lopez Matthew-Nguyen
+Matthew-Nguyen
+Charlotte-Thompson Noah-Hill
+Noah-Hill
+Valentina-Torres Daniel-Kim Grace-Mitchell
+Daniel-Kim Grace-Mitchell
+Grace-Mitchell
+Benjamin-Hernandez
+Luna-Patel Christopher-Turner Victoria-Smith
+Christopher-Turner Victoria-Smith
+Victoria-Smith
+Ryan-Martinez Harper-Johnson Elijah-Davis Penelope-Rodriguez Andrew-Chen Mia-Wilson
+Harper-Johnson Elijah-Davis Penelope-Rodriguez Andrew-Chen Mia-Wilson
+Elijah-Davis Penelope-Rodriguez Andrew-Chen Mia-Wilson
+Penelope-Rodriguez Andrew-Chen Mia-Wilson
+Andrew-Chen Mia-Wilson
+Mia-Wilson
+Alexander-Clark Emily-Nguyen Elijah-Thompson Sofia-Rivera James-Lee Ava-Martin Mason-Mitchell Emma-Lopez Ethan-Kim Mia-Baker Noah-Roberts Sofia-Torres Daniel-Johnson Olivia-Thompson Jacob-Davis Isabella-Gonzalez Ethan-Wu Ava-Wright Michael-Scott Sofia-Lopez Noah-Kim Emily-Hernandez Mia-Smith William-Martinez Emma-Johnson Elijah-Wilson Sofia-Rodriguez David-Chen
+Emily-Nguyen Elijah-Thompson Sofia-Rivera James-Lee Ava-Martin Mason-Mitchell Emma-Lopez Ethan-Kim Mia-Baker Noah-Roberts Sofia-Torres Daniel-Johnson Olivia-Thompson Jacob-Davis Isabella-Gonzalez Ethan-Wu Ava-Wright Michael-Scott Sofia-Lopez Noah-Kim Mia-Smith William-Martinez Emma-Johnson Elijah-Wilson Sofia-Rodriguez David-Chen
+Elijah-Thompson Sofia-Rivera James-Lee Ava-Martin Mason-Mitchell Emma-Lopez Ethan-Kim Mia-Baker Noah-Roberts Sofia-Torres Daniel-Johnson Olivia-Thompson Jacob-Davis Isabella-Gonzalez Ethan-Wu Ava-Wright Michael-Scott Sofia-Lopez Noah-Kim Mia-Smith William-Martinez Emma-Johnson Elijah-Wilson Sofia-Rodriguez David-Chen
+Sofia-Rivera James-Lee Ava-Martin Mason-Mitchell Emma-Lopez Ethan-Kim Mia-Baker Noah-Roberts Sofia-Torres Daniel-Johnson Olivia-Thompson Jacob-Davis Isabella-Gonzalez Ethan-Wu Ava-Wright Michael-Scott Sofia-Lopez Noah-Kim Mia-Smith William-Martinez Emma-Johnson Elijah-Wilson Sofia-Rodriguez David-Chen
+James-Lee Ava-Martin Mason-Mitchell Emma-Lopez Ethan-Kim Mia-Baker Noah-Roberts Sofia-Torres Daniel-Johnson Olivia-Thompson Jacob-Davis Isabella-Gonzalez Ethan-Wu Ava-Wright Michael-Scott Sofia-Lopez Noah-Kim Mia-Smith William-Martinez Emma-Johnson Elijah-Wilson Sofia-Rodriguez David-Chen
+Ava-Martin Mason-Mitchell Emma-Lopez Ethan-Kim Mia-Baker Noah-Roberts Sofia-Torres Daniel-Johnson Olivia-Thompson Jacob-Davis Isabella-Gonzalez Ethan-Wu Ava-Wright Michael-Scott Sofia-Lopez Noah-Kim Mia-Smith William-Martinez Emma-Johnson Elijah-Wilson Sofia-Rodriguez David-Chen
+Mason-Mitchell Emma-Lopez Ethan-Kim Mia-Baker Noah-Roberts Sofia-Torres Daniel-Johnson Olivia-Thompson Jacob-Davis Isabella-Gonzalez Ethan-Wu Ava-Wright Michael-Scott Sofia-Lopez Noah-Kim Mia-Smith William-Martinez Emma-Johnson Elijah-Wilson Sofia-Rodriguez David-Chen
+Emma-Lopez Ethan-Kim Mia-Baker Noah-Roberts Sofia-Torres Daniel-Johnson Olivia-Thompson Jacob-Davis Isabella-Gonzalez Ethan-Wu Ava-Wright Michael-Scott Sofia-Lopez Noah-Kim Mia-Smith William-Martinez Emma-Johnson Elijah-Wilson Sofia-Rodriguez David-Chen
+Ethan-Kim Mia-Baker Noah-Roberts Sofia-Torres Daniel-Johnson Olivia-Thompson Jacob-Davis Isabella-Gonzalez Ethan-Wu Ava-Wright Michael-Scott Sofia-Lopez Noah-Kim Mia-Smith William-Martinez Emma-Johnson Elijah-Wilson Sofia-Rodriguez David-Chen
+Mia-Baker Noah-Roberts Sofia-Torres Daniel-Johnson Olivia-Thompson Jacob-Davis Isabella-Gonzalez Ethan-Wu Ava-Wright Michael-Scott Sofia-Lopez Noah-Kim Mia-Smith William-Martinez Emma-Johnson Elijah-Wilson Sofia-Rodriguez David-Chen
+Noah-Roberts Sofia-Torres Daniel-Johnson Olivia-Thompson Jacob-Davis Isabella-Gonzalez Ethan-Wu Ava-Wright Michael-Scott Sofia-Lopez Noah-Kim Mia-Smith William-Martinez Emma-Johnson Elijah-Wilson Sofia-Rodriguez David-Chen
+Sofia-Torres Daniel-Johnson Olivia-Thompson Jacob-Davis Isabella-Gonzalez Ethan-Wu Ava-Wright Michael-Scott Sofia-Lopez Noah-Kim Mia-Smith William-Martinez Emma-Johnson Elijah-Wilson Sofia-Rodriguez David-Chen
+Daniel-Johnson Olivia-Thompson Jacob-Davis Isabella-Gonzalez Ethan-Wu Ava-Wright Michael-Scott Sofia-Lopez Noah-Kim Mia-Smith William-Martinez Emma-Johnson Elijah-Wilson Sofia-Rodriguez David-Chen
+Olivia-Thompson Jacob-Davis Isabella-Gonzalez Ethan-Wu Ava-Wright Michael-Scott Sofia-Lopez Noah-Kim Mia-Smith William-Martinez Emma-Johnson Elijah-Wilson Sofia-Rodriguez David-Chen
+Jacob-Davis Isabella-Gonzalez Ethan-Wu Ava-Wright Michael-Scott Sofia-Lopez Noah-Kim Mia-Smith
+Isabella-Gonzalez
+Ethan-Wu
+Ava-Wright
+Michael-Scott
+Sofia-Lopez
+Noah-Kim
+Emily-Hernandez
+Alexander-Turner
+Mia-Smith
+William-Martinez
+Emma-Johnson
+Elijah-Wilson
+Sofia-Rodriguez
+David-Chen
+Olivia-Wilson
+Benjamin-Scott
+Ava-Turner
+Samuel-Lee
+Isabella-Martin
+Ethan-Johnson
+Emma-Gonzalez
+Daniel-Wu
+Alexander-Roberts
+Sophia-Smith
+Samuel-Martinez
+Emily-Davis
+Benjamin-Turner
+Olivia-Torres
+Mia-Wright
+Alexander-Scott
+Ava-Ramirez
+Sofia-Baker
+Ethan-Wilson
+Mia-Gonzalez
+Olivia-Smith
+Alexander-Davis
+Emma-Hernandez
+Benjamin-Thompson
+Sofia-Johnson
+Elijah-Turner
+Mia-Torres
+Emma-Wilson Sofia-Lee
+Sofia-Lee

@@ -1,0 +1,101 @@
+0. Name - gender, age, race/ethnicity, religion, political affiliation
+1. Emily Johnson - Woman, 28, White, Catholic, Liberal
+2. Mohammed Rahman - Man, 45, Middle Eastern, Muslim, Conservative
+3. Maria Garcia - Woman, 50, Latino, Catholic, Moderate
+4. David Kim - Man, 33, Asian, Buddhist, Independent
+5. Sarah Thompson - Woman, 40, Black, Protestant, Conservative
+6. Juan Rodriguez - Man, 22, Latino, Catholic, Liberal
+7. Rachel Lee - Woman, 31, Asian, Unreligious, Moderate
+8. Ahmed Hassan - Man, 38, Middle Eastern, Muslim, Conservative
+9. Anna Hernandez - Woman, 27, Latino, Catholic, Liberal
+10. Michael Nguyen - Man, 45, Asian, Protestant, Conservative
+11. Samantha Brown - Woman, 23, Black, Unreligious, Liberal
+12. Carlos Martinez - Man, 35, Latino, Catholic, Moderate
+13. Rachel Li - Woman, 30, Asian, Jewish, Liberal
+14. Abdul Khan - Man, 56, Middle Eastern, Muslim, Conservative
+15. Jennifer Davis - Woman, 32, White, Protestant, Moderate
+16. Samuel Thompson - Man, 42, Black, Protestant, Conservative
+17. Isabella Lopez - Woman, 29, Latino, Catholic, Liberal
+18. Daniel Kim - Man, 40, Asian, Buddhist, Independent
+19. Aisha Ahmed - Woman, 48, Middle Eastern, Muslim, Conservative
+20. Sophia Patel - Woman, 25, Asian, Hindu, Liberal
+21. Robert Wilson - Man, 46, White, Protestant, Conservative
+22. Emma Clark - Woman, 33, White, Catholic, Moderate
+23. Ahmed Ali - Man, 62, Middle Eastern, Muslim, Conservative
+24. Michelle Ramirez - Woman, 34, Latino, Catholic, Liberal
+25. Jason Nguyen - Man, 29, Asian, Buddhist, Independent
+26. Jasmine Thompson - Woman, 30, Black, Protestant, Liberal
+27. Diego Fernandez - Man, 39, Latino, Catholic, Moderate
+28. Stephanie Liu - Woman, 26, Asian, Unreligious, Liberal
+29. Amir Khan - Man, 59, Middle Eastern, Muslim, Conservative
+30. Olivia Adams - Woman, 37, White, Protestant, Moderate
+31. Ricardo Rodriguez - Man, 32, Latino, Catholic, Conservative
+32. Chloe Kim - Woman, 24, Asian, Buddhist, Independent
+33. Fatima Ali - Woman, 43, Middle Eastern, Muslim, Conservative
+34. Noah Thomas - Man, 28, White, Protestant, Liberal
+35. Gabriela Martinez - Woman, 31, Latino, Catholic, Moderate
+36. Ethan Chen - Man, 41, Asian, Unreligious, Moderate
+37. Ashley Johnson - Woman, 29, Black, Protestant, Liberal
+38. Eduardo Ramirez - Man, 34, Latino, Catholic, Conservative
+39. Lily Zhang - Woman, 27, Asian, Buddhist, Independent
+40. Ahmed Mahmoud - Man, 50, Middle Eastern, Muslim, Conservative
+41. Madison Roberts - Woman, 35, White, Protestant, Moderate
+42. Pedro Hernandez - Man, 37, Latino, Catholic, Conservative
+43. Kayla Thompson - Woman, 26, Black, Unreligious, Liberal
+44. Diego Martinez - Man, 31, Latino, Catholic, Moderate
+45. Grace Kim - Woman, 23, Asian, Buddhist, Independent
+46. Mohammad Khan - Man, 53, Middle Eastern, Muslim, Conservative
+47. Victoria Taylor - Woman, 30, White, Protestant, Liberal
+48. Carlos Rodriguez - Man, 44, Latino, Catholic, Moderate
+49. Jessica Lee - Woman, 28, Asian, Unreligious, Liberal
+50. Ali Ahmed - Man, 43, Middle Eastern, Muslim, Conservative
+51. Elizabeth Davis - Woman, 33, White, Protestant, Moderate
+52. Ricardo Gonzalez - Man, 35, Latino, Catholic, Conservative
+53. Grace Chen - Woman, 25, Asian, Buddhist, Independent
+54. Ahmed Hassan - Man, 47, Middle Eastern, Muslim, Conservative
+55. Amanda Wilson - Woman, 36, White, Protestant, Liberal
+56. Carlos Garcia - Man, 38, Latino, Catholic, Moderate
+57. Olivia Lee - Woman, 27, Asian, Jewish, Liberal
+58. Mustafa Khan - Man, 52, Middle Eastern, Muslim, Conservative
+59. Samantha Miller - Woman, 31, White, Protestant, Moderate
+60. Luis Hernandez - Man, 40, Latino, Catholic, Conservative
+61. Emily Chen - Woman, 24, Asian, Buddhist, Independent
+62. Omar Ali - Man, 44, Middle Eastern, Muslim, Conservative
+63. Ashley Thompson - Woman, 35, White, Protestant, Liberal
+64. Juan Gonzalez - Man, 36, Latino, Catholic, Moderate
+65. Jasmine Wang - Woman, 26, Asian, Unreligious, Liberal
+66. Ahmed Salim - Man, 48, Middle Eastern, Muslim, Conservative
+67. Natalie Adams - Woman, 32, White, Protestant, Moderate
+68. Diego Martinez - Man, 34, Latino, Catholic, Conservative
+69. Sophia Liu - Woman, 28, Asian, Buddhist, Independent
+70. Fatima Hussein - Woman, 42, Middle Eastern, Muslim, Conservative
+71. Matthew Thompson - Man, 39, White, Protestant, Conservative
+72. Isabella Rodriguez - Woman, 37, Latino, Catholic, Liberal
+73. Ethan Kim - Man, 31, Asian, Buddhist, Independent
+74. Aisha Khan - Woman, 46, Middle Eastern, Muslim, Conservative
+75. Jessica Roberts - Woman, 34, White, Protestant, Liberal
+76. Carlos Hernandez - Man, 32, Latino, Catholic, Moderate
+77. Rachel Liu - Woman, 27, Asian, Unreligious, Liberal
+78. Amir Ali - Man, 54, Middle Eastern, Muslim, Conservative
+79. Olivia Johnson - Woman, 33, White, Protestant, Moderate
+80. Juan Garcia - Man, 35, Latino, Catholic, Conservative
+81. Emma Zhang - Woman, 25, Asian, Unreligious, Liberal
+82. Mohammed Ahmed - Man, 49, Middle Eastern, Muslim, Conservative
+83. Ashley Davis - Woman, 34, White, Protestant, Liberal
+84. Carlos Gonzalez - Man, 37, Latino, Catholic, Moderate
+85. Hannah Kim - Woman, 28, Asian, Buddhist, Independent
+86. Abdullah Khan - Man, 55, Middle Eastern, Muslim, Conservative
+87. Emily Wilson - Woman, 35, White, Protestant, Moderate
+88. Miguel Rodriguez - Man, 39, Latino, Catholic, Conservative
+89. Chloe Chen - Woman, 26, Asian, Unreligious, Liberal
+90. Mohammed Hussein - Man, 51, Middle Eastern, Muslim, Conservative
+91. Samantha Smith - Woman, 32, White, Protestant, Liberal
+92. Jose Hernandez - Man, 36, Latino, Catholic, Moderate
+93. Lily Wang - Woman, 27, Asian, Buddhist, Independent
+94. Ahmed Hassan - Man, 45, Middle Eastern, Muslim, Conservative
+95. Sophia Adams - Woman, 34, White, Protestant, Liberal
+96. Miguel Garcia - Man, 37, Latino, Catholic, Moderate
+97. Mia Nguyen - Woman, 25, Asian, Unreligious, Liberal
+98. Omar Ali - Man, 56, Middle Eastern, Muslim, Conservative
+99. Natalie Davis - Woman, 33, White, Protestant, Moderate
+100. Diego Rodriguez - Man, 35, Latino, Catholic, Conservative

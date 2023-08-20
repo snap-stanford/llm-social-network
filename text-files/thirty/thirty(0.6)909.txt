@@ -1,0 +1,8 @@
+{
+  "index": 0,
+  "message": {
+    "role": "assistant",
+    "content": "- Emily Johnson, Olivia Thomas\n- Emily Johnson, Daniel Kim\n- Isaiah Rodriguez, Chloe Kim\n- Isaiah Rodriguez, Sophia Nguyen\n- Chloe Kim, Sophia Nguyen\n- David Carter, Mia Thompson\n- David Carter, Samuel Mitchell\n- Sophia Nguyen, Ava Hernandez\n- Elijah Thompson, Noah Wright\n- Elijah Thompson, Samuel Mitchell\n- Isabella Martinez, Emma Rivera\n- Isabella Martinez, James Rodriguez\n- Michael Lee, Benjamin Chen\n- Michael Lee, Charlotte Lee\n- Olivia Thomas, Emma Rivera\n- Olivia Thomas, Olivia Davis\n- Olivia Thomas, Charlotte Lee\n- Ethan Davis, Noah Wright\n- Ethan Davis, Jacob Nguyen\n- Mia Alvarez, Emma Rivera\n- Mia Alvarez, Isabella Rodriguez\n- Benjamin Chen, Samuel Mitchell\n- Benjamin Chen, Benjamin Kim\n- Ava Lewis, Matthew Johnson\n- Ava Lewis, Noah Wright\n- Noah Wright, Alexander Wright\n- Emma Rivera, Isabella Rodriguez\n- Emma Rivera, Charlotte Lee\n- Daniel Kim, Harper Patel\n- Daniel Kim, Benjamin Kim\n- Harper Patel, Charlotte Lee\n- William Baker, Matthew Johnson\n- William Baker, Benjamin Kim\n- Mia Thompson, Olivia Davis\n- Mia Thompson, Samuel Mitchell\n- James Rodriguez, Isabella Rodriguez\n- James Rodriguez, Benjamin Kim\n- Sophia Chen, Samuel Mitchell\n- Sophia Chen, Benjamin Kim\n- Samuel Mitchell, Benjamin Kim\n- Olivia Davis, Charlotte Lee\n- Jacob Nguyen, Alexander Wright\n- Ava Hernandez, Isabella Rodriguez\n- Ava Hernandez, Charlotte Lee\n- Alexander Wright, Matthew Johnson\n- Charlotte Lee, Benjamin Kim\n- Isabella Rodriguez, Benjamin Kim"
+  },
+  "finish_reason": "stop"
+}

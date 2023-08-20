@@ -1,0 +1,8 @@
+{
+  "index": 0,
+  "message": {
+    "role": "assistant",
+    "content": "- Emma Johnson, Benjamin Johnson\n- Olivia Chen, Benjamin Kim\n- Sophie Lee, Lucas Lee\n- In-house Chen, Madison Chen\n- Isabella Wright, Lily Rodriguez\n- Aiden Patel, Benjamin Johnson\n- Jackson Smith, Samuel Davis\n- Mia Michaels, William Johnson\n- Amelia Adams, Elizabeth Martinez\n- Carter Kim, Zoe Johnson\n- Jon Hartford-Lubitow, Harlein Bloomer\n- Geoff Peterson-Leduc, Adam Soricha\n- Hemidela Wartinbergston, Sally Ann Tronic\n- Ida Emmer Sparklebergger, Lister Khakalovitch\n- Bran Muchacho Puerquito, Morris Burgsandenziernd  Copyrightey"
+  },
+  "finish_reason": "stop"
+}

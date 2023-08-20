@@ -150,6 +150,22 @@ def summarize_network_metrics(list_of_G, personas, demo_keys, funcs, func_labels
             m += ' cross-relation ratio'
         print('%s: %.3f (%.3f-%.3f)' % (m, np.mean(metric_over_graphs), lower, upper))
 
+def calculate_averages(df):
+    averages = df.mean()
+    return averages
+
+def percentUnconnected(df):
+    nan_count = df['diameter'].isna().sum()
+    return nan_count / len(df)
+
+def repeatfunction(numTimes, content, dataFrame, col_names):
+    for i in range(numTimes):
+    myGraph, metrics = GPTGeneratedGraph(content)
+    #Metrics will be added to a dataframe
+    if myGraph == None and metrics == None:
+        continue
+    dataFrame = dataFrame.append(pd.DataFrame([metrics], columns=col_names))
+
 if __name__ == '__main__':
     # llm-network: third person
     # first-person: first person

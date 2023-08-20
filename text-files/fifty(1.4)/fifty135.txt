@@ -1,0 +1,8 @@
+{
+  "index": 0,
+  "message": {
+    "role": "assistant",
+    "content": "- Emma Johnson, Sophia Nguyen\n- Noah Martinez, Ava Rodriguez\n- Olivia Chen, Lucas Lee\n- Liam Thompson, Elizabeth Martinez\n- Ava Rodriguez, Noah Martinez\n- Lucas Lee, Oliver Jackson                              \n- Isabella Wright, Mia Brown                             \n- Ethan Davis, Emily Nguyen                                                                                               \n- Sophia Nguyen, Ethan Patel    \n- Jackson Smith, Sofi Rodriguez\n- Mia Brown, Emily Nguyen                                    \n- AIden Patel, Isabella Martinez                            \n- Charlotte Johnson, Oliver Jackson                                                \n- Oliver Jackson, Benjamin Kim                                          \n- Amelia Gracia, Victoria 37. Gracia                                                                    \n- Benjamin Kim, James Lee                                                                      \n- Harper THompson, Chloe Thompson                                                        \n- Henry Davis, Daniel Davis                                         \n- Elizabeth Martinez, Abigail Thompson                         \n- Michael SMith,Matthew William SOPH\n- Evelyn Cheng,Natalie Nathan                                                                    \n- Francis Benjamin Peggy Joan                                    \n- Ashley Brian Alvarez Sarah                                \n- Noah Ramirez Steimsdem Cody                           \n- Michelle and Maya Leah                                      \n- Alexandra Patrick Carol Bella                              "
+  },
+  "finish_reason": "stop"
+}

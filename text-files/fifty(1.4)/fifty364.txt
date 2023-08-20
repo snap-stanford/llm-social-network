@@ -1,0 +1,8 @@
+{
+  "index": 0,
+  "message": {
+    "role": "assistant",
+    "content": "-Emma Johnson, Mia Brown\n-Emma Johnson, Elizabeth Martinez\n-Emma Johnson, Evelyn Chen\n-Emma Johnson, Sophia Nguyen\n-Emily Nguyen, Elizabeth Martinez\n-Emily Nguyen, Natalie Nguyen\n-Jackson Smith, Liam Thompson\n-Michael Smith, Liam Thompson\n-Oliver Jackson, James Lee\n-Oliver Jackson, Joseph Jackson"
+  },
+  "finish_reason": "stop"
+}

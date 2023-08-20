@@ -1,0 +1,8 @@
+{
+  "index": 0,
+  "message": {
+    "role": "assistant",
+    "content": "- Emma Johnson, Olivia Chen\n- Emma Johnson, Liam Thompson\n- Emma Johnson, Lucas Lee\n- Emma Johnson, Olivia Chen\n- Emma Johnson, Ethan Davis\n- Emma Johnson, Sophia Nguyen\n- Emma Johnson, Charlotte Johnson\n- Emma Johnson, Jackson Smith\n- Emma Johnson, Harper Thompson\n- Emma Johnson, Michael Smith\n- Emma Johnson, William Johnson\n- Emma Johnson, Sofia Rodriguez\n- Emma Johnson, James Lee\n- Noah Martinez, Ava Rodriguez\n- Noah Martinez, Ava Rodriguez\n- Noah Martinez, Amelia Garcia\n- Noah Martinez, Evelyn Chen\n- Noah Martinez, Henry Davis\n- +15 more ..."
+  },
+  "finish_reason": "stop"
+}

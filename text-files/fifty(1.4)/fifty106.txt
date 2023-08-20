@@ -1,0 +1,8 @@
+{
+  "index": 0,
+  "message": {
+    "role": "assistant",
+    "content": "- Emma Johnson, Lucas Lee\n- Olivia Chen, Amelia Garcia\n- Liam Thompson, Ethan Davis\n- Ava Rodriguez, Alexandra Chen\n- Isabella Wright, James Lee\n- Sophia Nguyen, Benjamin Kim\n- Jackson Smith, Emily Nguyen\n- Mia Brown, Samuel Davis\n- Aiden Patel, David Kim\n- Oliver Jackson, Joseph Jackson\n- Amelia Garcia, Olivia Chen\n- Benjamin Kim, Abigail Thompson\n- Harper Thompson, Matthew Wilson\n- Henry Davis, Gloria Thompson\n- Elizabeth Martinez, Ethan Patel\n- Michael Smith, Ahinoam Shaykin\n- Evelyn Chen, Eva Browne-Mascarello\n- Wiilam Johnson, Trace Salter\n- Taradale McDonalds people"
+  },
+  "finish_reason": "stop"
+}

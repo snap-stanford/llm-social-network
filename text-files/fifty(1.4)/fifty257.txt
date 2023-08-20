@@ -1,0 +1,8 @@
+{
+  "index": 0,
+  "message": {
+    "role": "assistant",
+    "content": "- Emma Johnson, David Kim\n- Olivia Chen, Emma Wilson\n- Ava Rodriguez, Olivia Chen\n- Isabella Wright, Emma Wilson\n- Isabella Wright, Ava Rodriguez\n- Sophia Nguyen, Isabella Wright\n- Richard Patel, Nathan Cambara\n- Mia Brown, Makayla Hullum\n- Jade Metiz, Isabella Wright\n- Isaac Thompson, Benjamin Coleman"
+  },
+  "finish_reason": "stop"
+}

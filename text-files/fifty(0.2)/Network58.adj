@@ -1,0 +1,52 @@
+#parsenetwork.py
+# GMT Mon Jul 24 23:57:29 2023
+# 
+Emma-Johnson Olivia-Chen Sophia-Nguyen Isabella-Wright Mia-Brown Charlotte-Johnson Harper-Thompson Abigail-Thompson Grace-Johnson Chloe-Thompson Hannah-Thompson Zoe-Johnson
+Noah-Martinez Ava-Rodriguez Ethan-Davis Elizabeth-Martinez Sofia-Rodriguez Matthew-Wilson Andrew-Smith Ethan-Patel Benjamin-Johnson Joshua-Wilson
+Olivia-Chen Emma-Johnson Sophia-Nguyen Isabella-Wright Mia-Brown Charlotte-Johnson Harper-Thompson Abigail-Thompson Grace-Johnson Chloe-Thompson Hannah-Thompson Zoe-Johnson
+Liam-Thompson Lucas-Lee Jackson-Smith Benjamin-Kim Michael-Smith James-Lee Joseph-Jackson Christopher-Lee Andrew-Smith Ethan-Patel Benjamin-Johnson Isaac-Jackson
+Ava-Rodriguez Noah-Martinez Ethan-Davis Elizabeth-Martinez Sofia-Rodriguez Matthew-Wilson Andrew-Smith Ethan-Patel Benjamin-Johnson Joshua-Wilson
+Lucas-Lee Liam-Thompson Jackson-Smith Benjamin-Kim Michael-Smith James-Lee Joseph-Jackson Christopher-Lee Andrew-Smith Ethan-Patel Benjamin-Johnson Isaac-Jackson
+Isabella-Wright Emma-Johnson Olivia-Chen Sophia-Nguyen Mia-Brown Charlotte-Johnson Harper-Thompson Abigail-Thompson Grace-Johnson Chloe-Thompson Hannah-Thompson Zoe-Johnson
+Ethan-Davis Noah-Martinez Ava-Rodriguez Elizabeth-Martinez Sofia-Rodriguez Matthew-Wilson Andrew-Smith Ethan-Patel Benjamin-Johnson Joshua-Wilson
+Sophia-Nguyen Emma-Johnson Olivia-Chen Isabella-Wright Mia-Brown Charlotte-Johnson Harper-Thompson Abigail-Thompson Grace-Johnson Chloe-Thompson Hannah-Thompson Zoe-Johnson
+Jackson-Smith Liam-Thompson Lucas-Lee Benjamin-Kim Michael-Smith James-Lee Joseph-Jackson Christopher-Lee Andrew-Smith Ethan-Patel Benjamin-Johnson Isaac-Jackson
+Mia-Brown Emma-Johnson Olivia-Chen Isabella-Wright Sophia-Nguyen Charlotte-Johnson Harper-Thompson Abigail-Thompson Grace-Johnson Chloe-Thompson Hannah-Thompson Zoe-Johnson
+Aiden-Patel Lucas-Lee Jackson-Smith Benjamin-Kim Michael-Smith James-Lee Joseph-Jackson Christopher-Lee Andrew-Smith Ethan-Patel Benjamin-Johnson Isaac-Jackson
+Charlotte-Johnson Emma-Johnson Olivia-Chen Sophia-Nguyen Isabella-Wright Mia-Brown Harper-Thompson Abigail-Thompson Grace-Johnson Chloe-Thompson Hannah-Thompson Zoe-Johnson
+Oliver-Jackson Liam-Thompson Joseph-Jackson Isaac-Jackson
+Amelia-Garcia Ava-Rodriguez Ethan-Davis Elizabeth-Martinez Sofia-Rodriguez Matthew-Wilson Andrew-Smith Ethan-Patel Benjamin-Johnson Joshua-Wilson
+Benjamin-Kim Liam-Thompson Lucas-Lee Jackson-Smith Michael-Smith James-Lee Joseph-Jackson Christopher-Lee Andrew-Smith Ethan-Patel Benjamin-Johnson Isaac-Jackson
+Harper-Thompson Emma-Johnson Olivia-Chen Sophia-Nguyen Isabella-Wright Mia-Brown Charlotte-Johnson Abigail-Thompson Grace-Johnson Chloe-Thompson Hannah-Thompson Zoe-Johnson
+Henry-Davis Samuel-Davis Daniel-Davis
+Elizabeth-Martinez Noah-Martinez Ava-Rodriguez Ethan-Davis Sofia-Rodriguez Matthew-Wilson Andrew-Smith Ethan-Patel Benjamin-Johnson Joshua-Wilson
+Michael-Smith Liam-Thompson Lucas-Lee Jackson-Smith Benjamin-Kim James-Lee Joseph-Jackson Christopher-Lee Andrew-Smith Ethan-Patel Benjamin-Johnson Isaac-Jackson
+Evelyn-Chen Olivia-Chen Sophia-Nguyen Isabella-Wright Mia-Brown Charlotte-Johnson Harper-Thompson Abigail-Thompson Grace-Johnson Chloe-Thompson Hannah-Thompson Zoe-Johnson
+William-Johnson Liam-Thompson Lucas-Lee Jackson-Smith Benjamin-Kim Michael-Smith James-Lee Joseph-Jackson Christopher-Lee Andrew-Smith Ethan-Patel Benjamin-Johnson Isaac-Jackson
+Sofia-Rodriguez Noah-Martinez Ava-Rodriguez Ethan-Davis Elizabeth-Martinez Matthew-Wilson Andrew-Smith Ethan-Patel Benjamin-Johnson Joshua-Wilson
+James-Lee Liam-Thompson Lucas-Lee Jackson-Smith Benjamin-Kim Michael-Smith Joseph-Jackson Christopher-Lee Andrew-Smith Ethan-Patel Benjamin-Johnson Isaac-Jackson
+Abigail-Thompson Emma-Johnson Olivia-Chen Sophia-Nguyen Isabella-Wright Mia-Brown Charlotte-Johnson Harper-Thompson Grace-Johnson Chloe-Thompson Hannah-Thompson Zoe-Johnson
+Daniel-Davis Samuel-Davis Henry-Davis
+Emily-Nguyen Sophia-Nguyen Olivia-Chen Isabella-Wright Mia-Brown Charlotte-Johnson Harper-Thompson Abigail-Thompson Grace-Johnson Chloe-Thompson Hannah-Thompson Zoe-Johnson
+Matthew-Wilson Noah-Martinez Ava-Rodriguez Ethan-Davis Elizabeth-Martinez Sofia-Rodriguez Andrew-Smith Ethan-Patel Benjamin-Johnson Joshua-Wilson
+Scarlett-Brown Mia-Brown Charlotte-Johnson Harper-Thompson Abigail-Thompson Grace-Johnson Chloe-Thompson Hannah-Thompson Zoe-Johnson
+Alexander-Patel Lucas-Lee Jackson-Smith Benjamin-Kim Michael-Smith James-Lee Joseph-Jackson Christopher-Lee Andrew-Smith Ethan-Patel Benjamin-Johnson Isaac-Jackson
+Grace-Johnson Emma-Johnson Olivia-Chen Sophia-Nguyen Isabella-Wright Mia-Brown Charlotte-Johnson Harper-Thompson Abigail-Thompson Chloe-Thompson Hannah-Thompson Zoe-Johnson
+Joseph-Jackson Liam-Thompson Lucas-Lee Jackson-Smith Benjamin-Kim Michael-Smith James-Lee Christopher-Lee Andrew-Smith Ethan-Patel Benjamin-Johnson Isaac-Jackson
+Victoria-Garcia Amelia-Garcia
+David-Kim Liam-Thompson Lucas-Lee Jackson-Smith Benjamin-Kim Michael-Smith James-Lee Joseph-Jackson Christopher-Lee Andrew-Smith Ethan-Patel Benjamin-Johnson Isaac-Jackson
+Chloe-Thompson Emma-Johnson Olivia-Chen Sophia-Nguyen Isabella-Wright Mia-Brown Charlotte-Johnson Harper-Thompson Abigail-Thompson Grace-Johnson Hannah-Thompson Zoe-Johnson
+Samuel-Davis Henry-Davis Daniel-Davis
+Zoey-Martinez Noah-Martinez Ava-Rodriguez Ethan-Davis Elizabeth-Martinez Sofia-Rodriguez Matthew-Wilson Andrew-Smith Ethan-Patel Benjamin-Johnson Joshua-Wilson
+Andrew-Smith Liam-Thompson Lucas-Lee Jackson-Smith Benjamin-Kim Michael-Smith James-Lee Joseph-Jackson Christopher-Lee Ethan-Patel Benjamin-Johnson Isaac-Jackson
+Madison-Chen Olivia-Chen Sophia-Nguyen Isabella-Wright Mia-Brown Charlotte-Johnson Harper-Thompson Abigail-Thompson Grace-Johnson Chloe-Thompson Hannah-Thompson Zoe-Johnson
+Benjamin-Johnson Emma-Johnson Olivia-Chen Sophia-Nguyen Isabella-Wright Mia-Brown Charlotte-Johnson Harper-Thompson Abigail-Thompson Grace-Johnson Chloe-Thompson Hannah-Thompson Zoe-Johnson
+Lily-Rodriguez Ava-Rodriguez Sofia-Rodriguez Elizabeth-Martinez Matthew-Wilson Ethan-Patel Joshua-Wilson
+Christopher-Lee Liam-Thompson Lucas-Lee Jackson-Smith Benjamin-Kim Michael-Smith James-Lee Joseph-Jackson Andrew-Smith Ethan-Patel Benjamin-Johnson Isaac-Jackson
+Hannah-Thompson Emma-Johnson Olivia-Chen Sophia-Nguyen Isabella-Wright Mia-Brown Charlotte-Johnson Harper-Thompson Abigail-Thompson Grace-Johnson Chloe-Thompson Zoe-Johnson
+Natalie-Nguyen Sophia-Nguyen Olivia-Chen Isabella-Wright Mia-Brown Charlotte-Johnson Harper-Thompson Abigail-Thompson Grace-Johnson Chloe-Thompson Hannah-Thompson Zoe-Johnson
+Joshua-Wilson Noah-Martinez Ava-Rodriguez Ethan-Davis Elizabeth-Martinez Sofia-Rodriguez Matthew-Wilson Andrew-Smith Ethan-Patel Benjamin-Johnson Zoe-Johnson
+Avery-Brown Mia-Brown Charlotte-Johnson Harper-Thompson Abigail-Thompson Grace-Johnson Chloe-Thompson Hannah-Thompson Zoe-Johnson
+Ethan-Patel Liam-Thompson Lucas-Lee Jackson-Smith Benjamin-Kim Michael-Smith
+Zoe-Johnson
+Isaac-Jackson

@@ -1,0 +1,101 @@
+0. Name - gender, age, race/ethnicity, religion, political affiliation
+1. Jane Johnson - Woman, 45, White, Catholic, Liberal
+2. David Martinez - Man, 28, Latino, Catholic, Independent
+3. Sarah Chen - Woman, 32, Asian, Buddhist, Liberal
+4. Ahmed Ali - Man, 40, Middle Eastern, Muslim, Conservative
+5. Maria Lopez - Woman, 52, Latina, Catholic, Conservative
+6. Michael Nguyen - Man, 22, Asian, Buddhist, Liberal
+7. Fatima Khan - Woman, 30, Middle Eastern, Muslim, Liberal
+8. James Thompson - Man, 60, White, Protestant, Conservative
+9. Emily Rodriguez - Woman, 25, Latina, Catholic, Liberal
+10. Daniel Kim - Man, 33, Asian, Buddhist, Moderate
+11. Aisha Ahmed - Woman, 48, Middle Eastern, Muslim, Conservative
+12. William Davis - Man, 42, White, Protestant, Independent
+13. Sophia Hernandez - Woman, 38, Latina, Catholic, Conservative
+14. Kevin Patel - Man, 29, Asian, Hindu, Liberal
+15. Yasmin Rahman - Woman, 47, Middle Eastern, Muslim, Liberal
+16. Robert Wilson - Man, 55, White, Protestant, Conservative
+17. Olivia Jones - Woman, 31, Black, Unreligious, Moderate
+18. Carlos Ramirez - Man, 37, Latino, Catholic, Independent
+19. Lily Wong - Woman, 43, Asian, Buddhist, Liberal
+20. Mohammed Khan - Man, 50, Middle Eastern, Muslim, Conservative
+21. Gabriela Silva - Woman, 27, Latina, Catholic, Liberal
+22. Christopher Scott - Man, 34, White, Protestant, Moderate
+23. Isabella Thomas - Woman, 29, Black, Protestant, Liberal
+24. Juan Gonzalez - Man, 48, Latino, Catholic, Conservative
+25. Emma Chen - Woman, 23, Asian, Buddhist, Liberal
+26. Aliyah Ahmed - Woman, 33, Middle Eastern, Muslim, Moderate
+27. Benjamin Johnson - Man, 43, White, Protestant, Liberal
+28. Mia Martinez - Woman, 36, Latina, Catholic, Conservative
+29. Joshua Nguyen - Man, 26, Asian, Buddhist, Liberal
+30. Leila Khan - Woman, 40, Middle Eastern, Muslim, Moderate
+31. Samuel Thompson - Man, 57, White, Protestant, Conservative
+32. Ava Wilson - Woman, 30, Black, Unreligious, Liberal
+33. Felipe Ramirez - Man, 35, Latino, Catholic, Independent
+34. Chloe Lee - Woman, 25, Asian, Buddhist, Liberal
+35. Omar Ali - Man, 45, Middle Eastern, Muslim, Conservative
+36. Victoria Johnson - Woman, 48, White, Protestant, Liberal
+37. Sofia Rodriguez - Woman, 33, Latina, Catholic, Conservative
+38. Ethan Kim - Man, 31, Asian, Buddhist, Liberal
+39. Layla Ahmed - Woman, 42, Middle Eastern, Muslim, Conservative
+40. Andrew Davis - Man, 39, White, Protestant, Moderate
+41. Ava Thompson - Woman, 28, Black, Unreligious, Liberal
+42. Miguel Hernandez - Man, 44, Latino, Catholic, Independent
+43. Emily Nguyen - Woman, 26, Asian, Buddhist, Liberal
+44. Omar Khan - Man, 52, Middle Eastern, Muslim, Conservative
+45. Grace Wilson - Woman, 35, White, Protestant, Liberal
+46. Natalie Smith - Woman, 33, Black, Unreligious, Moderate
+47. Alejandro Ramirez - Man, 32, Latino, Catholic, Conservative
+48. Zoe Lee - Woman, 24, Asian, Buddhist, Liberal
+49. Hassan Ahmed - Man, 49, Middle Eastern, Muslim, Conservative
+50. Amelia Johnson - Woman, 51, White, Protestant, Liberal
+51. Mia Martinez - Woman, 47, Latina, Catholic, Conservative
+52. Brandon Thompson - Man, 36, White, Protestant, Independent
+53. Olivia Rodriguez - Woman, 32, Latina, Catholic, Liberal
+54. Justin Kim - Man, 29, Asian, Buddhist, Moderate
+55. Aisha Khan - Woman, 44, Middle Eastern, Muslim, Conservative
+56. Alexander Davis - Man, 60, White, Protestant, Conservative
+57. Sophia Wilson - Woman, 34, Black, Unreligious, Liberal
+58. Carlos Hernandez - Man, 38, Latino, Catholic, Independent
+59. Lily Chen - Woman, 26, Asian, Buddhist, Liberal
+60. Mohammed Ali - Man, 48, Middle Eastern, Muslim, Conservative
+61. Ava Brown - Woman, 46, White, Protestant, Liberal
+62. Isabella Martinez - Woman, 35, Latina, Catholic, Conservative
+63. Adrian Thompson - Man, 33, White, Protestant, Moderate
+64. Maya Johnson - Woman, 30, Black, Unreligious, Liberal
+65. Jose Ramirez - Man, 37, Latino, Catholic, Independent
+66. Chloe Lee - Woman, 25, Asian, Buddhist, Liberal
+67. Ahmed Khan - Man, 42, Middle Eastern, Muslim, Conservative
+68. Naomi Wilson - Woman, 48, White, Protestant, Liberal
+69. Olivia Smith - Woman, 33, Black, Unreligious, Moderate
+70. Diego Hernandez - Man, 34, Latino, Catholic, Independent
+71. Emily Chen - Woman, 28, Asian, Buddhist, Liberal
+72. Fatima Ahmed - Woman, 40, Middle Eastern, Muslim, Moderate
+73. Daniel Davis - Man, 39, White, Protestant, Liberal
+74. Ava Thompson - Woman, 28, Black, Unreligious, Liberal
+75. Carlos Ramirez - Man, 42, Latino, Catholic, Independent
+76. Lily Wong - Woman, 43, Asian, Buddhist, Liberal
+77. Mohammed Khan - Man, 50, Middle Eastern, Muslim, Conservative
+78. Gabriela Silva - Woman, 27, Latina, Catholic, Liberal
+79. Christopher Scott - Man, 34, White, Protestant, Moderate
+80. Isabella Thomas - Woman, 29, Black, Protestant, Liberal
+81. Juan Gonzalez - Man, 48, Latino, Catholic, Conservative
+82. Emma Chen - Woman, 23, Asian, Buddhist, Liberal
+83. Aliyah Ahmed - Woman, 33, Middle Eastern, Muslim, Moderate
+84. Benjamin Johnson - Man, 43, White, Protestant, Liberal
+85. Mia Martinez - Woman, 36, Latina, Catholic, Conservative
+86. Joshua Nguyen - Man, 26, Asian, Buddhist, Liberal
+87. Leila Khan - Woman, 40, Middle Eastern, Muslim, Moderate
+88. Samuel Thompson - Man, 57, White, Protestant, Conservative
+89. Ava Wilson - Woman, 30, Black, Unreligious, Liberal
+90. Felipe Ramirez - Man, 35, Latino, Catholic, Independent
+91. Chloe Lee - Woman, 25, Asian, Buddhist, Liberal
+92. Omar Ali - Man, 45, Middle Eastern, Muslim, Conservative
+93. Victoria Johnson - Woman, 48, White, Protestant, Liberal
+94. Sofia Rodriguez - Woman, 33, Latina, Catholic, Conservative
+95. Ethan Kim - Man, 31, Asian, Buddhist, Liberal
+96. Layla Ahmed - Woman, 42, Middle Eastern, Muslim, Conservative
+97. Andrew Davis - Man, 39, White, Protestant, Moderate
+98. Ava Thompson - Woman, 28, Black, Unreligious, Liberal
+99. Miguel Hernandez - Man, 44, Latino, Catholic, Independent
+100. Emily Nguyen - Woman, 26, Asian, Buddhist, Liberal

@@ -1,0 +1,212 @@
+#parsenetwork.py
+# GMT Tue Jul 25 16:48:51 2023
+# 
+Alex-Johnson
+Olivia-Martinez
+Ethan-Thompson
+Maya-Nguyen
+Samuel-Davis
+Gabriela-Hernandez
+Daniel-Lee
+Sophia-Clark
+Jackson-Mitchell
+Isabella-Rodriguez
+David-Kim
+Mia-Thompson
+Jacob-Ramirez
+Ava-Patel
+Matthew-Foster
+Sofia-Silva
+Lucas-Chen
+Amelia-Wright
+Elijah-Scott
+Camila-Gonzalez
+Joshua-Wu
+Harper-Baker
+Michael-Roberts
+Penelope-Lopez
+Matthew-Nguyen
+Charlotte-Thompson
+Noah-Hill
+Valentina-Torres
+Daniel-Kim
+Grace-Mitchell
+Benjamin-Hernandez
+Luna-Patel
+Christopher-Turner
+Victoria-Smith
+Ryan-Martinez
+Harper-Johnson
+Elijah-Davis
+Penelope-Rodriguez
+Andrew-Chen
+Mia-Wilson
+Alexander-Clark
+Emily-Nguyen
+Elijah-Thompson
+Sofia-Rivera
+James-Lee
+Ava-Martin
+Mason-Mitchell
+Emma-Lopez
+Ethan-Kim
+Mia-Baker
+Noah-Roberts
+Sofia-Torres
+Daniel-Johnson
+Olivia-Thompson
+Jacob-Davis
+Isabella-Gonzalez
+Ethan-Wu
+Ava-Wright
+Michael-Scott
+Sofia-Lopez
+Noah-Kim
+Emily-Hernandez
+Alexander-Turner
+Mia-Smith
+William-Martinez
+Emma-Johnson
+Elijah-Wilson
+Sofia-Rodriguez
+David-Chen
+Olivia-Wilson
+Benjamin-Scott
+Ava-Turner
+Samuel-Lee
+Isabella-Martin
+Ethan-Johnson
+Emma-Gonzalez
+Daniel-Wu
+Alexander-Roberts
+Sophia-Smith
+Samuel-Martinez
+Emily-Davis
+Benjamin-Turner
+Olivia-Torres
+Mia-Wright
+Alexander-Scott
+Ava-Ramirez
+Sofia-Baker
+Ethan-Wilson
+Mia-Gonzalez
+Olivia-Smith
+Alexander-Davis
+Emma-Hernandez
+Benjamin-Thompson
+Sofia-Johnson
+Elijah-Turner
+Mia-Torres
+(Michael-Scott Olivia-Smith)
+Olivia-Smith)
+(Alexander-Davis Emily-Davis)
+Emily-Davis)
+(Elijah-Scott Noah-Hill)
+Noah-Hill)
+(Sofia-Johnson Emma-Johnson)
+Emma-Johnson)
+(Mia-Wright Harper-Baker)
+Harper-Baker)
+(Sofia-Smith Isabella-Martin)
+Isabella-Martin)
+(Benjamin-Thompson Samuel-Martinez) Alexander-Davis)
+Samuel-Martinez)
+(Alexander-Scott Jacob-Davis)
+Jacob-Davis)
+(Mia-Torres Alexander-Davis)
+Alexander-Davis)
+(Sofia-Baker Emma-Hernandez)
+Emma-Hernandez)
+(Mia-Gonzalez Ava-Ramirez)
+Ava-Ramirez)
+(Ethan-Wilson Benjamin-Turner)
+Benjamin-Turner)
+(Olivia-Smith Noah-Roberts)
+Noah-Roberts)
+(Emily-Davis Benjamin-Thompson)
+Benjamin-Thompson)
+(Samuel-Lee Daniel-Wu)
+Daniel-Wu)
+(Sofia-Torres Emily-Nguyen) Harper-Baker)
+Emily-Nguyen)
+(Sophia-Smith Ava-Patel)
+Ava-Patel)
+(Emma-Hernandez Isabella-Rodriguez)
+Isabella-Rodriguez)
+(Sofia-Silva Gabriela-Hernandez)
+Gabriela-Hernandez)
+(Penelope-Rodriguez Valentina-Torres)
+Valentina-Torres)
+(Lucas-Chen Daniel-Kim)
+Daniel-Kim)
+(Christopher-Turner Penelope-Lopez)
+Penelope-Lopez)
+(Joshua-Wu Andrew-Chen)
+Andrew-Chen)
+(Noah-Hill Jackson-Mitchell)
+Jackson-Mitchell)
+(Grace-Mitchell Mia-Thompson)
+Mia-Thompson)
+(Luna-Patel Alexander-Clark)
+Alexander-Clark)
+(Elijah-Turner Elijah-Davis)
+Elijah-Davis)
+(Penelope-Lopez Olivia-Thompson)
+Olivia-Thompson)
+(Noah-Roberts Michael-Roberts)
+Michael-Roberts)
+(Daniel-Johnson Charlotte-Thompson)
+Charlotte-Thompson)
+(Victoria-Smith Amelia-Wright)
+Amelia-Wright)
+(Ryan-Martinez Olivia-Wilson)
+Olivia-Wilson)
+(Harper-Johnson Mia-Wilson)
+Mia-Wilson)
+(Ethan-Kim Joshua-Wu)
+Joshua-Wu)
+(Emma-Lopez Camila-Gonzalez)
+Camila-Gonzalez)
+(Sofia-Lopez Harper-Johnson)
+Harper-Johnson)
+(Emma-Wilson Mia-Thompson)
+(Sophia-Lee Mia-Wilson)
+(Olivia-Martinez Maya-Nguyen)
+Maya-Nguyen)
+(Gabriela-Hernandez Sophia-Clark)
+Sophia-Clark)
+(Daniel-Lee Matthew-Foster)
+Matthew-Foster)
+(Sophia-Clark Gabriela-Hernandez)
+(Daniel-Kim Noah-Kim)
+Noah-Kim)
+(David-Kim Lucas-Chen)
+Lucas-Chen)
+(Mia-Thompson Gabriela-Hernandez)
+(Samuel-Davis Elijah-Thompson)
+Elijah-Thompson)
+(Samuel-Martinez William-Martinez)
+William-Martinez)
+(Elijah-Davis Joshua-Wu)
+(Ava-Martin Emma-Gonzalez)
+Emma-Gonzalez)
+(Jacob-Davis Ava-Ramirez)
+(Andrew-Chen Ethan-Wu)
+Ethan-Wu)
+(Alexander-Turner Benjamin-Scott)
+Benjamin-Scott)
+(Mia-Smith Sofia-Silva)
+Sofia-Silva)
+(David-Chen Ethan-Wu)
+(Jacob-Ramirez Benjamin-Hernandez)
+Benjamin-Hernandez)
+(Matthew-Foster Elijah-Scott)
+Elijah-Scott)
+(Ava-Patel Sofia-Rivera)
+Sofia-Rivera)
+(Sofia-Rodriguez Emma-Johnson)
+(Alexander-Roberts Elijah-Turner)
+Elijah-Turner)
+(Mason-Mitchell Elijah-Davis)
+(James-Lee Lucas-Chen)
+(Elijah-Wilson Noah-Hill)

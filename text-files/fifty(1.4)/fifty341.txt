@@ -1,0 +1,8 @@
+{
+  "index": 0,
+  "message": {
+    "role": "assistant",
+    "content": "- Emma Johnson, Charlotte Jonas\n- Olivia Chen, Lucas Lee\n- Ava Rodriguez, Noah Martinez\n- Isabella Wright, Sophia Nguyen\n- Ethan Davis, Michael Smith\n- Jackson Smith, Lily Rodriguez\n- Benjamin Kim, Natalie Nguyen\n- Henry Davis, Mia Brown\n- Alexander Patel, James Lee\n- Grace Johnson, Daniel Davis \n- Matthew Wilson, Benjamin Johnson\n- Zoey Martinez, Natalie Nguyen \n- Andrew Smith, Daniel Davis \n- Madison Chen, Oliver Jackson\n- Hannah Thompson, Zeke Jackson \n- Claire Young, Jenna James   \n- Chandler Jones, Peyton Steel \n- Samantha Kingsley, Gabriella Anderson \n- Brianna O'Neill, Tabitha McKenna \n- Dylan Foster, Lucas Hart \n- Charity Greene, Nora Steele \n- Ricardo Silva, Juan Calder\u00f3n \n- Enrique Alvarez, Caterina Romano \n- Leila Patel, Jess Underwood \n- Daniella Castro, Adriana Ruiz \n                                                            "
+  },
+  "finish_reason": "stop"
+}

@@ -1,0 +1,8 @@
+{
+  "index": 0,
+  "message": {
+    "role": "assistant",
+    "content": "- Emma Johnson, Olivia Chen\n- Emma Johnson, Isabella Wright\n- Emma Johnson, Charlotte Johnson\n- Emma Johnson, Hannah Thompson\n- Emma Johnson, Natalie Nguyen\n- Emma Johnson, Zoe Johnson\n- Olivia Chen, Emma Johnson\n- Olivia Chen, Sophia Nguyen\n- Olivia Chen, Harper Thompson\n- Noah Martinez, Ava Rodriguez\n- Noah Martinez, Sofia Rodriguez\n- Noah Martinez, Elizabeth Martinez\n- Noah Martinez, Zoey Martinez\n- Olivia Chen, Emily Nguyen\n- Olivia Chen, Maddison Chen\n- Liam Thompson, Jackson Smith\n- Liam Thompson, Michael Smith\n- Lucas Lee, Sophia Lee\n- Lucas Lee, James Lee\n- Ava Rodriguez, Noah Martinez\n- Ava Rodriguez, John Wilson\n- Ava Rodriguez, Ethan Davis\n- Sophia Nguyen, Zhanhua Lee\n- Sophia Nguyen, Benjamin Kim\n- Sophia Nguyen, Evelyn Chen\n- Sophia Nguyen, Hannah Thompson\n- Oliver Jackson, Joseph Jackson\n- Oliver Jackson, Isabella Wright\n- Amelia Garcia, Zoey Martinez\n- Amelia Garcia, Sylvia Rodriguez\n- Benjamin Kim, Daniel Davis\n- Benjamin Kim, Joan Wright\n- Benjamin Kim, Zhanhua Lee\n-Provide an unordered list of friendship demographics only partnerships-format-'--White Protestant Democrats-Emma Wilson' , Most common friends , Prefernces ie name contact methods that complimension_each_Other HENDERSON GENARLAY Miss Dr Harris Nakeshia\n. Zoey Martin PEONRAYPORT Sarai Kerluke SHSRUNDERPYIE.TAYN Nathan Hilton JUSTALK_Lynch Bill Khiana6 Camillo Abernathy Dakota McKzell Ms Mrs Raven Randolph Hilas1 Faris Deborah Evel"
+  },
+  "finish_reason": "stop"
+}

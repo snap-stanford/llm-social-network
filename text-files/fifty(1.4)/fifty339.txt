@@ -1,0 +1,8 @@
+{
+  "index": 0,
+  "message": {
+    "role": "assistant",
+    "content": "- Ava Rodriguez, Joseph Jackson\n- Elizabeth Martinez, Hannah Thompson\n- Olivia Chen, Alexandra Garcia\n- Benjamin Kim, Emma Wilson\n- Lucas Lee, Madison Chen\n- William Johnson, Logan Smith\n- Sophia Nguyen, Natalie Nguyen\n- Emma Johnson, Harper Thompson\n- Oliver Jackson, Mia Brown\n- Charlotte Johnson, Harper Thompson\n- Isabella Wright, Sophia Annabella Johnson\n- Katherine Davis, Henry Davis\n- Anna Rodriguez, Katherine Michelle Smith\n- Gabriel Williams, Matthew Anderson\n- Amelia Gregory-Garcia, Gabriel Thompson\n- Reese Hutchins, Joseph Rodriguez\n- Emma Ella Worthington, Ray Arnold Johnson\n- Alicia Barnett, Kevin Davis\n- Savannah Griffin, Jill Davis\n- Sophia Gomez-Perez, Berlin Rodriguez-Schaefer\nJoseph Nathan Mitchell Williams, Ryan De Linzmueller\n- Bryan Forsyth Montgomery, Austin Karsti Moore Retuyan Verzano\n- Kamilla Ivy Meadows Walker Burcilla Medrano Guadalajara Guerrero Hernandez\n- Tran Dunn, DAngvo Thanh Peter Johnson Barack T\u2019oba Costa Ghana-Ivory Hay-Steve Chand."
+  },
+  "finish_reason": "stop"
+}

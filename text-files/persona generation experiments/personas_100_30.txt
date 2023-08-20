@@ -1,0 +1,101 @@
+0. Name - gender, age, race/ethnicity, religion, political affiliation
+1. Emily Johnson - Woman, 28, White, Catholic, Liberal
+2. Muhammad Ahmed - Man, 42, Middle Eastern, Muslim, Conservative
+3. Maria Rodriguez - Woman, 50, Latino, Catholic, Moderate
+4. David Lee - Man, 32, Asian, Buddhist, Independent
+5. Sarah Thompson - Woman, 45, White, Protestant, Conservative
+6. Ahmed Hussein - Man, 38, Middle Eastern, Muslim, Moderate
+7. Jessica Martinez - Woman, 22, Latino, Catholic, Liberal
+8. Robert Chen - Man, 55, Asian, Protestant, Conservative
+9. Olivia Davis - Woman, 31, Black, Unreligious, Moderate
+10. Michael Nguyen - Man, 46, Asian, Buddhist, Independent
+11. Grace Taylor - Woman, 43, White, Protestant, Liberal
+12. Mohammed Ali - Man, 26, Middle Eastern, Muslim, Moderate
+13. Rachel Lopez - Woman, 39, Latino, Catholic, Conservative
+14. Christopher Kim - Man, 29, Asian, Protestant, Liberal
+15. Ashley Wright - Woman, 33, Black, Unreligious, Moderate
+16. Ahmed Abdullah - Man, 52, Middle Eastern, Muslim, Conservative
+17. Sofia Hernandez - Woman, 37, Latino, Catholic, Liberal
+18. Justin Davis - Man, 30, White, Protestant, Independent
+19. Megan Smith - Woman, 27, White, Protestant, Conservative
+20. Kevin Johnson - Man, 44, Black, Unreligious, Moderate
+21. Aisha Jamal - Woman, 49, Middle Eastern, Muslim, Liberal
+22. Juan Rodriguez - Man, 41, Latino, Catholic, Conservative
+23. Angela Lee - Woman, 34, Asian, Buddhist, Moderate
+24. Jacob Thompson - Man, 54, White, Protestant, Conservative
+25. Jasmine Nguyen - Woman, 23, Asian, Buddhist, Liberal
+26. Jamal Ahmed - Man, 37, Middle Eastern, Muslim, Moderate
+27. Isabella Martinez - Woman, 48, Latino, Catholic, Conservative
+28. Daniel Patel - Man, 32, Asian, Hindu, Liberal
+29. Mia Davis - Woman, 29, Black, Unreligious, Moderate
+30. Ali Hussein - Man, 47, Middle Eastern, Muslim, Conservative
+31. Gabriela Rodriguez - Woman, 25, Latino, Catholic, Liberal
+32. Aaron Johnson - Man, 35, White, Protestant, Conservative
+33. Sophia Wright - Woman, 30, Black, Unreligious, Moderate
+34. Ahmed Mohamed - Man, 39, Middle Eastern, Muslim, Liberal
+35. Emma Thompson - Woman, 43, White, Protestant, Conservative
+36. Jason Kim - Man, 28, Asian, Buddhist, Independent
+37. Nicole Smith - Woman, 32, White, Protestant, Liberal
+38. Amir Abdullah - Man, 51, Middle Eastern, Muslim, Conservative
+39. Sofia Lopez - Woman, 36, Latino, Catholic, Liberal
+40. Ryan Davis - Man, 38, White, Protestant, Moderate
+41. Lily Johnson - Woman, 26, White, Protestant, Conservative
+42. Ahmed Ali - Man, 40, Middle Eastern, Muslim, Moderate
+43. Ava Martinez - Woman, 24, Latino, Catholic, Liberal
+44. Matthew Lee - Man, 33, Asian, Buddhist, Independent
+45. Olivia Wright - Woman, 31, Black, Unreligious, Moderate
+46. Jamal Hussein - Man, 45, Middle Eastern, Muslim, Conservative
+47. Elena Rodriguez - Woman, 47, Latino, Catholic, Liberal
+48. Benjamin Chen - Man, 27, Asian, Protestant, Conservative
+49. Chloe Thompson - Woman, 29, White, Protestant, Moderate
+50. Ali Mohammed - Man, 48, Middle Eastern, Muslim, Liberal
+51. Mia Johnson - Woman, 23, White, Protestant, Conservative
+52. Adam Smith - Man, 34, White, Protestant, Independent
+53. Sophia Davis - Woman, 28, Black, Unreligious, Liberal
+54. Ahmed Ibrahim - Man, 41, Middle Eastern, Muslim, Conservative
+55. Emily Martinez - Woman, 38, Latino, Catholic, Moderate
+56. Ethan Lee - Man, 37, Asian, Buddhist, Liberal
+57. Ava Wright - Woman, 33, White, Protestant, Conservative
+58. Mohammed Ahmed - Man, 46, Middle Eastern, Muslim, Moderate
+59. Isabella Rodriguez - Woman, 44, Latino, Catholic, Conservative
+60. Daniel Kim - Man, 31, Asian, Protestant, Liberal
+61. Zoe Thompson - Woman, 30, White, Protestant, Moderate
+62. Kareem Hussein - Man, 53, Middle Eastern, Muslim, Conservative
+63. Gabriela Lopez - Woman, 35, Latino, Catholic, Liberal
+64. Christopher Johnson - Man, 36, White, Protestant, Conservative
+65. Maya Davis - Woman, 25, Black, Unreligious, Moderate
+66. Mohammed Ali - Man, 39, Middle Eastern, Muslim, Liberal
+67. Emily Hernandez - Woman, 26, Latino, Catholic, Conservative
+68. Justin Smith - Man, 32, White, Protestant, Independent
+69. Sofia Johnson - Woman, 29, White, Protestant, Liberal
+70. Ahmed Hassan - Man, 50, Middle Eastern, Muslim, Conservative
+71. Maria Rodriguez - Woman, 40, Latino, Catholic, Moderate
+72. Ethan Nguyen - Man, 35, Asian, Buddhist, Liberal
+73. Emma Wright - Woman, 34, White, Protestant, Conservative
+74. Aisha Abdullah - Man, 42, Middle Eastern, Muslim, Moderate
+75. Olivia Martinez - Woman, 23, Latino, Catholic, Liberal
+76. Joseph Kim - Man, 28, Asian, Protestant, Independent
+77. Megan Davis - Woman, 31, White, Protestant, Conservative
+78. Muhammad Hussein - Man, 43, Middle Eastern, Muslim, Conservative
+79. Sophia Hernandez - Woman, 36, Latino, Catholic, Liberal
+80. Benjamin Lee - Man, 29, Asian, Buddhist, Conservative
+81. Ava Thompson - Woman, 32, White, Protestant, Moderate
+82. Ahmed Ali - Man, 45, Middle Eastern, Muslim, Moderate
+83. Anna Rodriguez - Woman, 39, Latino, Catholic, Conservative
+84. Ryan Kim - Man, 34, Asian, Buddhist, Liberal
+85. Isabella Wright - Woman, 33, White, Protestant, Conservative
+86. Mohammed Ahmed - Man, 48, Middle Eastern, Muslim, Liberal
+87. Emily Lopez - Woman, 30, Latino, Catholic, Moderate
+88. David Chen - Man, 30, Asian, Protestant, Independent
+89. Mia Smith - Woman, 28, White, Protestant, Liberal
+90. Kareem Hussein - Man, 52, Middle Eastern, Muslim, Conservative
+91. Sophia Martinez - Woman, 35, Latino, Catholic, Liberal
+92. Ethan Johnson - Man, 36, White, Protestant, Conservative
+93. Maya Davis - Woman, 26, Black, Unreligious, Moderate
+94. Mohammed Ali - Man, 38, Middle Eastern, Muslim, Liberal
+95. Emily Hernandez - Woman, 24, Latino, Catholic, Conservative
+96. Aiden Smith - Man, 33, White, Protestant, Independent
+97. Olivia Johnson - Woman, 31, White, Protestant, Liberal
+98. Ahmed Hassan - Man, 49, Middle Eastern, Muslim, Conservative
+99. Maria Rodriguez - Woman, 41, Latino, Catholic, Moderate
+100. Daniel Kim - Man, 32, Asian, Buddhist, Liberal

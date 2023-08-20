@@ -1,0 +1,95 @@
+#parsenetwork.py
+# GMT Tue Jul 25 00:04:19 2023
+# 
+Emma-Johnson Olivia-Chen\r Lucas-Lee\r Sophia-Nguyen\r Benjamin-Kim\r Evelyn-Chen\r Emily-Nguyen\r Madison-Chen\r Natalie-Nguyen\r
+Noah-Martinez Ava-Rodriguez\r Elizabeth-Martinez\r Sofia-Rodriguez\r
+Olivia-Chen Emma-Johnson\r Lucas-Lee\r Sophia-Nguyen\r Benjamin-Kim\r Evelyn-Chen\r Emily-Nguyen\r Madison-Chen\r Natalie-Nguyen\r
+Liam-Thompson Isabella-Wright\r Charlotte-Johnson\r Harper-Thompson\r
+Ava-Rodriguez Noah-Martinez\r Michael-Smith\r Matthew-Wilson\r Andrew-Smith\r
+Lucas-Lee Emma-Johnson\r Olivia-Chen\r Sophia-Nguyen\r Benjamin-Kim\r Evelyn-Chen\r Emily-Nguyen\r Madison-Chen\r Natalie-Nguyen\r
+Isabella-Wright Liam-Thompson\r Charlotte-Johnson\r Harper-Thompson\r
+Ethan-Davis Aiden-Patel\r Michael-Smith\r Matthew-Wilson\r Andrew-Smith\r
+Sophia-Nguyen Emma-Johnson\r Olivia-Chen\r Lucas-Lee\r Benjamin-Kim\r Evelyn-Chen\r Emily-Nguyen\r Madison-Chen\r Natalie-Nguyen\r
+Jackson-Smith Mia-Brown\r Charlotte-Johnson\r Harper-Thompson\r
+Mia-Brown Jackson-Smith\r Charlotte-Johnson\r Harper-Thompson\r
+Aiden-Patel Ethan-Davis\r Michael-Smith\r Matthew-Wilson\r Andrew-Smith\r
+Charlotte-Johnson Isabella-Wright\r Liam-Thompson\r Mia-Brown\r
+Oliver-Jackson
+Amelia-Garcia Sofia-Rodriguez\r Victoria-Garcia\r
+Benjamin-Kim Emma-Johnson\r Olivia-Chen\r Lucas-Lee\r Sophia-Nguyen\r Evelyn-Chen\r Emily-Nguyen\r Madison-Chen\r Natalie-Nguyen\r
+Harper-Thompson Isabella-Wright\r Charlotte-Johnson\r Mia-Brown\r
+Henry-Davis Zoe-Johnson\r
+Elizabeth-Martinez Ava-Rodriguez\r Sofia-Rodriguez\r Zoey-Martinez\r
+Michael-Smith Ava-Rodriguez\r Ethan-Davis\r Matthew-Wilson\r Andrew-Smith\r
+Evelyn-Chen Emma-Johnson\r Olivia-Chen\r Lucas-Lee\r Sophia-Nguyen\r Benjamin-Kim\r Emily-Nguyen\r Madison-Chen\r Natalie-Nguyen\r
+William-Johnson Zoe-Johnson\r
+Sofia-Rodriguez Ava-Rodriguez\r Elizabeth-Martinez\r Lily-Rodriguez\r
+James-Lee Christopher-Lee\r Lucas-Lee\r Daniel-Davis\r
+Abigail-Thompson Chloe-Thompson\r Isabella-Wright\r Harper-Thompson\r
+Daniel-Davis Samuel-Davis\r James-Lee\r
+Emily-Nguyen Emma-Johnson\r Olivia-Chen\r Lucas-Lee\r Sophia-Nguyen\r Benjamin-Kim\r Evelyn-Chen\r Madison-Chen\r Natalie-Nguyen\r
+Matthew-Wilson Ava-Rodriguez\r Michael-Smith\r Andrew-Smith\r
+Scarlett-Brown Zoe-Johnson\r Avery-Brown\r
+Alexander-Patel Ethan-Davis\r Aiden-Patel\r
+Grace-Johnson Zoe-Johnson\r
+Joseph-Jackson Olivia-Jackson\r Isaac-Jackson\r
+Victoria-Garcia Amelia-Garcia\r Sofia-Rodriguez\r
+David-Kim Benjamin-Kim\r
+Chloe-Thompson Abigail-Thompson\r Isabella-Wright\r Harper-Thompson\r
+Samuel-Davis Daniel-Davis\r James-Lee\r
+Zoey-Martinez Elizabeth-Martinez\r Sofia-Rodriguez\r
+Andrew-Smith Ava-Rodriguez\r Ethan-Davis\r Michael-Smith\r Matthew-Wilson\r
+Madison-Chen Emma-Johnson\r Olivia-Chen\r Lucas-Lee\r Sophia-Nguyen\r Benjamin-Kim\r Evelyn-Chen\r Emily-Nguyen\r Natalie-Nguyen\r
+Benjamin-Johnson Olivia-Jackson\r Joseph-Jackson\r Isaac-Jackson\r
+Lily-Rodriguez Sofia-Rodriguez\r Elizabeth-Martinez\r Zoe-Johnson\r
+Christopher-Lee Samuel-Davis\r James-Lee\r
+Hannah-Thompson Abigail-Thompson\r Harper-Thompson\r Chloe-Thompson\r
+Natalie-Nguyen Emma-Johnson\r Olivia-Chen\r Lucas-Lee\r Sophia-Nguyen\r Benjamin-Kim\r Evelyn-Chen\r Emily-Nguyen\r Madison-Chen\r
+Joshua-Wilson Benjamin-Johnson\r Joseph-Jackson\r Isaac-Jackson\r
+Avery-Brown Scarlett-Brown\r Zoe-Johnson\r
+Ethan-Patel
+Zoe-Johnson Henry-Davis\r Zoe-Johnson\r
+Isaac-Jackson Olivia-Jackson\r Joseph-Jackson\r
+Olivia-Chen\r
+Lucas-Lee\r
+Sophia-Nguyen\r
+Benjamin-Kim\r
+Evelyn-Chen\r
+Emily-Nguyen\r
+Madison-Chen\r
+Natalie-Nguyen\r
+Ava-Rodriguez\r
+Elizabeth-Martinez\r
+Sofia-Rodriguez\r
+Emma-Johnson\r
+Isabella-Wright\r
+Charlotte-Johnson\r
+Harper-Thompson\r
+Noah-Martinez\r
+Michael-Smith\r
+Matthew-Wilson\r
+Andrew-Smith\r
+Liam-Thompson\r
+Aiden-Patel\r
+Mia-Brown\r
+Ethan-Davis\r
+Jackson-Smith\r
+Olivia-Jackson Benjamin-Johnson\r Joseph-Jackson\r Isaac-Jackson\r
+Benjamin-Johnson\r
+Joseph-Jackson\r
+Isaac-Jackson\r
+Victoria-Garcia\r
+Zoe-Johnson\r
+Zoey-Martinez\r
+Lily-Rodriguez\r
+Christopher-Lee\r
+Daniel-Davis\r
+Chloe-Thompson\r
+Samuel-Davis\r
+James-Lee\r
+Avery-Brown\r
+Olivia-Jackson\r
+Amelia-Garcia\r
+Abigail-Thompson\r
+Scarlett-Brown\r
+Henry-Davis\r

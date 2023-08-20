@@ -1,0 +1,100 @@
+#parsenetwork.py
+# GMT Tue Jul 25 16:48:51 2023
+# 
+Alex-Johnson Maya-Nguyen Daniel-Lee Sophia-Clark Elijah-Scott Joshua-Wu Harper-Johnson
+Olivia-Martinez Gabriela-Hernandez Samuel-Davis Sophia-Clark Jacob-Ramirez Ava-Patel
+Ethan-Thompson Maya-Nguyen Jacob-Ramirez Matthew-Foster Lucas-Chen Amelia-Wright
+Maya-Nguyen Olivia-Martinez Sophia-Silva Victoria-Smith Ryan-Martinez Luna-Patel
+Samuel-Davis Olivia-Martinez Gabriela-Hernandez Daniel-Lee Elijah-Scott Grace-Mitchell
+Gabriela-Hernandez Olivia-Martinez Sophia-Silva Valentina-Torres Camila-Gonzalez Harper-Baker
+Daniel-Lee Alex-Johnson Sophia-Clark Elijah-Scott Joshua-Wu Noah-Hill
+Sophia-Clark Alex-Johnson Daniel-Lee Elijah-Scott Harper-Johnson Elijah-Davis
+Jackson-Mitchell Maya-Nguyen Samuel-Davis Jacob-Ramirez Matthew-Foster Christopher-Turner
+Isabella-Rodriguez Ethan-Thompson Maya-Nguyen Gabriela-Hernandez Sophia-Clark Andrew-Chen
+David-Kim Maya-Nguyen Jacob-Ramirez Matthew-Foster Lucas-Chen Mia-Thompson
+Mia-Thompson Ethan-Thompson David-Kim Mia-Wilson Emma-Lopez Noah-Roberts
+Jacob-Ramirez Olivia-Martinez Maya-Nguyen Samuel-Davis Jackson-Mitchell Elijah-Davis
+Ava-Patel Olivia-Martinez Gabriela-Hernandez Jacob-Ramirez Sophia-Silva Valentina-Torres
+Matthew-Foster Ethan-Thompson Maya-Nguyen Jackson-Mitchell David-Kim Christopher-Turner
+Sofia-Silva Gabriela-Hernandez Ava-Patel Valentina-Torres Camila-Gonzalez Emma-Lopez
+Lucas-Chen Ethan-Thompson Maya-Nguyen David-Kim Mia-Thompson Noah-Roberts
+Amelia-Wright Maya-Nguyen Sophia-Clark Luna-Patel Harper-Baker Penelope-Lopez
+Elijah-Scott Alex-Johnson Daniel-Lee Sophia-Clark Jackson-Mitchell Noah-Hill
+Camila-Gonzalez Gabriela-Hernandez Ava-Patel Sofia-Silva Valentina-Torres Harper-Baker
+Joshua-Wu Alex-Johnson Daniel-Lee Elijah-Scott Harper-Johnson Elijah-Davis
+Harper-Baker Maya-Nguyen Samuel-Davis Gabriela-Hernandez Daniel-Lee Elijah-Scott
+Michael-Roberts Maya-Nguyen Jackson-Mitchell Christopher-Turner Victoria-Smith Ryan-Martinez
+Penelope-Lopez Sophia-Silva Ava-Patel Valentina-Torres Camila-Gonzalez Emma-Lopez
+Matthew-Nguyen Maya-Nguyen Jacob-Ramirez Daniel-Johnson Olivia-Thompson Isabella-Gonzalez
+Charlotte-Thompson Ethan-Thompson Mia-Thompson Emma-Gonzalez Benjamin-Thompson Elijah-Turner
+Noah-Hill Alex-Johnson Daniel-Lee Elijah-Scott Joshua-Wu Harper-Johnson
+Valentina-Torres Gabriela-Hernandez Ava-Patel Sofia-Silva Camila-Gonzalez Harper-Baker
+Daniel-Kim Maya-Nguyen David-Kim Mia-Thompson Emma-Lopez Noah-Roberts
+Grace-Mitchell Samuel-Davis Elijah-Scott Harper-Johnson Emily-Hernandez Noah-Kim
+Benjamin-Hernandez Olivia-Martinez Gabriela-Hernandez Jacob-Ramirez Sophia-Silva Valentina-Torres
+Luna-Patel Maya-Nguyen Amelia-Wright Penelope-Lopez Matthew-Nguyen Christopher-Turner
+Christopher-Turner
+Victoria-Smith
+Ryan-Martinez
+Harper-Johnson
+Elijah-Davis
+Penelope-Rodriguez
+Andrew-Chen
+Mia-Wilson
+Alexander-Clark
+Emily-Nguyen
+Elijah-Thompson
+Sofia-Rivera
+James-Lee
+Ava-Martin
+Mason-Mitchell
+Emma-Lopez
+Ethan-Kim
+Mia-Baker
+Noah-Roberts
+Sofia-Torres
+Daniel-Johnson
+Olivia-Thompson
+Jacob-Davis
+Isabella-Gonzalez
+Ethan-Wu
+Ava-Wright
+Michael-Scott
+Sofia-Lopez
+Noah-Kim
+Emily-Hernandez
+Alexander-Turner Maya-Nguyen Matthew-Foster Christopher-Turner Victoria-Smith Ryan-Martinez
+Mia-Smith Ethan-Thompson Maya-Nguyen Mia-Thompson Emma-Gonzalez Benjamin-Thompson
+William-Martinez Maya-Nguyen Samuel-Davis Jacob-Ramirez Jackson-Mitchell Elijah-Davis
+Emma-Johnson Alex-Johnson Harper-Johnson Elijah-Davis Sofia-Rivera Emma-Hernandez
+Elijah-Wilson Alex-Johnson Samuel-Davis Daniel-Lee Elijah-Scott Joshua-Wu
+Sofia-Rodriguez Maya-Nguyen Gabriela-Hernandez Ava-Patel Sophia-Silva Valentina-Torres
+David-Chen Ethan-Thompson Maya-Nguyen Lucas-Chen Mia-Thompson Noah-Roberts
+Olivia-Wilson Alex-Johnson Sophia-Clark Elijah-Scott Joshua-Wu Harper-Johnson
+Benjamin-Scott Maya-Nguyen Samuel-Davis Jacob-Ramirez Jackson-Mitchell Elijah-Davis
+Ava-Turner Gabriela-Hernandez Ava-Patel Sofia-Silva Valentina-Torres Harper-Baker
+Samuel-Lee Ethan-Thompson Daniel-Lee Noah-Hill Harper-Johnson Elijah-Davis
+Isabella-Martin Maya-Nguyen Samuel-Davis Gabriela-Hernandez Daniel-Lee Elijah-Scott
+Ethan-Johnson Alex-Johnson Daniel-Lee Elijah-Scott Joshua-Wu Harper-Johnson
+Emma-Gonzalez Gabriela-Hernandez Ava-Patel Sofia-Silva Valentina-Torres Harper-Baker
+Daniel-Wu Maya-Nguyen David-Kim Mia-Thompson Emma-Lopez Noah-Roberts
+Alexander-Roberts Maya-Nguyen Matthew-Foster Michael-Roberts Christopher-Turner Victoria-Smith
+Sophia-Smith Olivia-Martinez Maya-Nguyen Mia-Thompson Emma-Gonzalez Benjamin-Thompson
+Samuel-Martinez Ethan-Thompson Maya-Nguyen Matthew-Foster Lucas-Chen Amelia-Wright
+Emily-Davis Olivia-Martinez Maya-Nguyen Jacob-Ramirez Samuel-Davis Ava-Patel
+Benjamin-Turner Maya-Nguyen Matthew-Foster Michael-Roberts Christopher-Turner Victoria-Smith
+Olivia-Torres Gabriela-Hernandez Ava-Patel Sofia-Silva Valentina-Torres Harper-Baker
+Mia-Wright Maya-Nguyen Sophia-Clark Luna-Patel Harper-Baker Penelope-Lopez
+Alexander-Scott Maya-Nguyen Samuel-Davis Jacob-Ramirez Elijah-Davis Elijah-Wilson
+Ava-Ramirez Gabriela-Hernandez Ava-Patel Sofia-Silva Valentina-Torres Harper-Baker
+Sofia-Baker Olivia-Martinez Gabriela-Hernandez Ava-Patel Sofia-Silva Valentina-Torres
+Ethan-Wilson Alex-Johnson Samuel-Davis Daniel-Lee Elijah-Scott Joshua-Wu
+Mia-Gonzalez Olivia-Martinez Gabriela-Hernandez Ava-Patel Sofia-Silva Valentina-Torres
+Olivia-Smith Olivia-Martinez Maya-Nguyen Sophia-Smith Emma-Gonzalez Benjamin-Thompson
+Alexander-Davis Maya-Nguyen Samuel-Davis Jacob-Ramirez Elijah-Davis Sofia-Rivera
+Emma-Hernandez Alex-Johnson Maya-Nguyen Samuel-Davis Gabriela-Hernandez Daniel-Lee
+Benjamin-Thompson Maya-Nguyen Matthew-Nguyen Michael-Roberts Christopher-Turner Victoria-Smith
+Sofia-Johnson
+Elijah-Turner Maya-Nguyen Matthew-Foster Michael-Roberts Alexander-Turner Christopher-Turner
+Mia-Torres Gabriela-Hernandez Ava-Patel Sofia-Silva Valentina-Torres
+Sophia-Silva

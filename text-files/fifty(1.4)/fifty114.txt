@@ -1,0 +1,8 @@
+{
+  "index": 0,
+  "message": {
+    "role": "assistant",
+    "content": "- Emma Johnson, Noah Martinez \n- Olivia Chen, Lucas Lee \n- Isabella Wright, Jackson Smith \n- Mia Brown, Elizabeth Martinez \n- Abigail Thompson, Victoria Garcia \n- Grace Johnson, Lily Rodriguez \n- Benjamin Johnson, Samuel Davis \n- Kenneth Martinez, Yasharah Kumar \n- Logan Wilson, Aarti Patel \n- Alexandra Hernandez, Mackenzie Smith"
+  },
+  "finish_reason": "stop"
+}

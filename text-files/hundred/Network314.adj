@@ -1,0 +1,99 @@
+#parsenetwork.py
+# GMT Tue Jul 25 16:48:52 2023
+# 
+Alex-Johnson Maya-Nguyen Gabriela-Hernandez Samuel-Davis Daniel-Lee
+Olivia-Martinez Maya-Nguyen Gabriela-Hernandez Lucas-Chen Amelia-Wright
+Ethan-Thompson Maya-Nguyen Gabriela-Hernandez Daniel-Lee Sophia-Clark
+Maya-Nguyen Olivia-Martinez Samuel-Davis Daniel-Lee Penelope-Lopez
+Samuel-Davis Alex-Johnson Maya-Nguyen Daniel-Lee Mia-Thompson
+Gabriela-Hernandez Alex-Johnson Olivia-Martinez Maya-Nguyen Daniel-Lee
+Daniel-Lee Alex-Johnson Samuel-Davis Maya-Nguyen Mia-Thompson
+Sophia-Clark Ethan-Thompson Mia-Thompson Lucas-Chen Amelia-Wright
+Jackson-Mitchell Mia-Thompson Mia-Wilson Noah-Hill Benjamin-Hernandez
+Isabella-Rodriguez Mia-Thompson Mia-Wilson Noah-Hill Benjamin-Hernandez
+David-Kim Mia-Thompson Mia-Wilson Noah-Hill Benjamin-Hernandez
+Mia-Thompson Ethan-Thompson Sophia-Clark Jackson-Mitchell Isabella-Rodriguez
+Jacob-Ramirez Mia-Thompson Mia-Wilson Noah-Hill Benjamin-Hernandez
+Ava-Patel Mia-Thompson Mia-Wilson Noah-Hill Benjamin-Hernandez
+Matthew-Foster Mia-Thompson Mia-Wilson Noah-Hill Benjamin-Hernandez
+Sofia-Silva Mia-Thompson Mia-Wilson Noah-Hill Benjamin-Hernandez
+Lucas-Chen Ethan-Thompson Sophia-Clark Mia-Thompson Amelia-Wright
+Amelia-Wright Ethan-Thompson Sophia-Clark Lucas-Chen Mia-Thompson
+Elijah-Scott Sophia-Clark Mia-Thompson Lucas-Chen Amelia-Wright
+Camila-Gonzalez Sophia-Clark Mia-Thompson Lucas-Chen Amelia-Wright
+Joshua-Wu Sophia-Clark Mia-Thompson Lucas-Chen Amelia-Wright
+Harper-Baker Lucas-Chen Amelia-Wright Elijah-Scott Camila-Gonzalez
+Michael-Roberts Amelia-Wright Elijah-Scott Camila-Gonzalez Joshua-Wu
+Penelope-Lopez Lucas-Chen Amelia-Wright Elijah-Scott Camila-Gonzalez
+Matthew-Nguyen Sophia-Clark Mia-Thompson Lucas-Chen Amelia-Wright
+Charlotte-Thompson Ethan-Thompson Sophia-Clark Mia-Thompson Lucas-Chen
+Noah-Hill Jackson-Mitchell Isabella-Rodriguez David-Kim Jacob-Ramirez
+Valentina-Torres Jackson-Mitchell Isabella-Rodriguez David-Kim Jacob-Ramirez
+Daniel-Kim Ethan-Thompson Sophia-Clark Mia-Thompson Lucas-Chen
+Grace-Mitchell Mia-Thompson Mia-Wilson Noah-Hill Benjamin-Hernandez
+Benjamin-Hernandez Jackson-Mitchell Isabella-Rodriguez David-Kim Jacob-Ramirez
+Luna-Patel Jackson-Mitchell Isabella-Rodriguez David-Kim Jacob-Ramirez
+Christopher-Turner Jackson-Mitchell Isabella-Rodriguez David-Kim Jacob-Ramirez
+Victoria-Smith Jackson-Mitchell Isabella-Rodriguez David-Kim Jacob-Ramirez
+Ryan-Martinez Isabella-Rodriguez David-Kim Jacob-Ramirez Luna-Patel
+Harper-Johnson
+Elijah-Davis Isabella-Rodriguez David-Kim Jacob-Ramirez Luna-Patel
+Penelope-Rodriguez Isabella-Rodriguez David-Kim Jacob-Ramirez Luna-Patel
+Andrew-Chen Sophia-Clark Mia-Thompson Lucas-Chen Amelia-Wright
+Mia-Wilson Ethan-Thompson Sophia-Clark Andrew-Chen Lucas-Chen
+Alexander-Clark Ethan-Thompson Sophia-Clark Mia-Thompson Andrew-Chen
+Emily-Nguyen Ethan-Thompson Sophia-Clark Mia-Thompson Andrew-Chen
+Elijah-Thompson Ethan-Thompson Sophia-Clark Andrew-Chen
+Sofia-Rivera Ethan-Thompson Sophia-Clark Mia-Thompson Andrew-Chen
+James-Lee Sophia-Clark Mia-Thompson Lucas-Chen Amelia-Wright
+Ava-Martin Sophia-Clark Mia-Thompson Lucas-Chen Amelia-Wright
+Mason-Mitchell Sophia-Clark Mia-Thompson Lucas-Chen Amelia-Wright
+Emma-Lopez Sophia-Clark Mia-Thompson Lucas-Chen Amelia-Wright
+Ethan-Kim Sophia-Clark Mia-Thompson Lucas-Chen Amelia-Wright
+Mia-Baker Lucas-Chen Amelia-Wright Elijah-Scott Camila-Gonzalez
+Noah-Roberts Amelia-Wright Elijah-Scott Camila-Gonzalez Joshua-Wu
+Sofia-Torres Lucas-Chen Amelia-Wright Elijah-Scott Camila-Gonzalez
+Daniel-Johnson Lucas-Chen Amelia-Wright Elijah-Scott Camila-Gonzalez
+Olivia-Thompson Lucas-Chen Amelia-Wright Elijah-Scott Camila-Gonzalez
+Jacob-Davis Mia-Thompson Mia-Wilson Noah-Hill Benjamin-Hernandez
+Isabella-Gonzalez Mia-Thompson Mia-Wilson Noah-Hill Benjamin-Hernandez
+Ethan-Wu Mia-Thompson Mia-Wilson Noah-Hill Benjamin-Hernandez
+Ava-Wright Mia-Thompson Mia-Wilson Noah-Hill Benjamin-Hernandez
+Michael-Scott Mia-Thompson Mia-Wilson Noah-Hill Benjamin-Hernandez
+Sofia-Lopez Ethan-Thompson Sophia-Clark Mia-Thompson Lucas-Chen
+Noah-Kim Ethan-Thompson Sophia-Clark Mia-Thompson Lucas-Chen
+Emily-Hernandez Ethan-Thompson Sophia-Clark Mia-Thompson Lucas-Chen
+Alexander-Turner Ethan-Thompson Sophia-Clark Mia-Thompson Lucas-Chen
+Mia-Smith Ethan-Thompson Sophia-Clark Mia-Thompson Lucas-Chen
+William-Martinez Isabella-Rodriguez David-Kim Jacob-Ramirez Luna-Patel
+Emma-Johnson Isabella-Rodriguez David-Kim Jacob-Ramirez Luna-Patel
+Elijah-Wilson Isabella-Rodriguez David-Kim Jacob-Ramirez Luna-Patel
+Sofia-Rodriguez Isabella-Rodriguez David-Kim Jacob-Ramirez Luna-Patel
+David-Chen Ethan-Thompson Sophia-Clark Mia-Thompson Lucas-Chen
+Olivia-Wilson Ethan-Thompson Sophia-Clark Mia-Thompson Lucas-Chen
+Benjamin-Scott Ethan-Thompson Sophia-Clark Mia-Thompson Lucas-Chen
+Ava-Turner Ethan-Thompson Sophia-Clark Mia-Thompson Lucas-Chen
+Samuel-Lee Ethan-Thompson Sophia-Clark Mia-Thompson Lucas-Chen
+Isabella-Martin Ethan-Thompson Sophia-Clark Mia-Thompson Lucas-Chen
+Ethan-Johnson Jackson-Mitchell Isabella-Rodriguez David-Kim Jacob-Ramirez
+Emma-Gonzalez Jackson-Mitchell Isabella-Rodriguez David-Kim Jacob-Ramirez
+Daniel-Wu
+Alexander-Roberts
+Sophia-Smith
+Samuel-Martinez
+Emily-Davis
+Benjamin-Turner
+Olivia-Torres
+Mia-Wright
+Alexander-Scott
+Ava-Ramirez
+Sofia-Baker
+Ethan-Wilson
+Mia-Gonzalez
+Olivia-Smith
+Alexander-Davis
+Emma-Hernandez
+Benjamin-Thompson Jackson-Mitchell Isabella-Rodriguez David-Kim Jacob-Ramirez
+Sofia-Johnson Jackson-Mitchell Isabella-Rodriguez David-Kim Jacob-Ramirez
+Elijah-Turner Jackson-Mitchell Isabella-Rodriguez David-Kim Jacob-Ramirez
+Mia-Torres Jackson-Mitchell Isabella-Rodriguez David-Kim

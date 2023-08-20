@@ -1,0 +1,8 @@
+{
+  "index": 0,
+  "message": {
+    "role": "assistant",
+    "content": "(1, Emma Thompson), (2, Malik Johnson), (3, Sofia Rodriguez), (4, Ryan Chen), (5, Mia Green), (6, Xavier Littlebear), (7, Lily Wong), (8, Alejandro Ramirez), (9, Hannah Smith), (10, Malikah Hussein), (11, Ethan Kim), (12, Carlos Santos), (1, Sofia Rodriguez), (1, Mia Green), (1, Hannah Smith), (1, Malikah Hussein), (1, Carlos Santos), (2, Ryan Chen), (2, Alejandro Ramirez), (2, Ethan Kim), (3, Malikah Hussein), (3, Carlos Santos), (3, Lily Wong), (4, Malik Johnson), (4, Ethan Kim), (4, Carlos Santos), (4, Lily Wong), (5, Sofia Rodriguez), (5, Alejandro Ramirez), (5, Hannah Smith), (5, Lily Wong), (6, Malikah Hussein), (6, Carlos Santos), (6, Lily Wong), (7, Sofia Rodriguez), (7, Mia Green), (7, Hannah Smith), (7, Malikah Hussein), (7, Carlos Santos), (7, Ethan Kim), (8, Sofia Rodriguez), (8, Mia Green), (8, Hannah Smith), (8, Malikah Hussein), (8, Carlos Santos), (9, Sofia Rodriguez), (9, Mia Green), (9, Hannah Smith), (9, Carlos Santos), (10, Sofia Rodriguez), (10, Ryan Chen), (10, Hannah Smith), (10, Malikah Hussein), (10, Carlos Santos), (10, Ethan Kim), (11, Sofia Rodriguez), (11, Mia Green), (11, Hannah Smith), (11, Malikah Hussein), (11, Carlos Santos), (11, Lily Wong), (12, Sofia Rodriguez), (12, Mia Green), (12, Hannah Smith), (12, Malikah Hussein), (12, Carlos Santos), (12, Ethan Kim)"
+  },
+  "finish_reason": "stop"
+}

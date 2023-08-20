@@ -1,0 +1,8 @@
+{
+  "index": 0,
+  "message": {
+    "role": "assistant",
+    "content": "- Emma Johnson, Olivia Chen\n- Emma Johnson, Lucas Lee\n- Emma Johnson, Emily Nguyen\n- Emma Johnson, Madison Chen\n- Emma Johnson, Natalie Nguyen\n- Noah Martinez, Ava Rodriguez\n- Noah Martinez, Elizabeth Martinez\n- Noah Martinez, Sofia Rodriguez\n- Noah Martinez, Zoey Martinez\n- Olivia Chen, Emma Wilson\n- Olivia Chen, Aiden Patel\n- Olivia Chen, Emma Johnson\n- Olivia Chen, Lucas Lee\n- Olivia Chen, Natalie Nguyen\n- Liam Thompson, Ava Rodriguez\n- Liam Thompson, Sophia Nguyen\n- Liam Thompson, Jackson Smith\n- Liam Thompson, Amelia Garcia\n- Ava Rodriguez, Olivia Chen\n- Ava Rodriguez, Sofia Rodriguez\n- Ava Rodriguez, Victoria Garcia\n- Ava Rodriguez, Natalie Nguyen\n- (because Olivia Chen and Ava Rodgiguez have higher independence (aging up/school/social ease))"
+  },
+  "finish_reason": "stop"
+}

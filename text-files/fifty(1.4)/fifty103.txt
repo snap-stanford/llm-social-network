@@ -1,0 +1,8 @@
+{
+  "index": 0,
+  "message": {
+    "role": "assistant",
+    "content": "- Emma Johnson, Olivia Chen\n- Emma Johnson, Ethan Davis\n- Emma Johnson, Michael Smith\n- Emma Johnson, Harper Thompson\n- Emma Johnson, Joseph Jackson\n- Emma Johnson, Grace Johnson\n- Emma Johnson, Lily Rodriguez\n- Emma Johnson, Hannah Thompson\n- Noah Martinez, Ava Rodriguez\n- Noah Martinez, Sebastian Rodriguez\n- Noah Martinez, Olivia Chen\n- Noah Martinez, Isabella Wright\n- Noah Martinez, Sophia Nguyen\n- Noah Martinez, Matthew Wilson\n- Noah Martinez, Samuel Davis\n- Noah Martinez, Zoey Martinez\n- Noah Martinez, Benjamin Johnson\n- Noah Martinez, Ethan Patel\n- Noah Martinez, Natalie Nguyen\n- Olivia Chen, Emma Johnson\n- Olivia Chen, Sophia Nguyen\n- Olivia Chen, Jackson Smith\n- Olivia Chen, Amelia Garcia\n- Olivia Chen, Lara Zriek\n- Olivia Chen, Benjamin Kim\n- Olivia Chen, Alexander Patel\n- Olivia Chen, Matthew Wilson\n- Olivia Chen, Madison Chen\n- Olivia Chen, Aaron Levy\n- Olivia Chen, Valerie Troxell\n- Lydia Hillsgrove, Jackson Torresia\n- Lydia Hillsgrove, Kristina Ensley\n- Lydia Hillsgrove, Dylan Sharpnack\n..."
+  },
+  "finish_reason": "stop"
+}

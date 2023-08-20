@@ -1,0 +1,8 @@
+{
+  "index": 0,
+  "message": {
+    "role": "assistant",
+    "content": "- Emma Johnson, Liam Thompson\n- Noah Martinez, Ava Rodriguez\n- Olivia Chen, Emma Wilson\n- Liam Thompson, Noah Martinez\n- Ava Rodriguez, Ethan Davis\n- Lucas Lee, Harrison Johnson\n- Isabella Wright, Mia Brown\n- Ethan Davis, Ava Rodriguez\n- Sophia Nguyen, Diego Rodriguez\n- Jackson Smith, Olivia Chen\n- Mia Brown, Lucas Lee\n- Aiden Patel, Noah Martinez\n- Charlotte Johnson, Benjamin Kim\n- Oliver Jackson, Isabella Wright\n- Amelia Garcia, Henry Davis\n- Benjamin Kim, James Lee\n- Harper Thompson, Emily Nguyen\n- Henry Davis, Diego Rodriguez\n- Elizabeth Martinez, Sophia Rodrigue\n- Michael Smith, Mia Brown\n- Evelyn Chen, Lucas Lee\n- William Johnson, Grace Johnson\n- Sofia Rodriguez, Diego Rodriguez\n- James Lee, Morgan Martinez\n- Abigail Thompson, Charlotte Johnson\n- Daniel Davis, Matthew Wilson\n- Emily Nguyen, Lucas Lee\n- Matthew Wilson, Abigail Fortuno\n- Scarlett Brown, Henry Davis\n- Alexander Patel, Evelyn Chen\n- Grace Johnson, William Corleone\n- Joseph Jackson, William Johnson\n- Victoria Garcia, Amanda William\n- Davis Krishna, Grace Wynn\n- Chloe Thompson, Uri Dowleri\n- Sam Rodney, Ash Pendalion\n- Codey Smith, Sharon Raylene"
+  },
+  "finish_reason": "stop"
+}

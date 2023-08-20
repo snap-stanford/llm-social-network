@@ -1,0 +1,8 @@
+{
+  "index": 0,
+  "message": {
+    "role": "assistant",
+    "content": "- Emma Johnson, Benjamin Johnson\n- Noah Martinez, Victoria Garcia\n- Olivia Chen, Sophie Chung\n- Liam Thompson, Lucas Lee\n- Ava Rodriguez, Emma Garcia \n- Lucas Lee, Kamal Ali \n- Isabella Wright, Ava Rodriguez \n- Ethan Davis, Xavier Martinez \n- Sophia Nguyen, Lena Chen \n- Jackson Smith, Grace Johnson \n- Mia Brown, Ethan Davis \n- Aiden Patel, Madison Chen \n- Charlotte Johnson, Grace Thompson \n- Oliver Jackson, Jackson Smith \n- Amelia Garcia, Mia Rodriguez \n- Benjamin Kim, Emma Lee \n- Harper Smith, Natalie Nguyen \n- Henry Davis, Emily Nguyen \n- Elizabeth Martinez, Lola Rodriguez \n- Michael Smith, Michael Davis \n- Evelyn Chen, Benjamin Lee \n- William Johnson, Lucy Brown \n- Sofia Rodriguez, Carter Thompson \n- James Lee, Chloe Davis \n- Abigail Thompson, Harrison Johnson \n- Daniel Davis, Emma Thompson \n- Emily Nguyen, Kaden Lee \n- Matthew Wilson, Alyssa Smith \n- Scarlett Brown, Lauren Davis \n- Alexander Patel, Anika Patel \n- Grace Johnson, Isaac Ali \n- Joseph Jackson, Samuel Martinez \n- Victoria Garcia, Blake Thompson \n- David Kim, Wes Jackson \n- Chloe Thompson, Natalie Johnson \n- Samual Davis, Peyton Rodriguez \n- Zoey Martinez, Chloe Johnson \n- Andrew Smith, Joseph Chen \n- Madison Chen, Ashley Davis \n- Benjamin Johnson, Harper Peterson \n- Lily Rodriguez, Cole Rodriguez \n- Christopher Lee, Andrew Wilson \n- Hannah Thompson, Aria Johnson \n- Natalie Nguyen, Sophie Lee \n- Caleb Wilson, Isabella Brown \n- Avery Brown, Sofia Johnson \n- Ethan Patel, Caleb Thompson \n- Josh Nguyen, Muhammad Patel \n- Zoe Johnson, Mia Lee \n- Isaac Jackson, Razi Ahmed"
+  },
+  "finish_reason": "stop"
+}

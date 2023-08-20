@@ -1,0 +1,52 @@
+#parsenetwork.py
+# GMT Tue Jul 25 00:04:19 2023
+# 
+Emma-Johnson Olivia-Chen Benjamin-Kim Evelyn-Chen
+Noah-Martinez Ava-Rodriguez Sofia-Rodriguez Elizabeth-Martinez
+Olivia-Chen Emma-Johnson Sophia-Nguyen Evelyn-Chen Emily-Nguyen
+Liam-Thompson Lucas-Lee Benjamin-Johnson Christopher-Lee
+Ava-Rodriguez Noah-Martinez Sofia-Rodriguez Elizabeth-Martinez Zoe-Johnson
+Lucas-Lee Liam-Thompson Charlotte-Johnson James-Lee
+Isabella-Wright Aiden-Patel Mia-Brown William-Johnson Scarlett-Brown
+Ethan-Davis Benjamin-Kim Henry-Davis Matthew-Wilson
+Sophia-Nguyen Olivia-Chen Evelyn-Chen Natalie-Nguyen Emily-Nguyen
+Jackson-Smith Michael-Smith Alexander-Patel
+Mia-Brown Isabella-Wright William-Johnson Scarlett-Brown Avery-Brown
+Aiden-Patel Isabella-Wright Mia-Brown Elizabeth-Martinez Zoe-Johnson
+Charlotte-Johnson Liam-Thompson Lucas-Lee Christopher-Lee
+Oliver-Jackson Joseph-Jackson Isaac-Jackson Henry-Davis Samuel-Davis
+Amelia-Garcia
+Benjamin-Kim
+Harper-Thompson
+Henry-Davis
+Elizabeth-Martinez
+Michael-Smith
+Evelyn-Chen
+William-Johnson Isabella-Wright Mia-Brown Avery-Brown Zoe-Johnson
+Sofia-Rodriguez Noah-Martinez Ava-Rodriguez Elizabeth-Martinez Zoe-Johnson
+James-Lee Lucas-Lee Benjamin-Johnson Christopher-Lee
+Abigail-Thompson Alexander-Patel Emily-Nguyen
+Daniel-Davis Isabella-Wright Samuel-Davis Hannah-Thompson
+Emily-Nguyen Olivia-Chen Sophia-Nguyen Natalie-Nguyen Madison-Chen
+Matthew-Wilson Ethan-Davis Benjamin-Kim Benjamin-Johnson
+Scarlett-Brown Isabella-Wright Mia-Brown Avery-Brown Zoe-Johnson
+Alexander-Patel Jackson-Smith Abigail-Thompson Ethan-Patel
+Grace-Johnson Christopher-Lee Benjamin-Johnson James-Lee
+Joseph-Jackson Oliver-Jackson Isaac-Jackson Samuel-Davis Hannah-Thompson
+Victoria-Garcia Joseph-Jackson Isaac-Jackson Henry-Davis Samuel-Davis
+David-Kim Olivia-Chen Sophia-Nguyen Natalie-Nguyen Madison-Chen
+Chloe-Thompson Benjamin-Johnson Charlotte-Johnson Christopher-Lee
+Samuel-Davis Daniel-Davis Joseph-Jackson Isaac-Jackson Hannah-Thompson
+Zoey-Martinez Noah-Martinez Ava-Rodriguez Sofia-Rodriguez Elizabeth-Martinez
+Andrew-Smith Michael-Smith Ethan-Davis Matthew-Wilson
+Madison-Chen Olivia-Chen Sophia-Nguyen Emily-Nguyen Natalie-Nguyen
+Benjamin-Johnson Emma-Johnson Liam-Thompson Lucas-Lee Charlotte-Johnson
+Lily-Rodriguez Ava-Rodriguez Sofia-Rodriguez Elizabeth-Martinez
+Christopher-Lee Lucas-Lee Liam-Thompson Charlotte-Johnson
+Hannah-Thompson Daniel-Davis Joseph-Jackson Samuel-Davis
+Natalie-Nguyen Olivia-Chen Sophia-Nguyen Emily-Nguyen Madison-Chen
+Joshua-Wilson Matthew-Wilson Benjamin-Kim Benjamin-Johnson
+Avery-Brown Isabella-Wright Mia-Brown William-Johnson Scarlett-Brown
+Ethan-Patel
+Zoe-Johnson Ava-Rodriguez Sofia-Rodriguez Elizabeth-Martinez Avery-Brown
+Isaac-Jackson Oliver-Jackson Joseph-Jackson Samuel-Davis

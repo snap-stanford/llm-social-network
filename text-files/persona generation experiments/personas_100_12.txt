@@ -1,0 +1,101 @@
+0. Name - gender, age, race/ethnicity, religion, political affiliation
+1. Sarah Johnson - Woman, 28, White, Catholic, Liberal
+2. Muhammad Ahmed - Man, 45, Middle Eastern, Muslim, Conservative
+3. Maria Rodriguez - Woman, 32, Latino, Catholic, Liberal
+4. David Lee - Man, 40, Asian, Buddhist, Moderate
+5. Jessica Thompson - Woman, 25, Black, Protestant, Liberal
+6. Alejandro Gonzalez - Man, 33, Latino, Catholic, Conservative
+7. Emily Chen - Woman, 22, Asian, Buddhist, Liberal
+8. Robert Davis - Man, 50, White, Protestant, Conservative
+9. Aisha Khan - Woman, 38, Middle Eastern, Muslim, Liberal
+10. Carlos Ramirez - Man, 30, Latino, Catholic, Moderate
+11. Megan Anderson - Woman, 29, White, Protestant, Liberal
+12. Jamal Wright - Man, 27, Black, Unreligious, Moderate
+13. Isabel Martinez - Woman, 42, Latino, Catholic, Conservative
+14. Hiroshi Tanaka - Man, 60, Asian, Buddhist, Independent
+15. Patricia Thompson - Woman, 45, Black, Protestant, Conservative
+16. Juan Hernandez - Man, 22, Latino, Catholic, Liberal
+17. Priya Patel - Woman, 31, Asian, Hindu, Liberal
+18. Michael Johnson - Man, 35, White, Catholic, Conservative
+19. Fatima Ali - Woman, 40, Middle Eastern, Muslim, Liberal
+20. Daniel Wilson - Man, 23, Black, Protestant, Moderate
+21. Sofia Lopez - Woman, 27, Latino, Catholic, Liberal
+22. Cheng Wei - Man, 43, Asian, Buddhist, Conservative
+23. Emily Davis - Woman, 50, White, Protestant, Moderate
+24. Ahmed Khan - Man, 32, Middle Eastern, Muslim, Conservative
+25. Gabriela Garcia - Woman, 35, Latino, Catholic, Liberal
+26. Li Wei - Man, 25, Asian, Buddhist, Liberal
+27. Jasmine Thompson - Woman, 29, Black, Protestant, Liberal
+28. Guillermo Rodriguez - Man, 37, Latino, Catholic, Conservative
+29. Mei Ling - Woman, 33, Asian, Buddhist, Liberal
+30. Andrew Johnson - Man, 45, White, Protestant, Conservative
+31. Leila Ahmed - Woman, 40, Middle Eastern, Muslim, Liberal
+32. Ricardo Ortiz - Man, 28, Latino, Catholic, Moderate
+33. Katherine Smith - Woman, 26, White, Protestant, Liberal
+34. Malik Wright - Man, 24, Black, Unreligious, Liberal
+35. Sofia Martinez - Woman, 48, Latino, Catholic, Conservative
+36. Hiroshi Sato - Man, 55, Asian, Buddhist, Independent
+37. Kimberly Thompson - Woman, 43, Black, Protestant, Conservative
+38. Jose Ramirez - Man, 29, Latino, Catholic, Liberal
+39. Anika Patel - Woman, 30, Asian, Hindu, Liberal
+40. Christopher Wilson - Man, 53, White, Protestant, Conservative
+41. Aysha Khan - Woman, 36, Middle Eastern, Muslim, Liberal
+42. Carlos Gonzalez - Man, 34, Latino, Catholic, Moderate
+43. Rachel Anderson - Woman, 27, White, Protestant, Liberal
+44. Malik Wright - Man, 25, Black, Unreligious, Liberal
+45. Gabriela Garcia - Woman, 39, Latino, Catholic, Liberal
+46. Wei Li - Man, 26, Asian, Buddhist, Liberal
+47. Jasmine Thompson - Woman, 30, Black, Protestant, Liberal
+48. Guillermo Rodriguez - Man, 39, Latino, Catholic, Conservative
+49. Mei Ling - Woman, 34, Asian, Buddhist, Liberal
+50. Andrew Johnson - Man, 46, White, Protestant, Conservative
+51. Leila Ahmed - Woman, 41, Middle Eastern, Muslim, Liberal
+52. Ricardo Ortiz - Man, 29, Latino, Catholic, Moderate
+53. Katherine Smith - Woman, 27, White, Protestant, Liberal
+54. Malik Wright - Man, 25, Black, Unreligious, Liberal
+55. Sofia Martinez - Woman, 47, Latino, Catholic, Conservative
+56. Hiroshi Sato - Man, 54, Asian, Buddhist, Independent
+57. Kimberly Thompson - Woman, 42, Black, Protestant, Conservative
+58. Jose Ramirez - Man, 28, Latino, Catholic, Liberal
+59. Anika Patel - Woman, 29, Asian, Hindu, Liberal
+60. Christopher Wilson - Man, 52, White, Protestant, Conservative
+61. Aysha Khan - Woman, 35, Middle Eastern, Muslim, Liberal
+62. Carlos Gonzalez - Man, 33, Latino, Catholic, Moderate
+63. Rachel Anderson - Woman, 26, White, Protestant, Liberal
+64. Malik Wright - Man, 24, Black, Unreligious, Liberal
+65. Gabriela Garcia - Woman, 38, Latino, Catholic, Liberal
+66. Wei Li - Man, 25, Asian, Buddhist, Liberal
+67. Jasmine Thompson - Woman, 29, Black, Protestant, Liberal
+68. Guillermo Rodriguez - Man, 38, Latino, Catholic, Conservative
+69. Mei Ling - Woman, 33, Asian, Buddhist, Liberal
+70. Andrew Johnson - Man, 47, White, Protestant, Conservative
+71. Leila Ahmed - Woman, 42, Middle Eastern, Muslim, Liberal
+72. Ricardo Ortiz - Man, 30, Latino, Catholic, Moderate
+73. Katherine Smith - Woman, 28, White, Protestant, Liberal
+74. Malik Wright - Man, 26, Black, Unreligious, Liberal
+75. Sofia Martinez - Woman, 46, Latino, Catholic, Conservative
+76. Hiroshi Sato - Man, 53, Asian, Buddhist, Independent
+77. Kimberly Thompson - Woman, 41, Black, Protestant, Conservative
+78. Jose Ramirez - Man, 27, Latino, Catholic, Liberal
+79. Anika Patel - Woman, 28, Asian, Hindu, Liberal
+80. Christopher Wilson - Man, 51, White, Protestant, Conservative
+81. Aysha Khan - Woman, 34, Middle Eastern, Muslim, Liberal
+82. Carlos Gonzalez - Man, 32, Latino, Catholic, Moderate
+83. Rachel Anderson - Woman, 25, White, Protestant, Liberal
+84. Malik Wright - Man, 23, Black, Unreligious, Liberal
+85. Gabriela Garcia - Woman, 37, Latino, Catholic, Liberal
+86. Wei Li - Man, 24, Asian, Buddhist, Liberal
+87. Jasmine Thompson - Woman, 28, Black, Protestant, Liberal
+88. Guillermo Rodriguez - Man, 37, Latino, Catholic, Conservative
+89. Mei Ling - Woman, 32, Asian, Buddhist, Liberal
+90. Andrew Johnson - Man, 48, White, Protestant, Conservative
+91. Leila Ahmed - Woman, 43, Middle Eastern, Muslim, Liberal
+92. Ricardo Ortiz - Man, 31, Latino, Catholic, Moderate
+93. Katherine Smith - Woman, 29, White, Protestant, Liberal
+94. Malik Wright - Man, 27, Black, Unreligious, Liberal
+95. Sofia Martinez - Woman, 45, Latino, Catholic, Conservative
+96. Hiroshi Sato - Man, 52, Asian, Buddhist, Independent
+97. Kimberly Thompson - Woman, 40, Black, Protestant, Conservative
+98. Jose Ramirez - Man, 26, Latino, Catholic, Liberal
+99. Anika Patel - Woman, 27, Asian, Hindu, Liberal
+100. Christopher Wilson - Man, 50, White, Protestant, Conservative
