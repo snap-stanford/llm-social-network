@@ -1,6 +1,8 @@
 import os
 import openai
 from constants_and_utils import *
+import random
+import math
 
 DEMO_DESCRIPTIONS = {'gender': 'Man, Woman, or Nonbinary',
                      'age': '18-65',
@@ -361,21 +363,49 @@ def format_person(person, i):
     person_as_str = person_as_str[:len(person_as_str)-2]
     person_as_str += '\n'
     return person_as_str
+    
+def generate_interests(personas):
+    for name in personas:
+        prompt = 'Please complete the interests of ' + name + ':\n'
+        demos == personas[name]
+        for demo_val in demos:
+            prompt += demo_val + ': ' + demos[demo_val] + '\n'
+        prompt += 'interests: '
+        
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=[{"role": "system", "content": prompt}],
+            temperature=DEFAULT_TEMPERATURE)
+        response = extract_gpt_output(response)
+        print('RESPONSE')
+        print(response)
+        demos['interests'] = response
+        personas[name] = demos
+    
+    return personas
+    
+def generate_names(personas):
+    
 
 if __name__ == '__main__':
-    # generate personas with GPT
-    n = 50
-    demos_to_include = ['gender', 'age', 'race/ethnicity', 'religion', 'political affiliation']
-    generate_personas(n, demos_to_include, save_response=True)
-    fn = os.path.join(PATH_TO_TEXT_FILES, f'personas_{n}.txt')
-    print(load_personas_as_dict(fn))
+#    # generate personas with GPT
+#    n = 50
+#    demos_to_include = ['gender', 'age', 'race/ethnicity', 'religion', 'political affiliation']
+#    generate_personas(n, demos_to_include, save_response=True)
+#    fn = os.path.join(PATH_TO_TEXT_FILES, f'personas_{n}.txt')
+#    print(load_personas_as_dict(fn))
     
     # generate personas programmatically
+    personas = {}
     i = 1
+    n = 100
     while (i <= n):
         fn = os.path.join(PATH_TO_TEXT_FILES, f'programmatic_personas.txt')
         person = us_population(i)
-        convert_persona_to_string(name, personas, demo_keys, demos_to_include='all'):
+        personas[str(i)] = person
+        
         with open(fn, 'a') as f:
             f.write(format_person(person, i))
         i += 1
+    
+    
