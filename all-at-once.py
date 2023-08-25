@@ -16,28 +16,39 @@ manyOrFew = "Given the following list of people, generate a social network. Peop
 noDemo = "Given the following list of people, generate a social network. Respond with a list of connections in the format Person A, Person B. Do not include any text in the response besides the list and do not number them.\n"
 demo =  "Given the following list of people, generate a social network. Respond with a list of connections in the format Person A, Person B. Consider the demographic information of the individuals when creating the network. Do not include any text in the response besides the list and do not number them.\n"
 
-def GPTGeneratedGraph(content):
+def GPTGeneratedGraph(content, personas):
     G = None
     metrics = None
     tries = 0
+    max_tries = 20
+    duration = 5
     while tries < max_tries:
         try:
-            completion = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": content}])
+            completion = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": content}], temperature = DEFAULT_TEMPERATURE)
 
-            connections = completion.choices[0].message['content']
+            connections = extract_gpt_output(completion)
+            print(connections)
 
             pairs = connections.split('\n')
 
             G = nx.Graph()
+            for person in personas:
+                G.add_node(person.replace(' ', '-'))
             for pair in pairs:
                 try:
+                    if '.' in pair:
+                        pair = pair.split('. ')[1]
                     personA, personB = pair.split(", ")
+                    personA = personA.strip('(').replace(' ', '-')
+                    personB = personB.strip(')').replace(' ', '-')
+                    if ((personA not in personas) or (personB not in personas)):
+                        continue
                     G.add_edge(personA, personB)
                 except ValueError:
-                    print(f"Error: ValueError. skipped this network")
-                    break
+                    print(f"Error: ValueError; skipped this line.")
+                    continue
             if G.number_of_nodes() == 0:
-                break
+                continue
             return G
 
         except openai.error.OpenAIError as e:
@@ -47,16 +58,17 @@ def GPTGeneratedGraph(content):
     raise Exception("Maximum number of retries reached without success.")
 
 if __name__ == '__main__':
-    content = "Create a varied social network between the following list of people where some people have many, many friends, and others have fewer. Please take into account the provided demographic information (gender, age, race, religious and political affiliation) when determining who is likely to be friends. Provide an unordered list of friendship pairs in the format (Emma Wilson, Sophia Lee). Do not number the pairs."
+    content = "Create a varied social network between the following list of 12 people where some people have many, many friends, and others have fewer. Provide a list of friendship pairs in the format (Sophia Rodriguez, Eleanor Harris). Do not include any other text in your response. Do not include any people who are not listed below and do not generate new personas."
+    message = content
     
-    # select which features to include
-    personas = load_personas_as_dict('personas.txt')
-    personas = shuffle_dict(personas)
-    demo_keys = ['gender', 'age', 'race/ethnicity', 'religion', 'political affiliation']
-    for person in personas:
-        message += '\n' + convert_persona_to_string(person, personas, demo_keys)
-    print(message)
+    fn = os.path.join(PATH_TO_TEXT_FILES, 'programmatic_personas.txt')
+    personas, demo_keys = load_personas_as_dict(fn)
     
     for i in range(1):
-        G = GPTGeneratedGraph(content)
+#        personas = shuffle_dict(personas)
+        demo_keys = ['gender', 'race/ethnicity', 'age', 'religion', 'political affiliation']
+        for name in personas:
+            message += '\n' +convert_persona_to_string(name, personas, demo_keys)
+        print(message)
+        G = GPTGeneratedGraph(content, personas)
         save_network(G, 'all-at-once-' + str(i))
