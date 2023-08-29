@@ -364,11 +364,12 @@ def format_person(person, i):
 
 def generate_interests(personas):
     for name in personas:
-        prompt = 'Please complete the interests of ' + name + ':\n'
-        demos == personas[name]
+        prompt = f'Please complete the interests or hobbies of {name} by adding 2 unique interests:\n{{\n'
+        demos = personas[name]
         for demo_val in demos:
-            prompt += demo_val + ': ' + demos[demo_val] + '\n'
-        prompt += 'interests: '
+            prompt += f"  {demo_val}: '{demos[demo_val]}',\n"
+        
+        prompt += "  interests: '"
         
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
