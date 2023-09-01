@@ -5,7 +5,7 @@ import networkx as nx
 import time
 import matplotlib.pyplot as plt
 from constants_and_utils import *
-from generatepersonas import *
+from generate_personas import *
 
 def generate_prompt_for_person(name, personas, demo_keys, demos_to_include='all', perspective='second'):
     """
