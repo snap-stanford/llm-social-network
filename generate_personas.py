@@ -369,7 +369,7 @@ def generate_interests(personas):
         for demo_val in demos:
             prompt += f"  {demo_val}: '{demos[demo_val]}',\n"
         
-        prompt += "  interests: '"
+        prompt += "  interests: "
         
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
@@ -382,6 +382,54 @@ def generate_interests(personas):
         personas[name] = demos
     
     return personas
+
+def generate_names(k, race, gender):
+    prompt = f"Generate {k} different full names for people that are {race} and {gender}"
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=[{"role": "system", "content": prompt}],
+        temperature=DEFAULT_TEMPERATURE)
+    generated_names = response['choices'][0]['message']['content'].strip().split('\n')
+    generated_names = [name.split('. ')[-1] if '. ' in name else name for name in generated_names]
+    return generated_names
+
+
+def assign_unique_names(personas):
+#   splits the people into groups
+    demographic_groups = {}
+    for persona in personas:
+        name, demographics = persona.split(" - ")
+        gender, race, age, religion, political_affiliation = demographics.split(", ")
+#Make a tuple holding race and gender info
+# One fault - not customizable by group; want to change to allow this as a parameter
+        group = (race, gender)
+        if group not in demographic_groups:
+            demographic_groups[group] = []
+#    add each individual to appropriate group
+        demographic_groups[group].append(persona)
+    
+# Generate appropriate number of names for each group
+    names = {}
+    for group in demographic_groups:
+        k = len(demographic_groups[group])
+        race, gender = group
+        generated_names = generate_names(k, race, gender)
+#       only assigns up to K names
+        names[group] = generated_names[:k]
+        
+
+# assign new names
+    new_personas = []
+    for group, group_personas in demographic_groups.items():
+        index = 0
+        while index < len(group_personas):
+            persona = group_personas[index]
+            name, demographics = persona.split(' - ')
+            new_name = names[group][index]
+            new_personas.append(f"{new_name} - {demographics}")
+            index += 1
+            
+    return new_personas
 
 if __name__ == '__main__':
     # generate personas with GPT
