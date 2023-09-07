@@ -6,7 +6,7 @@ DEMO_DESCRIPTIONS = {'gender': 'Man, Woman, or Nonbinary',
                      'age': '18-65',
                      'race/ethnicity': 'White, Black, Latino, Asian, Native American/Alaska Native, or Native Hawaiian',
                      'religion': 'Protestant, Catholic, Jewish, Muslim, Hindu, Buddhist, or Unreligious',
-                     'political affiliation': 'Liberal, Conservative, Moderate, Independent'}
+                     'political affiliation': 'Liberal, Democrat, Conservative, Republican, Moderate, Independent'}
 GENERIC = {'name': 'John Smith',
            'gender': 'Man',
            'age': '35',
@@ -62,7 +62,7 @@ def load_personas_as_dict(fn, verbose=True):
     personas = {}
     for l in lines[1:]:
         l = l.strip()
-        if '.' in l:  # drop leading number and period
+        if '.' in l and l[0].isdigit():  # drop leading number and period
             l = l.split('. ', 1)[1]
         name, demos = l.split(' - ')
         if name in personas:  # only add new names
@@ -81,7 +81,7 @@ def load_personas_as_dict(fn, verbose=True):
                 valid_values = True
                 # check if demographic values are valid
                 for d, v in zip(demo_keys, demo_vals):
-                    if d != 'age' and v not in DEMO_DESCRIPTIONS[d]:
+                    if d != 'age' and d != 'interests' and v not in DEMO_DESCRIPTIONS[d]:
                         valid_values = False
                         if verbose:
                             print(f'Warning: invalid demographic value for {name}, {d}={v}')
@@ -444,7 +444,7 @@ if __name__ == '__main__':
     while (i <= n):
         fn = os.path.join(PATH_TO_TEXT_FILES, f'programmatic_personas.txt')
         person = us_population(i)
-        convert_persona_to_string(name, personas, demo_keys, demos_to_include='all'):
+        convert_persona_to_string(name, personas, demo_keys, demos_to_include='all')
         with open(fn, 'a') as f:
             f.write(format_person(person, i))
         i += 1
