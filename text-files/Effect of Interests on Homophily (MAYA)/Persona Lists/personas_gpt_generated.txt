@@ -1,0 +1,51 @@
+Name - gender, race/ethnicity, age, religion, political affiliation, interests
+Person 1 - Woman, White, 46, Protestant, Democrat, Indoor gardening and plant care, including propagating succulents and orchids.
+Person 2 - Man, Latino, 29, Catholic, Independent, Collecting vintage vinyl records
+Person 3 - Man, Latino, 66, Catholic, Republican, Attending Latin dance classes
+Person 4 - Man, Latino, 38, Catholic, Democrat, Playing classical guitar and composing original music on his own time.
+Person 5 - Woman, White, 65, Protestant, Republican, Volunteering at the local animal shelter and participating in dog training classes
+Person 6 - Woman, White, 42, Protestant, Republican, Creating elaborate scrapbook albums documenting family vacations and special events'
+Person 7 - Woman, Latino, 36, Unreligious, Democrat, Participating in local community gardening initiatives
+Person 8 - Woman, Asian, 41, Hindu, Independent, Traditional Indian classical music and dance
+Person 9 - Woman, White, 39, Unreligious, Republican, Playing competitive adult kickball in local leagues
+Person 10 - Woman, Black, 26, Protestant, Democrat, Photography
+Person 11 - Man, Black, 26, Protestant, Democrat, Playing jazz saxophone
+Person 12 - Woman, White, 56, Protestant, Democrat, Playing the piano and collecting vintage vinyl records
+Person 13 - Woman, Latino, 63, Catholic, Democrat, Knitting prayer shawls for her church community
+Person 14 - Woman, White, 30, Unreligious, Republican, Identifying and photographing rare bird species in the local area
+Person 15 - Man, Black, 23, Unreligious, Democrat, playing guitar at open mic nights
+Person 16 - Woman, White, 35, Protestant, Republican, Trail running and competing in ultramarathons
+Person 17 - Man, Native American/Alaska Native, 29, Unreligious, Independent, Folklore and Native American storytelling traditions surrounding nature and the environment
+Person 18 - Woman, White, 75, Protestant, Republican, Gardening and tending to her flower beds at her retirement home
+Person 19 - Woman, White, 64, Protestant, Democrat, Birdwatching and photographing local wildlife
+Person 20 - Woman, White, 70, Unreligious, Democrat, Gardening and cultivating beautiful flowers in her backyard garden
+Person 21 - Woman, White, 34, Unreligious, Republican, Gardening and cultivating her own vegetables and herbs in her backyard garden.
+Person 22 - Man, White, 47, Protestant, Democrat, Restoring vintage motorcycles
+Person 23 - Woman, White, 55, Protestant, Democrat, Knitting Icelandic sweaters
+Person 24 - Woman, White, 68, Protestant, Independent, Crocheting baby blankets for local children's charities
+Person 25 - Woman, White, 77, Protestant, Republican, Crossword puzzles and playing bridge with her friends at the local senior center.
+Person 26 - Woman, White, 35, Protestant, Independent, Homebrewing and experimenting with different beer recipes
+Person 27 - Woman, White, 60, Unreligious, Republican, Watching and discussing classic films from the 1950s.
+Person 28 - Man, White, 27, Protestant, Republican, Playing recreational softball on the weekends with friends and coworkers.
+Person 29 - Woman, Latino, 22, Catholic, Democrat, Hiking in national parks and documenting her experiences through photography.
+Person 30 - Man, White, 40, Protestant, Independent, Attending live jazz concerts and learning to play the saxophone
+Person 31 - Woman, Asian, 67, Unreligious, Independent, Practicing tai chi and meditation for physical and mental well-being.
+Person 32 - Man, Latino, 43, Catholic, Republican, Making stained glass artwork
+Person 33 - Woman, Black, 60, Protestant, Democrat, Attending local theater productions and musical performances.
+Person 34 - Woman, Black, 76, Unreligious, Democrat, Playing chess and participating in local chess competitions.
+Person 35 - Man, Latino, 50, Catholic, Democrat, Cooking traditional Latin American dishes using recipes passed down through generations
+Person 36 - Man, White, 38, Protestant, Republican, Playing competitive chess in local tournaments
+Person 37 - Woman, Latino, 26, Catholic, Republican, Oil painting landscapes in her spare time.
+Person 38 - Woman, Asian, 54, Hindu, Independent, Attending classical Indian music concerts and learning to play the sitar
+Person 39 - Woman, White, 60, Unreligious, Democrat, Playing classical piano music in a chamber ensemble
+Person 40 - Woman, White, 67, Catholic, Republican, Gardening and tending to her vegetable and herb garden
+Person 41 - Man, White, 63, Unreligious, Democrat, Sailing in his free time, and he loves exploring new bodies of water.
+Person 42 - Man, Latino, 29, Catholic, Republican, Renovating classic cars
+Person 43 - Man, White, 18, Protestant, Republican, Playing guitar and singing in a local rock band
+Person 44 - Woman, Latino, 50, Catholic, Democrat, Gardening and growing her own vegetables
+Person 45 - Woman, White, 48, Protestant, Republican, Trying new recipes from different cuisines and hosting dinner parties with friends and family.
+Person 46 - Man, Black, 46, Unreligious, Democrat, Participating in amateur photography and capturing nature's beauty through his lens.
+Person 47 - Man, Black, 58, Unreligious, Democrat, Coin collecting
+Person 48 - Woman, Latino, 24, Catholic, Democrat, Baking and decorating custom cakes for special occasions and events
+Person 49 - Woman, Latino, 64, Unreligious, Democrat, Attending salsa dancing classes and performing in local dance showcases.
+Person 50 - Man, Black, 73, Protestant, Democrat, Photographing local wildlife and landscapes

@@ -1,0 +1,51 @@
+Name - gender, race/ethnicity, age, religion, political affiliation, interests
+Person 1 - Woman, White, 46, Protestant, Democrat, Trying food at local restaurants
+Person 2 - Man, Latino, 29, Catholic, Independent, Making customized PCs and keyboards
+Person 3 - Man, Latino, 66, Catholic, Republican, Boating in his local lake
+Person 4 - Man, Latino, 38, Catholic, Democrat, Camping at various national parks in his RV
+Person 5 - Woman, White, 65, Protestant, Republican, Coaching a middle school basketball team
+Person 6 - Woman, White, 42, Protestant, Republican, Creating elaborate scrapbook albums documenting family vacations and special events'
+Person 7 - Woman, Latino, 36, Unreligious, Democrat, Learning languages and about world cultures
+Person 8 - Woman, Asian, 41, Hindu, Independent, Playing board games
+Person 9 - Woman, White, 39, Unreligious, Republican, Watching reality TV shows
+Person 10 - Woman, Black, 26, Protestant, Democrat, Listening to podcasts 
+Person 11 - Man, Black, 26, Protestant, Democrat, Going to local car meets
+Person 12 - Woman, White, 56, Protestant, Democrat, Wine tasting 
+Person 13 - Woman, Latino, 63, Catholic, Democrat, Making watercolor paintings
+Person 14 - Woman, White, 30, Unreligious, Republican, Ice skating
+Person 15 - Man, Black, 23, Unreligious, Democrat, Dancing at his local studio
+Person 16 - Woman, White, 35, Protestant, Republican, Doing hair and makeup for her friends
+Person 17 - Man, Native American/Alaska Native, 29, Unreligious, Independent, Interior design
+Person 18 - Woman, White, 75, Protestant, Republican, Playing card games
+Person 19 - Woman, White, 64, Protestant, Democrat, Fostering kittens from the local shelter
+Person 20 - Woman, White, 70, Unreligious, Democrat, Planting and tending to roses
+Person 21 - Woman, White, 34, Unreligious, Republican, Weightlifting and exercise 
+Person 22 - Man, White, 47, Protestant, Democrat, Reading fiction novels
+Person 23 - Woman, White, 55, Protestant, Democrat, Cycling in her neighborhood
+Person 24 - Woman, White, 68, Protestant, Independent, Volunteering for the humane society
+Person 25 - Woman, White, 77, Protestant, Republican, Playing pickleball 
+Person 26 - Woman, White, 35, Protestant, Independent, Watching movies and filmmaking 
+Person 27 - Woman, White, 60, Unreligious, Republican, Reading and writing poetry
+Person 28 - Man, White, 27, Protestant, Republican, Sports betting
+Person 29 - Woman, Latino, 22, Catholic, Democrat, Collecting vintage shoes and purses
+Person 30 - Man, White, 40, Protestant, Independent, Watching NFL games with friends
+Person 31 - Woman, Asian, 67, Unreligious, Independent, Leading a bookclub for women in her neighborhood
+Person 32 - Man, Latino, 43, Catholic, Republican, Playing the guitar in a local band
+Person 33 - Woman, Black, 60, Protestant, Democrat, Singing in a church choir
+Person 34 - Woman, Black, 76, Unreligious, Democrat, Watercolor painting 
+Person 35 - Man, Latino, 50, Catholic, Democrat, Coaching a local recreational soccer team
+Person 36 - Man, White, 38, Protestant, Republican, Rollerblading on his local trail
+Person 37 - Woman, Latino, 26, Catholic, Republican, Online lifestyle content creation
+Person 38 - Woman, Asian, 54, Hindu, Independent, Reading cookbooks and cooking new meals
+Person 39 - Woman, White, 60, Unreligious, Democrat, Attending folk music concerts
+Person 40 - Woman, White, 67, Catholic, Republican, Knitting and crocheting 
+Person 41 - Man, White, 63, Unreligious, Democrat, Woodworking and carpentry
+Person 42 - Man, Latino, 29, Catholic, Republican, Fly fishing at his local river
+Person 43 - Man, White, 18, Protestant, Republican, Skiing and snowboarding 
+Person 44 - Woman, Latino, 50, Catholic, Democrat, Volunteer teaching at her church 
+Person 45 - Woman, White, 48, Protestant, Republican, Yoga and pilates classes
+Person 46 - Man, Black, 46, Unreligious, Democrat, Photographing motorcycles and cars
+Person 47 - Man, Black, 58, Unreligious, Democrat, Playing in online chess matches
+Person 48 - Woman, Latino, 24, Catholic, Democrat, Jogging and training for marathons
+Person 49 - Woman, Latino, 64, Unreligious, Democrat, Baking cakes and cookies
+Person 50 - Man, Black, 73, Protestant, Democrat, Watching history documentaries

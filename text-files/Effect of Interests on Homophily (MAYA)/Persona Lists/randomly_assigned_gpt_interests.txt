@@ -1,0 +1,51 @@
+Name - gender, race/ethnicity, age, religion, political affiliation, interests
+Person 1 - Woman, White, 46, Protestant, Democrat, Playing a musical instrument
+Person 2 - Man, Latino, 29, Catholic, Independent, Photography
+Person 3 - Man, Latino, 66, Catholic, Republican, Hiking and exploring nature
+Person 4 - Man, Latino, 38, Catholic, Democrat, Cooking and experimenting with new recipes
+Person 5 - Woman, White, 65, Protestant, Republican, DIY projects and home improvement
+Person 6 - Woman, White, 42, Protestant, Republican, Yoga and meditation
+Person 7 - Woman, Latino, 36, Unreligious, Democrat, Gardening and growing your own vegetables
+Person 8 - Woman, Asian, 41, Hindu, Independent, Painting and other art forms
+Person 9 - Woman, White, 39, Unreligious, Republican, Traveling and exploring new cultures
+Person 10 - Woman, Black, 26, Protestant, Democrat, Birdwatching and wildlife observation
+Person 11 - Man, Black, 26, Protestant, Democrat, Dancing (e.g., salsa, ballet, hip-hop)
+Person 12 - Woman, White, 56, Protestant, Democrat, Collecting stamps or coins
+Person 13 - Woman, Latino, 63, Catholic, Democrat, Binge-watching TV series and movies
+Person 14 - Woman, White, 30, Unreligious, Republican, Running and participating in marathons
+Person 15 - Man, Black, 23, Unreligious, Democrat, Investing in the stock market
+Person 16 - Woman, White, 35, Protestant, Republican, Writing poetry or short stories
+Person 17 - Man, Native American/Alaska Native, 29, Unreligious, Independent, Creative crafts such as knitting or crocheting
+Person 18 - Woman, White, 75, Protestant, Republican, Surfing or other water sports
+Person 19 - Woman, White, 64, Protestant, Democrat, Stand-up comedy or improvisation
+Person 20 - Woman, White, 70, Unreligious, Democrat, Collecting vintage or antique items
+Person 21 - Woman, White, 34, Unreligious, Republican, Playing board games or card games
+Person 22 - Man, White, 47, Protestant, Democrat, Volunteer work with animal shelters
+Person 23 - Woman, White, 55, Protestant, Democrat, Martial arts (e.g., karate, jiu-jitsu, taekwondo)
+Person 24 - Woman, White, 68, Protestant, Independent, Sustainable living and eco-awareness
+Person 25 - Woman, White, 77, Protestant, Republican, Vintage car restoration
+Person 26 - Woman, White, 35, Protestant, Independent, Playing video games
+Person 27 - Woman, White, 60, Unreligious, Republican, Geocaching and treasure hunting
+Person 28 - Man, White, 27, Protestant, Republican, Wine tasting and learning about different varieties
+Person 29 - Woman, Latino, 22, Catholic, Democrat, Horseback riding and equestrian sports
+Person 30 - Man, White, 40, Protestant, Independent, Astronomy and stargazing
+Person 31 - Woman, Asian, 67, Unreligious, Independent, Blogging and social media
+Person 32 - Man, Latino, 43, Catholic, Republican, Playing team sports (e.g., basketball, soccer, softball)
+Person 33 - Woman, Black, 60, Protestant, Democrat, Reading nonfiction books and autobiographies
+Person 34 - Woman, Black, 76, Unreligious, Democrat, Fashion and personal styling
+Person 35 - Man, Latino, 50, Catholic, Democrat, Woodworking and furniture making
+Person 36 - Man, White, 38, Protestant, Republican, Learning a new language
+Person 37 - Woman, Latino, 26, Catholic, Republican, Skateboarding or rollerblading
+Person 38 - Woman, Asian, 54, Hindu, Independent, Disc golf or frisbee golf
+Person 39 - Woman, White, 60, Unreligious, Democrat, Charity work and fundraising
+Person 40 - Woman, White, 67, Catholic, Republican, Watching and analyzing sports games
+Person 41 - Man, White, 63, Unreligious, Democrat, Fishing and recreational angling
+Person 42 - Man, Latino, 29, Catholic, Republican, Genealogy and researching family history
+Person 43 - Man, White, 18, Protestant, Republican, Stand-up paddleboarding or kayaking
+Person 44 - Woman, Latino, 50, Catholic, Democrat, Embracing a minimalist lifestyle
+Person 45 - Woman, White, 48, Protestant, Republican, Brewing home-made beer or cider
+Person 46 - Man, Black, 46, Unreligious, Democrat, Socializing and networking
+Person 47 - Man, Black, 58, Unreligious, Democrat, Fitness and weightlifting
+Person 48 - Woman, Latino, 24, Catholic, Democrat, Adopting and caring for pets
+Person 49 - Woman, Latino, 64, Unreligious, Democrat, Learning about different cultures through cuisine
+Person 50 - Man, Black, 73, Protestant, Democrat, Educational documentaries and documentaries

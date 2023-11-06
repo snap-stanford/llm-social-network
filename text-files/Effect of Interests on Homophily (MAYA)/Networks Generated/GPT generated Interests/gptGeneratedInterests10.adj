@@ -1,0 +1,53 @@
+#llm-as-agent.py personas_gpt_generated.txt --save_prefix gptGeneratedInterests10
+# GMT Fri Sep  8 02:05:24 2023
+# 
+Person-1 Person-2 Person-7 Person-9 Person-14 Person-19 Person-20
+Person-2 Person-4 Person-13 Person-35
+Person-3 Person-2 Person-35 Person-42
+Person-4 Person-2 Person-5 Person-7 Person-16 Person-22 Person-31 Person-36 Person-42 Person-45
+Person-5 Person-6 Person-18 Person-24 Person-25 Person-31 Person-40
+Person-6 Person-5 Person-19 Person-33
+Person-7 Person-4 Person-7 Person-14
+Person-8 Person-38 Person-7 Person-33 Person-49
+Person-9 Person-4 Person-8 Person-35
+Person-10 Person-11 Person-44 Person-49
+Person-11 Person-10 Person-30 Person-33 Person-46 Person-50
+Person-12 Person-2 Person-4 Person-23 Person-39 Person-50
+Person-13 Person-7 Person-29 Person-44
+Person-14 Person-4 Person-19 Person-28
+Person-15 Person-11 Person-10 Person-46 Person-34
+Person-16 Person-1 Person-7 Person-9 Person-14 Person-27
+Person-17 Person-14 Person-19 Person-29 Person-46 Person-50
+Person-18 Person-5 Person-40 Person-24 Person-49 Person-37
+Person-19 Person-14 Person-36 Person-45
+Person-20 Person-1 Person-7 Person-19 Person-33 Person-40
+Person-21 Person-5 Person-10 Person-18 Person-24 Person-34
+Person-22 Person-2 Person-4 Person-11 Person-21
+Person-23 Person-1 Person-13 Person-19
+Person-24 Person-2 Person-13 Person-19 Person-29 Person-38
+Person-25 Person-5 Person-18 Person-23 Person-33 Person-40
+Person-26 Person-1 Person-4 Person-10 Person-23 Person-39
+Person-27 Person-13 Person-19 Person-33
+Person-28 Person-2 Person-3 Person-18 Person-34 Person-41
+Person-29 Person-10 Person-14 Person-50
+Person-30 Person-11 Person-24 Person-32
+Person-31 Person-7 Person-8 Person-13 Person-19 Person-28
+Person-32 Person-2 Person-5 Person-6 Person-8 Person-10 Person-31
+Person-33 Person-10 Person-11 Person-39 Person-46
+Person-34 Person-7 Person-10 Person-11 Person-39 Person-46
+Person-35 Person-2 Person-4 Person-7 Person-9 Person-14 Person-33 Person-44
+Person-36 Person-4 Person-11 Person-34
+Person-37 Person-2 Person-3 Person-4 Person-33 Person-35
+Person-38 Person-8 Person-31 Person-39
+Person-39 Person-1 Person-4 Person-5 Person-13 Person-19 Person-23 Person-27 Person-33 Person-34 Person-40
+Person-40 Person-18 Person-44
+Person-41 Person-3 Person-10 Person-13
+Person-42 Person-2 Person-4 Person-23 Person-29 Person-33 Person-48
+Person-43 Person-2 Person-4 Person-11 Person-15
+Person-44 Person-7 Person-33 Person-49
+Person-45 Person-1 Person-5 Person-6 Person-16 Person-20 Person-23 Person-27 Person-32 Person-36 Person-38
+Person-46 Person-10 Person-11 Person-14 Person-24 Person-50
+Person-47 Person-10 Person-11 Person-29
+Person-48 Person-2 Person-4 Person-7 Person-10 Person-11 Person-13 Person-19 Person-29
+Person-49 Person-7 Person-9 Person-13 Person-19 Person-35 Person-44 Person-48 Person-50
+Person-50 Person-10 Person-11 Person-14 Person-19

@@ -1,0 +1,53 @@
+#llm-as-agent.py persona_names_wo_interests.txt --save_prefix gptGen19
+# GMT Thu Sep  7 20:16:20 2023
+# 
+Emma-Henderson Juan-Rodriguez Sierra-Johnson Eleanor-Thompson Maria-Rodriguez Emma-Dawson
+Carlos-Rodriguez Antonio-Ramirez Juan-Rodriguez Ana-Rodriguez Sofia-Rodriguez Isabella-Rodriguez Carmen-Rodriguez Jose-Rodriguez Lucia-Rodriguez
+Antonio-Ramirez Carlos-Rodriguez Juan-Rodriguez Maria-Rodriguez Sofia-Rodriguez Jose-Rodriguez Lucia-Rodriguez Isabella-Rodriguez Carmen-Rodriguez
+Juan-Rodriguez Carlos-Rodriguez Ana-Rodriguez Maria-Rodriguez Sophia-Rodriguez Lucia-Rodriguez Isabella-Rodriguez Carmen-Rodriguez
+Sarah-Thompson Antonio-Ramirez Michelle-Brooks Anna-Thompson Evelyn-Anderson Elizabeth-Thompson Michael-Thompson Linda-Turner
+Michelle-Brooks Antonio-Ramirez Sarah-Thompson Anna-Thompson Evelyn-Anderson Michael-Thompson Linda-Turner
+Ana-Rodriguez Carlos-Rodriguez Juan-Rodriguez Sierra-Johnson Malik-Johnson Juan-Ramirez Angelo-Hernandez Lucia-Rodriguez Isabella-Rodriguez Carmen-Rodriguez
+Priya-Patel Nalini-Patel Emma-Henderson Anna-Thompson Sarah-Thompson Linda-Turner
+Emily-Anderson Antonio-Ramirez Sabrina-O'Connor Emily-Williams
+Sierra-Johnson Malik-Johnson Josephine-Washington Maya-Johnson
+Malik-Johnson Sierra-Johnson Kwame-Johnson Maya-Johnson Joshua-Washington Carlton-Archer
+Eleanor-Thompson Emma-Henderson Juan-Rodriguez Maria-Rodriguez Eleanor-Harris Josephine-Washington
+Maria-Rodriguez Carlos-Rodriguez Juan-Rodriguez Sofia-Rodriguez Isabella-Rodriguez Lucia-Rodriguez Carmen-Rodriguez
+Sabrina-O'Connor Antonio-Ramirez Sarah-Thompson Emily-Anderson Emily-Williams Jane-Reynolds
+Kwame-Johnson Carlos-Rodriguez Juan-Rodriguez Sierra-Johnson Malik-Johnson Ana-Rodriguez Sophia-Rodriguez Angelo-Hernandez Maya-Johnson Emma-Dawson George-Wilkinson
+Anna-Thompson Antonio-Ramirez Sarah-Thompson Michelle-Brooks Sabrina-O'Connor Emily-Anderson Evelyn-Anderson Elizabeth-Thompson Michael-Thompson Linda-Turner
+Makoa-Nashoba Carlos-Rodriguez Sarah-Thompson Emily-Anderson Sierra-Johnson Malik-Johnson Anna-Thompson Emily-Williams Josephine-Washington Maya-Johnson
+Evelyn-Anderson Antonio-Ramirez Sarah-Thompson Michelle-Brooks Emily-Anderson Anna-Thompson Elizabeth-Thompson Margaret-Walsh Linda-Turner
+Caroline-Bennett Emma-Henderson Juan-Rodriguez Eleanor-Thompson Maria-Rodriguez John-Stevens
+Eleanor-Harris Emma-Henderson Juan-Rodriguez Ana-Rodriguez Eleanor-Thompson Maria-Rodriguez Kwame-Johnson Emilia-Summers John-Whitaker Jennifer-Davis Emma-Dawson George-Wilkinson Lucia-Rodriguez Joshua-Washington Carlton-Archer Carmen-Rodriguez James-Thompson
+Emilia-Summers Antonio-Ramirez Emily-Anderson Elizabeth-Thompson Sofia-Rodriguez
+John-Whitaker Emma-Henderson Juan-Rodriguez Sierra-Johnson Malik-Johnson Eleanor-Thompson Maria-Rodriguez Jennifer-Davis Josephine-Washington Maya-Johnson Angelo-Hernandez Emma-Dawson George-Wilkinson Lucia-Rodriguez Joshua-Washington Carlton-Archer Isabella-Rodriguez Carmen-Rodriguez James-Thompson
+Jennifer-Davis Emma-Henderson Eleanor-Thompson Caroline-Bennett Eleanor-Harris Emma-Dawson
+Gladys-Newton Sarah-Thompson Emily-Anderson Evelyn-Anderson Caroline-Bennett Sophia-Rodriguez Josephine-Washington Maya-Johnson Angelo-Hernandez George-Wilkinson Lucia-Rodriguez Joshua-Washington
+Elizabeth-Thompson Antonio-Ramirez Sarah-Thompson Michelle-Brooks Emily-Anderson Anna-Thompson Evelyn-Anderson John-Smith Linda-Turner
+Emily-Williams Emma-Henderson Sarah-Thompson Emily-Anderson Anna-Thompson Evelyn-Anderson Elizabeth-Thompson
+Jane-Reynolds Antonio-Ramirez Sarah-Thompson Michelle-Brooks Emily-Anderson Evelyn-Anderson Elizabeth-Thompson Ethan-Reynolds Margaret-Walsh Linda-Turner
+Ethan-Reynolds Carlos-Rodriguez Antonio-Ramirez Emily-Anderson Makoa-Nashoba Jane-Reynolds
+Sophia-Rodriguez Carlos-Rodriguez Juan-Rodriguez Ana-Rodriguez Maria-Rodriguez Isabella-Rodriguez Carmen-Rodriguez
+John-Stevens Carlos-Rodriguez Malik-Johnson Anna-Thompson Michael-Thompson Linda-Turner
+Sakura-Tanaka Priya-Patel Nalini-Patel
+Juan-Ramirez Antonio-Ramirez Juan-Rodriguez Sofia-Rodriguez
+Josephine-Washington Sierra-Johnson Malik-Johnson Joshua-Washington Carlton-Archer Maya-Johnson
+Maya-Johnson Emma-Henderson Sierra-Johnson Malik-Johnson Eleanor-Thompson Maria-Rodriguez Kwame-Johnson Josephine-Washington Angelo-Hernandez Joshua-Washington Carlton-Archer Isabella-Rodriguez Carmen-Rodriguez James-Thompson
+Angelo-Hernandez Carlos-Rodriguez Juan-Rodriguez Emily-Anderson Eleanor-Thompson Maria-Rodriguez Juan-Ramirez Lucia-Rodriguez Isabella-Rodriguez Carmen-Rodriguez
+Michael-Thompson Antonio-Ramirez Sarah-Thompson Michelle-Brooks Anna-Thompson Evelyn-Anderson Elizabeth-Thompson Ethan-Reynolds Linda-Turner
+Sofia-Rodriguez Carlos-Rodriguez Antonio-Ramirez Maria-Rodriguez Jose-Rodriguez Isabella-Rodriguez Carmen-Rodriguez
+Nalini-Patel Priya-Patel Maya-Johnson
+Emma-Dawson Emma-Henderson Ana-Rodriguez Sierra-Johnson Malik-Johnson Maria-Rodriguez Eleanor-Thompson Caroline-Bennett Eleanor-Harris Josephine-Washington Maya-Johnson Angelo-Hernandez Lucia-Rodriguez Joshua-Washington Carlton-Archer Isabella-Rodriguez Carmen-Rodriguez James-Thompson
+Margaret-Walsh Antonio-Ramirez Sarah-Thompson Michelle-Brooks Evelyn-Anderson Elizabeth-Thompson Ethan-Reynolds Michael-Thompson Linda-Turner
+George-Wilkinson Emma-Henderson Juan-Rodriguez Ana-Rodriguez Maria-Rodriguez Kwame-Johnson Eleanor-Harris Sophia-Rodriguez Josephine-Washington Maya-Johnson Angelo-Hernandez Joshua-Washington Carlton-Archer Isabella-Rodriguez Carmen-Rodriguez James-Thompson
+Jose-Rodriguez Carlos-Rodriguez Antonio-Ramirez Sofia-Rodriguez Isabella-Rodriguez
+John-Smith Antonio-Ramirez Sarah-Thompson Michelle-Brooks Emily-Anderson Evelyn-Anderson Anna-Thompson Elizabeth-Thompson Ethan-Reynolds Michael-Thompson Linda-Turner
+Lucia-Rodriguez Carlos-Rodriguez Juan-Rodriguez Sofia-Rodriguez Isabella-Rodriguez Carmen-Rodriguez
+Linda-Turner Antonio-Ramirez Sarah-Thompson Michelle-Brooks Emily-Anderson Evelyn-Anderson Anna-Thompson Elizabeth-Thompson Jane-Reynolds Ethan-Reynolds Margaret-Walsh
+Joshua-Washington Juan-Rodriguez Sierra-Johnson Malik-Johnson Josephine-Washington Carlton-Archer
+Carlton-Archer Emma-Henderson Juan-Rodriguez Sierra-Johnson Malik-Johnson Ana-Rodriguez Kwame-Johnson Eleanor-Thompson Maria-Rodriguez Caroline-Bennett Eleanor-Harris Josephine-Washington Maya-Johnson Angelo-Hernandez Emma-Dawson George-Wilkinson Lucia-Rodriguez Joshua-Washington Isabella-Rodriguez Carmen-Rodriguez James-Thompson
+Isabella-Rodriguez Juan-Rodriguez Sofia-Rodriguez Lucia-Rodriguez Carlos-Rodriguez Carmen-Rodriguez
+Carmen-Rodriguez Ana-Rodriguez Juan-Rodriguez Sofia-Rodriguez Lucia-Rodriguez Isabella-Rodriguez
+James-Thompson Sarah-Thompson Eleanor-Thompson Maria-Rodriguez Juan-Rodriguez Sierra-Johnson Malik-Johnson Eleanor-Harris John-Whitaker Jane-Reynolds Josephine-Washington

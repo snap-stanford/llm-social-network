@@ -1,0 +1,53 @@
+#llm-as-agent.py randomly_assigned_gpt_interests.txt --save_prefix randomAssignment30
+# GMT Fri Sep  8 18:41:56 2023
+# 
+Person-1 Person-13 Person-16 Person-18 Person-23 Person-28 Person-38
+Person-2 Person-1 Person-3 Person-4 Person-7 Person-10 Person-13 Person-18 Person-26 Person-36 Person-42
+Person-3 Person-2 Person-5 Person-6 Person-9 Person-16 Person-22 Person-35 Person-37 Person-42 Person-48
+Person-4 Person-3 Person-7 Person-32 Person-35 Person-44 Person-48 Person-49
+Person-5 Person-4 Person-12 Person-23
+Person-6 Person-23 Person-24 Person-34 Person-39
+Person-7 Person-2 Person-4 Person-28
+Person-8 Person-4 Person-7 Person-38
+Person-9 Person-3 Person-4 Person-5 Person-8 Person-18 Person-24 Person-31 Person-35 Person-37 Person-48
+Person-10 Person-7 Person-11 Person-33
+Person-11 Person-10 Person-31 Person-33 Person-46 Person-47
+Person-12 Person-5 Person-9 Person-44 Person-49
+Person-13 Person-9 Person-10 Person-15 Person-33 Person-40
+Person-14 Person-3 Person-9 Person-18
+Person-15 Person-1 Person-7 Person-11 Person-23 Person-29
+Person-16 Person-5 Person-6 Person-24
+Person-17 Person-3 Person-7
+Person-18 Person-5 Person-26 Person-46
+Person-19 Person-9 Person-29 Person-37
+Person-20 Person-1 Person-11 Person-12 Person-39
+Person-21 Person-9 Person-18 Person-25 Person-39 Person-50
+Person-22 Person-7 Person-10 Person-18 Person-39 Person-48
+Person-23 Person-8 Person-24 Person-30
+Person-24 Person-7 Person-9 Person-10 Person-27 Person-39
+Person-25 Person-3 Person-5 Person-12 Person-19 Person-24
+Person-26 Person-1 Person-6 Person-16 Person-34
+Person-27 Person-3 Person-6 Person-9 Person-24 Person-45
+Person-28 Person-1 Person-5 Person-9
+Person-29 Person-7 Person-10 Person-12 Person-18 Person-23 Person-39 Person-48 Person-49
+Person-30 Person-3 Person-8 Person-16 Person-24
+Person-31 Person-7 Person-9 Person-28 Person-34 Person-44
+Person-32 Person-6 Person-8 Person-44 Person-48
+Person-33 Person-29 Person-46 Person-49
+Person-34 Person-15 Person-23 Person-33
+Person-35 Person-4 Person-7 Person-11 Person-19 Person-28
+Person-36 Person-1 Person-3 Person-18 Person-31 Person-34
+Person-37 Person-4 Person-10 Person-18
+Person-38 Person-8
+Person-39 Person-7 Person-14 Person-33
+Person-40 Person-2 Person-3 Person-44
+Person-41 Person-3 Person-9 Person-17 Person-25 Person-36
+Person-42 Person-2 Person-3 Person-4 Person-6 Person-10
+Person-43 Person-3 Person-18 Person-29
+Person-44 Person-7 Person-24 Person-39 Person-43 Person-48
+Person-45 Person-3 Person-5 Person-9 Person-18 Person-24
+Person-46 Person-11 Person-18 Person-32 Person-37 Person-47
+Person-47 Person-1 Person-7 Person-11 Person-14 Person-23 Person-28 Person-31 Person-33 Person-39 Person-46
+Person-48 Person-2 Person-4 Person-7 Person-22 Person-29 Person-44 Person-49
+Person-49 Person-4 Person-7 Person-13 Person-18 Person-40
+Person-50 Person-3 Person-5 Person-9 Person-10 Person-11 Person-13 Person-15 Person-16 Person-18 Person-24

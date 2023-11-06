@@ -1,0 +1,53 @@
+#llm-as-agent.py standard_personas_list.txt --save_prefix standardPersonas17
+# GMT Fri Sep  8 04:58:37 2023
+# 
+Person-1 Person-2 Person-4 Person-10 Person-11 Person-13 Person-19 Person-23 Person-29 Person-33 Person-34 Person-39 Person-41 Person-44 Person-46 Person-47 Person-48 Person-49 Person-50
+Person-2 Person-4 Person-35 Person-42 Person-44 Person-48
+Person-3 Person-2 Person-4 Person-5 Person-6 Person-12 Person-13 Person-15 Person-18 Person-22 Person-25 Person-26 Person-30 Person-32 Person-36 Person-40 Person-42 Person-45
+Person-4 Person-2 Person-7 Person-35 Person-44
+Person-5 Person-3 Person-6 Person-9 Person-18 Person-25
+Person-6 Person-3 Person-5 Person-9 Person-16 Person-18 Person-25 Person-36 Person-45 Person-42 Person-43
+Person-7 Person-4 Person-29 Person-34 Person-36 Person-45
+Person-8 Person-1 Person-38
+Person-9 Person-3 Person-5 Person-6 Person-14 Person-16 Person-18 Person-27 Person-28 Person-36 Person-45 Person-50
+Person-10 Person-9 Person-13 Person-29 Person-33 Person-46
+Person-11 Person-1 Person-10 Person-15 Person-33 Person-46 Person-47 Person-50
+Person-12 Person-1 Person-4 Person-9 Person-19 Person-21
+Person-13 Person-4 Person-7 Person-29 Person-44 Person-42
+Person-14 Person-6 Person-9 Person-16 Person-45
+Person-15 Person-7 Person-10 Person-11 Person-13 Person-19 Person-21 Person-23 Person-29 Person-33 Person-34 Person-39 Person-46 Person-47 Person-49 Person-50
+Person-16 Person-3 Person-6 Person-9 Person-18 Person-25
+Person-17 Person-2 Person-12 Person-14 Person-26 Person-28
+Person-18 Person-3 Person-5 Person-9 Person-16 Person-25
+Person-19 Person-1 Person-13 Person-29 Person-33 Person-39
+Person-20 Person-1 Person-12 Person-19 Person-33 Person-39
+Person-21 Person-3 Person-5 Person-6 Person-9 Person-16 Person-18 Person-25 Person-27 Person-36 Person-45
+Person-22 Person-5 Person-9 Person-16 Person-18 Person-25
+Person-23 Person-1 Person-12 Person-19 Person-29 Person-33 Person-39 Person-50
+Person-24 Person-18 Person-30 Person-39
+Person-25 Person-3 Person-5 Person-6 Person-9 Person-18 Person-24 Person-40
+Person-26 Person-6 Person-18 Person-36 Person-45 Person-40
+Person-27 Person-3 Person-5 Person-6 Person-9 Person-18 Person-25 Person-36 Person-40 Person-43 Person-45
+Person-28 Person-7 Person-20 Person-22 Person-33 Person-48
+Person-29 Person-4 Person-7 Person-13 Person-35 Person-44 Person-48 Person-49
+Person-30 Person-2 Person-6 Person-8 Person-11 Person-16
+Person-31 Person-8 Person-16 Person-28 Person-38
+Person-32 Person-3 Person-12 Person-36 Person-40 Person-50
+Person-33 Person-10 Person-11 Person-14 Person-32
+Person-34 Person-7 Person-10 Person-11 Person-33 Person-49
+Person-35 Person-1 Person-4 Person-9 Person-13 Person-19 Person-29 Person-44
+Person-36 Person-3 Person-5 Person-6 Person-9 Person-18 Person-25 Person-28 Person-45
+Person-37 Person-3 Person-10 Person-18 Person-26 Person-42
+Person-38 Person-8 Person-31
+Person-39 Person-7 Person-20 Person-49
+Person-40 Person-3 Person-6 Person-18 Person-25 Person-27
+Person-41 Person-1 Person-7 Person-12 Person-13 Person-19 Person-20 Person-23 Person-29 Person-33 Person-34 Person-39
+Person-42 Person-3 Person-6 Person-9 Person-16 Person-18 Person-25 Person-28 Person-36 Person-43 Person-45
+Person-43 Person-3 Person-5 Person-6 Person-9 Person-18 Person-28 Person-36 Person-40 Person-45
+Person-44 Person-1 Person-4 Person-7 Person-13 Person-19 Person-29 Person-33 Person-39 Person-48 Person-49
+Person-45 Person-6 Person-18 Person-25 Person-36 Person-40
+Person-46 Person-1 Person-10 Person-11 Person-33 Person-47
+Person-47 Person-7 Person-10 Person-11 Person-19 Person-23 Person-39 Person-46
+Person-48 Person-4 Person-7 Person-13 Person-29 Person-44 Person-49
+Person-49 Person-7 Person-13 Person-19 Person-29
+Person-50 Person-10 Person-11 Person-33 Person-46 Person-47

@@ -1,0 +1,53 @@
+#llm-as-agent.py personas_gpt_generated.txt --save_prefix gptGeneratedInterests25
+# GMT Fri Sep  8 03:12:28 2023
+# 
+Person-1 Person-4 Person-7 Person-19 Person-30 Person-46
+Person-2 Person-4 Person-10 Person-36 Person-45
+Person-3 Person-5 Person-15 Person-18
+Person-4 Person-2 Person-7 Person-14 Person-35
+Person-5 Person-3 Person-14 Person-18 Person-25
+Person-6 Person-5 Person-18 Person-24
+Person-7 Person-2 Person-4 Person-14 Person-19 Person-28 Person-29
+Person-8 Person-38
+Person-9 Person-7 Person-14 Person-20 Person-26 Person-36
+Person-10 Person-11 Person-44 Person-49
+Person-11 Person-2 Person-4 Person-10 Person-27 Person-30 Person-33
+Person-12 Person-2 Person-5 Person-23 Person-26 Person-39
+Person-13 Person-7 Person-28 Person-44
+Person-14 Person-19 Person-50
+Person-15 Person-10 Person-11 Person-46 Person-50
+Person-16 Person-4 Person-14 Person-29
+Person-17 Person-14 Person-19 Person-50
+Person-18 Person-5 Person-39 Person-40
+Person-19 Person-10 Person-14 Person-17
+Person-20 Person-6 Person-18 Person-27
+Person-21 Person-1 Person-5 Person-6 Person-9 Person-18 Person-20 Person-34 Person-40 Person-46 Person-50
+Person-22 Person-2 Person-4 Person-11 Person-37
+Person-23 Person-5 Person-13 Person-19 Person-30 Person-39
+Person-24 Person-5 Person-13 Person-18 Person-19 Person-30
+Person-25 Person-5 Person-12 Person-19
+Person-26 Person-1 Person-4 Person-14
+Person-27 Person-4 Person-11 Person-20
+Person-28 Person-1 Person-4 Person-5 Person-9 Person-14 Person-26
+Person-29 Person-10 Person-49 Person-47 Person-44 Person-35
+Person-30 Person-11 Person-14
+Person-31 Person-7 Person-22 Person-33
+Person-32 Person-3 Person-4 Person-18
+Person-33 Person-10 Person-11 Person-39 Person-46 Person-49
+Person-34 Person-10 Person-11 Person-36 Person-46
+Person-35 Person-6 Person-7 Person-9 Person-13 Person-44
+Person-36 Person-3 Person-4 Person-10 Person-11 Person-18 Person-34
+Person-37 Person-2 Person-4 Person-13 Person-30 Person-34
+Person-38 Person-8 Person-30 Person-31 Person-39
+Person-39 Person-1 Person-4 Person-27 Person-33 Person-37
+Person-40 Person-18 Person-20 Person-46
+Person-41 Person-7 Person-14 Person-19 Person-29 Person-37
+Person-42 Person-2 Person-3 Person-12 Person-22 Person-32
+Person-43 Person-2 Person-4 Person-11 Person-15 Person-22 Person-30 Person-36 Person-42 Person-47 Person-50
+Person-44 Person-7 Person-35 Person-49
+Person-45 Person-7 Person-9 Person-14 Person-19 Person-27 Person-35 Person-46 Person-49
+Person-46 Person-10 Person-11 Person-14 Person-35 Person-50
+Person-47 Person-10 Person-11 Person-46
+Person-48 Person-7 Person-29 Person-43 Person-44
+Person-49 Person-7 Person-9 Person-10 Person-11 Person-13 Person-19 Person-27 Person-30 Person-35 Person-37
+Person-50 Person-10 Person-25 Person-44
