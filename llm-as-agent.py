@@ -27,7 +27,9 @@ def generate_prompt_for_person(name, personas, demo_keys, demos_to_include='all'
     else:  # third person
         prompt = f'This is {person_str}. Which of the following people will {name} become friends with?\n'
         friends_prefix = 'Friends'
-
+    
+    personas = shuffle_dict(personas)
+    
     for n in personas:
         if name != n:
             prompt += convert_persona_to_string(n, personas, demo_keys, demos_to_include) + '\n'
@@ -61,11 +63,14 @@ def construct_network(personas, demo_keys, max_tries=10, save_prefix=None, promp
             try:
                 print(f'Attempt #{t}')
                 prompt = generate_prompt_for_person(name, personas, demo_keys, **prompt_kwargs)
+#                print('PROMPT')
+#                print(prompt)
                 response = openai.ChatCompletion.create(
                                 model="gpt-3.5-turbo",
                                 messages=[{"role": "system", "content": prompt}],
                                 temperature=DEFAULT_TEMPERATURE)
                 out = extract_gpt_output(response)
+                print('RESPONSE')
                 print(out)
                 new_edges = get_new_edges_from_gpt_output(out, get_node_from_string(name), list(G.nodes()))
                 # only update the graph for this person once every function passed
@@ -83,7 +88,7 @@ if __name__ == "__main__":
     # Example call: 
     # nohup python3 -u llm-as-agent.py personas_30.txt --save_prefix second-person-n30-1 > second-person-n30-1.out 2>&1 & 
     parser = argparse.ArgumentParser()
-    parser.add_argument('persona_fn', type=str)
+    parser.add_argument('--persona_fn', type=str, default='programmatic_personas.txt')
     parser.add_argument('--save_prefix', type=str, default='')
     parser.add_argument('--perspective', type=str, choices=['first', 'second', 'third'], default='second')
     parser.add_argument('--demos_to_include', type=str, default='all')
@@ -103,4 +108,8 @@ if __name__ == "__main__":
     # construct network
     prompt_kwargs = {'perspective': args.perspective,
                      'demos_to_include': demos_to_include}
-    G = construct_network(personas, demo_keys, save_prefix=save_prefix, prompt_kwargs=prompt_kwargs)
+    i = 30
+    while (i < 35):
+        fn = 'llm-as-agent-' + str(i)
+        G = construct_network(personas, demo_keys, save_prefix=fn, prompt_kwargs=prompt_kwargs)
+        i += 1
