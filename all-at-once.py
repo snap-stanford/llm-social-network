@@ -2,6 +2,7 @@ import os
 import openai
 from constants_and_utils import *
 from generate_personas import *
+import time
 
 """
 Generate x random personas: name, gender, age, ethnicity, religion, political association.
@@ -41,7 +42,9 @@ def GPTGeneratedGraph(content, personas):
                     personA, personB = pair.split(", ")
                     personA = personA.strip('(').replace(' ', '-')
                     personB = personB.strip(')').replace(' ', '-')
-                    if ((personA not in personas) or (personB not in personas)):
+#                    print(personA, personB)
+                    if ((personA not in G.nodes()) or (personB not in G.nodes())):
+                        print("Hallucinated person")
                         continue
                     G.add_edge(personA, personB)
                 except ValueError:
@@ -51,24 +54,26 @@ def GPTGeneratedGraph(content, personas):
                 continue
             return G
 
-        except openai.error.OpenAIError as e:
-            print(f"Error: {e}. Retrying in {duration} seconds.")
+        except:
+            print(f"Retrying in {duration} seconds.")
             tries += 1
             time.sleep(duration)
     raise Exception("Maximum number of retries reached without success.")
 
 if __name__ == '__main__':
-    content = "Create a varied social network between the following list of 12 people where some people have many, many friends, and others have fewer. Provide a list of friendship pairs in the format (Sophia Rodriguez, Eleanor Harris). Do not include any other text in your response. Do not include any people who are not listed below and do not generate new personas."
-    message = content
     
     fn = os.path.join(PATH_TO_TEXT_FILES, 'programmatic_personas.txt')
     personas, demo_keys = load_personas_as_dict(fn)
     
-    for i in range(1):
+    i = 30
+    while (i < 35):
 #        personas = shuffle_dict(personas)
+        message = "Create a varied social network between the following list of 50 people where some people have many, many friends, and others have fewer. Provide a list of friendship pairs in the format (Sophia Rodriguez, Eleanor Harris). Do not include any other text in your response. Do not include any people who are not listed below."
         demo_keys = ['gender', 'race/ethnicity', 'age', 'religion', 'political affiliation']
+        personas = shuffle_dict(personas)
         for name in personas:
             message += '\n' +convert_persona_to_string(name, personas, demo_keys)
         print(message)
-        G = GPTGeneratedGraph(content, personas)
+        G = GPTGeneratedGraph(message, personas)
         save_network(G, 'all-at-once-' + str(i))
+        i += 1
