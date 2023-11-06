@@ -90,7 +90,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     fn = os.path.join(PATH_TO_TEXT_FILES, args.persona_fn)
-    personas, demo_keys = load_personas_as_dict(fn, verbose=False)
+    personas, demo_keys = load_personas_as_dict(fn, verbose=True)
     save_prefix = args.save_prefix if len(args.save_prefix) > 0 else None
     demos_to_include = args.demos_to_include if args.demos_to_include == 'all' else args.demos_to_include.split(',')
 
