@@ -387,6 +387,26 @@ def generate_interests(personas):
 def generate_names(personas):
     
 
+def generate_interests(personas):
+    for name in personas:
+        prompt = 'Please complete the interests of ' + name + ':\n'
+        demos == personas[name]
+        for demo_val in demos:
+            prompt += demo_val + ': ' + demos[demo_val] + '\n'
+        prompt += 'interests: '
+        
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=[{"role": "system", "content": prompt}],
+            temperature=DEFAULT_TEMPERATURE)
+        response = extract_gpt_output(response)
+        print('RESPONSE')
+        print(response)
+        demos['interests'] = response
+        personas[name] = demos
+    
+    return personas
+
 if __name__ == '__main__':
 #    # generate personas with GPT
 #    n = 50
