@@ -2,6 +2,7 @@ import os
 import openai
 from constants_and_utils import *
 from generate_personas import *
+import time
 
 """
 Generate x random personas: name, gender, age, ethnicity, religion, political association.
@@ -16,47 +17,71 @@ manyOrFew = "Given the following list of people, generate a social network. Peop
 noDemo = "Given the following list of people, generate a social network. Respond with a list of connections in the format Person A, Person B. Do not include any text in the response besides the list and do not number them.\n"
 demo =  "Given the following list of people, generate a social network. Respond with a list of connections in the format Person A, Person B. Consider the demographic information of the individuals when creating the network. Do not include any text in the response besides the list and do not number them.\n"
 
-def GPTGeneratedGraph(content):
+def GPTGeneratedGraph(content, personas):
     G = None
     metrics = None
     tries = 0
+    max_tries = 20
+    duration = 5
     while tries < max_tries:
         try:
-            completion = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": content}])
+            completion = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": content}], temperature = DEFAULT_TEMPERATURE)
 
-            connections = completion.choices[0].message['content']
+            connections = extract_gpt_output(completion)
+            print(connections)
 
             pairs = connections.split('\n')
 
             G = nx.Graph()
+            for person in personas:
+                G.add_node(person.replace(' ', '-'))
             for pair in pairs:
                 try:
+                    if '.' in pair:
+                        pair = pair.split('. ')[1]
                     personA, personB = pair.split(", ")
+                    personA = personA.strip('(').replace(' ', '-')
+                    personB = personB.strip(')').replace(' ', '-')
+#                    print(personA, personB)
+                    if ((personA not in G.nodes()) or (personB not in G.nodes())):
+                        print("Hallucinated person")
+                        continue
                     G.add_edge(personA, personB)
                 except ValueError:
-                    print(f"Error: ValueError. skipped this network")
-                    break
+                    print(f"Error: ValueError; skipped this line.")
+                    continue
             if G.number_of_nodes() == 0:
-                break
+                continue
             return G
 
-        except openai.error.OpenAIError as e:
-            print(f"Error: {e}. Retrying in {duration} seconds.")
+        except:
+            print(f"Retrying in {duration} seconds.")
             tries += 1
             time.sleep(duration)
     raise Exception("Maximum number of retries reached without success.")
 
 if __name__ == '__main__':
-    content = "Create a varied social network between the following list of people where some people have many, many friends, and others have fewer. Please take into account the provided demographic information (gender, age, race, religious and political affiliation) when determining who is likely to be friends. Provide an unordered list of friendship pairs in the format (Emma Wilson, Sophia Lee). Do not number the pairs."
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--persona_fn', type=str, default='programmatic_personas.txt')
+    parser.add_argument('--save_prefix', type=str, default='')
+    parser.add_argument('--perspective', type=str, choices=['first', 'second', 'third'], default='second')
+    parser.add_argument('--demos_to_include', type=str, default='all')
+    args = parser.parse_args()
+
+    fn = os.path.join(PATH_TO_TEXT_FILES, args.persona_fn)
+    personas, demo_keys = load_personas_as_dict(fn, verbose=False)
+    save_prefix = args.save_prefix if len(args.save_prefix) > 0 else None
+    demos_to_include = args.demos_to_include if args.demos_to_include == 'all' else args.demos_to_include.split(',')
     
-    # select which features to include
-    personas = load_personas_as_dict('personas.txt')
-    personas = shuffle_dict(personas)
-    demo_keys = ['gender', 'age', 'race/ethnicity', 'religion', 'political affiliation']
-    for person in personas:
-        message += '\n' + convert_persona_to_string(person, personas, demo_keys)
-    print(message)
-    
-    for i in range(1):
-        G = GPTGeneratedGraph(content)
+    i = 40
+    while (i < 41):
+#        personas = shuffle_dict(personas)
+        message = "Create a varied social network between the following list of 50 people where some people have many, many friends, and others have fewer. Provide a list of friendship pairs in the format (Sophia Rodriguez, Eleanor Harris). Do not include any other text in your response. Do not include any people who are not listed below."
+        demo_keys = ['gender', 'race/ethnicity', 'age', 'religion', 'political affiliation']
+        personas = shuffle_dict(personas)
+        for name in personas:
+            message += '\n' +convert_persona_to_string(name, personas, demo_keys)
+        print(message)
+        G = GPTGeneratedGraph(message, personas)
         save_network(G, 'all-at-once-' + str(i))
+        i += 1

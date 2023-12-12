@@ -3,7 +3,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 import os
 import openai
+import random
 
+PATH_TO_FOLDER = 'Users/ejw675/Downloads/llm-social-network'
 PATH_TO_TEXT_FILES = './text-files'  # folder holding text files, typically GPT output
 PATH_TO_SAVED_PLOTS = './saved-plots'  # folder holding plots, eg, network figures
 DEFAULT_TEMPERATURE = 0.8

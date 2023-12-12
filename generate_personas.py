@@ -3,12 +3,15 @@ import openai
 from constants_and_utils import *
 import random
 import math
+import argparse
 
-DEMO_DESCRIPTIONS = {'gender': 'Man, Woman, or Nonbinary',
+NAMES_TEMPERATURE = 1.2
+
+DEMO_DESCRIPTIONS = {'gender': 'Woman, Man, or Nonbinary',
+                    'race/ethnicity': 'White, Black, Latino, Asian, Native American/Alaska Native, or Native Hawaiian',
                      'age': '18-65',
-                     'race/ethnicity': 'White, Black, Latino, Asian, Native American/Alaska Native, or Native Hawaiian',
                      'religion': 'Protestant, Catholic, Jewish, Muslim, Hindu, Buddhist, or Unreligious',
-                     'political affiliation': 'Liberal, Conservative, Moderate, Independent'}
+                     'political affiliation': 'Democrat, Republican, Independent'}
 GENERIC = {'name': 'John Smith',
            'gender': 'Man',
            'age': '35',
@@ -16,9 +19,11 @@ GENERIC = {'name': 'John Smith',
            'religion': 'Protestant',
            'political affiliation': 'Moderate'}
            
+"""
+GENERATING PERSONAS WITH GPT
+"""
 
-
-def generate_personas(n, demos_to_include, save_response=True):
+def generate_personas(n, demos_to_include, fn, save_response=True):
     """
     Generate n random personas: name, gender, age, ethnicity, religion, political association.
     """
@@ -45,7 +50,6 @@ def generate_personas(n, demos_to_include, save_response=True):
         key = 'Name - ' + ', '.join(demos_to_include) + '\n'
         response = key + response
         # save generated response in text file
-        fn = os.path.join(PATH_TO_TEXT_FILES, f'personas_{n}.txt')
         print('Saving personas in', fn)
         with open(fn, 'w') as f:
             f.write(response)
@@ -65,8 +69,12 @@ def load_personas_as_dict(fn, verbose=True):
     for l in lines[1:]:
         l = l.strip()
         if '.' in l:  # drop leading number and period
-            l = l.split('. ', 1)[1]
-        name, demos = l.split(' - ')
+            i, l = l.split('. ', 1)
+        if '-' in l:
+            name, demos = l.split(' - ')
+        else:
+            name = str(i)
+            demos = l
         if name in personas:  # only add new names
             if personas[name] == demos:
                 if verbose:
@@ -105,10 +113,19 @@ def convert_persona_to_string(name, personas, demo_keys, demos_to_include='all')
     s = name
     if len(demos_to_include) > 0:
         s += ' - '
+        demo_vals_to_include = []
         # for age, specify that the number means age
-        demo_vals_to_include = [demo2val[d] if d != 'age' else f'age {demo2val[d]}' for d in demos_to_include]
+        for d in demos_to_include:
+            if (d != 'age'):
+                demo_vals_to_include.append(demo2val[d])
+            else:
+                demo_vals_to_include.append('age ' + demo2val[d])
         s += ', '.join(demo_vals_to_include)
     return s
+
+"""
+GENERATING PERSONAS PROGRAMMATICALLY
+"""
     
 def us_population(i):
     person = {}
@@ -171,24 +188,24 @@ def us_population(i):
             
         if (person['age'] < 18):
             if (gender < 0.49):
-                person['gender'] = 'Female'
+                person['gender'] = 'Woman'
             else:
-                person['gender'] = 'Male'
+                person['gender'] = 'Man'
         elif (person['age'] < 34):
             if (gender < 0.5):
-                person['gender'] = 'Female'
+                person['gender'] = 'Woman'
             else:
-                person['gender'] = 'Male'
+                person['gender'] = 'Man'
         elif (person['age'] < 54):
             if (gender < 0.53):
-                person['gender'] = 'Female'
+                person['gender'] = 'Woman'
             else:
-                person['gender'] = 'Male'
+                person['gender'] = 'Man'
         else:
             if (gender < 0.6):
-                person['gender'] = 'Female'
+                person['gender'] = 'Woman'
             else:
-                person['gender'] = 'Male'
+                person['gender'] = 'Man'
     
     elif (race < 0.934):
         age_group = age_group * 0.72 + 0.28
@@ -235,34 +252,34 @@ def us_population(i):
     if (person['race'] != 'Black'):
         if (person['age'] < 29):
             if (gender < 0.49):
-                person['gender'] = 'Female'
+                person['gender'] = 'Woman'
             else:
-                person['gender'] = 'Male'
+                person['gender'] = 'Man'
         elif (person['age'] < 59):
             if (gender < 0.5):
-                person['gender'] = 'Female'
+                person['gender'] = 'Woman'
             else:
-                person['gender'] = 'Male'
+                person['gender'] = 'Man'
         elif (person['age'] < 65):
             if (gender < 0.51):
-                person['gender'] = 'Female'
+                person['gender'] = 'Woman'
             else:
-                person['gender'] = 'Male'
+                person['gender'] = 'Man'
         elif (person['age'] < 75):
             if (gender < 0.53):
-                person['gender'] = 'Female'
+                person['gender'] = 'Woman'
             else:
-                person['gender'] = 'Male'
+                person['gender'] = 'Man'
         elif (person['age'] < 80):
             if (gender < 0.55):
-                person['gender'] = 'Female'
+                person['gender'] = 'Woman'
             else:
-                person['gender'] = 'Male'
+                person['gender'] = 'Man'
         else:
             if (gender < 0.64):
-                person['gender'] = 'Female'
+                person['gender'] = 'Woman'
             else:
-                person['gender'] = 'Male'
+                person['gender'] = 'Man'
         
     random.seed(7*i + 4)
     nonbinary = random.random()
@@ -367,9 +384,9 @@ def format_person(person, i):
 def generate_interests(personas):
     for name in personas:
         prompt = 'Please complete the interests of ' + name + ':\n'
-        demos == personas[name]
-        for demo_val in demos:
-            prompt += demo_val + ': ' + demos[demo_val] + '\n'
+        demos = personas[name]
+        for demo_key in demos:
+            prompt += demo_key + ': ' + demos[demo_key] + '\n'
         prompt += 'interests: '
         
         response = openai.ChatCompletion.create(
@@ -385,7 +402,32 @@ def generate_interests(personas):
     return personas
     
 def generate_names(personas):
+    for name in personas:
+        prompt = 'Generate a name for somoene with the following demographic information: '
+        demos = personas[name]
+        for demo_key in demos:
+            prompt += demo_key + ', '
+        prompt = prompt[:len(prompt)-2]
+        print(prompt)
+        
+        max_tries = 10
+        i = 1
+        while ((name in personas) and (i <= max_tries)):
+            print('Persona ' + name + '; Attempt ' + str(i))
+            response = openai.ChatCompletion.create(
+                model="gpt-3.5-turbo",
+                messages=[{"role": "system", "content": prompt}],
+                temperature=NAMES_TEMPERATURE)
+            response = extract_gpt_output(response)
+            lines = response.split('\n')
+            for l in lines:
+                if (l.count(' ') == 1):
+                    print(l)
+                    personas.pop(name)
+                    personas[l] = demos
+            i += 1
     
+    return personas
 
 def generate_interests(personas):
     for name in personas:
@@ -404,28 +446,55 @@ def generate_interests(personas):
         print(response)
         demos['interests'] = response
         personas[name] = demos
+        
+    # evaluate_interests(personas)
     
     return personas
+    
+def parse():
+    # Create the parser
+    parser = argparse.ArgumentParser(description='Process command line arguments.')
+    
+    # Add arguments
+    parser.add_argument('number_of_people', type=int, help='How many people would you like to generate?')
+    parser.add_argument('generating_method', type=str, help='Generate programatically or with GPT?')
+    parser.add_argument('file_name', type=str, help='What is the name of the file where you would like to save the personas?')
+
+    # Parse the arguments
+    args = parser.parse_args()
+
+    # Print the arguments
+    print("Number of personas", args.number_of_people)
+    print("Generation method", args.generating_method)
+    print("File destination", args.file_name)
+    
+    return args
 
 if __name__ == '__main__':
-#    # generate personas with GPT
-#    n = 50
-#    demos_to_include = ['gender', 'age', 'race/ethnicity', 'religion', 'political affiliation']
-#    generate_personas(n, demos_to_include, save_response=True)
-#    fn = os.path.join(PATH_TO_TEXT_FILES, f'personas_{n}.txt')
-#    print(load_personas_as_dict(fn))
-    
-    # generate personas programmatically
-    personas = {}
-    i = 1
-    n = 100
-    while (i <= n):
-        fn = os.path.join(PATH_TO_TEXT_FILES, f'programmatic_personas.txt')
-        person = us_population(i)
-        personas[str(i)] = person
-        
-        with open(fn, 'a') as f:
-            f.write(format_person(person, i))
-        i += 1
+    args = parse()
+    # generate personas with GPT
+    n = args.number_of_people
+    fn = os.path.join(PATH_TO_TEXT_FILES, args.file_name)
+    demos_to_include = ['gender', 'age', 'race/ethnicity', 'religion', 'political affiliation']
+    if (args.generating_method == 'GPT'):
+        generate_personas(n, demos_to_include, fn, save_response=True)
+        print(load_personas_as_dict(fn))
+    else:
+        personas = {}
+        i = 1
+        while (i <= n):
+            person = us_population(i)
+            personas[str(i)] = person
+
+            with open(fn, 'a') as f:
+                f.write(format_person(person, i))
+            i += 1
+            
+    # pass arguments: # of people, save path
+#
+#    fn = os.path.join(PATH_TO_TEXT_FILES, 'programmatic_personas.txt')
+#    personas, demo_keys = load_personas_as_dict(fn)
+#    personas = generate_names(personas)
+#    print(personas)
     
     

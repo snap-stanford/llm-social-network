@@ -2,8 +2,12 @@ import networkx as nx
 import os
 import matplotlib.pyplot as plt
 import numpy as np
+from scipy import stats
 from constants_and_utils import *
 from generate_personas import *
+from analyze_networks import *
+from scipy.spatial import distance
+import scipy.special
 
 def create_moreno_graphs_girls():
     fn = '/Users/ejw675/Downloads/moreno_vdb/out.moreno_vdb_vdb'
@@ -349,43 +353,195 @@ def create_email_graphs():
             graphs['email graph'].add_edges_from([(u1, u2)])
     
     return graphs
-
-def summarize_network_metrics(list_of_G, funcs, func_labels):
-    """
-    Summarize mean and 95% CI of network metrics over list of graphs,
-    including cross ratios, average degree, clustering, etc.
-    """
-    all_metrics = []
-    for G in list_of_G:
-        metrics = []
-        for f in funcs:
-            metrics.append(f(G.to_undirected(reciprocal=False)))
-        all_metrics.append(metrics)
-    all_metrics = np.array(all_metrics)
-    assert all_metrics.shape == (len(list_of_G), len(funcs)), all_metrics.shape
     
-    for i, m in enumerate(func_labels):
-        metric_over_graphs = all_metrics[:, i]  # get vector of metric over graphs
-        if ((('centrality' in m) == False) and (('triangle' in m) == False)):
-            lower = np.percentile(metric_over_graphs, 5)
-            upper = np.percentile(metric_over_graphs, 95)
-            print('%s: %.3f (%.3f-%.3f)' % (m, np.mean(metric_over_graphs), lower, upper))
+#def summarize_network_metrics(list_of_G, funcs, func_labels):
+#    print('SUMMARIZING NETWORK METRICS')
+#    """
+#    Summarize mean and 95% CI of network metrics over list of graphs,
+#    including cross ratios, average degree, clustering, etc.
+#    """
+#    all_metrics = []
+#    for G in list_of_G:
+#        metrics = []
+#        for f in funcs:
+#            metrics.append(f(G.to_undirected(reciprocal=False)))
+#        all_metrics.append(metrics)
+#    all_metrics = np.array(all_metrics)
+#    assert all_metrics.shape == (len(list_of_G), len(funcs)), all_metrics.shape
+#
+#    for i, m in enumerate(func_labels):
+#        metric_over_graphs = all_metrics[:, i]  # get vector of metric over graphs
+#        if ((('centrality' in m) == False) and (('triangle' in m) == False)):
+#            lower = np.percentile(metric_over_graphs, 5)
+#            upper = np.percentile(metric_over_graphs, 95)
+#            print('%s: %.3f (%.3f-%.3f)' % (m, np.mean(metric_over_graphs), lower, upper))
+#            print("Mean, SD of the sample:", str(np.mean(metric_over_graphs)), str(np.std(metric_over_graphs)))
+#        else:
+#            degree_list = []
+#            ks2_scores = []
+#            for degree_dict1 in metric_over_graphs:
+#                for degree_dict2 in metric_over_graphs:
+#                    if (degree_dict1 != degree_dict2):
+##                        print(stats.ks_2samp(list(degree_dict1.values()), list(degree_dict2.values())))
+#                        ks2_scores.append(stats.ks_2samp(list(degree_dict1.values()), list(degree_dict2.values())))
+#                degree_list.extend(degree_dict1.values())
+#
+#            ks2_pvalue = []
+#            for score in ks2_scores:
+#                ks2_pvalue.append(score[1])
+#            print("Mean, SD of the ks2 pvalue sample:", str(np.mean(ks2_pvalue)), str(np.std(ks2_pvalue)))
+#            print("Mean, SD of the ks2 statistic sample:", str(np.mean(ks2_scores)), str(np.std(ks2_scores)))
+#
+#            if ('centrality' in m):
+#                plt.hist(degree_list, bins=30, range=(0, 1))
+#            else:
+#                plt.hist(degree_list, bins=30)
+#            plt.xlabel(m)
+#            plt.ylabel('Number of nodes')
+#            plt.show()
+            
+def compare_graph_lists(list1, list2, funcs, func_labels, method = 'Jensen-Shannon'):
+    bar_dict = {}
+    bar_dict['cross'] = []
+    bar_dict['list1'] = []
+    bar_dict['list2'] = []
+    bar_dict['cross_yer'] = []
+    bar_dict['list1_yer'] = []
+    bar_dict['list2_yer'] = []
+    
+    for i in range(len(funcs)):
+        f = funcs[i]
+        f_label = func_labels[i]
+        num_buckets_one = 0
+        num_buckets_two = 0
+        
+        metrics1 = []
+        for G in list1:
+            metrics1.append(f(G.to_undirected(reciprocal=False)))
+            num_buckets_one += math.sqrt(len(G))
+        metrics2 = []
+        for G in list2:
+            metrics2.append(f(G.to_undirected(reciprocal=False)))
+            num_buckets_two += math.sqrt(len(G))
+        num_buckets_one = int(num_buckets_one / len(list1))
+        num_buckets_two = int(num_buckets_two / len(list2))
+        num_buckets_mixed = int((num_buckets_one + num_buckets_two) / 2)
+            
+        if ((('cent.' in f_label) == False) and (('triangle' in f_label) == False)):
+            lower = np.percentile(metrics1, 5)
+            upper = np.percentile(metrics1, 95)
+            mean = np.mean(metrics1)
+            print(f_label, 'distribution for list1', ':', mean, '(', lower, ',', upper, ')')
+            bar_dict['list1'].append(mean)
+            bar_dict['list1_yer'].append((upper - lower) / 2)
+    
+            lower = np.percentile(metrics2, 5)
+            upper = np.percentile(metrics2, 95)
+            mean = np.mean(metrics2)
+            print(f_label, 'distribution for list2', ':', mean, '(', lower, upper, ')')
+            bar_dict['list2'].append(mean)
+            bar_dict['list2_yer'].append((upper - lower) / 2)
+            
+            bar_dict['cross'].append(0)
+            bar_dict['cross_yer'].append(0)
+            
         else:
-            degree_list = []
-            for degree_dict in metric_over_graphs:
-                degree_list += degree_dict.values()
-            if ('centrality' in m):
-                plt.hist(degree_list, bins=30, range=(0, 1))
-            else:
-                plt.hist(degree_list, bins=30)
-            plt.xlabel(m)
-            plt.ylabel('Number of nodes')
-            plt.show()
+            scores_cmp = []
+            scores1 = []
+            scores2 = []
+            
+            # COMPARISON BETWEEN TWO LISTS
+            for degree_dict1 in metrics1:
+                for degree_dict2 in metrics2:
+#                    print(f_label, 'comparison between two distributions:')
+                    degrees1_hist, edges = np.histogram(list(degree_dict1.values()), bins=num_buckets_mixed)
+                    degrees2_hist, edges = np.histogram(list(degree_dict2.values()), bins=num_buckets_mixed)
+                    
+                    if (method == 'Jensen-Shannon'):
+                        scores_cmp.append(distance.jensenshannon(degrees1_hist, degrees2_hist))
+                    elif (method == 'Kolmogorov–Smirnov'):
+                        scores_cmp.append(stats.ks_2samp(list(degree_dict1.values()), list(degree_dict2.values()))[1])
+            lower = np.percentile(scores_cmp, 5)
+            upper = np.percentile(scores_cmp, 95)
+            mean = np.mean(scores_cmp)
+            print(f_label, 'distribution of the', method, 'across two lists:', ':', mean, '(', lower, upper, ')')
+            bar_dict['cross'].append(mean)
+            bar_dict['cross_yer'].append((upper - lower) / 2)
+            
+            # WITHIN ONE LIST
+            for degree_dict1 in metrics1:
+                for degree_dict2 in metrics1:
+                    if (degree_dict1 == degree_dict2):
+                        continue
+                    degrees1_hist, edges = np.histogram(list(degree_dict1.values()), bins=num_buckets_one)
+                    degrees2_hist, edges = np.histogram(list(degree_dict2.values()), bins=num_buckets_one)
+                    
+                    if (method == 'Jensen-Shannon'):
+                        scores1.append(distance.jensenshannon(degrees1_hist, degrees2_hist))
+                    elif (method == 'Kolmogorov–Smirnov'):
+                        scores1.append(stats.ks_2samp(list(degree_dict1.values()), list(degree_dict2.values()))[1])
+                    
+            lower = np.percentile(scores1, 5)
+            upper = np.percentile(scores1, 95)
+            mean = np.mean(scores1)
+            print(f_label, 'distribution of the', method, 'for list1:', ':', mean, '(', lower, upper, ')')
+            bar_dict['list1'].append(mean)
+            bar_dict['list1_yer'].append((upper - lower) / 2)
+            
+            # WITHIN SECOND LIST
+            for degree_dict1 in metrics2:
+                for degree_dict2 in metrics2:
+                    if (degree_dict1 == degree_dict2):
+                        continue
+                    degrees1_hist, edges = np.histogram(list(degree_dict1.values()), bins=num_buckets_two)
+                    degrees2_hist, edges = np.histogram(list(degree_dict2.values()), bins=num_buckets_two)
+                    
+                    if (method == 'Jensen-Shannon'):
+                        scores2.append(distance.jensenshannon(degrees1_hist, degrees2_hist))
+                    elif (method == 'Kolmogorov–Smirnov'):
+                        scores2.append(stats.ks_2samp(list(degree_dict1.values()), list(degree_dict2.values()))[1])
+                    
+            lower = np.percentile(scores2, 5)
+            upper = np.percentile(scores2, 95)
+            mean = np.mean(scores2)
+            print(f_label, 'distribution of the', method, 'for list2:', ':', mean, '(', lower, upper, ')')
+            bar_dict['list2'].append(mean)
+            bar_dict['list2_yer'].append((upper - lower) / 2)
+        
+    barWidth = 0.1
+    i = 0
+    r1 = np.arange(len(bar_dict['list1']))
+    colors = ['orange', 'red']
+    G_labels = ['Real networks', 'Generated networks']
+    for item in ['list1', 'list2']:
+        r = [x + i * barWidth for x in r1[:3]]
+        plt.bar(r, bar_dict[item][:3], width = barWidth, color = colors[i], edgecolor = 'black', yerr = bar_dict[item + '_yer'][:3], capsize = 3, label = G_labels[i])
+        i += 1
+    
+    plt.xticks([r + barWidth for r in range(len(bar_dict['list1'][:3]))], func_labels[:3])
+#   plt.legend()
+    plt.ylabel('Value of metric')
+    plt.legend()
+    plt.show()
+    
+    i = 0
+    colors = ['blue', 'orange', 'red']
+    G_labels = ['Cross', 'Real networks', 'Generated networks']
+    for item in ['cross', 'list1', 'list2']:
+        r = [x + i * barWidth for x in r1[:4]]
+        plt.bar(r, bar_dict[item][3:], width = barWidth, color = colors[i], edgecolor = 'black', yerr = bar_dict[item + '_yer'][3:], capsize = 4, label = G_labels[i])
+        i += 1
+    
+    plt.xticks([r + barWidth for r in range(len(bar_dict['list1'][3:]))], func_labels[3:])
+#   plt.legend()
+    plt.ylabel(method + ' difference')
+    plt.legend()
+    plt.show()
 
 if __name__ == '__main__':
     graph_dict = {}
     graph_dict.update(create_mexico_graphs())
-    graph_dict.update(create_jazz_graphs())
+    # graph_dict.update(create_jazz_graphs())
     graph_dict.update(create_taro_graphs())
     graph_dict.update(create_bktec_graphs())
     graph_dict.update(create_email_graphs())
@@ -408,9 +564,27 @@ if __name__ == '__main__':
         
     list_of_G = list(graph_dict.values())
     
+    test_G = load_list_of_graphs('llm-as-agent', 0, 30)
+#    get_edge_summary(test_G)
+    fn = os.path.join(PATH_TO_TEXT_FILES, 'programmatic_personas.txt')
+    personas, demo_keys = load_personas_as_dict(fn, verbose=False)
+    
 #    get_edge_summary(list_of_G)
 #    fn = os.path.join(PATH_TO_TEXT_FILES, 'programmatic_personas.txt')
 #    personas, demo_keys = load_personas_as_dict(fn, verbose=False)
+    funcs = [nx.density, nx.average_clustering, prop_nodes_in_giant_component, nx.radius, nx.diameter, nx.degree_centrality, nx.betweenness_centrality, nx.closeness_centrality, nx.triangles]
+    func_labels = ['density', 'clustering coef', 'prop nodes in LCC', 'radius',
+    'diameter', 'degree cent.', 'betweenness cent.', 'closeness cent.', 'triangle part.']
+    demo_keys = []
+    summarize_network_metrics(list_of_G, personas, demo_keys, funcs, func_labels, demos=False)
+    
+    print("--------CROSS COMPARISON--------")
     funcs = [nx.density, nx.average_clustering, prop_nodes_in_giant_component, nx.degree_centrality, nx.betweenness_centrality, nx.closeness_centrality, nx.triangles]
-    func_labels = ['density', 'clustering coef', 'prop nodes in largest connected component', 'degree centrality', 'betweenness centrality', 'closeness centrality', 'triangle participation']
-    summarize_network_metrics(list_of_G, funcs, func_labels)
+    func_labels = ['density', 'clustering coef', 'prop nodes in LCC', 'degree cent.', 'betweenness cent.', 'closeness cent.', 'triangle part.']
+    compare_graph_lists(list_of_G, test_G, funcs, func_labels, method='Jensen-Shannon')
+#    print("--------WITHIN REAL NETWORKS--------")
+#    compare_graph_lists_jss(list_of_G, list_of_G, funcs, func_labels)
+#    print("--------WITHIN GENERATED GRAPHS--------")
+#    compare_graph_lists_jss(test_G, test_G, funcs, func_labels)
+#    summarize_network_metrics(list_of_G, funcs, func_labels)
+#    summarize_network_metrics(test_G, funcs, func_labels)

@@ -1,0 +1,53 @@
+#one-by-one.py
+# GMT Thu Sep  7 20:57:35 2023
+# 
+John-Smith Jose-Rodriguez Sofia-Rodriguez Sarah-Thompson Maya-Johnson
+Nalini-Patel Sofia-Rodriguez John-Whitaker Priya-Patel Eleanor-Thompson
+Jane-Reynolds Jose-Rodriguez Emilia-Summers Carlton-Archer Sofia-Rodriguez Carmen-Rodriguez Sabrina-O'Connor Margaret-Walsh Ethan-Reynolds Maya-Johnson John-Whitaker Michelle-Brooks Emily-Anderson Elizabeth-Thompson George-Wilkinson
+Jose-Rodriguez Sierra-Johnson Sofia-Rodriguez Emily-Williams Sarah-Thompson Ethan-Reynolds Juan-Rodriguez Maya-Johnson Carlos-Rodriguez Juan-Ramirez
+Emilia-Summers Sierra-Johnson Emma-Henderson Eleanor-Harris Sarah-Thompson Anna-Thompson Gladys-Newton Margaret-Walsh Ethan-Reynolds Elizabeth-Thompson Joshua-Washington Linda-Turner
+Sierra-Johnson Emily-Williams Sophia-Rodriguez Ana-Rodriguez Maya-Johnson Elizabeth-Thompson Jennifer-Davis George-Wilkinson Eleanor-Thompson Kwame-Johnson
+Emma-Henderson Eleanor-Harris Josephine-Washington Sarah-Thompson Angelo-Hernandez Carmen-Rodriguez Gladys-Newton Margaret-Walsh Ethan-Reynolds John-Whitaker Antonio-Ramirez Jennifer-Davis George-Wilkinson Caroline-Bennett John-Stevens Linda-Turner
+Carlton-Archer Sofia-Rodriguez Ethan-Reynolds Maya-Johnson Priya-Patel Michelle-Brooks James-Thompson Joshua-Washington Eleanor-Thompson Kwame-Johnson Linda-Turner
+Eleanor-Harris Josephine-Washington Sarah-Thompson Angelo-Hernandez Carmen-Rodriguez Sakura-Tanaka Ethan-Reynolds Evelyn-Anderson Maya-Johnson Elizabeth-Thompson Jennifer-Davis Joshua-Washington George-Wilkinson Eleanor-Thompson
+Josephine-Washington Carmen-Rodriguez Sakura-Tanaka Gladys-Newton Ethan-Reynolds John-Whitaker Elizabeth-Thompson Jennifer-Davis Joshua-Washington George-Wilkinson Eleanor-Thompson Caroline-Bennett John-Stevens
+Sofia-Rodriguez Sarah-Thompson Ethan-Reynolds Isabella-Rodriguez Emily-Anderson Elizabeth-Thompson Carlos-Rodriguez Juan-Ramirez Lucia-Rodriguez
+Emily-Williams Carmen-Rodriguez Ethan-Reynolds Sophia-Rodriguez Priya-Patel Michelle-Brooks Jennifer-Davis George-Wilkinson Eleanor-Thompson Linda-Turner
+Sarah-Thompson Anna-Thompson Sabrina-O'Connor Ethan-Reynolds Maya-Johnson John-Whitaker Isabella-Rodriguez Elizabeth-Thompson
+Angelo-Hernandez Sakura-Tanaka Ethan-Reynolds Juan-Rodriguez Joshua-Washington Juan-Ramirez
+Carmen-Rodriguez Ethan-Reynolds Evelyn-Anderson John-Whitaker Isabella-Rodriguez Elizabeth-Thompson Maria-Rodriguez Jennifer-Davis Joshua-Washington Eleanor-Thompson Caroline-Bennett Linda-Turner
+Sakura-Tanaka Anna-Thompson Ethan-Reynolds Sophia-Rodriguez Michelle-Brooks James-Thompson Maria-Rodriguez Jennifer-Davis Emma-Dawson Joshua-Washington George-Wilkinson Eleanor-Thompson
+Anna-Thompson Sabrina-O'Connor Ethan-Reynolds Maya-Johnson John-Whitaker Emily-Anderson Elizabeth-Thompson Maria-Rodriguez Jennifer-Davis Joshua-Washington George-Wilkinson Linda-Turner
+Gladys-Newton Ethan-Reynolds Evelyn-Anderson John-Whitaker Antonio-Ramirez Michelle-Brooks Maria-Rodriguez Jennifer-Davis Joshua-Washington
+Sabrina-O'Connor Ethan-Reynolds Maya-Johnson John-Whitaker Isabella-Rodriguez Elizabeth-Thompson Joshua-Washington Eleanor-Thompson Kwame-Johnson Malik-Johnson Linda-Turner
+Margaret-Walsh Ethan-Reynolds Michelle-Brooks Joshua-Washington Linda-Turner
+Ethan-Reynolds Maya-Johnson Isabella-Rodriguez Emily-Anderson Elizabeth-Thompson Jennifer-Davis George-Wilkinson John-Stevens Malik-Johnson Linda-Turner
+Evelyn-Anderson Maria-Rodriguez Joshua-Washington George-Wilkinson Eleanor-Thompson Caroline-Bennett
+Sophia-Rodriguez Ana-Rodriguez John-Whitaker Antonio-Ramirez Isabella-Rodriguez Emily-Anderson Elizabeth-Thompson Maria-Rodriguez Jennifer-Davis Carlos-Rodriguez Joshua-Washington George-Wilkinson Lucia-Rodriguez Linda-Turner
+Ana-Rodriguez Maria-Rodriguez Emma-Dawson Joshua-Washington George-Wilkinson Lucia-Rodriguez Eleanor-Thompson Kwame-Johnson Linda-Turner
+Juan-Rodriguez Maya-Johnson Isabella-Rodriguez Joshua-Washington Lucia-Rodriguez
+Maya-Johnson Makoa-Nashoba Emily-Anderson Elizabeth-Thompson Jennifer-Davis Joshua-Washington George-Wilkinson Eleanor-Thompson Linda-Turner
+John-Whitaker Antonio-Ramirez Makoa-Nashoba Elizabeth-Thompson Jennifer-Davis George-Wilkinson Caroline-Bennett John-Stevens Kwame-Johnson
+Antonio-Ramirez Michelle-Brooks Elizabeth-Thompson Maria-Rodriguez Jennifer-Davis Joshua-Washington George-Wilkinson Linda-Turner
+Priya-Patel Elizabeth-Thompson Maria-Rodriguez Jennifer-Davis Joshua-Washington Eleanor-Thompson John-Stevens Malik-Johnson Linda-Turner
+Isabella-Rodriguez James-Thompson Makoa-Nashoba Elizabeth-Thompson Jennifer-Davis Joshua-Washington George-Wilkinson Eleanor-Thompson Kwame-Johnson Linda-Turner
+Michelle-Brooks Elizabeth-Thompson Maria-Rodriguez Jennifer-Davis George-Wilkinson Linda-Turner
+James-Thompson Jennifer-Davis Joshua-Washington Eleanor-Thompson Kwame-Johnson Linda-Turner
+Makoa-Nashoba Maria-Rodriguez Jennifer-Davis
+Emily-Anderson Elizabeth-Thompson Maria-Rodriguez Jennifer-Davis Joshua-Washington Linda-Turner
+Elizabeth-Thompson Jennifer-Davis George-Wilkinson Caroline-Bennett
+Maria-Rodriguez Jennifer-Davis Joshua-Washington George-Wilkinson Eleanor-Thompson Caroline-Bennett Linda-Turner
+Jennifer-Davis Emma-Dawson George-Wilkinson Michael-Thompson Caroline-Bennett John-Stevens Linda-Turner
+Emma-Dawson George-Wilkinson Eleanor-Thompson Caroline-Bennett Kwame-Johnson Linda-Turner
+Carlos-Rodriguez Joshua-Washington Eleanor-Thompson Linda-Turner
+Joshua-Washington Eleanor-Thompson John-Stevens Linda-Turner
+Juan-Ramirez Linda-Turner
+George-Wilkinson
+Lucia-Rodriguez Michael-Thompson Linda-Turner
+Michael-Thompson Eleanor-Thompson Linda-Turner
+Eleanor-Thompson Caroline-Bennett John-Stevens Linda-Turner
+Caroline-Bennett Linda-Turner
+John-Stevens Malik-Johnson Linda-Turner
+Kwame-Johnson Linda-Turner
+Malik-Johnson Linda-Turner
+Linda-Turner

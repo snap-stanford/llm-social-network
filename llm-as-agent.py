@@ -4,10 +4,29 @@ import openai
 import networkx as nx
 import time
 import matplotlib.pyplot as plt
+import random
 from constants_and_utils import *
-from generatepersonas import *
+from generate_personas import *
+from one_by_one import *
+from analyze_networks import *
 
-def generate_prompt_for_person(name, personas, demo_keys, demos_to_include='all', perspective='second'):
+openai.api_key = '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'
+
+def generate_random_graph(personas):
+    G = nx.Graph()
+    for person in personas:
+        G.add_node(person.replace(' ', '-'))
+    for node1 in G:
+        for node2 in G:
+            if (node1 != node2):
+                if (random.random() < 0.15):
+                    G.add_edge(node1, node2)
+    print(G)
+    
+    save_network(G, 'random_graph')
+    return G
+
+def generate_prompt_for_person(name, personas, demo_keys, demos_to_include='all', perspective='second', relation = 'friend'):
     """
     Generate LLM-as-agent prompt for persona.
     personas: dict of name (str) : demographics (list)
@@ -18,16 +37,25 @@ def generate_prompt_for_person(name, personas, demo_keys, demos_to_include='all'
     """
     assert perspective in {'first', 'second', 'third'}, f'Not a valid perspective: {perspective}'
     person_str = convert_persona_to_string(name, personas, demo_keys, demos_to_include)
+    verb = 'become friends with?\n'
+    friends_prefix = 'Your friends'
+    if (relation == 'date'):
+        verb = 'date romantically?\n'
+        friends_prefix = 'Your dating partners'
+    elif (relation == 'work'):
+        verb = 'work with in a professional setting?\n'
+        friends_prefix = 'Your professional co-workers:'
     if perspective == 'first':  # first person
         prompt = f'I am {person_str}. Which of the following people will I become friends with?\n'
         friends_prefix = 'My friends:'
     elif perspective == 'second':  # second person
-        prompt = f'You are {person_str}. Which of the following people will you become friends with?\n'
-        friends_prefix = 'Your friends'
+        prompt = f'You are {person_str}. Which of the following people would you ' + verb # EDITED
     else:  # third person
         prompt = f'This is {person_str}. Which of the following people will {name} become friends with?\n'
         friends_prefix = 'Friends'
-
+    
+    personas = shuffle_dict(personas)
+    
     for n in personas:
         if name != n:
             prompt += convert_persona_to_string(n, personas, demo_keys, demos_to_include) + '\n'
@@ -48,7 +76,7 @@ def get_new_edges_from_gpt_output(out, source_node, valid_nodes):
         new_edges.append((source_node, target_node))
     return new_edges
 
-def construct_network(personas, demo_keys, max_tries=10, save_prefix=None, prompt_kwargs={}):
+def construct_network(personas, demo_keys, max_tries=10, save_prefix=None, prompt_kwargs={}, relation='friend'):
     """
     Iterate through personas, issue API call, construct network.
     """
@@ -60,12 +88,15 @@ def construct_network(personas, demo_keys, max_tries=10, save_prefix=None, promp
         for t in range(max_tries):
             try:
                 print(f'Attempt #{t}')
-                prompt = generate_prompt_for_person(name, personas, demo_keys, **prompt_kwargs)
+                prompt = generate_prompt_for_person(name, personas, demo_keys, demos_to_include='all', relation = relation)
+                print('PROMPT')
+                print(prompt)
                 response = openai.ChatCompletion.create(
                                 model="gpt-3.5-turbo",
                                 messages=[{"role": "system", "content": prompt}],
                                 temperature=DEFAULT_TEMPERATURE)
                 out = extract_gpt_output(response)
+                print('RESPONSE')
                 print(out)
                 new_edges = get_new_edges_from_gpt_output(out, get_node_from_string(name), list(G.nodes()))
                 # only update the graph for this person once every function passed
@@ -78,12 +109,68 @@ def construct_network(personas, demo_keys, max_tries=10, save_prefix=None, promp
     if save_prefix is not None:
         save_network(G, save_prefix)
     return G
+    
+def iterate_with_local(G, personas, max_num_iterations, threshold, degree=False):
+    duration = 2
+    max_tries = 10
+    full_persona_list = ''
+    for persona in personas:
+        full_persona_list += convert_persona_to_string(persona, personas, ['gender', 'race/ethnicity', 'age', 'religion', 'political affiliation']) + '\n'
+    
+    for k in range(max_num_iterations):
+        newG = nx.DiGraph()
+        newG.add_nodes_from([get_node_from_string(n) for n in personas])
+        for p in personas:
+            print('CURRENT PERSONA:', p)
+            for t in range(max_tries):
+                try:
+                    friends = G.neighbors(p.replace(' ', '-'))
+                    friend_list = ''
+                    for friend in friends:
+                        friend_list += friend.replace('-', ' ')
+                        if (len(list(G.neighbors(friend))) > 0):
+                            friend_list += ', who is friends with '
+                            for second_friend in G.neighbors(friend):
+                                friend_list += second_friend.replace('-', ' ') + ', '
+                            friend_list = friend_list[:(len(friend_list) - 2)]
+                        else:
+                            friend_list += ', who has no friends'
+                        friend_list += '\n'
+                    prompt = 'You are ' + convert_persona_to_string(p, personas, ['gender', 'race/ethnicity', 'age', 'religion', 'political affiliation']) + '\nYou are currently friends with these people, each of whose friends is also listed:\n' + friend_list + '\nBased on this information, who among the following people will you be friends with now? You can lose and gain friendships.\n' + full_persona_list + '\nYour friends:\n1. '
+                    print('PROMPT\n', prompt)
+                    response = openai.ChatCompletion.create(
+                                    model="gpt-3.5-turbo",
+                                    messages=[{"role": "system", "content": prompt}],
+                                    temperature=DEFAULT_TEMPERATURE)
+                    out = extract_gpt_output(response)
+                    print('RESPONSE\n', out)
+                    
+                    new_friends = parse_gpt_output(G, out, p, prompt='singles')
+                    new_p_edges = []
+                    for new_pair in new_friends:
+                        if (new_pair[0].replace('-', ' ') in list(personas.keys())):
+                            newG.add_edge(new_pair[0], new_pair[1])
+                        else:
+                            print('Hallucinated person!', new_pair[0])
+                            error()
+                    print('Graph:', newG, '\n')
+                    break
+                except:
+                    print(f"Error during querying GPT. Retrying in {duration} seconds.")
+                    time.sleep(duration)
+        distance = compute_edge_distance(G, newG)
+        print('EDGE DISTANCE (CHANGE) IN CURRENT ITERATION:', distance)
+        if (distance < threshold):
+            G = newG
+            break
+            
+    return G
 
 if __name__ == "__main__":
     # Example call: 
     # nohup python3 -u llm-as-agent.py personas_30.txt --save_prefix second-person-n30-1 > second-person-n30-1.out 2>&1 & 
     parser = argparse.ArgumentParser()
-    parser.add_argument('persona_fn', type=str)
+    parser.add_argument('--persona_fn', type=str, default='programmatic_personas.txt')
     parser.add_argument('--save_prefix', type=str, default='')
     parser.add_argument('--perspective', type=str, choices=['first', 'second', 'third'], default='second')
     parser.add_argument('--demos_to_include', type=str, default='all')
@@ -103,4 +190,30 @@ if __name__ == "__main__":
     # construct network
     prompt_kwargs = {'perspective': args.perspective,
                      'demos_to_include': demos_to_include}
-    G = construct_network(personas, demo_keys, save_prefix=save_prefix, prompt_kwargs=prompt_kwargs)
+                     
+    demo_keys = ['gender', 'race/ethnicity', 'age', 'religion', 'political affiliation']
+
+#    i = 29
+#    while (i < 30):
+#        fn = 'llm-as-agent-dates' + str(i)
+#        G = construct_network(personas, demo_keys, save_prefix=fn, prompt_kwargs=prompt_kwargs, relation='date')
+#        i += 1
+#
+#    i = 1
+#    while (i < 30):
+#        fn = 'llm-as-agent-work' + str(i)
+#        G = construct_network(personas, demo_keys, save_prefix=fn, prompt_kwargs=prompt_kwargs, relation='work')
+#        i += 1
+
+#    generate_random_graph(personas)
+    
+    list_of_G = load_list_of_graphs('llm-as-agent-', 0, 1)
+    list_of_G += (load_list_of_graphs('random_graph-', 0, 1))
+
+    # for llm-as-agent graph
+
+    # for random graph
+    print(list_of_G[0])
+    new_G = iterate_with_local(list_of_G[0], personas, 10, 0.5, degree=False)
+    save_network(new_G, 'llm-as-agent-iterated')
+    

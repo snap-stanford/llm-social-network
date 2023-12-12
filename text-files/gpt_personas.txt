@@ -1,0 +1,150 @@
+Name - gender, age, race/ethnicity, religion, political affiliation
+1. Emily Johnson - Woman, 27, Black, Unreligious, Democrat
+2. Mohammad Khan - Man, 45, Asian, Muslim, Independent
+3. Maria Rodriguez - Woman, 32, Latino, Catholic, Democrat
+4. David Lee - Man, 40, Asian, Buddhist, Independent
+5. Sarah Thompson - Woman, 29, White, Protestant, Republican
+6. Jamal Williams - Man, 28, Black, Muslim, Democrat
+7. Anna Nguyen - Woman, 22, Asian, Unreligious, Independent
+8. Carlos Lopez - Man, 33, Latino, Catholic, Democrat
+9. Jessica Kim - Woman, 26, Asian, Protestant, Independent
+10. Ahmed Ali - Man, 50, Middle Eastern, Muslim, Republican
+11. Olivia Martinez - Woman, 36, Latino, Catholic, Democrat
+12. James Johnson - Man, 45, Black, Protestant, Republican
+13. Sophia Chen - Woman, 23, Asian, Buddhist, Independent
+14. Antonio Garcia - Man, 39, Latino, Catholic, Democrat
+15. Emma Wilson - Woman, 28, White, Unreligious, Democrat
+16. Malik Jackson - Man, 31, Black, Muslim, Democrat
+17. Grace Kim - Woman, 24, Asian, Protestant, Independent
+18. Juan Rodriguez - Man, 37, Latino, Catholic, Democrat
+19. Mia Thompson - Woman, 30, White, Protestant, Republican
+20. Tyrone Washington - Man, 42, Black, Protestant, Independent
+21. Lily Nguyen - Woman, 21, Asian, Unreligious, Independent
+22. Jose Martinez - Man, 43, Latino, Catholic, Democrat
+23. Ethan Johnson - Man, 33, White, Protestant, Republican
+24. Aaliyah Mohammad - Woman, 35, Middle Eastern, Muslim, Democrat
+25. Isabella Lewis - Woman, 26, Black, Unreligious, Democrat
+26. Michael Kim - Man, 29, Asian, Protestant, Independent
+27. Sophia Hernandez - Woman, 31, Latino, Catholic, Democrat
+28. Emily Thompson - Woman, 27, White, Protestant, Republican
+29. Xavier Davis - Man, 34, Black, Unreligious, Independent
+30. Chloe Nguyen - Woman, 22, Asian, Unreligious, Independent
+31. Daniel Gonzalez - Man, 40, Latino, Catholic, Democrat
+32. Olivia Johnson - Woman, 34, White, Protestant, Republican
+33. Muhammad Ahmed - Man, 48, Middle Eastern, Muslim, Independent
+34. Ava Lewis - Woman, 25, Black, Unreligious, Democrat
+35. Ryan Kim - Man, 27, Asian, Protestant, Independent
+36. Maria Garcia - Woman, 32, Latino, Catholic, Democrat
+37. Benjamin Thompson - Man, 36, White, Protestant, Republican
+38. Jada Jackson - Woman, 29, Black, Unreligious, Democrat
+39. Ethan Chen - Man, 24, Asian, Buddhist, Independent
+40. Sofia Rodriguez - Woman, 33, Latino, Catholic, Democrat
+41. William Johnson - Man, 38, White, Protestant, Republican
+42. Aisha Mohammed - Woman, 37, Middle Eastern, Muslim, Democrat
+43. Ava Williams - Woman, 28, Black, Unreligious, Democrat
+44. Christopher Lee - Man, 30, Asian, Buddhist, Independent
+45. Gabriela Lopez - Woman, 31, Latino, Catholic, Democrat
+46. Noah Davis - Man, 35, White, Protestant, Independent
+47. Maya Kim - Woman, 26, Asian, Protestant, Independent
+48. Juan Hernandez - Man, 40, Latino, Catholic, Democrat
+49. Allison Thompson - Woman, 29, White, Unreligious, Republican
+50. Malik Washington - Man, 32, Black, Muslim, Independent1. Woman, White, 46, Protestant, Democrat
+2. Man, Latino, 29, Catholic, Independent
+3. Man, Latino, 66, Catholic, Republican
+4. Man, Latino, 38, Catholic, Democrat
+5. Woman, White, 65, Protestant, Republican
+6. Woman, White, 42, Protestant, Republican
+7. Woman, Latino, 36, Unreligious, Democrat
+8. Woman, Asian, 41, Hindu, Independent
+9. Woman, White, 39, Unreligious, Republican
+10. Woman, Black, 26, Protestant, Democrat
+11. Man, Black, 26, Protestant, Democrat
+12. Woman, White, 56, Protestant, Democrat
+13. Woman, Latino, 63, Catholic, Democrat
+14. Woman, White, 30, Unreligious, Republican
+15. Man, Black, 23, Unreligious, Democrat
+16. Woman, White, 35, Protestant, Republican
+17. Man, Native American/Alaska Native, 29, Unreligious, Independent
+18. Woman, White, 75, Protestant, Republican
+19. Woman, White, 64, Protestant, Democrat
+20. Woman, White, 70, Unreligious, Democrat
+21. Woman, White, 34, Unreligious, Republican
+22. Man, White, 47, Protestant, Democrat
+23. Woman, White, 55, Protestant, Democrat
+24. Woman, White, 68, Protestant, Independent
+25. Woman, White, 77, Protestant, Republican
+26. Woman, White, 35, Protestant, Independent
+27. Woman, White, 60, Unreligious, Republican
+28. Man, White, 27, Protestant, Republican
+29. Woman, Latino, 22, Catholic, Democrat
+30. Man, White, 40, Protestant, Independent
+31. Woman, Asian, 67, Unreligious, Independent
+32. Man, Latino, 43, Catholic, Republican
+33. Woman, Black, 60, Protestant, Democrat
+34. Woman, Black, 76, Unreligious, Democrat
+35. Man, Latino, 50, Catholic, Democrat
+36. Man, White, 38, Protestant, Republican
+37. Woman, Latino, 26, Catholic, Republican
+38. Woman, Asian, 54, Hindu, Independent
+39. Woman, White, 60, Unreligious, Democrat
+40. Woman, White, 67, Catholic, Republican
+41. Man, White, 63, Unreligious, Democrat
+42. Man, Latino, 29, Catholic, Republican
+43. Man, White, 18, Protestant, Republican
+44. Woman, Latino, 50, Catholic, Democrat
+45. Woman, White, 48, Protestant, Republican
+46. Man, Black, 46, Unreligious, Democrat
+47. Man, Black, 58, Unreligious, Democrat
+48. Woman, Latino, 24, Catholic, Democrat
+49. Woman, Latino, 64, Unreligious, Democrat
+50. Man, Black, 73, Protestant, Democrat
+1. Woman, White, 46, Protestant, Democrat
+2. Man, Latino, 29, Catholic, Independent
+3. Man, Latino, 66, Catholic, Republican
+4. Man, Latino, 38, Catholic, Democrat
+5. Woman, White, 65, Protestant, Republican
+6. Woman, White, 42, Protestant, Republican
+7. Woman, Latino, 36, Unreligious, Democrat
+8. Woman, Asian, 41, Hindu, Independent
+9. Woman, White, 39, Unreligious, Republican
+10. Woman, Black, 26, Protestant, Democrat
+11. Man, Black, 26, Protestant, Democrat
+12. Woman, White, 56, Protestant, Democrat
+13. Woman, Latino, 63, Catholic, Democrat
+14. Woman, White, 30, Unreligious, Republican
+15. Man, Black, 23, Unreligious, Democrat
+16. Woman, White, 35, Protestant, Republican
+17. Man, Native American/Alaska Native, 29, Unreligious, Independent
+18. Woman, White, 75, Protestant, Republican
+19. Woman, White, 64, Protestant, Democrat
+20. Woman, White, 70, Unreligious, Democrat
+21. Woman, White, 34, Unreligious, Republican
+22. Man, White, 47, Protestant, Democrat
+23. Woman, White, 55, Protestant, Democrat
+24. Woman, White, 68, Protestant, Independent
+25. Woman, White, 77, Protestant, Republican
+26. Woman, White, 35, Protestant, Independent
+27. Woman, White, 60, Unreligious, Republican
+28. Man, White, 27, Protestant, Republican
+29. Woman, Latino, 22, Catholic, Democrat
+30. Man, White, 40, Protestant, Independent
+31. Woman, Asian, 67, Unreligious, Independent
+32. Man, Latino, 43, Catholic, Republican
+33. Woman, Black, 60, Protestant, Democrat
+34. Woman, Black, 76, Unreligious, Democrat
+35. Man, Latino, 50, Catholic, Democrat
+36. Man, White, 38, Protestant, Republican
+37. Woman, Latino, 26, Catholic, Republican
+38. Woman, Asian, 54, Hindu, Independent
+39. Woman, White, 60, Unreligious, Democrat
+40. Woman, White, 67, Catholic, Republican
+41. Man, White, 63, Unreligious, Democrat
+42. Man, Latino, 29, Catholic, Republican
+43. Man, White, 18, Protestant, Republican
+44. Woman, Latino, 50, Catholic, Democrat
+45. Woman, White, 48, Protestant, Republican
+46. Man, Black, 46, Unreligious, Democrat
+47. Man, Black, 58, Unreligious, Democrat
+48. Woman, Latino, 24, Catholic, Democrat
+49. Woman, Latino, 64, Unreligious, Democrat
+50. Man, Black, 73, Protestant, Democrat
