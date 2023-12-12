@@ -172,8 +172,10 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--persona_fn', type=str, default='programmatic_personas.txt')
     parser.add_argument('--save_prefix', type=str, default='')
-    parser.add_argument('--perspective', type=str, choices=['first', 'second', 'third'], default='second')
     parser.add_argument('--demos_to_include', type=str, default='all')
+    parser.add_argument('--num_networks', type=int, default=30)
+    parser.add_argument('--perspective', type=str, choices=['first', 'second', 'third'], default='second')
+
     args = parser.parse_args()
 
     fn = os.path.join(PATH_TO_TEXT_FILES, args.persona_fn)
@@ -193,11 +195,11 @@ if __name__ == "__main__":
                      
     demo_keys = ['gender', 'race/ethnicity', 'age', 'religion', 'political affiliation']
 
-#    i = 29
-#    while (i < 30):
-#        fn = 'llm-as-agent-dates' + str(i)
-#        G = construct_network(personas, demo_keys, save_prefix=fn, prompt_kwargs=prompt_kwargs, relation='date')
-#        i += 1
+    i = 0
+    while (i < args.num_networks):
+        fn = 'llm-as-agent-dates' + str(i)
+        G = construct_network(personas, demo_keys, save_prefix=fn, prompt_kwargs=prompt_kwargs, relation='date')
+        i += 1
 #
 #    i = 1
 #    while (i < 30):
@@ -213,7 +215,7 @@ if __name__ == "__main__":
     # for llm-as-agent graph
 
     # for random graph
-    print(list_of_G[0])
-    new_G = iterate_with_local(list_of_G[0], personas, 10, 0.5, degree=False)
-    save_network(new_G, 'llm-as-agent-iterated')
-    
+#    print(list_of_G[0])
+#    new_G = iterate_with_local(list_of_G[0], personas, 10, 0.5, degree=False)
+#    save_network(new_G, 'llm-as-agent-iterated')
+#

@@ -64,8 +64,9 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--persona_fn', type=str, default='programmatic_personas.txt')
     parser.add_argument('--save_prefix', type=str, default='')
-    parser.add_argument('--perspective', type=str, choices=['first', 'second', 'third'], default='second')
     parser.add_argument('--demos_to_include', type=str, default='all')
+    args = parser.parse_args()
+    parser.add_argument('--num_networks', type=int, default=30)
     args = parser.parse_args()
 
     fn = os.path.join(PATH_TO_TEXT_FILES, args.persona_fn)
@@ -73,8 +74,8 @@ if __name__ == '__main__':
     save_prefix = args.save_prefix if len(args.save_prefix) > 0 else None
     demos_to_include = args.demos_to_include if args.demos_to_include == 'all' else args.demos_to_include.split(',')
     
-    i = 40
-    while (i < 41):
+    i = 0
+    while (i < args.num_networks):
 #        personas = shuffle_dict(personas)
         message = "Create a varied social network between the following list of 50 people where some people have many, many friends, and others have fewer. Provide a list of friendship pairs in the format (Sophia Rodriguez, Eleanor Harris). Do not include any other text in your response. Do not include any people who are not listed below."
         demo_keys = ['gender', 'race/ethnicity', 'age', 'religion', 'political affiliation']
