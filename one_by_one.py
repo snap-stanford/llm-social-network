@@ -70,7 +70,6 @@ def parse_gpt_output(G, output, ego_friend, prompt='singles'):
                 else:
                     print('Hallucinated new person.')
                     OSError()
-    
 #    print(pairs)
     return pairs
     
