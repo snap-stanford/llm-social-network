@@ -1,0 +1,86 @@
+Taro exchange network, part of the Koblenz Network Collection
+===========================================================================
+
+This directory contains the TSV and related files of the moreno_taro network: This undirected network contains gift-givings (taro) between households in a Papuan village. A node represents a household and an edge between two households indicates that there happened a gift-giving.
+
+
+More information about the network is provided here: 
+http://konect.cc/networks/moreno_taro
+
+Files: 
+    meta.moreno_taro -- Metadata about the network 
+    out.moreno_taro -- The adjacency matrix of the network in whitespace-separated values format, with one edge per line
+      The meaning of the columns in out.moreno_taro are: 
+        First column: ID of from node 
+        Second column: ID of to node
+        Third column (if present): weight or multiplicity of edge
+        Fourth column (if present):  timestamp of edges Unix time
+
+
+Use the following References for citation:
+
+@MISC{konect:2017:moreno_taro,
+    title = {Taro exchange network dataset -- {KONECT}},
+    month = oct,
+    year = {2017},
+    url = {http://konect.cc/networks/moreno_taro}
+}
+
+@book{konect:hage,
+	title = {Structural Models in Anthropology},
+	author = {Hage, Per and Harary, Frank},
+	year = {1983},
+	publisher = {Cambridge Univ. Press}
+}
+
+@book{konect:schwimmer,
+	title = {Exchange in the Social Structure of the Orokaiva: Traditional
+                  and Emergent Ideologies in the Northern District of
+                  {Papua}}, 
+	author = {Schwimmer, Eric},
+	year = {1973},
+	publisher = {St. Martin's Press}
+}
+
+@book{konect:hage,
+	title = {Structural Models in Anthropology},
+	author = {Hage, Per and Harary, Frank},
+	year = {1983},
+	publisher = {Cambridge Univ. Press}
+}
+
+@book{konect:schwimmer,
+	title = {Exchange in the Social Structure of the Orokaiva: Traditional
+                  and Emergent Ideologies in the Northern District of
+                  {Papua}}, 
+	author = {Schwimmer, Eric},
+	year = {1973},
+	publisher = {St. Martin's Press}
+}
+
+
+@inproceedings{konect,
+	title = {{KONECT} -- {The} {Koblenz} {Network} {Collection}},
+	author = {Jérôme Kunegis},
+	year = {2013},
+	booktitle = {Proc. Int. Conf. on World Wide Web Companion},
+	pages = {1343--1350},
+	url = {http://dl.acm.org/citation.cfm?id=2488173},
+	url_presentation = {https://www.slideshare.net/kunegis/presentationwow},
+	url_web = {http://konect.cc/},
+	url_citations = {https://scholar.google.com/scholar?cites=7174338004474749050},
+}
+
+@inproceedings{konect,
+	title = {{KONECT} -- {The} {Koblenz} {Network} {Collection}},
+	author = {Jérôme Kunegis},
+	year = {2013},
+	booktitle = {Proc. Int. Conf. on World Wide Web Companion},
+	pages = {1343--1350},
+	url = {http://dl.acm.org/citation.cfm?id=2488173},
+	url_presentation = {https://www.slideshare.net/kunegis/presentationwow},
+	url_web = {http://konect.cc/},
+	url_citations = {https://scholar.google.com/scholar?cites=7174338004474749050},
+}
+
+

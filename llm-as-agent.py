@@ -225,9 +225,9 @@ def iterate_with_local_2(G, personas, max_num_iterations, threshold, degree=Fals
                         else:
                             friend_list += '(who has no friends)'
                         friend_list += '\n'
-                    prompt = 'You are ' + convert_persona_to_string(p, personas, ['gender', 'race/ethnicity', 'age', 'religion', 'political affiliation']) + '\nYou are currently friends with these people, each of whose friends is also listed:\n' + friend_list + '\nBased on this information, who among the following people will you be friends with now? You can lose and gain friendships, or keep all the same friends.\n' + full_persona_list
+                    prompt = 'You are ' + convert_persona_to_string(p, personas, ['gender', 'race/ethnicity', 'age', 'religion', 'political affiliation']) + '\nYou are currently friends with these people, each of whose friends is also listed:\n' + friend_list + '\nBased on this information, who among the following people will you be friends with now? You can add or remove friendships, or keep all the same friends.\n' + full_persona_list
                     prompt += 'Please give your response in json format as below: \n{\n\t"added_connections": [...] # list of names as strings, it can be empty,\n\t"removed_connections": [...] # list of names as strings, it can be empty\n}'
-#                    print('PROMPT\n', prompt)
+                    print('PROMPT\n', prompt)
                     response = openai.ChatCompletion.create(
                                     model="gpt-3.5-turbo",
                                     messages=[{"role": "system", "content": prompt}],
@@ -269,7 +269,7 @@ def iterate_with_local_2(G, personas, max_num_iterations, threshold, degree=Fals
 #        G.to_undirected(reciprocal = True)
         distance = compute_edge_distance(G, newG)
         print('EDGE DISTANCE (CHANGE) IN CURRENT ITERATION:', distance)
-        save_network(new_G, 'llm-as-agent-iterated')
+        save_network(newG, 'llm-as-agent-iterated')
         if (distance < threshold):
             G = newG
             break

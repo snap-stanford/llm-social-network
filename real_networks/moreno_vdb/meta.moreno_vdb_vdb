@@ -1,0 +1,11 @@
+category: HumanSocial
+code: Mv
+name: Dutch college
+description: Student–student ratings
+entity-names: student
+extr: moreno
+url: http://moreno.ss.uci.edu/data.html#vdb
+long-description: This directed network contains friendship ratings between 32 university freshmen who mostly did not know each other before starting university. Each student was asked to rate the other student at seven different time points.  Note that the origin of the timestamps is not accurately known but the distance between two timestamps is correct. A node represents a student and an edge between two students shows that the left rated the right one The edge weights show how good their friendship is in the eye of the left node. The weight ranges from −1 for risk of getting into conflict to +3 for best friend.
+relationship-names: rating
+cite: konect:bunt
+tags:  #zeroweight

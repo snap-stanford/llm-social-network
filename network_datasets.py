@@ -10,7 +10,7 @@ from scipy.spatial import distance
 import scipy.special
 
 def create_moreno_graphs_girls():
-    fn = '/Users/ejw675/Downloads/moreno_vdb/out.moreno_vdb_vdb'
+    fn = PATH_TO_FOLDER + '/real_networks/moreno_vdb/out.moreno_vdb_vdb'
     graphs = {}
     
     with open(fn, 'r') as f:
@@ -25,7 +25,7 @@ def create_moreno_graphs_girls():
     return graphs
     
 def create_moreno_graphs_boys():
-    fn = '/Users/ejw675/Downloads/moreno_highschool/out.moreno_highschool_highschool'
+    fn = PATH_TO_FOLDER + '/real_networks/moreno_highschool/out.moreno_highschool_highschool'
     graphs = {}
     graphs['moreno boys graph'] = nx.DiGraph()
     
@@ -39,7 +39,7 @@ def create_moreno_graphs_boys():
     return graphs
     
 def create_hitech_graphs():
-    fn = '/Users/ejw675/Downloads/hiTech/Hi-tech.net'
+    fn = PATH_TO_FOLDER + '/real_networks/hiTech/Hi-tech.net'
     graphs = {}
     graphs['hitech graph'] = nx.DiGraph()
     
@@ -55,7 +55,7 @@ def create_hitech_graphs():
     return graphs
     
 def create_prison_graphs():
-    fn = '/Users/ejw675/Downloads/prison.xml'
+    fn = PATH_TO_FOLDER + '/real_networks/prison.xml'
     graphs = {}
     graphs['prison graph'] = nx.DiGraph()
     
@@ -78,7 +78,7 @@ def create_prison_graphs():
     return graphs
     
 def create_tailor_graphs():
-    fn = '/Users/ejw675/Downloads/kaptail 2.xml'
+    fn = PATH_TO_FOLDER + '/real_networks/kaptail 2.xml'
     graphs = {}
     
     with open(fn, 'r') as f:
@@ -111,7 +111,7 @@ def create_tailor_graphs():
     return graphs
     
 def create_sawmill_graphs():
-    fn = '/Users/ejw675/Downloads/sawmill/Sawmill.net'
+    fn = PATH_TO_FOLDER + '/real_networks/sawmill/Sawmill.net'
     graphs = {}
     graphs['sawmill graph'] = nx.DiGraph()
     
@@ -127,7 +127,7 @@ def create_sawmill_graphs():
     return graphs
     
 def create_attiro_graphs():
-    fn = '/Users/ejw675/Downloads/attiro.xml'
+    fn = PATH_TO_FOLDER + '/real_networks/attiro.xml'
     graphs = {}
     graphs['attiro graph'] = nx.DiGraph()
     
@@ -150,7 +150,7 @@ def create_attiro_graphs():
     return graphs
     
 def create_bktec_graphs():
-    fn = '/Users/ejw675/Downloads/bktec.xml'
+    fn = PATH_TO_FOLDER + '/real_networks/bktec.xml'
     graphs = {}
     
     with open(fn, 'r') as f:
@@ -179,7 +179,7 @@ def create_bktec_graphs():
     return graphs
     
 def create_dining_graphs():
-    fn = '/Users/ejw675/Downloads/dining 2.xml'
+    fn = PATH_TO_FOLDER + '/real_networks/dining 2.xml'
     graphs = {}
     graphs['dining graph'] = nx.DiGraph()
     
@@ -202,7 +202,7 @@ def create_dining_graphs():
     return graphs
     
 def create_galesburg_graphs():
-    fn = '/Users/ejw675/Downloads/Galesburg2.paj'
+    fn = PATH_TO_FOLDER + '/real_networks/Galesburg2.paj'
     graphs = {}
     graphs['galesburg graph'] = nx.DiGraph()
     
@@ -217,7 +217,7 @@ def create_galesburg_graphs():
     return graphs
     
 def create_pilot_graphs():
-    fn = '/Users/ejw675/Downloads/Flying_teams.xml'
+    fn = PATH_TO_FOLDER + '/real_networks/Flying_teams.xml'
     graphs = {}
     graphs['pilot graph'] = nx.DiGraph()
     start = 0
@@ -243,7 +243,7 @@ def create_pilot_graphs():
     return graphs
     
 def create_sanjuan_graphs():
-    fn = '/Users/ejw675/Downloads/SanJuanSur.paj'
+    fn = PATH_TO_FOLDER + '/real_networks/SanJuanSur.paj'
     graphs = {}
     graphs['san juan graph'] = nx.DiGraph()
     
@@ -259,7 +259,7 @@ def create_sanjuan_graphs():
     return graphs
     
 def create_mexico_graphs():
-    fn = '/Users/ejw675/Downloads/mexican_power.paj'
+    fn = PATH_TO_FOLDER + '/real_networks/mexican_power.paj'
     graphs = {}
     graphs['mexico graph'] = nx.DiGraph()
     
@@ -275,7 +275,7 @@ def create_mexico_graphs():
     return graphs
     
 def create_southern_graphs():
-    fn = '/Users/ejw675/Downloads/opsahl-southernwomen/out.opsahl-southernwomen'
+    fn = PATH_TO_FOLDER + '/real_networks/opsahl-southernwomen/out.opsahl-southernwomen'
     graphs = {}
     graphs['southern graph'] = nx.DiGraph()
     
@@ -289,7 +289,7 @@ def create_southern_graphs():
     return graphs
     
 def create_taro_graphs():
-    fn = '/Users/ejw675/Downloads/moreno_taro/out.moreno_taro_taro'
+    fn = PATH_TO_FOLDER + '/real_networks/moreno_taro/out.moreno_taro_taro'
     graphs = {}
     graphs['taro graph'] = nx.DiGraph()
     
@@ -303,7 +303,7 @@ def create_taro_graphs():
     return graphs
     
 def create_karate_graphs():
-    fn = '/Users/ejw675/Downloads/karate/karate.gml'
+    fn = PATH_TO_FOLDER + '/real_networks/karate/karate.gml'
     graphs = {}
     graphs['karate graph'] = nx.DiGraph()
     
@@ -323,7 +323,7 @@ def create_karate_graphs():
     return graphs
     
 def create_jazz_graphs():
-    fn = '/Users/ejw675/Downloads/jazz.net'
+    fn = PATH_TO_FOLDER + '/real_networks/jazz.net'
     graphs = {}
     graphs['jazz graph'] = nx.DiGraph()
     
@@ -339,7 +339,7 @@ def create_jazz_graphs():
     return graphs
     
 def create_email_graphs():
-    fn = '/Users/ejw675/Downloads/email 2.txt'
+    fn = PATH_TO_FOLDER + '/real_networks/email 2.txt'
     graphs = {}
     graphs['email graph'] = nx.DiGraph()
     

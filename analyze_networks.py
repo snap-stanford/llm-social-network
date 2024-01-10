@@ -12,7 +12,7 @@ def load_list_of_graphs(prefix, start_seed, end_seed, directed=True):
     """
     list_of_G = []
     for s in range(start_seed, end_seed):
-        fn = os.path.join(PATH_TO_TEXT_FILES, f'{prefix}{s}.adj')
+        fn = os.path.join(PATH_TO_TEXT_FILES, f'{prefix}-{s}.adj')
         if directed:
             G = nx.read_adjlist(fn, create_using=nx.DiGraph)
         else:

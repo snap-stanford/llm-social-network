@@ -1,0 +1,12 @@
+category: Interaction
+code: SW
+name: Southern women (large)
+description: Woman–event participation
+entity-names: woman,event
+extr: opsahl
+url: http://toreopsahl.com/datasets/#southernwomen
+long-description: This bipartite dataset shows the participation of 18 white women in 14 social events over a nine-month period. The data was collected in the Southern United States of America in the 1930s. There is an edge for every woman who participates in an event. The first column contains the women, the second column contains the events.
+relationship-names: participation
+cite: konect:southernwomen
+tags:  #join #incomplete
+

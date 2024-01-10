@@ -5,9 +5,9 @@ import os
 import openai
 import random
 
-PATH_TO_FOLDER = 'Users/ejw675/Downloads/llm-social-network'
-PATH_TO_TEXT_FILES = './text-files'  # folder holding text files, typically GPT output
-PATH_TO_SAVED_PLOTS = './saved-plots'  # folder holding plots, eg, network figures
+PATH_TO_FOLDER = '/Users/ejw675/Downloads/llm-social-network'
+PATH_TO_TEXT_FILES = PATH_TO_FOLDER + '/text-files'  # folder holding text files, typically GPT output
+PATH_TO_SAVED_PLOTS = PATH_TO_FOLDER + '/saved-plots'  # folder holding plots, eg, network figures
 DEFAULT_TEMPERATURE = 0.8
 openai.api_key = os.getenv("OPENAI_API_KEY")
 

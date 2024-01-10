@@ -1,0 +1,10 @@
+category: HumanSocial
+code: MT
+name: Taro exchange
+description: Household–household gift-givings
+entity-names: household
+extr: moreno
+url: http://moreno.ss.uci.edu/data.html#taro
+long-description: This undirected network contains gift-givings (taro) between households in a Papuan village. A node represents a household and an edge between two households indicates that there happened a gift-giving.
+relationship-names: gift-giving
+cite: konect:hage,konect:schwimmer

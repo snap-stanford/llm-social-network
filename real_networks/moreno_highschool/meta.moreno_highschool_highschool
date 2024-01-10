@@ -1,0 +1,10 @@
+category: HumanSocial
+code: MH
+name: Highschool
+description: Boy–boy friendships
+entity-names: boy
+extr: moreno
+url: http://moreno.ss.uci.edu/data.html#high
+long-description: This directed network contains friendships between boys in a small highschool in Illinois. Each boy was asked once in the fall of 1957 and the spring of 1958. This dataset aggregates the results from both dates. A node represents a boy and an edge between two boys shows that the left boy chose the right boy as a friend. The edge weights show how often that happened. As a boy could choose the same boy twice edge values from 1 to 2 are allowed.
+relationship-names: friendship
+cite: konect:coleman 
