@@ -5,10 +5,12 @@ import os
 import openai
 import random
 
-PATH_TO_FOLDER = '/Users/ejw675/Downloads/llm-social-network'
+PATH_TO_FOLDER = '.'
 PATH_TO_TEXT_FILES = PATH_TO_FOLDER + '/text-files'  # folder holding text files, typically GPT output
-PATH_TO_SAVED_PLOTS = PATH_TO_FOLDER + '/saved-plots'  # folder holding plots, eg, network figures
+PATH_TO_SAVED_PLOTS = PATH_TO_FOLDER + '/plots'  # folder holding plots, eg, network figures
+PATH_TO_STATS_FILES = PATH_TO_FOLDER + '/stats'  # folder holding stats files, eg, proportion of nodes in giant component
 DEFAULT_TEMPERATURE = 0.8
+SHOW_PLOTS = False
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 def draw_and_save_network_plot(G, save_prefix):

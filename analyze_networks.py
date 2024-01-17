@@ -5,10 +5,12 @@ import numpy as np
 from constants_and_utils import *
 from generate_personas import *
 import pandas as pd
+import seaborn as sns
+import plotting
 
 def load_list_of_graphs(prefix, start_seed, end_seed, directed=True):
     """
-    Load list of graphs from adjlist.
+    Load list of graphs from adjlist. By default, assume directed graphs.
     """
     list_of_G = []
     for s in range(start_seed, end_seed):
@@ -56,7 +58,7 @@ def compute_edge_distance(G1, G2):
     num_edges = num_nodes * (num_nodes-1)  # total num possible edges
     return distance / num_edges
 
-def get_edge_summary(list_of_G):
+def get_edge_summary(list_of_G, save_name):
     """
     Summarize edge-related statistics: 
     1) num edges per graph,
@@ -64,12 +66,8 @@ def get_edge_summary(list_of_G):
     3) proportion of graphs that each edge appears.
     """
     num_edges = [len(G.edges()) for G in list_of_G]
-    plt.plot(num_edges)
-    plt.ylim(0, max(num_edges)+1)
-    plt.grid(alpha=0.3)
-    plt.xlabel('Seed')
-    plt.ylabel('Num edges')
-    plt.show()
+
+    plotting.plot_edges(num_edges, save_name)
 
     all_real_d = []
     for i, G1 in enumerate(list_of_G):
@@ -78,14 +76,14 @@ def get_edge_summary(list_of_G):
                 all_real_d.append(compute_edge_distance(G1, G2))
     print('Average edge distance between graphs: %.3f' % np.mean(all_real_d))
 
+    plotting.plot_edge_dist(all_real_d, save_name)
+
     edges, props = get_edge_proportions(list_of_G)
     print('Most common edges:')
     for i in range(30):
         print('%d. %s -> %s (p=%.3f)' % (i, edges[i][0], edges[i][1], props[i]))
-    plt.hist(props, bins=30)
-    plt.xlabel('Prop of networks where edge appeared')
-    plt.ylabel(f'Num edges (out of {len(edges)})')
-    plt.show()
+
+    plotting.plot_props(props, edges, save_name)
 
 
 def compute_cross_proportions(G, personas, demo_keys, ratio=True):
@@ -130,119 +128,79 @@ def compute_cross_proportions_within_demo(G, personas, demo_keys, demo):
     """
     pass
 
-def summarize_network_metrics(list_of_G, personas, demo_keys, funcs, func_labels, demos=True):
-    """
-    Summarize mean and 95% of network metrics over list of graphs, 
-    including cross ratios, average degree, clustering, etc.
-    """
-    main = []
-    main_yerr = []
-    
-    all_metrics = []
-    for G in list_of_G:
-        if (demos):
-            metrics = list(compute_cross_proportions(G, personas, demo_keys))
-        else:
-            metrics = []
-        for f in funcs:
-            if (((f == nx.radius) | (f == nx.diameter)) & (demos == False)):
-                metrics.append(0)
-            else:
-                metrics.append(f(G.to_undirected(reciprocal=False)))
-        all_metrics.append(metrics)
-    all_metrics = np.array(all_metrics)
-    assert all_metrics.shape == (len(list_of_G), len(demo_keys) + len(funcs)), all_metrics.shape
-    for i, m in enumerate(demo_keys + func_labels):
-        metric_over_graphs = all_metrics[:, i]  # get vector of metric over graphs
-        if ((('cent' in m) == False) and (('triangle' in m) == False)):
-            lower = np.percentile(metric_over_graphs, 5)
-            upper = np.percentile(metric_over_graphs, 95)
-            mean = np.mean(metric_over_graphs)
-            print('%s: %.3f (%.3f-%.3f)' % (m, mean, lower, upper))
-            main.append(mean)
-            main_yerr.append((upper - lower) / 2)
-        else:
-            degree_list = []
-            mean_list = []
-            for degree_dict in metric_over_graphs:
-                degree_list += degree_dict.values()
-                mean = np.mean(list(degree_dict.values()))
-                if ('triangle' in m):
-                    mean /= (len(list(degree_dict.values())) * (len(list(degree_dict.values())) - 1) / 2) # normalize
-                mean_list.append(mean)
-            if ('centrality' in m):
-                plt.hist(degree_list, bins=30, range=(0, 1))
-            else:
-                plt.hist(degree_list, bins=30)
-            plt.xlabel(m)
-            plt.ylabel('Number of nodes')
-            plt.show()
-            
-            lower = np.percentile(mean_list, 5)
-            upper = np.percentile(mean_list, 95)
-            mean = np.mean(mean_list)
-            print('%s: %.3f (%.3f-%.3f)' % (m, mean, lower, upper))
-            main.append(mean)
-            main_yerr.append((upper - lower) / 2)
-            
-    start = 0
-    barWidth = 0.1
-    i = 0
-    
-    if (demos):
-        barWidth = 0.1
-        i = 0
-        r1 = np.arange(len(main[:5]))
-        r = [x for x in r1]
-        plt.bar(r, main[:5], width = barWidth, color = 'blue', edgecolor = 'black', yerr = main_yerr[:5], capsize = 5, label = 'main')
-    
-        plt.xticks([r + barWidth for r in range(len(main[:5]))], demo_keys)
-        plt.ylabel('Homophily')
-        plt.show()
-        start= 5
-    
-    r1 = np.arange(len(main[start:(start+3)]))
-    r = [x for x in r1]
-    plt.bar(r, main[start:(start+3)], width = barWidth, color = 'blue', edgecolor = 'black', yerr = main_yerr[start:(start+3)], capsize = 3, label = 'main')
-    
-    plt.xticks([r + barWidth for r in range(len(main[start:(start+3)]))], func_labels[:3])
-#   plt.legend()
-    plt.ylabel('Value of metric')
-    plt.show()
-    
-    r1 = np.arange(len(main[(start+5):]))
-    r = [x for x in r1]
-    plt.bar(r, main[(start+5):], width = barWidth, color = 'blue', edgecolor = 'black', yerr = main_yerr[(start+5):], capsize = 3, label = 'main')
-    
-    plt.xticks([r + barWidth for r in range(len(main[(start+5):]))], func_labels[5:])
-#   plt.legend()
-    plt.ylabel('Value of metric')
-    plt.show()
 
-#def calculate_averages(df):
-#    averages = df.mean()
-#    return averages
-#
-#def percentUnconnected(df):
-#    nan_count = df['diameter'].isna().sum()
-#    return nan_count / len(df)
-#
-#def repeatfunction(numTimes, content, dataFrame, col_names):
-#    for i in range(numTimes):
-#        myGraph, metrics = GPTGeneratedGraph(content)
-#    #Metrics will be added to a dataframe
-#    if myGraph == None and metrics == None:
-#        continue
-#    dataFrame = dataFrame.append(pd.DataFrame([metrics], columns=col_names))
+def summarize_network_metrics(list_of_G, personas, demo_keys, save_name, demos=True):
+
+    ### ---------------------------------- homophily ---------------------------------- ###
+
+    if demos: # compute homophily
+        homophily_metrics_df = pd.DataFrame({'graph_nr':[], 'demo':[], 'metric_value':[], 'save_name':[]})
+        for graph_nr, G in enumerate(list_of_G):
+            homophily_metrics = list(compute_cross_proportions(G, personas, demo_keys))
+            # concat with series
+            homophily_metrics_df = pd.concat([homophily_metrics_df,
+                                              pd.DataFrame({'graph_nr':graph_nr, 'demo':demo_keys,
+                                                            'metric_value':homophily_metrics,
+                                                            'save_name':[save_name]*len(demo_keys)})])
+
+    # plot homophily
+    plotting.plot_homophily(homophily_metrics_df, save_name)
+
+    # save homophily dataframe in stats
+    homophily_metrics_df.to_csv(os.path.join(PATH_TO_STATS_FILES, f'{save_name}_homophily.csv'))
+
+    ### ---------------------------------- network-level metrics ---------------------------------- ###
+
+    network_metrics_df = pd.DataFrame({'graph_nr':[], 'metric_name':[], 'metric_value':[], 'save_name':[]})
+
+    network_metrics = ['density', 'avg_clustering_coef', 'prop_nodes_lcc', 'radius', 'diameter']
+    network_func = [nx.density, nx.average_clustering, prop_nodes_in_giant_component, nx.radius, nx.diameter]
+    for graph_nr, G in enumerate(list_of_G):
+
+        for metric_name, f in zip(network_metrics, network_func):
+            if metric_name in ['radius', 'diameter']:
+                largest_cc = sorted(nx.connected_components(G.to_undirected()), key=len, reverse=True)[0]
+                metric_value = f(G.subgraph(largest_cc).to_undirected())
+                ### PLEASE NOTE LCC HERE
+            else:
+                metric_value = f(G.to_undirected())
+
+            network_metrics_df = pd.concat([network_metrics_df, pd.DataFrame({'graph_nr':graph_nr,
+                                                                              'metric_name':[metric_name],
+                                                                              'metric_value':[metric_value],
+                                                                              'save_name':[save_name]})])
+        density_value = nx.density(G.to_undirected())
+        network_metrics_df = pd.concat([network_metrics_df, pd.DataFrame({'graph_nr':graph_nr, 'metric_name':['density'],
+                                                                          'metric_value':[density_value],
+                                                                          'save_name':[save_name]})])
+
+
+    node_metrics = ['degree_centrality', 'betweenness_centrality', 'closeness_centrality']
+    node_func = [nx.degree_centrality, nx.betweenness_centrality, nx.closeness_centrality]
+    for graph_nr, G in enumerate(list_of_G):
+        for metric_name, f in zip(node_metrics, node_func):
+            metric_value = np.array(list(f(G.to_undirected()).values()))
+            network_metrics_df = pd.concat([network_metrics_df, pd.DataFrame({'graph_nr':graph_nr,
+                                                                              'metric_name':[metric_name],
+                                                                              'metric_value':[metric_value],
+                                                                               'save_name':[save_name]})])
+
+    # save network metrics dataframe in stats
+    network_metrics_df.to_csv(os.path.join(PATH_TO_STATS_FILES, f'{save_name}_network_metrics.csv'))
+
+    # plot network metrics
+    plotting.plot_network_metrics(network_metrics_df, save_name)
+
 
 def parse():
     # Create the parser
     parser = argparse.ArgumentParser(description='Process command line arguments.')
     
     # Add arguments
-    parser.add_argument('persona_fn', type=str, help='What is the name of the persona file you want to use?')
-    parser.add_argument('network_fn', type=str, help='What is the name of the network file you want to use?')
-    parser.add_argument('num_networks', type=int, help='How many networks are there?')
+    parser.add_argument('--persona_fn', type=str, default='programmatic_personas.txt')
+    parser.add_argument('--network_fn', type=str, help='What is the name of the network file you want to use?')
+    parser.add_argument('--num_networks', type=int, help='How many networks are there?')
+    parser.add_argument('--save_name', type=str, default='')
 
     # Parse the arguments
     args = parser.parse_args()
@@ -255,14 +213,11 @@ def parse():
     return args
 
 if __name__ == '__main__':
-    # llm-network: third person
-    # first-person: first person
-    # second-person: second person
+
     args = parse()
     list_of_G = load_list_of_graphs(args.network_fn, 0, args.num_networks)
-    get_edge_summary(list_of_G)
+    get_edge_summary(list_of_G, args.save_name)
     fn = os.path.join(PATH_TO_TEXT_FILES, args.persona_fn)
     personas, demo_keys = load_personas_as_dict(fn, verbose=False)
-    funcs = [nx.density, nx.average_clustering, prop_nodes_in_giant_component, nx.radius, nx.diameter, nx.degree_centrality, nx.betweenness_centrality, nx.closeness_centrality, nx.triangles]
-    func_labels = ['density', 'clustering coef', 'prop nodes in largest connected component', 'radius', 'diameter', 'degree centrality', 'betweenness centrality', 'closeness centrality', 'triangle participation']
-    summarize_network_metrics(list_of_G, personas, demo_keys, funcs, func_labels)
+
+    summarize_network_metrics(list_of_G, personas, demo_keys, save_name=args.network_fn)
