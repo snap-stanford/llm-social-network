@@ -420,143 +420,143 @@ def create_karate_graphs():
 #            plt.ylabel('Number of nodes')
 #            plt.show()
             
-def compare_graph_lists(list1, list2, funcs, func_labels, method = 'Jensen-Shannon'):
-    bar_dict = {}
-    bar_dict['cross'] = []
-    bar_dict['list1'] = []
-    bar_dict['list2'] = []
-    bar_dict['cross_yer'] = []
-    bar_dict['list1_yer'] = []
-    bar_dict['list2_yer'] = []
-    
-    for i in range(len(funcs)):
-        f = funcs[i]
-        f_label = func_labels[i]
-        num_buckets_one = 0
-        num_buckets_two = 0
-        
-        metrics1 = []
-        for G in list1:
-            metrics1.append(f(G.to_undirected(reciprocal=False)))
-            num_buckets_one += math.sqrt(len(G))
-        metrics2 = []
-        for G in list2:
-            metrics2.append(f(G.to_undirected(reciprocal=False)))
-            num_buckets_two += math.sqrt(len(G))
-        num_buckets_one = int(num_buckets_one / len(list1))
-        num_buckets_two = int(num_buckets_two / len(list2))
-        num_buckets_mixed = int((num_buckets_one + num_buckets_two) / 2)
-            
-        if ((('cent.' in f_label) == False) and (('triangle' in f_label) == False)):
-            lower = np.percentile(metrics1, 5)
-            upper = np.percentile(metrics1, 95)
-            mean = np.mean(metrics1)
-            print(f_label, 'distribution for list1', ':', mean, '(', lower, ',', upper, ')')
-            bar_dict['list1'].append(mean)
-            bar_dict['list1_yer'].append((upper - lower) / 2)
-    
-            lower = np.percentile(metrics2, 5)
-            upper = np.percentile(metrics2, 95)
-            mean = np.mean(metrics2)
-            print(f_label, 'distribution for list2', ':', mean, '(', lower, upper, ')')
-            bar_dict['list2'].append(mean)
-            bar_dict['list2_yer'].append((upper - lower) / 2)
-            
-            bar_dict['cross'].append(0)
-            bar_dict['cross_yer'].append(0)
-            
-        else:
-            scores_cmp = []
-            scores1 = []
-            scores2 = []
-            
-            # COMPARISON BETWEEN TWO LISTS
-            for degree_dict1 in metrics1:
-                for degree_dict2 in metrics2:
-#                    print(f_label, 'comparison between two distributions:')
-                    degrees1_hist, edges = np.histogram(list(degree_dict1.values()), bins=num_buckets_mixed)
-                    degrees2_hist, edges = np.histogram(list(degree_dict2.values()), bins=num_buckets_mixed)
-                    
-                    if (method == 'Jensen-Shannon'):
-                        scores_cmp.append(distance.jensenshannon(degrees1_hist, degrees2_hist))
-                    elif (method == 'Kolmogorov–Smirnov'):
-                        scores_cmp.append(stats.ks_2samp(list(degree_dict1.values()), list(degree_dict2.values()))[1])
-            lower = np.percentile(scores_cmp, 5)
-            upper = np.percentile(scores_cmp, 95)
-            mean = np.mean(scores_cmp)
-            print(f_label, 'distribution of the', method, 'across two lists:', ':', mean, '(', lower, upper, ')')
-            bar_dict['cross'].append(mean)
-            bar_dict['cross_yer'].append((upper - lower) / 2)
-            
-            # WITHIN ONE LIST
-            for degree_dict1 in metrics1:
-                for degree_dict2 in metrics1:
-                    if (degree_dict1 == degree_dict2):
-                        continue
-                    degrees1_hist, edges = np.histogram(list(degree_dict1.values()), bins=num_buckets_one)
-                    degrees2_hist, edges = np.histogram(list(degree_dict2.values()), bins=num_buckets_one)
-                    
-                    if (method == 'Jensen-Shannon'):
-                        scores1.append(distance.jensenshannon(degrees1_hist, degrees2_hist))
-                    elif (method == 'Kolmogorov–Smirnov'):
-                        scores1.append(stats.ks_2samp(list(degree_dict1.values()), list(degree_dict2.values()))[1])
-                    
-            lower = np.percentile(scores1, 5)
-            upper = np.percentile(scores1, 95)
-            mean = np.mean(scores1)
-            print(f_label, 'distribution of the', method, 'for list1:', ':', mean, '(', lower, upper, ')')
-            bar_dict['list1'].append(mean)
-            bar_dict['list1_yer'].append((upper - lower) / 2)
-            
-            # WITHIN SECOND LIST
-            for degree_dict1 in metrics2:
-                for degree_dict2 in metrics2:
-                    if (degree_dict1 == degree_dict2):
-                        continue
-                    degrees1_hist, edges = np.histogram(list(degree_dict1.values()), bins=num_buckets_two)
-                    degrees2_hist, edges = np.histogram(list(degree_dict2.values()), bins=num_buckets_two)
-                    
-                    if (method == 'Jensen-Shannon'):
-                        scores2.append(distance.jensenshannon(degrees1_hist, degrees2_hist))
-                    elif (method == 'Kolmogorov–Smirnov'):
-                        scores2.append(stats.ks_2samp(list(degree_dict1.values()), list(degree_dict2.values()))[1])
-                    
-            lower = np.percentile(scores2, 5)
-            upper = np.percentile(scores2, 95)
-            mean = np.mean(scores2)
-            print(f_label, 'distribution of the', method, 'for list2:', ':', mean, '(', lower, upper, ')')
-            bar_dict['list2'].append(mean)
-            bar_dict['list2_yer'].append((upper - lower) / 2)
-        
-    barWidth = 0.1
-    i = 0
-    r1 = np.arange(len(bar_dict['list1']))
-    colors = ['orange', 'red']
-    G_labels = ['Real networks', 'Generated networks']
-    for item in ['list1', 'list2']:
-        r = [x + i * barWidth for x in r1[:3]]
-        plt.bar(r, bar_dict[item][:3], width = barWidth, color = colors[i], edgecolor = 'black', yerr = bar_dict[item + '_yer'][:3], capsize = 3, label = G_labels[i])
-        i += 1
-    
-    plt.xticks([r + barWidth for r in range(len(bar_dict['list1'][:3]))], func_labels[:3])
-#   plt.legend()
-    plt.ylabel('Value of metric')
-    plt.legend()
-    plt.show()
-    
-    i = 0
-    colors = ['blue', 'orange', 'red']
-    G_labels = ['Cross', 'Real networks', 'Generated networks']
-    for item in ['cross', 'list1', 'list2']:
-        r = [x + i * barWidth for x in r1[:4]]
-        plt.bar(r, bar_dict[item][3:], width = barWidth, color = colors[i], edgecolor = 'black', yerr = bar_dict[item + '_yer'][3:], capsize = 4, label = G_labels[i])
-        i += 1
-    
-    plt.xticks([r + barWidth for r in range(len(bar_dict['list1'][3:]))], func_labels[3:])
-#   plt.legend()
-    plt.ylabel(method + ' difference')
-    plt.legend()
-    plt.show()
+# def compare_graph_lists(list1, list2, funcs, func_labels, method = 'Jensen-Shannon'):
+#     bar_dict = {}
+#     bar_dict['cross'] = []
+#     bar_dict['list1'] = []
+#     bar_dict['list2'] = []
+#     bar_dict['cross_yer'] = []
+#     bar_dict['list1_yer'] = []
+#     bar_dict['list2_yer'] = []
+#
+#     for i in range(len(funcs)):
+#         f = funcs[i]
+#         f_label = func_labels[i]
+#         num_buckets_one = 0
+#         num_buckets_two = 0
+#
+#         metrics1 = []
+#         for G in list1:
+#             metrics1.append(f(G.to_undirected(reciprocal=False)))
+#             num_buckets_one += math.sqrt(len(G))
+#         metrics2 = []
+#         for G in list2:
+#             metrics2.append(f(G.to_undirected(reciprocal=False)))
+#             num_buckets_two += math.sqrt(len(G))
+#         num_buckets_one = int(num_buckets_one / len(list1))
+#         num_buckets_two = int(num_buckets_two / len(list2))
+#         num_buckets_mixed = int((num_buckets_one + num_buckets_two) / 2)
+#
+#         if ((('cent.' in f_label) == False) and (('triangle' in f_label) == False)):
+#             lower = np.percentile(metrics1, 5)
+#             upper = np.percentile(metrics1, 95)
+#             mean = np.mean(metrics1)
+#             print(f_label, 'distribution for list1', ':', mean, '(', lower, ',', upper, ')')
+#             bar_dict['list1'].append(mean)
+#             bar_dict['list1_yer'].append((upper - lower) / 2)
+#
+#             lower = np.percentile(metrics2, 5)
+#             upper = np.percentile(metrics2, 95)
+#             mean = np.mean(metrics2)
+#             print(f_label, 'distribution for list2', ':', mean, '(', lower, upper, ')')
+#             bar_dict['list2'].append(mean)
+#             bar_dict['list2_yer'].append((upper - lower) / 2)
+#
+#             bar_dict['cross'].append(0)
+#             bar_dict['cross_yer'].append(0)
+#
+#         else:
+#             scores_cmp = []
+#             scores1 = []
+#             scores2 = []
+#
+#             # COMPARISON BETWEEN TWO LISTS
+#             for degree_dict1 in metrics1:
+#                 for degree_dict2 in metrics2:
+# #                    print(f_label, 'comparison between two distributions:')
+#                     degrees1_hist, edges = np.histogram(list(degree_dict1.values()), bins=num_buckets_mixed)
+#                     degrees2_hist, edges = np.histogram(list(degree_dict2.values()), bins=num_buckets_mixed)
+#
+#                     if (method == 'Jensen-Shannon'):
+#                         scores_cmp.append(distance.jensenshannon(degrees1_hist, degrees2_hist))
+#                     elif (method == 'Kolmogorov–Smirnov'):
+#                         scores_cmp.append(stats.ks_2samp(list(degree_dict1.values()), list(degree_dict2.values()))[1])
+#             lower = np.percentile(scores_cmp, 5)
+#             upper = np.percentile(scores_cmp, 95)
+#             mean = np.mean(scores_cmp)
+#             print(f_label, 'distribution of the', method, 'across two lists:', ':', mean, '(', lower, upper, ')')
+#             bar_dict['cross'].append(mean)
+#             bar_dict['cross_yer'].append((upper - lower) / 2)
+#
+#             # WITHIN ONE LIST
+#             for degree_dict1 in metrics1:
+#                 for degree_dict2 in metrics1:
+#                     if (degree_dict1 == degree_dict2):
+#                         continue
+#                     degrees1_hist, edges = np.histogram(list(degree_dict1.values()), bins=num_buckets_one)
+#                     degrees2_hist, edges = np.histogram(list(degree_dict2.values()), bins=num_buckets_one)
+#
+#                     if (method == 'Jensen-Shannon'):
+#                         scores1.append(distance.jensenshannon(degrees1_hist, degrees2_hist))
+#                     elif (method == 'Kolmogorov–Smirnov'):
+#                         scores1.append(stats.ks_2samp(list(degree_dict1.values()), list(degree_dict2.values()))[1])
+#
+#             lower = np.percentile(scores1, 5)
+#             upper = np.percentile(scores1, 95)
+#             mean = np.mean(scores1)
+#             print(f_label, 'distribution of the', method, 'for list1:', ':', mean, '(', lower, upper, ')')
+#             bar_dict['list1'].append(mean)
+#             bar_dict['list1_yer'].append((upper - lower) / 2)
+#
+#             # WITHIN SECOND LIST
+#             for degree_dict1 in metrics2:
+#                 for degree_dict2 in metrics2:
+#                     if (degree_dict1 == degree_dict2):
+#                         continue
+#                     degrees1_hist, edges = np.histogram(list(degree_dict1.values()), bins=num_buckets_two)
+#                     degrees2_hist, edges = np.histogram(list(degree_dict2.values()), bins=num_buckets_two)
+#
+#                     if (method == 'Jensen-Shannon'):
+#                         scores2.append(distance.jensenshannon(degrees1_hist, degrees2_hist))
+#                     elif (method == 'Kolmogorov–Smirnov'):
+#                         scores2.append(stats.ks_2samp(list(degree_dict1.values()), list(degree_dict2.values()))[1])
+#
+#             lower = np.percentile(scores2, 5)
+#             upper = np.percentile(scores2, 95)
+#             mean = np.mean(scores2)
+#             print(f_label, 'distribution of the', method, 'for list2:', ':', mean, '(', lower, upper, ')')
+#             bar_dict['list2'].append(mean)
+#             bar_dict['list2_yer'].append((upper - lower) / 2)
+#
+#     barWidth = 0.1
+#     i = 0
+#     r1 = np.arange(len(bar_dict['list1']))
+#     colors = ['orange', 'red']
+#     G_labels = ['Real networks', 'Generated networks']
+#     for item in ['list1', 'list2']:
+#         r = [x + i * barWidth for x in r1[:3]]
+#         plt.bar(r, bar_dict[item][:3], width = barWidth, color = colors[i], edgecolor = 'black', yerr = bar_dict[item + '_yer'][:3], capsize = 3, label = G_labels[i])
+#         i += 1
+#
+#     plt.xticks([r + barWidth for r in range(len(bar_dict['list1'][:3]))], func_labels[:3])
+# #   plt.legend()
+#     plt.ylabel('Value of metric')
+#     plt.legend()
+#     plt.show()
+#
+#     i = 0
+#     colors = ['blue', 'orange', 'red']
+#     G_labels = ['Cross', 'Real networks', 'Generated networks']
+#     for item in ['cross', 'list1', 'list2']:
+#         r = [x + i * barWidth for x in r1[:4]]
+#         plt.bar(r, bar_dict[item][3:], width = barWidth, color = colors[i], edgecolor = 'black', yerr = bar_dict[item + '_yer'][3:], capsize = 4, label = G_labels[i])
+#         i += 1
+#
+#     plt.xticks([r + barWidth for r in range(len(bar_dict['list1'][3:]))], func_labels[3:])
+# #   plt.legend()
+#     plt.ylabel(method + ' difference')
+#     plt.legend()
+#     plt.show()
 
 
 def get_divs(df_one, df_two, divs, names, metrics, metric, name):
@@ -576,8 +576,8 @@ def get_divs(df_one, df_two, divs, names, metrics, metric, name):
             bins = np.linspace(min_val, max_val, num_bins)
 
             # create histograms
-            hist_1, _ = np.histogram(values_1, bins)
-            hist_2, _ = np.histogram(values_2, bins)
+            hist_1, _ = np.histogram(values_1, bins, density=True)
+            hist_2, _ = np.histogram(values_2, bins, density=True)
 
             # calculate jensen-shannon divergence
             divs.append(distance.jensenshannon(hist_1, hist_2))
