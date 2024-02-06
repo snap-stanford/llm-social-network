@@ -143,11 +143,11 @@ def summarize_network_metrics(list_of_G, personas, demo_keys, save_name, demos=T
                                                             'metric_value':homophily_metrics,
                                                             'save_name':[save_name]*len(demo_keys)})])
 
-    # plot homophily
-    plotting.plot_homophily(homophily_metrics_df, save_name)
+        # plot homophily
+        plotting.plot_homophily(homophily_metrics_df, save_name)
 
-    # save homophily dataframe in stats
-    homophily_metrics_df.to_csv(os.path.join(PATH_TO_STATS_FILES, f'{save_name}_homophily.csv'))
+        # save homophily dataframe in stats
+        homophily_metrics_df.to_csv(os.path.join(PATH_TO_STATS_FILES, f'{save_name}_homophily.csv'))
 
     ### ---------------------------------- network-level metrics ---------------------------------- ###
 
@@ -179,7 +179,7 @@ def summarize_network_metrics(list_of_G, personas, demo_keys, save_name, demos=T
     node_func = [nx.degree_centrality, nx.betweenness_centrality, nx.closeness_centrality]
     for graph_nr, G in enumerate(list_of_G):
         for metric_name, f in zip(node_metrics, node_func):
-            metric_value = np.array(list(f(G.to_undirected()).values()))
+            metric_value = list(f(G.to_undirected()).values())
             network_metrics_df = pd.concat([network_metrics_df, pd.DataFrame({'graph_nr':graph_nr,
                                                                               'metric_name':[metric_name],
                                                                               'metric_value':[metric_value],
@@ -187,6 +187,9 @@ def summarize_network_metrics(list_of_G, personas, demo_keys, save_name, demos=T
 
     # save network metrics dataframe in stats
     network_metrics_df.to_csv(os.path.join(PATH_TO_STATS_FILES, f'{save_name}_network_metrics.csv'))
+    print("---------------------------------")
+    print("Saved network metrics to: ")
+    print( f'{save_name}_network_metrics.csv')
 
     # plot network metrics
     plotting.plot_network_metrics(network_metrics_df, save_name)

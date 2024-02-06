@@ -22,4 +22,4 @@ network_datasets.py: scrapes metrics from 16 real-world networks and compares th
 
 one-by-one.py: generates and saves a social network by prompting GPT with one individual persona at a time. Takes the same five optional arguments as llm-as-agent.py. 
 
-`analyze_networks.py --network_fn llm-as-agent --num_networks 30`
+` python analyze_networks.py --network_fn llm-as-agent --num_networks 30 --save_name llm-as-agent`

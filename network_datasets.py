@@ -2,40 +2,60 @@ import networkx as nx
 import os
 import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
 from scipy import stats
 from constants_and_utils import *
 from generate_personas import *
 from analyze_networks import *
 from scipy.spatial import distance
 import scipy.special
+import json
+import pandas as pd
+import plotting
+from ast import literal_eval
 
-def create_moreno_graphs_girls():
-    fn = PATH_TO_FOLDER + '/real_networks/moreno_vdb/out.moreno_vdb_vdb'
-    graphs = {}
+
+# def create_moreno_graphs_girls():
+#     fn = PATH_TO_FOLDER + '/real_networks/moreno_vdb/out.moreno_vdb_vdb'
+#     graphs = {}
+#
+#     with open(fn, 'r') as f:
+#         edges = f.readlines()
+#         for edge in edges:
+#             data = edge.split(' ')
+#             if (data[0] != '%'):
+#                 if (graphs.get(data[3]) == None):
+#                     graphs[data[3]] = nx.DiGraph()
+#                 (graphs[data[3]]).add_weighted_edges_from([(data[0], data[1], data[2])])
+#
+#     return graphs
     
-    with open(fn, 'r') as f:
-        edges = f.readlines()
-        for edge in edges:
-            data = edge.split(' ')
-            if (data[0] != '%'):
-                if (graphs.get(data[3]) == None):
-                    graphs[data[3]] = nx.DiGraph()
-                (graphs[data[3]]).add_weighted_edges_from([(data[0], data[1], data[2])])
-        
-    return graphs
-    
+# def create_moreno_graphs_boys():
+#     fn = PATH_TO_FOLDER + '/real_networks/moreno_highschool/out.moreno_highschool_highschool'
+#     graphs = {}
+#     graphs['moreno boys graph'] = nx.DiGraph()
+#
+#     with open(fn, 'r') as f:
+#         edges = f.readlines()
+#         for edge in edges:
+#             data = edge.split(' ')
+#             if (data[0] != '%'):
+#                 graphs['moreno boys graph'].add_weighted_edges_from([(data[0], data[1], data[2])])
+#
+#     return graphs
+
 def create_moreno_graphs_boys():
     fn = PATH_TO_FOLDER + '/real_networks/moreno_highschool/out.moreno_highschool_highschool'
     graphs = {}
     graphs['moreno boys graph'] = nx.DiGraph()
-    
+
     with open(fn, 'r') as f:
         edges = f.readlines()
         for edge in edges:
             data = edge.split(' ')
             if (data[0] != '%'):
-                graphs['moreno boys graph'].add_weighted_edges_from([(data[0], data[1], data[2])])
-    
+                graphs['moreno boys graph'].add_edges_from([(data[0], data[1])])
+
     return graphs
     
 def create_hitech_graphs():
@@ -83,7 +103,7 @@ def create_tailor_graphs():
     
     with open(fn, 'r') as f:
         content = f.readlines()[0]
-        networks = ['KAPFTS1', 'KAPFTS2', 'KAPFTI1', 'KAPFTI2', '</MetaNetwork>']
+        networks = ['KAPFTS1', 'KAPFTS2'] # , 'KAPFTI1', 'KAPFTI2', '</MetaNetwork>']
         start = 0
         i = 0
         while (i < len(networks) - 1):
@@ -110,21 +130,21 @@ def create_tailor_graphs():
             
     return graphs
     
-def create_sawmill_graphs():
-    fn = PATH_TO_FOLDER + '/real_networks/sawmill/Sawmill.net'
-    graphs = {}
-    graphs['sawmill graph'] = nx.DiGraph()
-    
-    with open(fn, 'r') as f:
-        edges = f.readlines()
-        for edge in edges[39:101]:
-            u1, u2 = edge[6:].split('  ', 1)
-            u1 = u1.strip()
-            u2 = u2.strip()
-            u2 = u2.split(' ')[0]
-            graphs['sawmill graph'].add_edges_from([(u1, u2)])
-            
-    return graphs
+# def create_sawmill_graphs():
+#     fn = PATH_TO_FOLDER + '/real_networks/sawmill/Sawmill.net'
+#     graphs = {}
+#     graphs['sawmill graph'] = nx.DiGraph()
+#
+#     with open(fn, 'r') as f:
+#         edges = f.readlines()
+#         for edge in edges[39:101]:
+#             u1, u2 = edge[6:].split('  ', 1)
+#             u1 = u1.strip()
+#             u2 = u2.strip()
+#             u2 = u2.split(' ')[0]
+#             graphs['sawmill graph'].add_edges_from([(u1, u2)])
+#
+#     return graphs
     
 def create_attiro_graphs():
     fn = PATH_TO_FOLDER + '/real_networks/attiro.xml'
@@ -149,34 +169,34 @@ def create_attiro_graphs():
             
     return graphs
     
-def create_bktec_graphs():
-    fn = PATH_TO_FOLDER + '/real_networks/bktec.xml'
-    graphs = {}
-    
-    with open(fn, 'r') as f:
-        content = f.readlines()[0]
-        networks = ['BKTECB', 'BKTECC']
-        start = 0
-        graphs[networks[0]] = nx.DiGraph()
-        start = content.find(networks[0])
-            
-        while (start < content.find(networks[1])):
-            start = content.find("link", start) + 1
-            if (start == 0):
-                break
-            src_str = content.find("source", start)
-            tgt_str = content.find("target", start)
-            typ_str = content.find("type", start)
-            value_str = content.find("value", start)
-            end_str = content.find("/>", start)
-            
-            src = content[src_str:tgt_str].split('"')[1]
-            tgt = content[tgt_str:typ_str].split('"')[1]
-                
-            if ((content[value_str:end_str].split('"')[1] != "1")):
-                graphs[networks[0]].add_edges_from([(src, tgt)])
-            
-    return graphs
+# def create_bktec_graphs():
+#     fn = PATH_TO_FOLDER + '/real_networks/bktec.xml'
+#     graphs = {}
+#
+#     with open(fn, 'r') as f:
+#         content = f.readlines()[0]
+#         networks = ['BKTECB', 'BKTECC']
+#         start = 0
+#         graphs[networks[0]] = nx.DiGraph()
+#         start = content.find(networks[0])
+#
+#         while (start < content.find(networks[1])):
+#             start = content.find("link", start) + 1
+#             if (start == 0):
+#                 break
+#             src_str = content.find("source", start)
+#             tgt_str = content.find("target", start)
+#             typ_str = content.find("type", start)
+#             value_str = content.find("value", start)
+#             end_str = content.find("/>", start)
+#
+#             src = content[src_str:tgt_str].split('"')[1]
+#             tgt = content[tgt_str:typ_str].split('"')[1]
+#
+#             if ((content[value_str:end_str].split('"')[1] != "1")):
+#                 graphs[networks[0]].add_edges_from([(src, tgt)])
+#
+#     return graphs
     
 def create_dining_graphs():
     fn = PATH_TO_FOLDER + '/real_networks/dining 2.xml'
@@ -258,35 +278,35 @@ def create_sanjuan_graphs():
     
     return graphs
     
-def create_mexico_graphs():
-    fn = PATH_TO_FOLDER + '/real_networks/mexican_power.paj'
-    graphs = {}
-    graphs['mexico graph'] = nx.DiGraph()
+# def create_mexico_graphs():
+#     fn = PATH_TO_FOLDER + '/real_networks/mexican_power.paj'
+#     graphs = {}
+#     graphs['mexico graph'] = nx.DiGraph()
+#
+#     with open(fn, 'r') as f:
+#         edges = f.readlines()
+#         for edge in edges[39:156]:
+#             u1, u2 = edge[5:].split('  ', 1)
+#             u1 = u1.strip()
+#             u2 = u2.strip()
+#             u2 = u2.split(' ')[0]
+#             graphs['mexico graph'].add_edges_from([(u1, u2)])
+#
+#     return graphs
     
-    with open(fn, 'r') as f:
-        edges = f.readlines()
-        for edge in edges[39:156]:
-            u1, u2 = edge[5:].split('  ', 1)
-            u1 = u1.strip()
-            u2 = u2.strip()
-            u2 = u2.split(' ')[0]
-            graphs['mexico graph'].add_edges_from([(u1, u2)])
-
-    return graphs
-    
-def create_southern_graphs():
-    fn = PATH_TO_FOLDER + '/real_networks/opsahl-southernwomen/out.opsahl-southernwomen'
-    graphs = {}
-    graphs['southern graph'] = nx.DiGraph()
-    
-    with open(fn, 'r') as f:
-        edges = f.readlines()
-        for edge in edges:
-            data = edge.split(' ')
-            if (data[0] != '%'):
-                graphs['southern graph'].add_edges_from([(data[0], data[1])])
-    
-    return graphs
+# def create_southern_graphs():
+#     fn = PATH_TO_FOLDER + '/real_networks/opsahl-southernwomen/out.opsahl-southernwomen'
+#     graphs = {}
+#     graphs['southern graph'] = nx.DiGraph()
+#
+#     with open(fn, 'r') as f:
+#         edges = f.readlines()
+#         for edge in edges:
+#             data = edge.split(' ')
+#             if (data[0] != '%'):
+#                 graphs['southern graph'].add_edges_from([(data[0], data[1])])
+#
+#     return graphs
     
 def create_taro_graphs():
     fn = PATH_TO_FOLDER + '/real_networks/moreno_taro/out.moreno_taro_taro'
@@ -322,37 +342,37 @@ def create_karate_graphs():
     
     return graphs
     
-def create_jazz_graphs():
-    fn = PATH_TO_FOLDER + '/real_networks/jazz.net'
-    graphs = {}
-    graphs['jazz graph'] = nx.DiGraph()
+# def create_jazz_graphs():
+#     fn = PATH_TO_FOLDER + '/real_networks/jazz.net'
+#     graphs = {}
+#     graphs['jazz graph'] = nx.DiGraph()
+#
+#     with open(fn, 'r') as f:
+#         edges = f.readlines()
+#         for edge in edges[3:5487]:
+#             u1, u2 = edge[5:].split('  ', 1)
+#             u1 = u1.strip()
+#             u2 = u2.strip()
+#             u2 = u2.split(' ')[0]
+#             graphs['jazz graph'].add_edges_from([(u1, u2)])
+#
+#     return graphs
     
-    with open(fn, 'r') as f:
-        edges = f.readlines()
-        for edge in edges[3:5487]:
-            u1, u2 = edge[5:].split('  ', 1)
-            u1 = u1.strip()
-            u2 = u2.strip()
-            u2 = u2.split(' ')[0]
-            graphs['jazz graph'].add_edges_from([(u1, u2)])
-    
-    return graphs
-    
-def create_email_graphs():
-    fn = PATH_TO_FOLDER + '/real_networks/email 2.txt'
-    graphs = {}
-    graphs['email graph'] = nx.DiGraph()
-    
-    with open(fn, 'r') as f:
-        edges = f.readlines()
-        for edge in edges:
-            u1, u2 = edge.split(' ', 1)
-            u1 = u1.strip()
-            u2 = u2.strip()
-            u2 = u2.split(' ')[0]
-            graphs['email graph'].add_edges_from([(u1, u2)])
-    
-    return graphs
+# def create_email_graphs():
+#     fn = PATH_TO_FOLDER + '/real_networks/email 2.txt'
+#     graphs = {}
+#     graphs['email graph'] = nx.DiGraph()
+#
+#     with open(fn, 'r') as f:
+#         edges = f.readlines()
+#         for edge in edges:
+#             u1, u2 = edge.split(' ', 1)
+#             u1 = u1.strip()
+#             u2 = u2.strip()
+#             u2 = u2.split(' ')[0]
+#             graphs['email graph'].add_edges_from([(u1, u2)])
+#
+#     return graphs
     
 #def summarize_network_metrics(list_of_G, funcs, func_labels):
 #    print('SUMMARIZING NETWORK METRICS')
@@ -538,13 +558,89 @@ def compare_graph_lists(list1, list2, funcs, func_labels, method = 'Jensen-Shann
     plt.legend()
     plt.show()
 
+
+def get_divs(df_one, df_two, divs, names, metrics, metric, name):
+
+    num_bins = (int(np.sqrt(len(df_one))) + int(np.sqrt(len(df_one)))) // 2
+
+    for i in range(len(df_one)):
+        for j in range(0, len(df_two)):
+            values_1 = df_one.iloc[i]['metric_value']
+            values_2 = df_two.iloc[j]['metric_value']
+
+            # find max
+            max_val = max(max(values_1), max(values_2))
+            min_val = min(min(values_1), min(values_2))
+
+            # create bins
+            bins = np.linspace(min_val, max_val, num_bins)
+
+            # create histograms
+            hist_1, _ = np.histogram(values_1, bins)
+            hist_2, _ = np.histogram(values_2, bins)
+
+            # calculate jensen-shannon divergence
+            divs.append(distance.jensenshannon(hist_1, hist_2))
+            metrics.append(metric)
+            names.append(f'{name}')
+
+    return divs, metrics, names
+
+
+def compare_networks(list_of_names=['real', 'llm_as_agent']):
+    # load stats/{name}_network_metrics.json and join for all names
+    dfs = []
+    for name in list_of_names:
+        with open('stats/' + name + '_network_metrics.csv', 'r') as f:
+            dfs.append(pd.read_csv(f, index_col=0))
+
+    # create one df from dfs
+    data = pd.concat(dfs, axis=0)
+    print(data)
+
+    data.to_csv('stats/compare_networks.csv')
+    plotting.plot_comparison(data, 'all')
+
+    divs = []
+    names = []
+    metrics = []
+
+    for node_metric in ['degree_centrality', 'betweenness_centrality', 'closeness_centrality']:
+
+
+        # within real networks
+        only_real = data[data['save_name'] == 'real']
+        real_metric = only_real[only_real['metric_name'] == node_metric]
+        real_metric['metric_value'] = real_metric['metric_value'].apply(literal_eval)
+
+        divs, metris, names = get_divs(real_metric, real_metric, divs, names, metrics, node_metric, f'inter-{list_of_names[0]}')
+
+        # within generated networks
+        only_generated = data[data['save_name'] == 'llm_as_agent']
+        generated_metric = only_generated[only_generated['metric_name'] == node_metric]
+        generated_metric['metric_value'] = generated_metric['metric_value'].apply(literal_eval)
+
+        divs, metrics, names = get_divs(generated_metric, generated_metric, divs, names, metrics, node_metric, f'inter-{list_of_names[1]}')
+
+        # between real and generated
+        divs, metrics, names = get_divs(real_metric, generated_metric, divs, names, metrics, node_metric, f'{list_of_names[0]}-{list_of_names[1]}')
+
+        # plot
+    divs_df = pd.DataFrame({'divs': divs, 'name': names, 'metric_name': metrics})
+    plotting.plot_divs(cross_metrics_df=divs_df)
+    print(divs_df.head())
+
+
+
+
+
 if __name__ == '__main__':
     graph_dict = {}
-    graph_dict.update(create_mexico_graphs())
+    # graph_dict.update(create_mexico_graphs())
     # graph_dict.update(create_jazz_graphs())
     graph_dict.update(create_taro_graphs())
-    graph_dict.update(create_bktec_graphs())
-    graph_dict.update(create_email_graphs())
+    # graph_dict.update(create_bktec_graphs())
+    # graph_dict.update(create_email_graphs())
     graph_dict.update(create_pilot_graphs())
     graph_dict.update(create_attiro_graphs())
     graph_dict.update(create_dining_graphs())
@@ -553,8 +649,8 @@ if __name__ == '__main__':
     graph_dict.update(create_prison_graphs())
     graph_dict.update(create_tailor_graphs())
     graph_dict.update(create_sanjuan_graphs())
-    graph_dict.update(create_sawmill_graphs())
-    graph_dict.update(create_southern_graphs())
+    # graph_dict.update(create_sawmill_graphs())
+    # graph_dict.update(create_southern_graphs())
     graph_dict.update(create_galesburg_graphs())
     # graph_dict.update(create_moreno_graphs_girls())
     graph_dict.update(create_moreno_graphs_boys())
@@ -562,29 +658,29 @@ if __name__ == '__main__':
 #    for key in graph_dict.keys():
 #        print(key, graph_dict[key])
         
-    list_of_G = list(graph_dict.values())
+    list_of_G_real_networks = list(graph_dict.values())
+
+    summarize_network_metrics(list_of_G_real_networks, None, None, save_name="real", demos=False)
     
-    test_G = load_list_of_graphs('llm-as-agent', 0, 30)
-#    get_edge_summary(test_G)
+    list_of_G_llm_as_agent = load_list_of_graphs('llm-as-agent', 0, 30)
     fn = os.path.join(PATH_TO_TEXT_FILES, 'programmatic_personas.txt')
     personas, demo_keys = load_personas_as_dict(fn, verbose=False)
+
+    summarize_network_metrics(list_of_G_llm_as_agent, personas, demo_keys, save_name="llm_as_agent")
+
+    compare_networks()
+
+
+
+
     
-#    get_edge_summary(list_of_G)
-#    fn = os.path.join(PATH_TO_TEXT_FILES, 'programmatic_personas.txt')
-#    personas, demo_keys = load_personas_as_dict(fn, verbose=False)
-    funcs = [nx.density, nx.average_clustering, prop_nodes_in_giant_component, nx.radius, nx.diameter, nx.degree_centrality, nx.betweenness_centrality, nx.closeness_centrality, nx.triangles]
-    func_labels = ['density', 'clustering coef', 'prop nodes in LCC', 'radius',
-    'diameter', 'degree cent.', 'betweenness cent.', 'closeness cent.', 'triangle part.']
-    demo_keys = []
-    summarize_network_metrics(list_of_G, personas, demo_keys, funcs, func_labels, demos=False)
-    
-    print("--------CROSS COMPARISON--------")
-    funcs = [nx.density, nx.average_clustering, prop_nodes_in_giant_component, nx.degree_centrality, nx.betweenness_centrality, nx.closeness_centrality, nx.triangles]
-    func_labels = ['density', 'clustering coef', 'prop nodes in LCC', 'degree cent.', 'betweenness cent.', 'closeness cent.', 'triangle part.']
-    compare_graph_lists(list_of_G, test_G, funcs, func_labels, method='Jensen-Shannon')
-#    print("--------WITHIN REAL NETWORKS--------")
-#    compare_graph_lists_jss(list_of_G, list_of_G, funcs, func_labels)
-#    print("--------WITHIN GENERATED GRAPHS--------")
-#    compare_graph_lists_jss(test_G, test_G, funcs, func_labels)
-#    summarize_network_metrics(list_of_G, funcs, func_labels)
-#    summarize_network_metrics(test_G, funcs, func_labels)
+#     print("--------CROSS COMPARISON--------")
+#     funcs = [nx.density, nx.average_clustering, prop_nodes_in_giant_component, nx.degree_centrality, nx.betweenness_centrality, nx.closeness_centrality, nx.triangles]
+#     func_labels = ['density', 'clustering coef', 'prop nodes in LCC', 'degree cent.', 'betweenness cent.', 'closeness cent.', 'triangle part.']
+#     compare_graph_lists(list_of_G, test_G, funcs, func_labels, method='Jensen-Shannon')
+# #    print("--------WITHIN REAL NETWORKS--------")
+# #    compare_graph_lists_jss(list_of_G, list_of_G, funcs, func_labels)
+# #    print("--------WITHIN GENERATED GRAPHS--------")
+# #    compare_graph_lists_jss(test_G, test_G, funcs, func_labels)
+# #    summarize_network_metrics(list_of_G, funcs, func_labels)
+# #    summarize_network_metrics(test_G, funcs, func_labels)

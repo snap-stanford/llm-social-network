@@ -3,8 +3,11 @@ import networkx as nx
 import numpy as np
 import os
 import seaborn as sns
+import matplotlib.ticker as ticker
 
 from constants_and_utils import *
+
+sns.set_theme()
 
 def plot_homophily(homophily_metrics_df, save_name):
 
@@ -22,12 +25,69 @@ def plot_homophily(homophily_metrics_df, save_name):
     plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}_homophily_bar.png'))
     plt.close()
 
+def plot_divs(cross_metrics_df):
+
+
+
+    for metric_name in  ['degree_centrality', 'betweenness_centrality', 'closeness_centrality']:
+        plt.figure(figsize=(12, 6))
+    # Create the boxplot
+        df = cross_metrics_df[cross_metrics_df['metric_name'].isin([metric_name])]
+
+        #set metric value type to float with and set 0.01 precision
+        df['divs'] = df['divs'].astype(float).round(2)
+        sns.boxplot(x='metric_name', y='divs', hue='name', data=df, palette="Set3")
+
+        # Add stripplot on top of the boxplot to show individual points, no legend
+        sns.stripplot(x='metric_name', y='divs', hue='name', data=df,
+                      jitter=True, dodge=True, linewidth=1, palette="Set3", legend=False)
+
+        # Adjust the y-axis
+        ax = plt.gca()
+
+        ax.yaxis.set_major_locator(ticker.LinearLocator(numticks=10))
+
+        plt.legend(title=f'Networks')
+        plt.ylabel('JSD')
+        plt.xlabel('Metric')
+
+        plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'cross_network_{metric_name}.png'))
+        plt.close()
+
+
+def plot_comparison(network_metrics_df, save_name):
+
+    for metric_name in ['density', 'avg_clustering_coef', 'prop_nodes_lcc', 'radius', 'diameter']:
+    # Create the boxplot
+        df = network_metrics_df[network_metrics_df['metric_name'].isin([metric_name])]
+
+        # modify df to 0.01 precision
+        # print data tyopes for columns in df
+        print(df.dtypes)
+        #set metric value type to float with and set 0.01 precision
+        df['metric_value'] = df['metric_value'].astype(float).round(2)
+        sns.boxplot(x='metric_name', y='metric_value', hue='save_name', data=df, palette="Set3")
+
+        # Add stripplot on top of the boxplot to show individual points, no legend
+        sns.stripplot(x='metric_name', y='metric_value', hue='save_name', data=df,
+                      jitter=True, dodge=True, linewidth=1, palette="Set3", legend=False)
+
+        # Adjust the y-axis
+        ax = plt.gca()
+
+        ax.yaxis.set_major_locator(ticker.LinearLocator(numticks=10))
+
+        plt.legend(title=f'Network')
+
+        plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}_network_{metric_name}.png'))
+        plt.close()
+
 
 def plot_network_metrics(network_metrics_df, save_name):
 
     # plot ['density', 'avg_clustering_coef', 'prop_nodes_lcc'] as bars on one plot
     sns.barplot(x='metric_name', y='metric_value',
-                data=network_metrics_df[network_metrics_df['metric_name'].isin(['density', 'avg_clustering_coef', 'prop_nodes_lcc'])])
+                data=network_metrics_df[network_metrics_df['metric_name'].isin(['density', 'avg_clustering_coef', 'prop_nodes_lcc'])], hue='save_name')
     plt.xlabel('Network Metric')
     plt.ylabel('Value')
     plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}_network_metrics_bar.png'))
