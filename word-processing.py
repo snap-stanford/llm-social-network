@@ -23,7 +23,7 @@ def count_words_in_interests(interests, lower=True):
     return word_counts
 
 
-def get_log_odds(file1, file2, file0, verbose=False, lower=True):
+def get_log_odds(file1, file2, verbose=False, lower=True):
     interests1 = read_interests_from_file(file1)
     interests2 = read_interests_from_file(file2)
 
