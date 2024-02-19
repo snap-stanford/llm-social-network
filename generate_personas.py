@@ -73,20 +73,20 @@ def load_personas_as_dict(fn, verbose=True):
                 if verbose:
                     print(f'Warning: found duplicate of {name} with different demographics')
         else:
-            demo_vals = demos.split(', ')
-            if len(demo_vals) != len(demo_keys):  # check that all demographics are present
-                if verbose:
-                    print(f'Warning: incomplete demographics for {name}')
-            else:
-                valid_values = True
-                # check if demographic values are valid
-                for d, v in zip(demo_keys, demo_vals):
-                    if d != 'age' and d != 'interests' and v not in DEMO_DESCRIPTIONS[d]:
-                        valid_values = False
-                        if verbose:
-                            print(f'Warning: invalid demographic value for {name}, {d}={v}')
-                if valid_values:  # passed all checks
-                    personas[name] = demo_vals
+            demo_vals = demos.split(', ', len(demo_keys)-1)
+#            if len(demo_vals) != len(demo_keys):  # check that all demographics are present
+#                if verbose:
+#                    print(f'Warning: incomplete demographics for {name}')
+#            else:
+            valid_values = True
+            # check if demographic values are valid
+            for d, v in zip(demo_keys, demo_vals):
+                if d != 'age' and d != 'interests' and v not in DEMO_DESCRIPTIONS[d]:
+                    valid_values = False
+                    if verbose:
+                        print(f'Warning: invalid demographic value for {name}, {d}={v}')
+            if valid_values:  # passed all checks
+                personas[name] = demo_vals
     print(f'Loaded {len(personas)} distinct personas with demo keys', demo_keys)
     return personas, demo_keys
 
@@ -382,6 +382,31 @@ def generate_interests(personas):
         personas[name] = demos
     
     return personas
+    
+def generate_interest_list(race, gender, num_interests=500, output_file='generated_interests.txt', temp=1.0):
+    generated_interests = []
+    
+    for i in range(num_interests):
+        prompt = (
+            f"Complete the interest category for this persona, giving them a unique interest or hobby in one sentence\n"
+            f"For example: 'Reading historical fiction novels' or 'Participating in online activism'\n{{\n"
+            f"  race: '{race}',\n"
+            f"  gender: '{gender}',\n"
+            "  interests: "
+        )
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=[{"role": "system", "content": prompt}],
+            temperature=temp
+        )
+        
+        interest = extract_gpt_output(response)
+        
+        generated_interests.append(interest)
+
+    with open(output_file, 'w') as file:
+        for interest in generated_interests:
+            file.write(f"{interest}\n")
 
 def generate_names(k, race, gender):
     prompt = f"Generate {k} different full names for people that are {race} and {gender}"
@@ -438,7 +463,7 @@ if __name__ == '__main__':
     generate_personas(n, demos_to_include, save_response=True)
     fn = os.path.join(PATH_TO_TEXT_FILES, f'personas_{n}.txt')
     print(load_personas_as_dict(fn))
-    
+
     # generate personas programmatically
     i = 1
     while (i <= n):
@@ -448,3 +473,4 @@ if __name__ == '__main__':
         with open(fn, 'a') as f:
             f.write(format_person(person, i))
         i += 1
+
