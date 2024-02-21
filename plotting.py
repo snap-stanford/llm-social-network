@@ -25,17 +25,16 @@ def plot_homophily(homophily_metrics_df, save_name):
     plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}_homophily_bar.png'))
     plt.close()
 
-def plot_divs(cross_metrics_df):
-
-
+def plot_divs(cross_metrics_df, save_name):
 
     for metric_name in  ['degree_centrality', 'betweenness_centrality', 'closeness_centrality']:
         plt.figure(figsize=(12, 6))
-    # Create the boxplot
+
+        # Create the boxplot
         df = cross_metrics_df[cross_metrics_df['metric_name'].isin([metric_name])]
 
         #set metric value type to float with and set 0.01 precision
-        df['divs'] = df['divs'].astype(float).round(2)
+        df.loc[:, 'divs'] = df['divs'].astype(float).round(2)
         sns.boxplot(x='metric_name', y='divs', hue='name', data=df, palette="Set3")
 
         # Add stripplot on top of the boxplot to show individual points, no legend
@@ -51,7 +50,7 @@ def plot_divs(cross_metrics_df):
         plt.ylabel('JSD')
         plt.xlabel('Metric')
 
-        plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'cross_network_{metric_name}.png'))
+        plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'cross_network_{save_name}_{metric_name}.png'))
         plt.close()
 
 
@@ -65,7 +64,7 @@ def plot_comparison(network_metrics_df, save_name):
         # print data tyopes for columns in df
         print(df.dtypes)
         #set metric value type to float with and set 0.01 precision
-        df['metric_value'] = df['metric_value'].astype(float).round(2)
+        df.loc[:, 'metric_value'] = df['metric_value'].astype(float).round(2)
         sns.boxplot(x='metric_name', y='metric_value', hue='save_name', data=df, palette="Set3")
 
         # Add stripplot on top of the boxplot to show individual points, no legend
@@ -80,6 +79,13 @@ def plot_comparison(network_metrics_df, save_name):
         plt.legend(title=f'Network')
 
         plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}_network_{metric_name}.png'))
+        plt.close()
+
+        # now just bar plots
+        sns.barplot(x='metric_name', y='metric_value', data=df, hue='save_name')
+        plt.xlabel('Network Metric')
+        plt.ylabel('Value')
+        plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}_network_{metric_name}_bar.png'))
         plt.close()
 
 

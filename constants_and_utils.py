@@ -11,7 +11,7 @@ PATH_TO_SAVED_PLOTS = PATH_TO_FOLDER + '/plots'  # folder holding plots, eg, net
 PATH_TO_STATS_FILES = PATH_TO_FOLDER + '/stats'  # folder holding stats files, eg, proportion of nodes in giant component
 DEFAULT_TEMPERATURE = 0.8
 SHOW_PLOTS = False
-openai.api_key = os.getenv("OPENAI_API_KEY")
+OPEN_API_KEY = os.getenv("OPENAI_API_KEY")
 
 def draw_and_save_network_plot(G, save_prefix):
     """
@@ -40,10 +40,10 @@ def extract_gpt_output(response):
     Extract output message from GPT, check for finish reason.
     """
     response = response.choices[0]
-    finish_reason = response['finish_reason']
+    finish_reason = response.finish_reason
     if finish_reason != 'stop':
         raise Exception(f'Response stopped for reason {finish_reason}')
-    return response['message']['content']
+    return response.message.content
 
 def get_node_from_string(s):
     """

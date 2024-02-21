@@ -1,25 +1,56 @@
-This project builds a pipeline for generating a social network using ChatGPT. It contains one program to generate personas, three programs to generate a social network based on those personas by calling the GPT API, and two programs to analyze those networks and compare them against real-world networks. 
+# Zero-shot Social Network Generation
 
-all-at-once.py: generates and saves a social network by prompting GPT with all personas at once. Takes four optional arguments from the command line:
-1. persona_fn: name of text file containing list of personas in the network (default: programmatic_personas.txt)
-2. save_prefix: prefix of name of adjacency list file where generated network will be saved (default: '')
-3. num_networks: number of networks to generate (default: 30)
-4. demos_to_include: demographic values to include, as a list (default: all)
+## Generate personas
 
-analyze_networks.py: analyzes a list of networks by homophily and other network metrics. Takes three required arguments:
-1. persona_fn: name of text file containing list of personas in the network
-2. network_fn: prefix of name of adjacency list files where generated netowrks are saved
-3. num_networks: number of networks to analyze
+To generate a list of 50 personas programmatically (no generation) and save it to a file called us_50.json, run the following command.
+This does *not* include names nor interests.
 
-constants_and_utils.py: useful functions
+```python generate_personas.py --number_of_people 50  --generating_method us --file_name us_50.json```
 
-generate_personas.py: generates a list of personas programmatically and with GPT
+If you would like to generate names and/or interests (based on demographics):
 
-llm-as-agent.py: generates and saves a social network by feeding one person at a time into GPT, growing the network iteratively. Takes the four optional arguments from all-at-once.py, in addition to a fifth optional argument
-5. perspective: perspective (first, second, third) which GPT will be prompted with (default = second)
+```python generate_personas.py --number_of_people 50  --generating_method us --file_name us_50.json --include_names --include_interests --model gpt-3.5-turbo```
 
-network_datasets.py: scrapes metrics from 16 real-world networks and compares them to a list of generated networks of our choice
+The resulting files will be: `us_50.json`, `us_50_with_names.json`, and `us_50_with_names_and_interests.json`
 
-one-by-one.py: generates and saves a social network by prompting GPT with one individual persona at a time. Takes the same five optional arguments as llm-as-agent.py. 
 
-` python analyze_networks.py --network_fn llm-as-agent --num_networks 30 --save_name llm-as-agent`
+## LLM as Agent
+
+### Prompt
+You are name Maggie-Franklin gender Woman, race/ethnicity White, age 46, religion Protestant, political affiliation Democrat. Which of the following people would you become friends with?
+
+name Sunita-Patel gender Woman, race/ethnicity Asian, age 41, religion Hindu, political affiliation Independent 
+
+name Jennifer-Davis gender Woman, race/ethnicity White, age 35, religion Protestant, political affiliation Republican 
+
+[...]
+
+### Generation
+
+``` python llm-as-agent.py --persona_fn us_50_with_names_with_interests.json --save_prefix llm-as-agent-us-50 --num_networks 10 --perspective second --model gpt-3.5-turbo ```
+
+By default, ['gender', 'race/ethnicity', 'age', 'religion', 'political affiliation'] are included (and name if in the file, otherwise just person number)
+
+If you want to include interests or other demographics, you can specify them with the `--demos_to_include` argument. For example, to include interests run
+
+``` python llm-as-agent.py --persona_fn us_50_with_names_with_interests.json --save_prefix llm-as-agent-us-50 --num_networks 10 --perspective second --model gpt-3.5-turbo --demos_to_include 'gender' 'race/ethnicity' 'age' 'religion' 'political affiliation' 'interests' ```
+
+## All at Once
+
+### Prompt
+Create a realistic social network between the following list of 50 people. Provide a list of friendship pairs in the format ('Sophiaaa Rodriguez', 'Eleanor Harriss'). Do not include any other text in your response. Do not include any people who are not listed below.
+
+name Antonio-Rodriguez gender Man, race/ethnicity Latino, age 29, religion Catholic, political affiliation Republican
+
+name Jasmine-Thompson gender Woman, race/ethnicity Black, age 26, religion Protestant, political affiliation Democrat
+
+[...]
+
+### Generation
+
+``` python all-at-once.py --persona_fn us_50_with_names_with_interests.json --save_prefix all-at-once-us-50 --num_networks 10 --model gpt-3.5-turbo ```
+
+
+## One by One
+
+... (to be added)

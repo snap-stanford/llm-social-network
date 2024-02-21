@@ -2,11 +2,13 @@ import networkx as nx
 import os
 import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
+import json
+import seaborn as sns
+
+import plotting
 from constants_and_utils import *
 from generate_personas import *
-import pandas as pd
-import seaborn as sns
-import plotting
 
 def load_list_of_graphs(prefix, start_seed, end_seed, directed=True):
     """
@@ -108,16 +110,14 @@ def _compute_cross_proportions(G, personas, demo_keys):
     # count cross-relationships in graph
     crs = np.zeros(len(demo_keys))
     for source, target in G.edges():
-        demo1 = personas[source.replace('-', ' ')]
-        assert len(demo1) == len(demo_keys)
-        demo2 = personas[target.replace('-', ' ')]
-        assert len(demo2) == len(demo_keys)
-        for d, k in enumerate(demo_keys):
-            if k == 'age':  # take absolute difference for age
-                crs[d] += abs(int(demo1[d]) - int(demo2[d]))
+        demo1 = personas[source]
+        demo2 = personas[target]
+        for ind, d in enumerate(demo_keys):
+            if d == 'age':  # take absolute difference for age
+                crs[ind] += abs(int(demo1[d]) - int(demo2[d]))
             else:
                 if demo1[d] != demo2[d]:
-                    crs[d] += 1
+                    crs[ind] += 1
     props = crs / len(G.edges())  # get proportion of edges
     return props
 
@@ -200,10 +200,10 @@ def parse():
     parser = argparse.ArgumentParser(description='Process command line arguments.')
     
     # Add arguments
-    parser.add_argument('--persona_fn', type=str, default='programmatic_personas.txt')
+    parser.add_argument('--persona_fn', type=str, default='us_50_with_names_with_interests.json', help='What is the name of the persona file you want to use?')
     parser.add_argument('--network_fn', type=str, help='What is the name of the network file you want to use?')
     parser.add_argument('--num_networks', type=int, help='How many networks are there?')
-    parser.add_argument('--save_name', type=str, default='')
+    parser.add_argument('--demos_to_include', nargs='+', default=['gender', 'race/ethnicity', 'age', 'religion', 'political affiliation'])
 
     # Parse the arguments
     args = parser.parse_args()
@@ -219,8 +219,10 @@ if __name__ == '__main__':
 
     args = parse()
     list_of_G = load_list_of_graphs(args.network_fn, 0, args.num_networks)
-    get_edge_summary(list_of_G, args.save_name)
+    get_edge_summary(list_of_G, args.network_fn)
     fn = os.path.join(PATH_TO_TEXT_FILES, args.persona_fn)
-    personas, demo_keys = load_personas_as_dict(fn, verbose=False)
+    # load from json
+    with open(fn, 'r') as f:
+        personas = json.load(f)
 
-    summarize_network_metrics(list_of_G, personas, demo_keys, save_name=args.network_fn)
+    summarize_network_metrics(list_of_G, personas, args.demos_to_include, save_name=args.network_fn)

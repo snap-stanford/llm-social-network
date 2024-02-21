@@ -4,15 +4,17 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from scipy import stats
-from constants_and_utils import *
-from generate_personas import *
-from analyze_networks import *
 from scipy.spatial import distance
 import scipy.special
 import json
 import pandas as pd
-import plotting
 from ast import literal_eval
+
+import plotting
+from constants_and_utils import *
+from generate_personas import *
+from analyze_networks import *
+
 
 
 # def create_moreno_graphs_girls():
@@ -561,7 +563,7 @@ def create_karate_graphs():
 
 def get_divs(df_one, df_two, divs, names, metrics, metric, name):
 
-    num_bins = (int(np.sqrt(len(df_one))) + int(np.sqrt(len(df_one)))) // 2
+    num_bins = (int(np.sqrt(len(df_one))) + int(np.sqrt(len(df_two)))) // 2
 
     for i in range(len(df_one)):
         for j in range(0, len(df_two)):
@@ -587,8 +589,9 @@ def get_divs(df_one, df_two, divs, names, metrics, metric, name):
     return divs, metrics, names
 
 
-def compare_networks(list_of_names=['real', 'llm_as_agent']):
+def compare_networks(generated_names):
     # load stats/{name}_network_metrics.json and join for all names
+    list_of_names = ['real'] + generated_names
     dfs = []
     for name in list_of_names:
         with open('stats/' + name + '_network_metrics.csv', 'r') as f:
@@ -596,14 +599,27 @@ def compare_networks(list_of_names=['real', 'llm_as_agent']):
 
     # create one df from dfs
     data = pd.concat(dfs, axis=0)
-    print(data)
 
     data.to_csv('stats/compare_networks.csv')
-    plotting.plot_comparison(data, 'all')
+    plotting.plot_comparison(data, '-'.join(list_of_names))
+
+def compare_networks_divs(generated_name):
+
+    list_of_names = ['real', generated_name]
+    dfs = []
+    for name in list_of_names:
+        with open('stats/' + name + '_network_metrics.csv', 'r') as f:
+            dfs.append(pd.read_csv(f, index_col=0))
+
+    # create one df from dfs
+    data = pd.concat(dfs, axis=0)
+
+    list_of_names = ['real', generated_name]
 
     divs = []
     names = []
     metrics = []
+
 
     for node_metric in ['degree_centrality', 'betweenness_centrality', 'closeness_centrality']:
 
@@ -611,14 +627,14 @@ def compare_networks(list_of_names=['real', 'llm_as_agent']):
         # within real networks
         only_real = data[data['save_name'] == 'real']
         real_metric = only_real[only_real['metric_name'] == node_metric]
-        real_metric['metric_value'] = real_metric['metric_value'].apply(literal_eval)
+        real_metric.loc[:, 'metric_value'] = real_metric['metric_value'].apply(literal_eval)
 
         divs, metris, names = get_divs(real_metric, real_metric, divs, names, metrics, node_metric, f'inter-{list_of_names[0]}')
 
         # within generated networks
-        only_generated = data[data['save_name'] == 'llm_as_agent']
+        only_generated = data[data['save_name'] == generated_name]
         generated_metric = only_generated[only_generated['metric_name'] == node_metric]
-        generated_metric['metric_value'] = generated_metric['metric_value'].apply(literal_eval)
+        generated_metric.loc[:, 'metric_value'] = generated_metric['metric_value'].apply(literal_eval)
 
         divs, metrics, names = get_divs(generated_metric, generated_metric, divs, names, metrics, node_metric, f'inter-{list_of_names[1]}')
 
@@ -627,9 +643,8 @@ def compare_networks(list_of_names=['real', 'llm_as_agent']):
 
         # plot
     divs_df = pd.DataFrame({'divs': divs, 'name': names, 'metric_name': metrics})
-    plotting.plot_divs(cross_metrics_df=divs_df)
-    print(divs_df.head())
 
+    plotting.plot_divs(divs_df, '-'.join(list_of_names))
 
 
 
@@ -661,19 +676,22 @@ if __name__ == '__main__':
     list_of_G_real_networks = list(graph_dict.values())
 
     summarize_network_metrics(list_of_G_real_networks, None, None, save_name="real", demos=False)
-    
-    list_of_G_llm_as_agent = load_list_of_graphs('llm-as-agent', 0, 30)
-    fn = os.path.join(PATH_TO_TEXT_FILES, 'programmatic_personas.txt')
-    personas, demo_keys = load_personas_as_dict(fn, verbose=False)
-
-    summarize_network_metrics(list_of_G_llm_as_agent, personas, demo_keys, save_name="llm_as_agent")
-
-    compare_networks()
 
 
+    for generations in ['llm-as-agent-us-50-gpt-3.5-turbo', 'all-at-once-us-50-gpt-3.5-turbo',]:
+        list_of_G_llm = load_list_of_graphs(generations, 0, 10)
+        fn = os.path.join(PATH_TO_TEXT_FILES, 'us_50_with_names_with_interests.json')
+        with open(fn, 'r') as f:
+            personas = json.load(f)
+        demo_keys = ['gender', 'race/ethnicity', 'age', 'religion', 'political affiliation']
+        summarize_network_metrics(list_of_G_llm, personas, demo_keys, save_name=generations)
+        compare_networks_divs(generations)
+
+    compare_networks(['llm-as-agent-us-50-gpt-3.5-turbo', 'all-at-once-us-50-gpt-3.5-turbo'])
 
 
-    
+
+
 #     print("--------CROSS COMPARISON--------")
 #     funcs = [nx.density, nx.average_clustering, prop_nodes_in_giant_component, nx.degree_centrality, nx.betweenness_centrality, nx.closeness_centrality, nx.triangles]
 #     func_labels = ['density', 'clustering coef', 'prop nodes in LCC', 'degree cent.', 'betweenness cent.', 'closeness cent.', 'triangle part.']
