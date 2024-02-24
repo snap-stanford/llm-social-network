@@ -53,4 +53,20 @@ name Jasmine-Thompson gender Woman, race/ethnicity Black, age 26, religion Prote
 
 ## One by One
 
-... (to be added)
+### Prompt
+
+You are person Bethany-Mitchell - gender Woman, race/ethnicity White, age 34, religion Unreligious, political affiliation Republican
+Which of the following people will you become friends with? Provide a list of numbers separated by commas. Do not provide demographics.
+Maggie-Thompson gender Woman, race/ethnicity White, age 75, religion Protestant, political affiliation Republican
+Bethany-Mitchell gender Woman, race/ethnicity White, age 34, religion Unreligious, political affiliation Republican
+[...]
+
+Existing friendships are:
+(Linda-Reynolds, Rebecca-Thompson)
+(Rebecca-Thompson, Luciana-Rodriguez)
+[...]
+
+Example response format: name1, name2, name3
+Your friends:
+
+``` python one_by_one.py --persona_fn us_50_with_names_with_interests.json --save_prefix one-by-one-us-50 --num_networks 10 --model gpt-3.5-turbo ```
