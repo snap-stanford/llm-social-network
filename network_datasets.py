@@ -603,6 +603,29 @@ def compare_networks(generated_names):
     data.to_csv('stats/compare_networks.csv')
     plotting.plot_comparison(data, '-'.join(list_of_names))
 
+def compare_homophily(generated_names, add_literature=False):
+    # load stats/{name}_network_metrics.json and join for all names
+    list_of_names =  generated_names
+
+    dfs = []
+    for name in list_of_names:
+        with open('stats/' + name + '_homophily.csv', 'r') as f:
+            dfs.append(pd.read_csv(f, index_col=0))
+
+    if add_literature:
+        data = pd.DataFrame({'graph_nr': [0, 0, 0, 0, 0],
+                             'demo': ['gender', 'race/ethnicity', 'age', 'religion', 'political affiliation'],
+                             'metric_value': [0.92, 0.434, 0.6, 0.704, 0.536], 'save_name': ['literature']*5})
+
+        dfs.append(data)
+
+    if add_literature:
+        list_of_names.append('literature')
+    data = pd.concat(dfs, axis=0)
+
+    data.to_csv('stats/compare_homophily.csv')
+    plotting.plot_comparison_homophily(data, '-'.join(list_of_names))
+
 def compare_networks_divs(generated_name):
 
     list_of_names = ['real', generated_name]
@@ -688,7 +711,8 @@ if __name__ == '__main__':
         compare_networks_divs(generations)
 
     compare_networks(['llm-as-agent-us-50-gpt-3.5-turbo', 'all-at-once-us-50-gpt-3.5-turbo'])
-
+    compare_homophily(['llm-as-agent-us-50-gpt-3.5-turbo', 'all-at-once-us-50-gpt-3.5-turbo'])
+    compare_homophily(['llm-as-agent-us-50-gpt-3.5-turbo', 'all-at-once-us-50-gpt-3.5-turbo'], add_literature=True)
 
 
 

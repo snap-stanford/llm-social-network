@@ -25,6 +25,22 @@ def plot_homophily(homophily_metrics_df, save_name):
     plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}_homophily_bar.png'))
     plt.close()
 
+def plot_comparison_homophily(homophily_metrics_df, save_name):
+
+    # plot homophily
+    sns.boxplot(x='demo', y='metric_value', data=homophily_metrics_df, hue='save_name', whis=[0, 100])
+    sns.stripplot(x='demo', y='metric_value', data=homophily_metrics_df, hue='save_name', size=4, palette='dark:.3')
+    plt.xlabel('Demographic Category')
+    plt.ylabel('Homophily')
+    plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}_homophily.png'))
+    plt.close()
+
+    sns.barplot(x='demo', y='metric_value', hue='save_name', data=homophily_metrics_df)
+    plt.xlabel('Demographic Category')
+    plt.ylabel('Homophily')
+    plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}_homophily_bar.png'))
+    plt.close()
+
 def plot_divs(cross_metrics_df, save_name):
 
     for metric_name in  ['degree_centrality', 'betweenness_centrality', 'closeness_centrality']:
