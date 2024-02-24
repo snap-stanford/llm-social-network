@@ -104,9 +104,9 @@ if __name__ == '__main__':
 
         test_name = list(personas.keys())[0]
         if test_name.isdigit():
-            pair = (1, 2)
+            pair = f'(number1, number2)'
         else:
-            pair = ('Sophiaaa Rodriguez', 'Eleanor Harriss')
+            pair = f'(name1, name2)'
 
         message = f'Create a realistic social network between the following list of 50 people. Provide a list of friendship pairs in the format {pair}. Do not include any other text in your response. Do not include any people who are not listed below.'
         print(message)

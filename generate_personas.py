@@ -130,7 +130,7 @@ def convert_persona_to_string(name, personas, demos_to_include):
     Generate string for persona, specifying which demographics to include (if any).
     """
 
-    s = f'name {name} '
+    s = f'{name} '
     for d in demos_to_include:
         s += f'{d} {personas[name][d]}, '
 
