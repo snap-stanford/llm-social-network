@@ -105,10 +105,10 @@ def create_tailor_graphs():
     
     with open(fn, 'r') as f:
         content = f.readlines()[0]
-        networks = ['KAPFTS1', 'KAPFTS2'] # , 'KAPFTI1', 'KAPFTI2', '</MetaNetwork>']
+        networks = ['KAPFTS1', 'KAPFTS2', 'KAPFTI1',] # loading only the first two 'KAPFTI2', '</MetaNetwork>']
         start = 0
         i = 0
-        while (i < len(networks) - 1):
+        while (i < len(networks) -1):
             graphs[networks[i]] = nx.DiGraph()
             start = content.find(networks[i])
             
@@ -674,11 +674,7 @@ def compare_networks_divs(generated_name):
 
 if __name__ == '__main__':
     graph_dict = {}
-    # graph_dict.update(create_mexico_graphs())
-    # graph_dict.update(create_jazz_graphs())
     graph_dict.update(create_taro_graphs())
-    # graph_dict.update(create_bktec_graphs())
-    # graph_dict.update(create_email_graphs())
     graph_dict.update(create_pilot_graphs())
     graph_dict.update(create_attiro_graphs())
     graph_dict.update(create_dining_graphs())
@@ -687,16 +683,12 @@ if __name__ == '__main__':
     graph_dict.update(create_prison_graphs())
     graph_dict.update(create_tailor_graphs())
     graph_dict.update(create_sanjuan_graphs())
-    # graph_dict.update(create_sawmill_graphs())
-    # graph_dict.update(create_southern_graphs())
     graph_dict.update(create_galesburg_graphs())
-    # graph_dict.update(create_moreno_graphs_girls())
     graph_dict.update(create_moreno_graphs_boys())
-    
-#    for key in graph_dict.keys():
-#        print(key, graph_dict[key])
+
         
     list_of_G_real_networks = list(graph_dict.values())
+    print("Number of real networks:", len(list_of_G_real_networks))
 
     summarize_network_metrics(list_of_G_real_networks, None, None, save_name="real", demos=False)
 

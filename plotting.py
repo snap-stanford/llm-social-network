@@ -7,41 +7,52 @@ import matplotlib.ticker as ticker
 
 from constants_and_utils import *
 
-sns.set_theme()
-
+# set paper context, font scale 2, white background
+sns.set_theme(context='paper', style='white', palette='pastel', font='sans-serif', font_scale=1.5)
+# set default figure size
+plt.rcParams['figure.figsize'] = [12, 6]
 def plot_homophily(homophily_metrics_df, save_name):
+
+    if not os.path.exists(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}')):
+        os.makedirs(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}'))
 
     # plot homophily
     sns.boxplot(x='demo', y='metric_value', data=homophily_metrics_df, whis=[0, 100])
     sns.stripplot(x='demo', y='metric_value', data=homophily_metrics_df, size=4, color=".3")
     plt.xlabel('Demographic Category')
     plt.ylabel('Homophily')
-    plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}_homophily.png'))
+    plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}/homophily.png'))
     plt.close()
 
     sns.barplot(x='demo', y='metric_value', data=homophily_metrics_df)
     plt.xlabel('Demographic Category')
     plt.ylabel('Homophily')
-    plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}_homophily_bar.png'))
+    plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}/homophily_bar.png'))
     plt.close()
 
 def plot_comparison_homophily(homophily_metrics_df, save_name):
+
+    if not os.path.exists(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}')):
+        os.makedirs(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}'))
 
     # plot homophily
     sns.boxplot(x='demo', y='metric_value', data=homophily_metrics_df, hue='save_name', whis=[0, 100])
     sns.stripplot(x='demo', y='metric_value', data=homophily_metrics_df, hue='save_name', size=4, palette='dark:.3')
     plt.xlabel('Demographic Category')
     plt.ylabel('Homophily')
-    plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}_homophily.png'))
+    plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}/homophily.png'))
     plt.close()
 
     sns.barplot(x='demo', y='metric_value', hue='save_name', data=homophily_metrics_df)
     plt.xlabel('Demographic Category')
     plt.ylabel('Homophily')
-    plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}_homophily_bar.png'))
+    plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}/homophily_bar.png'))
     plt.close()
 
 def plot_divs(cross_metrics_df, save_name):
+
+    if not os.path.exists(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}')):
+        os.makedirs(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}'))
 
     for metric_name in  ['degree_centrality', 'betweenness_centrality', 'closeness_centrality']:
         plt.figure(figsize=(12, 6))
@@ -66,11 +77,14 @@ def plot_divs(cross_metrics_df, save_name):
         plt.ylabel('JSD')
         plt.xlabel('Metric')
 
-        plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'cross_network_{save_name}_{metric_name}.png'))
+        plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}/cross_network_{metric_name}.png'))
         plt.close()
 
 
 def plot_comparison(network_metrics_df, save_name):
+
+    if not os.path.exists(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}')):
+        os.makedirs(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}'))
 
     for metric_name in ['density', 'avg_clustering_coef', 'prop_nodes_lcc', 'radius', 'diameter']:
     # Create the boxplot
@@ -94,25 +108,28 @@ def plot_comparison(network_metrics_df, save_name):
 
         plt.legend(title=f'Network')
 
-        plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}_network_{metric_name}.png'))
+        plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}/network_{metric_name}.png'))
         plt.close()
 
         # now just bar plots
         sns.barplot(x='metric_name', y='metric_value', data=df, hue='save_name')
         plt.xlabel('Network Metric')
         plt.ylabel('Value')
-        plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}_network_{metric_name}_bar.png'))
+        plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}/network_{metric_name}_bar.png'))
         plt.close()
 
 
 def plot_network_metrics(network_metrics_df, save_name):
+
+    if not os.path.exists(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}')):
+        os.makedirs(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}'))
 
     # plot ['density', 'avg_clustering_coef', 'prop_nodes_lcc'] as bars on one plot
     sns.barplot(x='metric_name', y='metric_value',
                 data=network_metrics_df[network_metrics_df['metric_name'].isin(['density', 'avg_clustering_coef', 'prop_nodes_lcc'])], hue='save_name')
     plt.xlabel('Network Metric')
     plt.ylabel('Value')
-    plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}_network_metrics_bar.png'))
+    plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}/network_metrics_bar.png'))
     plt.close()
 
     # plot ['radius', 'diameter'] as bars on one plot
@@ -120,7 +137,7 @@ def plot_network_metrics(network_metrics_df, save_name):
                 data=network_metrics_df[network_metrics_df['metric_name'].isin(['radius', 'diameter'])])
     plt.xlabel('Network Metric')
     plt.ylabel('Value')
-    plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}_network_metrics_bar2.png'))
+    plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}/network_metrics_bar2.png'))
     plt.close()
 
     # plot histograms of centralities over all nodes
@@ -130,37 +147,49 @@ def plot_network_metrics(network_metrics_df, save_name):
         # get all values with metric_name = metric
         metric_df = network_metrics_df[network_metrics_df['metric_name'] == metric]
         values = np.concatenate(metric_df['metric_value'].values).flatten()
-        sns.histplot(x=values.tolist(), bins=30)
+        sns.histplot(x=values.tolist(), bins=30, stat='density')
         plt.xlabel(metric)
-        plt.ylabel('Count')
-        plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}_{metric}_hist.png'))
+        plt.ylabel('Frequency')
+        plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}/{metric}_hist.png'))
         plt.close()
 
 def plot_edges(num_edges, save_name):
+
+    if not os.path.exists(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}')):
+        os.makedirs(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}'))
+
     sns.boxplot(x=num_edges, whis=[0, 100], palette='pastel')
     sns.stripplot(x=num_edges, size=4, color=".3")
     plt.xlabel('Num edges')
     if SHOW_PLOTS:
         plt.show()
-    plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}_num_edges.png'))
+    plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}/num_edges.png'))
     plt.close()
 
 def plot_edge_dist(all_real_d, save_name):
+
+    if not os.path.exists(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}')):
+        os.makedirs(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}'))
+
     sns.histplot(all_real_d, bins=30)
     plt.xlabel('Edge distance')
     plt.ylabel('Num graph pairs')
     if SHOW_PLOTS:
         plt.show()
-    plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}_edge_distance.png'))
+    plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}/edge_distance.png'))
     plt.close()
 
 
 def plot_props(props, edges, save_name):
+
+    if not os.path.exists(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}')):
+        os.makedirs(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}'))
+
     sns.histplot(props, bins=30)
     plt.xlabel('Prop of networks where edge appeared')
     plt.ylabel(f'Num edges (out of {len(edges)})')
     if SHOW_PLOTS:
         plt.show()
     with open(os.path.join(PATH_TO_TEXT_FILES, 'edge_props.txt'), 'w') as f:
-        plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}_edge_props.png'))
+        plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}/edge_props.png'))
         plt.close()

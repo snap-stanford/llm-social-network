@@ -132,6 +132,8 @@ def compute_cross_proportions_within_demo(G, personas, demo_keys, demo):
 def summarize_network_metrics(list_of_G, personas, demo_keys, save_name, demos=True):
 
     ### ---------------------------------- homophily ---------------------------------- ###
+    if not os.path.exists(os.path.join(PATH_TO_STATS_FILES, f'{save_name}')):
+        os.makedirs(os.path.join(PATH_TO_STATS_FILES, f'{save_name}'))
 
     if demos: # compute homophily
         homophily_metrics_df = pd.DataFrame({'graph_nr':[], 'demo':[], 'metric_value':[], 'save_name':[]})
@@ -147,7 +149,7 @@ def summarize_network_metrics(list_of_G, personas, demo_keys, save_name, demos=T
         plotting.plot_homophily(homophily_metrics_df, save_name)
 
         # save homophily dataframe in stats
-        homophily_metrics_df.to_csv(os.path.join(PATH_TO_STATS_FILES, f'{save_name}_homophily.csv'))
+        homophily_metrics_df.to_csv(os.path.join(PATH_TO_STATS_FILES, f'{save_name}/homophily.csv'))
 
     ### ---------------------------------- network-level metrics ---------------------------------- ###
 
@@ -186,10 +188,11 @@ def summarize_network_metrics(list_of_G, personas, demo_keys, save_name, demos=T
                                                                                'save_name':[save_name]})])
 
     # save network metrics dataframe in stats
-    network_metrics_df.to_csv(os.path.join(PATH_TO_STATS_FILES, f'{save_name}_network_metrics.csv'))
+
+    network_metrics_df.to_csv(os.path.join(PATH_TO_STATS_FILES, f'{save_name}/network_metrics.csv'))
     print("---------------------------------")
     print("Saved network metrics to: ")
-    print( f'{save_name}_network_metrics.csv')
+    print( f'{save_name}/network_metrics.csv')
 
     # plot network metrics
     plotting.plot_network_metrics(network_metrics_df, save_name)
@@ -226,3 +229,5 @@ if __name__ == '__main__':
         personas = json.load(f)
 
     summarize_network_metrics(list_of_G, personas, args.demos_to_include, save_name=args.network_fn)
+
+    # python analyze_networks.py --persona_fn us_50_with_names_with_interests.json --network_fn llm-as-agent-us-50-gpt-3.5-turbo --num_networks 10
