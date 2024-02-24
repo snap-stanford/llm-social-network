@@ -1,3 +1,0 @@
-OPEN_API_KEY = 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 
-
-
