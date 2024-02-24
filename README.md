@@ -69,4 +69,6 @@ Existing friendships are:
 Example response format: name1, name2, name3
 Your friends:
 
+### Generation
+
 ``` python one_by_one.py --persona_fn us_50_with_names_with_interests.json --save_prefix one-by-one-us-50 --num_networks 10 --model gpt-3.5-turbo ```
