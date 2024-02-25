@@ -8,6 +8,8 @@ import json
 from PIL import Image
 import os
 
+import plotting
+
 PATH_TO_FOLDER = '.'
 PATH_TO_TEXT_FILES = PATH_TO_FOLDER + '/text-files'  # folder holding text files, typically GPT output
 PATH_TO_SAVED_PLOTS = PATH_TO_FOLDER + '/plots'  # folder holding plots, eg, network figures
@@ -29,6 +31,20 @@ def draw_and_save_network_plot(G, save_prefix):
     fig_path = os.path.join(PATH_TO_SAVED_PLOTS, f'{save_prefix}.png')
     print('Saving network drawing in ', fig_path)
     plt.savefig(fig_path)
+    plt.close()
+
+def draw_and_save_network_plot_no_labels(G, save_prefix):
+    """
+    Draw network, save figure.
+    """
+    # draw network without node labels
+    # set small node size
+    # set small line width
+    nx.draw_networkx(G, pos=nx.spring_layout(G, seed=0, k=2*1/np.sqrt(len(G.nodes()))), with_labels=False, node_size=15, width=0.1)
+    plt.axis("off")
+    fig_path = os.path.join(PATH_TO_SAVED_PLOTS, f'{save_prefix}.png')
+    plt.savefig(fig_path)
+    plt.close()
 
 def save_network(G, save_prefix):
     """
@@ -133,7 +149,38 @@ def combine_plots(folders, plot_names):
         # save plot
         print('Saving combined plot in ', fig_path)
         plt.savefig(fig_path)
+        # close figure
+        plt.close()
 
+
+def load_and_draw_network(path_prefix, nr_networks):
+
+
+    nr_edges = []
+    for i in range(nr_networks):
+        G = nx.read_adjlist(f'{path_prefix}-{i}.adj')
+        nr_edges.append(len(G.edges()))
+
+        network_name = path_prefix.split('/')[1]
+        # make os path
+        if not os.path.exists(os.path.join(PATH_TO_SAVED_PLOTS, f'{network_name}/drawn')):
+            os.makedirs(os.path.join(PATH_TO_SAVED_PLOTS, f'{network_name}/drawn/'))
+        draw_and_save_network_plot_no_labels(G, f'{network_name}/drawn/{i}')
+    plotting.plot_nr_edges(nr_edges, f'{network_name}')
+
+def draw_list_of_networks(list_of_G, network_name):
+
+
+    nr_edges = []
+    for i in range(len(list_of_G)):
+        G = list_of_G[i]
+        nr_edges.append(len(G.edges()))
+
+        # make os path
+        if not os.path.exists(os.path.join(PATH_TO_SAVED_PLOTS, f'{network_name}/drawn')):
+            os.makedirs(os.path.join(PATH_TO_SAVED_PLOTS, f'{network_name}/drawn/'))
+        draw_and_save_network_plot_no_labels(G, f'{network_name}/drawn/{i}')
+    plotting.plot_nr_edges(nr_edges, f'{network_name}')
 
 if __name__ == '__main__':
 
@@ -143,3 +190,8 @@ if __name__ == '__main__':
 
     combine_plots(['plots/all-at-once-for_us_50-gpt-3.5-turbo', 'plots/llm-as-agent-for_us_50-gpt-3.5-turbo', 'plots/one-by-one-for_us_50-gpt-3.5-turbo', 'plots/real'],
                   ['betweenness_centrality_hist.png', 'degree_centrality_hist.png', 'closeness_centrality_hist.png'])
+
+
+    load_and_draw_network('text-files/all-at-once-for_us_50-gpt-3.5-turbo', 15)
+    load_and_draw_network('text-files/llm-as-agent-for_us_50-gpt-3.5-turbo', 15)
+    load_and_draw_network('text-files/one-by-one-for_us_50-gpt-3.5-turbo', 15)
