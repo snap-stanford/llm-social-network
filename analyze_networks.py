@@ -110,8 +110,13 @@ def _compute_cross_proportions(G, personas, demo_keys):
     # count cross-relationships in graph
     crs = np.zeros(len(demo_keys))
     for source, target in G.edges():
-        demo1 = personas[source]
-        demo2 = personas[target]
+        try:
+            demo1 = personas[source]
+            demo2 = personas[target]
+        except:
+            print('Error with source:', source, 'target:', target)
+            print('Personas:', personas)
+            quit()
         for ind, d in enumerate(demo_keys):
             if d == 'age':  # take absolute difference for age
                 crs[ind] += abs(int(demo1[d]) - int(demo2[d]))
@@ -230,4 +235,5 @@ if __name__ == '__main__':
 
     summarize_network_metrics(list_of_G, personas, args.demos_to_include, save_name=args.network_fn)
 
+    # python analyze_networks.py --persona_fn us_50_with_names_with_interests.json --network_fn llm-as-agent-us-50-gpt-3.5-turbo --num_networks 10
     # python analyze_networks.py --persona_fn us_50_with_names_with_interests.json --network_fn llm-as-agent-us-50-gpt-3.5-turbo --num_networks 10

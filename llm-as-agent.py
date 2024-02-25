@@ -64,7 +64,7 @@ def get_new_edges_from_gpt_output(out, source_node, valid_nodes):
         new_edges.append((source_node, target_node))
     return new_edges
 
-def construct_network(model, personas, demos_to_include, max_tries, save_prefix,  perspective, relation):
+def construct_network(model, personas, demos_to_include, max_tries, save_prefix,  perspective, network=0):
     """
     Iterate through personas, issue API call, construct network.
     """
@@ -88,7 +88,7 @@ def construct_network(model, personas, demos_to_include, max_tries, save_prefix,
                         }
                     ],
                     temperature=DEFAULT_TEMPERATURE)
-                out = extract_gpt_output(response)
+                out = extract_gpt_output(response, savename=f'costs/cost_{save_prefix}.json')
                 print('RESPONSE')
                 print(out)
                 # print('RESPONSE')
@@ -149,5 +149,5 @@ if __name__ == "__main__":
         print(f'Constructing network {i}...')
         save_prefix = args.save_prefix + '-' + args.model + '-' + str(i)
         G = construct_network(args.model, personas, demos_to_include=args.demos_to_include, max_tries = 10, save_prefix=save_prefix,
-                               perspective=args.perspective, relation='friend')
+                               perspective=args.perspective, network = i)
         i += 1

@@ -589,12 +589,15 @@ def get_divs(df_one, df_two, divs, names, metrics, metric, name):
     return divs, metrics, names
 
 
-def compare_networks(generated_names):
+def compare_networks(generated_names, real=True):
     # load stats/{name}_network_metrics.json and join for all names
-    list_of_names = ['real'] + generated_names
+    if real:
+        list_of_names = ['real'] + generated_names
+    else:
+        list_of_names = generated_names
     dfs = []
     for name in list_of_names:
-        with open('stats/' + name + '_network_metrics.csv', 'r') as f:
+        with open('stats/' + name + '/network_metrics.csv', 'r') as f:
             dfs.append(pd.read_csv(f, index_col=0))
 
     # create one df from dfs
@@ -609,7 +612,7 @@ def compare_homophily(generated_names, add_literature=False):
 
     dfs = []
     for name in list_of_names:
-        with open('stats/' + name + '_homophily.csv', 'r') as f:
+        with open('stats/' + name + '/homophily.csv', 'r') as f:
             dfs.append(pd.read_csv(f, index_col=0))
 
     if add_literature:
@@ -631,7 +634,7 @@ def compare_networks_divs(generated_name):
     list_of_names = ['real', generated_name]
     dfs = []
     for name in list_of_names:
-        with open('stats/' + name + '_network_metrics.csv', 'r') as f:
+        with open('stats/' + name + '/network_metrics.csv', 'r') as f:
             dfs.append(pd.read_csv(f, index_col=0))
 
     # create one df from dfs
@@ -665,7 +668,7 @@ def compare_networks_divs(generated_name):
         divs, metrics, names = get_divs(real_metric, generated_metric, divs, names, metrics, node_metric, f'{list_of_names[0]}-{list_of_names[1]}')
 
         # plot
-    divs_df = pd.DataFrame({'divs': divs, 'name': names, 'metric_name': metrics})
+    divs_df = pd.DataFrame({'divs': divs, 'save_name': names, 'metric_name': metrics})
 
     plotting.plot_divs(divs_df, '-'.join(list_of_names))
 
@@ -692,21 +695,23 @@ if __name__ == '__main__':
 
     summarize_network_metrics(list_of_G_real_networks, None, None, save_name="real", demos=False)
 
+    list_names = ['llm-as-agent-for_us_50-gpt-3.5-turbo', 'all-at-once-for_us_50-gpt-3.5-turbo', 'one-by-one-for_us_50-gpt-3.5-turbo'] # SET
 
-    for generations in ['llm-as-agent-us-50-gpt-3.5-turbo', 'all-at-once-us-50-gpt-3.5-turbo',]:
+
+    for generations in list_names:
         list_of_G_llm = load_list_of_graphs(generations, 0, 10)
-        fn = os.path.join(PATH_TO_TEXT_FILES, 'us_50_with_names_with_interests.json')
+        fn = os.path.join(PATH_TO_TEXT_FILES, 'us_50.json') # SET
         with open(fn, 'r') as f:
             personas = json.load(f)
         demo_keys = ['gender', 'race/ethnicity', 'age', 'religion', 'political affiliation']
         summarize_network_metrics(list_of_G_llm, personas, demo_keys, save_name=generations)
         compare_networks_divs(generations)
 
-    compare_networks(['llm-as-agent-us-50-gpt-3.5-turbo', 'all-at-once-us-50-gpt-3.5-turbo'])
-    compare_homophily(['llm-as-agent-us-50-gpt-3.5-turbo', 'all-at-once-us-50-gpt-3.5-turbo'])
-    compare_homophily(['llm-as-agent-us-50-gpt-3.5-turbo', 'all-at-once-us-50-gpt-3.5-turbo'], add_literature=True)
 
-
+    compare_networks(list_names)
+    compare_networks(list_names, real=False)
+    compare_homophily(list_names)
+    compare_homophily(list_names, add_literature=True)
 
 #     print("--------CROSS COMPARISON--------")
 #     funcs = [nx.density, nx.average_clustering, prop_nodes_in_giant_component, nx.degree_centrality, nx.betweenness_centrality, nx.closeness_centrality, nx.triangles]

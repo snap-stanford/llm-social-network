@@ -11,20 +11,52 @@ from constants_and_utils import *
 sns.set_theme(context='paper', style='white', palette='pastel', font='sans-serif', font_scale=1.5)
 # set default figure size
 plt.rcParams['figure.figsize'] = [12, 6]
+
+
+def define_color(save_names):
+    """
+    Create a color palette dictionary based on conditions for save_names.
+    """
+    # Define your base palettes
+    pastel_palette = sns.color_palette("pastel")
+
+    # Map each save_name to a specific color
+    color_map = {}
+    for name in save_names:
+        if "real" in name and ("llm-as-agent" in name or "one-by-one" in name or "all-at-once" in name):
+            color_map[name] = pastel_palette[4]
+        elif "llm-as-agent" in name:
+            color_map[name] = pastel_palette[0]  # First color from pastel palette
+        elif "one-by-one" in name:
+            color_map[name] = pastel_palette[1]  # Second color from pastel green palette
+        elif "all-at-once" in name:
+            color_map[name] = pastel_palette[2]  # Third color from pastel green palette
+        elif "real" in name:
+            color_map[name] = pastel_palette[3]
+        elif "literature" in name:
+            color_map[name] = pastel_palette[5]
+
+    return color_map
+
+def get_pallete(df):
+    return define_color(df['save_name'].unique())
+
+
 def plot_homophily(homophily_metrics_df, save_name):
 
     if not os.path.exists(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}')):
         os.makedirs(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}'))
 
     # plot homophily
-    sns.boxplot(x='demo', y='metric_value', data=homophily_metrics_df, whis=[0, 100])
+
+    sns.boxplot(x='demo', y='metric_value', data=homophily_metrics_df, hue="save_name", whis=[0, 100], palette=get_pallete(homophily_metrics_df))
     sns.stripplot(x='demo', y='metric_value', data=homophily_metrics_df, size=4, color=".3")
     plt.xlabel('Demographic Category')
     plt.ylabel('Homophily')
     plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}/homophily.png'))
     plt.close()
 
-    sns.barplot(x='demo', y='metric_value', data=homophily_metrics_df)
+    sns.barplot(x='demo', y='metric_value', data=homophily_metrics_df, hue="save_name", palette=get_pallete(homophily_metrics_df))
     plt.xlabel('Demographic Category')
     plt.ylabel('Homophily')
     plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}/homophily_bar.png'))
@@ -36,14 +68,14 @@ def plot_comparison_homophily(homophily_metrics_df, save_name):
         os.makedirs(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}'))
 
     # plot homophily
-    sns.boxplot(x='demo', y='metric_value', data=homophily_metrics_df, hue='save_name', whis=[0, 100])
-    sns.stripplot(x='demo', y='metric_value', data=homophily_metrics_df, hue='save_name', size=4, palette='dark:.3')
+    sns.boxplot(x='demo', y='metric_value', data=homophily_metrics_df, hue='save_name', whis=[0, 100], palette=get_pallete(homophily_metrics_df))
+    # sns.stripplot(x='demo', y='metric_value', data=homophily_metrics_df, hue='save_name', size=4, palette='dark:.3')
     plt.xlabel('Demographic Category')
     plt.ylabel('Homophily')
     plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}/homophily.png'))
     plt.close()
 
-    sns.barplot(x='demo', y='metric_value', hue='save_name', data=homophily_metrics_df)
+    sns.barplot(x='demo', y='metric_value', hue='save_name', data=homophily_metrics_df, palette=get_pallete(homophily_metrics_df))
     plt.xlabel('Demographic Category')
     plt.ylabel('Homophily')
     plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}/homophily_bar.png'))
@@ -62,11 +94,11 @@ def plot_divs(cross_metrics_df, save_name):
 
         #set metric value type to float with and set 0.01 precision
         df.loc[:, 'divs'] = df['divs'].astype(float).round(2)
-        sns.boxplot(x='metric_name', y='divs', hue='name', data=df, palette="Set3")
+        sns.boxplot(x='metric_name', y='divs', hue='save_name', data=df, palette=get_pallete(cross_metrics_df))
 
         # Add stripplot on top of the boxplot to show individual points, no legend
-        sns.stripplot(x='metric_name', y='divs', hue='name', data=df,
-                      jitter=True, dodge=True, linewidth=1, palette="Set3", legend=False)
+        sns.stripplot(x='metric_name', y='divs', hue='save_name', data=df,
+                      jitter=True, dodge=True, linewidth=1, palette=get_pallete(cross_metrics_df), legend=False)
 
         # Adjust the y-axis
         ax = plt.gca()
@@ -95,11 +127,11 @@ def plot_comparison(network_metrics_df, save_name):
         print(df.dtypes)
         #set metric value type to float with and set 0.01 precision
         df.loc[:, 'metric_value'] = df['metric_value'].astype(float).round(2)
-        sns.boxplot(x='metric_name', y='metric_value', hue='save_name', data=df, palette="Set3")
+        sns.boxplot(x='metric_name', y='metric_value', hue='save_name', data=df, palette=get_pallete(df))
 
         # Add stripplot on top of the boxplot to show individual points, no legend
         sns.stripplot(x='metric_name', y='metric_value', hue='save_name', data=df,
-                      jitter=True, dodge=True, linewidth=1, palette="Set3", legend=False)
+                      jitter=True, dodge=True, linewidth=1, palette=get_pallete(df), legend=False)
 
         # Adjust the y-axis
         ax = plt.gca()
@@ -112,7 +144,7 @@ def plot_comparison(network_metrics_df, save_name):
         plt.close()
 
         # now just bar plots
-        sns.barplot(x='metric_name', y='metric_value', data=df, hue='save_name')
+        sns.barplot(x='metric_name', y='metric_value', data=df, hue='save_name', palette=get_pallete(df))
         plt.xlabel('Network Metric')
         plt.ylabel('Value')
         plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}/network_{metric_name}_bar.png'))
@@ -126,7 +158,7 @@ def plot_network_metrics(network_metrics_df, save_name):
 
     # plot ['density', 'avg_clustering_coef', 'prop_nodes_lcc'] as bars on one plot
     sns.barplot(x='metric_name', y='metric_value',
-                data=network_metrics_df[network_metrics_df['metric_name'].isin(['density', 'avg_clustering_coef', 'prop_nodes_lcc'])], hue='save_name')
+                data=network_metrics_df[network_metrics_df['metric_name'].isin(['density', 'avg_clustering_coef', 'prop_nodes_lcc'])], hue='save_name', palette=get_pallete(network_metrics_df))
     plt.xlabel('Network Metric')
     plt.ylabel('Value')
     plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}/network_metrics_bar.png'))
@@ -134,7 +166,7 @@ def plot_network_metrics(network_metrics_df, save_name):
 
     # plot ['radius', 'diameter'] as bars on one plot
     sns.barplot(x='metric_name', y='metric_value',
-                data=network_metrics_df[network_metrics_df['metric_name'].isin(['radius', 'diameter'])])
+                data=network_metrics_df[network_metrics_df['metric_name'].isin(['radius', 'diameter'])], hue='save_name', palette=get_pallete(network_metrics_df))
     plt.xlabel('Network Metric')
     plt.ylabel('Value')
     plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}/network_metrics_bar2.png'))
@@ -147,9 +179,12 @@ def plot_network_metrics(network_metrics_df, save_name):
         # get all values with metric_name = metric
         metric_df = network_metrics_df[network_metrics_df['metric_name'] == metric]
         values = np.concatenate(metric_df['metric_value'].values).flatten()
-        sns.histplot(x=values.tolist(), bins=30, stat='density')
+        # set x axis to (0,1)
+        plt.xlim(0, 0.85)
+        sns.histplot(x=values.tolist(), bins=30, stat='density', color=get_pallete(network_metrics_df)[save_name])
         plt.xlabel(metric)
         plt.ylabel('Frequency')
+        plt.legend([save_name])
         plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}/{metric}_hist.png'))
         plt.close()
 

@@ -4,6 +4,9 @@ import matplotlib.pyplot as plt
 import os
 import openai
 import random
+import json
+from PIL import Image
+import os
 
 PATH_TO_FOLDER = '.'
 PATH_TO_TEXT_FILES = PATH_TO_FOLDER + '/text-files'  # folder holding text files, typically GPT output
@@ -35,10 +38,28 @@ def save_network(G, save_prefix):
     print('Saving adjlist in ', graph_path)
     nx.write_adjlist(G, graph_path)
 
-def extract_gpt_output(response):
+def extract_gpt_output(response, savename=None):
     """
     Extract output message from GPT, check for finish reason.
     """
+
+    if savename is not None:
+        # read json in savename
+        # if file exists
+        if os.path.exists(savename):
+            with open(savename) as f:
+                data = json.load(f)
+        else:
+            data = {"prompt_tokens": 0, "completion_tokens": 0}
+
+        data["prompt_tokens"] += response.usage.prompt_tokens
+        data["completion_tokens"] += response.usage.completion_tokens
+
+
+        # save to savename
+        with open(savename, 'w') as f:
+            json.dump(data, f)
+
     response = response.choices[0]
     finish_reason = response.finish_reason
     if finish_reason != 'stop':
@@ -70,3 +91,55 @@ def shuffle_dict(dict):
         shuffled_dict[item] = dict[item]
         
     return shuffled_dict
+
+def compute_token_cost(savepath, nr_networks, model='gpt-3.5-turbo'):
+
+    prompt_tokens = []
+    completion_tokens = []
+    for i in range(nr_networks):
+        with open(f'{savepath}-{i}.json') as f:
+            data = json.load(f)
+            prompt_tokens.append(data['prompt_tokens'])
+            completion_tokens.append(data['completion_tokens'])
+
+    # print averages and std
+    print(f'Files in {savepath}: {nr_networks}')
+    print(f'Prompt tokens: {np.mean(prompt_tokens)} +- {np.std(prompt_tokens)}')
+    print(f'Completion tokens: {np.mean(completion_tokens)} +- {np.std(completion_tokens)}')
+
+    # pricing
+    if model == 'gpt-3.5-turbo':
+        prompt_cost = 0.0005/1000
+        completion_cost = 0.0015/1000
+        costs = [prompt_cost*pt + completion_cost*ct for pt, ct in zip(prompt_tokens, completion_tokens)]
+        print(f'Cost in dollars: {np.mean(costs)} +- {np.std(costs)}')
+
+    else:
+        print("Model cost unknown")
+
+def combine_plots(folders, plot_names):
+    for j, plot_name in enumerate(plot_names):
+        fig, axs = plt.subplots(2, 2, figsize=(15, 10))
+        for i, folder in enumerate(folders):
+            img_path = os.path.join(folder, plot_name)
+            img = Image.open(img_path)
+            pairs = [(0, 0), (0, 1), (1, 0), (1, 1)]
+            axs[pairs[i]].imshow(img)
+            axs[pairs[i]].axis('off')
+
+        plt.tight_layout()
+        # save combined plot
+        fig_path = os.path.join(os.path.join(PATH_TO_SAVED_PLOTS), f'{plot_name}_combined_plot.png')
+        # save plot
+        print('Saving combined plot in ', fig_path)
+        plt.savefig(fig_path)
+
+
+if __name__ == '__main__':
+
+    compute_token_cost('costs/cost_all-at-once-for_us_50-gpt-3.5-turbo', 15)
+    compute_token_cost('costs/cost_llm-as-agent-for_us_50-gpt-3.5-turbo', 15)
+    compute_token_cost('costs/cost_one-by-one-for_us_50-gpt-3.5-turbo', 15)
+
+    combine_plots(['plots/all-at-once-for_us_50-gpt-3.5-turbo', 'plots/llm-as-agent-for_us_50-gpt-3.5-turbo', 'plots/one-by-one-for_us_50-gpt-3.5-turbo', 'plots/real'],
+                  ['betweenness_centrality_hist.png', 'degree_centrality_hist.png', 'closeness_centrality_hist.png'])

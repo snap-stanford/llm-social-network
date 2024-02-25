@@ -8,7 +8,7 @@ from generate_personas import *
 
 client = OpenAI(api_key=OPEN_API_KEY)
 
-def GPTGeneratedGraph(model, prompt, personas):
+def GPTGeneratedGraph(model, prompt, personas, save_prefix):
     G = None
     metrics = None
     tries = 0
@@ -26,7 +26,7 @@ def GPTGeneratedGraph(model, prompt, personas):
                 ],
                 temperature=DEFAULT_TEMPERATURE)
 
-            connections = extract_gpt_output(completion)
+            connections = extract_gpt_output(completion, savename=f'costs/cost_{save_prefix}.json')
             print("PROMPT")
             print(prompt)
             print("RESPONSE")
@@ -118,6 +118,6 @@ if __name__ == '__main__':
         # print(message)
         # print("-------------------")
         # print(personas)
-        G = GPTGeneratedGraph(args.model, message, personas)
+        G = GPTGeneratedGraph(args.model, message, personas, args.save_prefix + '-' + args.model + '-' + str(i))
         save_network(G, args.save_prefix + '-' + args.model + '-' + str(i))
 

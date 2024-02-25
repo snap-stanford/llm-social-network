@@ -12,13 +12,16 @@ from openai import OpenAI
 client = OpenAI(api_key=OPEN_API_KEY)
 
 
-def parse_gpt_output(person, output):
+def parse_gpt_output(person, personas, output):
     pairs = []
     names = output.split(',')
     names = [name.strip() for name in names]
 
     for name in names:
-        pairs.append((person, name))
+        if name in personas:
+            pairs.append((person, name))
+        else:
+            print(f'Name {name} not in personas')
     return pairs
 
 
@@ -72,7 +75,7 @@ def get_message(G, personas, person, demos, perspective):
     return message
 
 
-def generate_network(personas, demos, perspective, model, rand):
+def generate_network(personas, demos, perspective, model, rand, save_prefix):
     # shuffle order of personas in dictionary
     if rand == 'on':
         personas = shuffle_dict(personas)
@@ -107,7 +110,7 @@ def generate_network(personas, demos, perspective, model, rand):
                         }
                     ],
                     temperature=DEFAULT_TEMPERATURE)
-                content = extract_gpt_output(response)
+                content = extract_gpt_output(response, savename=f'costs/cost_{save_prefix}.json')
                 print('GPT response:\n', content)
             except openai.error.OpenAIError as e:
                 print(f"Error during querying GPT: {e}. Retrying in {duration} seconds.")
@@ -116,7 +119,7 @@ def generate_network(personas, demos, perspective, model, rand):
                 continue
 
             try:
-                pairs = parse_gpt_output(person, content)
+                pairs = parse_gpt_output(person, personas, content)
                 G.add_edges_from(pairs)
                 print('Graph:', G)
                 break
@@ -151,8 +154,8 @@ if __name__ == "__main__":
 
     i = 0
     while i < args.num_networks:
-        G = generate_network(personas, args.demos_to_include, perspective=args.perspective, model=args.model, rand='on')
-        network_path = os.path.join(PATH_TO_TEXT_FILES, args.save_prefix + '-' + args.model + '-' + str(i) + '.adj')
+        network_path =  args.save_prefix + '-' + args.model + '-' + str(i)
+        G = generate_network(personas, args.demos_to_include, perspective=args.perspective, model=args.model, rand='on', save_prefix = args.save_prefix + '-' + args.model + '-' + str(i))
         save_network(G, network_path)
         i += 1
 
