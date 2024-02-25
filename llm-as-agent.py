@@ -60,6 +60,9 @@ def get_new_edges_from_gpt_output(out, source_node, valid_nodes):
             name = name[5:]
         target_node = name
         assert target_node in valid_nodes, f'Invalid node from GPT: {target_node}'
+        # skip self connections
+        if target_node == source_node:
+            continue
         print(f'Adding edge from {source_node} to {target_node}')
         new_edges.append((source_node, target_node))
     return new_edges

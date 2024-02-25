@@ -63,6 +63,9 @@ def GPTGeneratedGraph(model, prompt, personas, save_prefix):
                         print(f"Hallucinated person: {personB}")
                         count += 1
                         continue
+                    elif personA == personB:
+                        print(f"Self-connection: {personA}")
+                        continue
                     G.add_edge(personA, personB)
 
                 except ValueError:

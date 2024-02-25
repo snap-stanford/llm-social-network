@@ -18,7 +18,7 @@ def parse_gpt_output(person, personas, output):
     names = [name.strip() for name in names]
 
     for name in names:
-        if name in personas:
+        if name in personas and name != person:
             pairs.append((person, name))
         else:
             print(f'Name {name} not in personas')
