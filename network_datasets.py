@@ -17,20 +17,19 @@ from analyze_networks import *
 
 
 
-# def create_moreno_graphs_girls():
-#     fn = PATH_TO_FOLDER + '/real_networks/moreno_vdb/out.moreno_vdb_vdb'
-#     graphs = {}
-#
-#     with open(fn, 'r') as f:
-#         edges = f.readlines()
-#         for edge in edges:
-#             data = edge.split(' ')
-#             if (data[0] != '%'):
-#                 if (graphs.get(data[3]) == None):
-#                     graphs[data[3]] = nx.DiGraph()
-#                 (graphs[data[3]]).add_weighted_edges_from([(data[0], data[1], data[2])])
-#
-#     return graphs
+def create_moreno_graphs_girls():
+    fn = PATH_TO_FOLDER + '/real_networks/moreno_vdb/out.moreno_vdb_vdb'
+    graphs = {}
+    graphs['moreno girls graph'] = nx.DiGraph()
+
+    with open(fn, 'r') as f:
+        edges = f.readlines()
+        for edge in edges:
+            data = edge.split(' ')
+            if (data[0] != '%') and int(data[2]) >= 1:
+                graphs['moreno girls graph'].add_edges_from([(data[0], data[1])])
+
+    return graphs
     
 # def create_moreno_graphs_boys():
 #     fn = PATH_TO_FOLDER + '/real_networks/moreno_highschool/out.moreno_highschool_highschool'
@@ -677,21 +676,25 @@ def compare_networks_divs(generated_name):
 
 if __name__ == '__main__':
     graph_dict = {}
-    graph_dict.update(create_taro_graphs())
-    graph_dict.update(create_pilot_graphs())
-    graph_dict.update(create_attiro_graphs())
-    graph_dict.update(create_dining_graphs())
     graph_dict.update(create_hitech_graphs())
-    graph_dict.update(create_karate_graphs())
     graph_dict.update(create_prison_graphs())
-    graph_dict.update(create_tailor_graphs())
-    graph_dict.update(create_sanjuan_graphs())
     graph_dict.update(create_galesburg_graphs())
     graph_dict.update(create_moreno_graphs_boys())
+    graph_dict.update(create_karate_graphs())
+    graph_dict.update(create_tailor_graphs())
+    graph_dict.update(create_moreno_graphs_girls())
 
-        
-    list_of_G_real_networks = list(graph_dict.values())
+    # graph_dict.update(create_pilot_graphs())
+    # graph_dict.update(create_attiro_graphs())
+    # graph_dict.update(create_dining_graphs())
+    # graph_dict.update(create_sanjuan_graphs())
+    # graph_dict.update(create_taro_graphs())
+
+
+
+    list_of_G_real_networks = [G.to_undirected(reciprocal=False) for G in graph_dict.values()]
     print("Number of real networks:", len(list_of_G_real_networks))
+    draw_list_of_networks(list_of_G_real_networks, 'real')
 
     summarize_network_metrics(list_of_G_real_networks, None, None, save_name="real", demos=False)
 
