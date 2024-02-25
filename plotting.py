@@ -38,6 +38,16 @@ def define_color(save_names):
 
     return color_map
 
+def adapt_legend(legend):
+    legend.set_title(None)
+    for text in legend.get_texts():
+        if 'llm-as-agent' in text.get_text():
+            text.set_text('Local')
+        elif 'one-by-one' in text.get_text():
+            text.set_text('Sequential')
+        elif 'all-at-once' in text.get_text():
+            text.set_text('Global')
+
 def get_pallete(df):
     return define_color(df['save_name'].unique())
 
@@ -52,13 +62,17 @@ def plot_homophily(homophily_metrics_df, save_name):
     sns.boxplot(x='demo', y='metric_value', data=homophily_metrics_df, hue="save_name", whis=[0, 100], palette=get_pallete(homophily_metrics_df))
     sns.stripplot(x='demo', y='metric_value', data=homophily_metrics_df, size=4, color=".3")
     plt.xlabel('Demographic Category')
-    plt.ylabel('Homophily')
+    plt.ylabel('Observed/expected cross relations')
+    legend = plt.legend()
+    adapt_legend(legend)
     plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}/homophily.png'))
     plt.close()
 
     sns.barplot(x='demo', y='metric_value', data=homophily_metrics_df, hue="save_name", palette=get_pallete(homophily_metrics_df))
     plt.xlabel('Demographic Category')
-    plt.ylabel('Homophily')
+    plt.ylabel('Observed/expected cross relations')
+    legend = plt.legend()
+    adapt_legend(legend)
     plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}/homophily_bar.png'))
     plt.close()
 
@@ -71,13 +85,15 @@ def plot_comparison_homophily(homophily_metrics_df, save_name):
     sns.boxplot(x='demo', y='metric_value', data=homophily_metrics_df, hue='save_name', whis=[0, 100], palette=get_pallete(homophily_metrics_df))
     # sns.stripplot(x='demo', y='metric_value', data=homophily_metrics_df, hue='save_name', size=4, palette='dark:.3')
     plt.xlabel('Demographic Category')
-    plt.ylabel('Homophily')
+    plt.ylabel('Observed/expected cross relations')
+    adapt_legend(plt.legend())
     plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}/homophily.png'))
     plt.close()
 
     sns.barplot(x='demo', y='metric_value', hue='save_name', data=homophily_metrics_df, palette=get_pallete(homophily_metrics_df))
     plt.xlabel('Demographic Category')
-    plt.ylabel('Homophily')
+    plt.ylabel('Observed/expected cross relations')
+    adapt_legend(plt.legend())
     plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}/homophily_bar.png'))
     plt.close()
 
@@ -137,9 +153,11 @@ def plot_comparison(network_metrics_df, save_name):
         ax = plt.gca()
 
         ax.yaxis.set_major_locator(ticker.LinearLocator(numticks=10))
+        plt.ylabel('Value')
+        plt.xlabel('Network Metric')
 
-        plt.legend(title=f'Network')
-
+        legend = plt.legend()
+        adapt_legend(legend)
         plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}/network_{metric_name}.png'))
         plt.close()
 
@@ -147,6 +165,7 @@ def plot_comparison(network_metrics_df, save_name):
         sns.barplot(x='metric_name', y='metric_value', data=df, hue='save_name', palette=get_pallete(df))
         plt.xlabel('Network Metric')
         plt.ylabel('Value')
+        adapt_legend(plt.legend())
         plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}/network_{metric_name}_bar.png'))
         plt.close()
 
@@ -158,9 +177,11 @@ def plot_network_metrics(network_metrics_df, save_name):
 
     # plot ['density', 'avg_clustering_coef', 'prop_nodes_lcc'] as bars on one plot
     sns.barplot(x='metric_name', y='metric_value',
-                data=network_metrics_df[network_metrics_df['metric_name'].isin(['density', 'avg_clustering_coef', 'prop_nodes_lcc'])], hue='save_name', palette=get_pallete(network_metrics_df))
+                data=network_metrics_df[network_metrics_df['metric_name'].isin(['density', 'avg_clustering_coef', 'prop_nodes_lcc'])],
+                hue='save_name', palette=get_pallete(network_metrics_df))
     plt.xlabel('Network Metric')
     plt.ylabel('Value')
+    adapt_legend(plt.legend())
     plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}/network_metrics_bar.png'))
     plt.close()
 
@@ -169,6 +190,7 @@ def plot_network_metrics(network_metrics_df, save_name):
                 data=network_metrics_df[network_metrics_df['metric_name'].isin(['radius', 'diameter'])], hue='save_name', palette=get_pallete(network_metrics_df))
     plt.xlabel('Network Metric')
     plt.ylabel('Value')
+    adapt_legend(plt.legend())
     plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}/network_metrics_bar2.png'))
     plt.close()
 
@@ -182,9 +204,9 @@ def plot_network_metrics(network_metrics_df, save_name):
         # set x axis to (0,1)
         plt.xlim(0, 0.85)
         sns.histplot(x=values.tolist(), bins=30, stat='density', color=get_pallete(network_metrics_df)[save_name])
-        plt.xlabel(metric)
+        plt.xlabel(metric.replace('_', ' ').capitalize())
         plt.ylabel('Frequency')
-        plt.legend([save_name])
+        adapt_legend(plt.legend([save_name]))
         plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}/{metric}_hist.png'))
         plt.close()
 
@@ -228,3 +250,17 @@ def plot_props(props, edges, save_name):
     with open(os.path.join(PATH_TO_TEXT_FILES, 'edge_props.txt'), 'w') as f:
         plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}/edge_props.png'))
         plt.close()
+
+
+def plot_nr_edges(edges, save_name):
+
+    if not os.path.exists(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}')):
+        os.makedirs(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}'))
+
+    sns.histplot(edges, bins=10, color='black')
+    plt.xlabel('Num edges')
+    plt.ylabel('Num networks')
+    if SHOW_PLOTS:
+        plt.show()
+    plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}/num_edges.png'))
+    plt.close()
