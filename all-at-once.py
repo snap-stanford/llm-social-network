@@ -77,6 +77,8 @@ def GPTGeneratedGraph(model, prompt, personas, save_prefix):
             print("Percentage of hallucinations: ", count/total_len)
             if count/total_len > 0.15:
                 raise Exception("Too many hallucinations")
+            if len(G.edges()) == 0:
+                raise Exception("No edges")
             return G
 
         except Exception as e:

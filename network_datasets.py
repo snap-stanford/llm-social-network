@@ -562,7 +562,6 @@ def create_karate_graphs():
 
 def get_divs(df_one, df_two, divs, names, metrics, metric, name):
 
-    num_bins = (int(np.sqrt(len(df_one))) + int(np.sqrt(len(df_two)))) // 2
 
     for i in range(len(df_one)):
         for j in range(0, len(df_two)):
@@ -572,6 +571,8 @@ def get_divs(df_one, df_two, divs, names, metrics, metric, name):
             # find max
             max_val = max(max(values_1), max(values_2))
             min_val = min(min(values_1), min(values_2))
+
+            num_bins = 8
 
             # create bins
             bins = np.linspace(min_val, max_val, num_bins)
@@ -625,6 +626,8 @@ def compare_homophily(generated_names, add_literature=False):
         list_of_names.append('literature')
     data = pd.concat(dfs, axis=0)
 
+    # reindex
+    data.reset_index(drop=True, inplace=True)
     data.to_csv('stats/compare_homophily.csv')
     plotting.plot_comparison_homophily(data, '-'.join(list_of_names))
 
@@ -693,16 +696,23 @@ if __name__ == '__main__':
 
 
     list_of_G_real_networks = [G.to_undirected(reciprocal=False) for G in graph_dict.values()]
+    print("Real")
+    count_communities(list_of_G_real_networks, 'real')
     print("Number of real networks:", len(list_of_G_real_networks))
     draw_list_of_networks(list_of_G_real_networks, 'real')
-
     summarize_network_metrics(list_of_G_real_networks, None, None, save_name="real", demos=False)
 
-    list_names = ['llm-as-agent-for_us_50-gpt-3.5-turbo', 'all-at-once-for_us_50-gpt-3.5-turbo', 'one-by-one-for_us_50-gpt-3.5-turbo'] # SET
+    list_names = ['llm-as-agent-for_us_50-gpt-3.5-turbo', 'all-at-once-for_us_50-gpt-3.5-turbo', 'one-by-one-for_us_50-gpt-3.5-turbo'] #, 'llm-as-agent-for_us_50-with-interests-gpt-3.5-turbo'] # SET
+    nr_networks = [100,100,100,30] # set
 
+    for ind, generations in enumerate(list_names):
+        list_of_G_llm = load_list_of_graphs(generations, 0, nr_networks[ind])
 
-    for generations in list_names:
-        list_of_G_llm = load_list_of_graphs(generations, 0, 10)
+        # if no edges remove from list
+        list_of_G_llm = [G for G in list_of_G_llm if G.number_of_edges() > 0]
+        print(generations)
+        count_communities(list_of_G_llm, generations)
+        print(len(list_of_G_llm))
         fn = os.path.join(PATH_TO_TEXT_FILES, 'us_50.json') # SET
         with open(fn, 'r') as f:
             personas = json.load(f)
@@ -715,6 +725,16 @@ if __name__ == '__main__':
     compare_networks(list_names, real=False)
     compare_homophily(list_names)
     compare_homophily(list_names, add_literature=True)
+
+
+    combine_plots(['plots/real', 'plots/all-at-once-for_us_50-gpt-3.5-turbo', 'plots/llm-as-agent-for_us_50-gpt-3.5-turbo', 'plots/one-by-one-for_us_50-gpt-3.5-turbo', ],
+                  ['betweenness_centrality_hist.png', 'degree_centrality_hist.png', 'closeness_centrality_hist.png', 'community_count_hist.png', 'community_size_hist.png'
+                   ,'modularity_hist.png'])
+
+
+    # load_and_draw_network('text-files/all-at-once-for_us_50-gpt-3.5-turbo', nr_networks[0])
+    # load_and_draw_network('text-files/llm-as-agent-for_us_50-gpt-3.5-turbo', nr_networks[0])
+    # load_and_draw_network('text-files/one-by-one-for_us_50-gpt-3.5-turbo', nr_networks[0])
 
 #     print("--------CROSS COMPARISON--------")
 #     funcs = [nx.density, nx.average_clustering, prop_nodes_in_giant_component, nx.degree_centrality, nx.betweenness_centrality, nx.closeness_centrality, nx.triangles]

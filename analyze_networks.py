@@ -151,8 +151,8 @@ def summarize_network_metrics(list_of_G, personas, demo_keys, save_name, demos=T
                                                             'save_name':[save_name]*len(demo_keys)})])
 
         # plot homophily
+        homophily_metrics_df = homophily_metrics_df.reset_index(drop=True)
         plotting.plot_homophily(homophily_metrics_df, save_name)
-
         # save homophily dataframe in stats
         homophily_metrics_df.to_csv(os.path.join(PATH_TO_STATS_FILES, f'{save_name}/homophily.csv'))
 
@@ -194,6 +194,8 @@ def summarize_network_metrics(list_of_G, personas, demo_keys, save_name, demos=T
 
     # save network metrics dataframe in stats
 
+    # reindex
+    network_metrics_df = network_metrics_df.reset_index(drop=True)
     network_metrics_df.to_csv(os.path.join(PATH_TO_STATS_FILES, f'{save_name}/network_metrics.csv'))
     print("---------------------------------")
     print("Saved network metrics to: ")
@@ -222,6 +224,23 @@ def parse():
     print("Number of networks", args.num_networks)
     
     return args
+
+
+def count_communities(list_of_G, save_name):
+
+    counts = []
+    sizes = []
+    mods = []
+    for G in list_of_G:
+        comms = nx.community.louvain_communities(G, seed=42)
+        counts.append(len(comms))
+        sizes = sizes + [len(c) for c in comms]
+
+        modularity = nx.community.modularity(G, comms)
+        mods.append(modularity)
+
+    plotting.plot_communities(counts, sizes, mods, save_name)
+
 
 if __name__ == '__main__':
 

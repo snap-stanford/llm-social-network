@@ -26,11 +26,15 @@ def define_color(save_names):
         if "real" in name and ("llm-as-agent" in name or "one-by-one" in name or "all-at-once" in name):
             color_map[name] = pastel_palette[4]
         elif "llm-as-agent" in name:
-            color_map[name] = pastel_palette[0]  # First color from pastel palette
+            r, g, b = pastel_palette[0]
+            if "interest" in name:
+                color_map[name] = (r,g,0.85)
+            else:
+                color_map[name] = (r,g,1)
         elif "one-by-one" in name:
-            color_map[name] = pastel_palette[1]  # Second color from pastel green palette
+            color_map[name] = pastel_palette[1]
         elif "all-at-once" in name:
-            color_map[name] = pastel_palette[2]  # Third color from pastel green palette
+            color_map[name] = pastel_palette[2]
         elif "real" in name:
             color_map[name] = pastel_palette[3]
         elif "literature" in name:
@@ -42,14 +46,38 @@ def adapt_legend(legend):
     legend.set_title(None)
     for text in legend.get_texts():
         if 'llm-as-agent' in text.get_text():
-            text.set_text('Local')
+            if 'interest' in text.get_text():
+                text.set_text('Local w/ interests')
+            else:
+                text.set_text('Local')
         elif 'one-by-one' in text.get_text():
             text.set_text('Sequential')
         elif 'all-at-once' in text.get_text():
             text.set_text('Global')
+        elif 'real' in text.get_text():
+            text.set_text('Real')
+        elif 'literature' in text.get_text():
+            text.set_text('Literature')
 
 def get_pallete(df):
     return define_color(df['save_name'].unique())
+
+
+def custom_sort_key(x):
+    if "llm-as-agent" in x:
+        return 3
+    elif "one-by-one" in x:
+        return 4
+    elif "all-at-once" in x:
+        return 2
+    else:
+        return 1
+
+def change_order(df):
+    df['sort_order'] = df['save_name'].apply(custom_sort_key)
+    df_sorted = df.sort_values(by=['sort_order', 'save_name'])
+    return df_sorted
+
 
 
 def plot_homophily(homophily_metrics_df, save_name):
@@ -59,7 +87,8 @@ def plot_homophily(homophily_metrics_df, save_name):
 
     # plot homophily
 
-    sns.boxplot(x='demo', y='metric_value', data=homophily_metrics_df, hue="save_name", whis=[0, 100], palette=get_pallete(homophily_metrics_df))
+
+    sns.boxplot(x='demo', y='metric_value', data=homophily_metrics_df, hue="save_name", palette=get_pallete(homophily_metrics_df))
     sns.stripplot(x='demo', y='metric_value', data=homophily_metrics_df, size=4, color=".3")
     plt.xlabel('Demographic Category')
     plt.ylabel('Observed/expected cross relations')
@@ -81,8 +110,10 @@ def plot_comparison_homophily(homophily_metrics_df, save_name):
     if not os.path.exists(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}')):
         os.makedirs(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}'))
 
+    homophily_metrics_df = change_order(homophily_metrics_df)
+
     # plot homophily
-    sns.boxplot(x='demo', y='metric_value', data=homophily_metrics_df, hue='save_name', whis=[0, 100], palette=get_pallete(homophily_metrics_df))
+    sns.boxplot(x='demo', y='metric_value', data=homophily_metrics_df, hue='save_name', palette=get_pallete(homophily_metrics_df))
     # sns.stripplot(x='demo', y='metric_value', data=homophily_metrics_df, hue='save_name', size=4, palette='dark:.3')
     plt.xlabel('Demographic Category')
     plt.ylabel('Observed/expected cross relations')
@@ -137,6 +168,7 @@ def plot_comparison(network_metrics_df, save_name):
     for metric_name in ['density', 'avg_clustering_coef', 'prop_nodes_lcc', 'radius', 'diameter']:
     # Create the boxplot
         df = network_metrics_df[network_metrics_df['metric_name'].isin([metric_name])]
+        df = change_order(df)
 
         # modify df to 0.01 precision
         # print data tyopes for columns in df
@@ -175,6 +207,8 @@ def plot_network_metrics(network_metrics_df, save_name):
     if not os.path.exists(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}')):
         os.makedirs(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}'))
 
+    network_metrics_df = change_order(network_metrics_df)
+
     # plot ['density', 'avg_clustering_coef', 'prop_nodes_lcc'] as bars on one plot
     sns.barplot(x='metric_name', y='metric_value',
                 data=network_metrics_df[network_metrics_df['metric_name'].isin(['density', 'avg_clustering_coef', 'prop_nodes_lcc'])],
@@ -203,11 +237,48 @@ def plot_network_metrics(network_metrics_df, save_name):
         values = np.concatenate(metric_df['metric_value'].values).flatten()
         # set x axis to (0,1)
         plt.xlim(0, 0.85)
-        sns.histplot(x=values.tolist(), bins=30, stat='density', color=get_pallete(network_metrics_df)[save_name])
+        bins = np.linspace(0, 0.85, 50)
+        if metric == 'degree_centrality':
+            bins = np.linspace(0, 0.85, 25)
+        if metric == 'betweenness_centrality':
+            bins = np.linspace(0, 0.5, 25)
+            plt.xlim(0, 0.5)
+        sns.histplot(x=values.tolist(), bins=bins, stat='density', color=get_pallete(network_metrics_df)[save_name])
         plt.xlabel(metric.replace('_', ' ').capitalize())
         plt.ylabel('Frequency')
         adapt_legend(plt.legend([save_name]))
         plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}/{metric}_hist.png'))
+        plt.close()
+
+def plot_communities(counts, sizes, modularities, save_name):
+
+        if not os.path.exists(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}')):
+            os.makedirs(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}'))
+
+
+        # plot communities
+        bins = np.linspace(0, max(max(counts), 10), max(max(counts)//2, 10))
+        sns.histplot(x=counts, bins=bins, stat='density', color=define_color([save_name])[save_name])
+        plt.xlabel('Community count')
+        plt.ylabel('Frequency')
+        adapt_legend(plt.legend([save_name]))
+        plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}/community_count_hist.png'))
+        plt.close()
+
+        bins = np.linspace(0,  30, 15)
+        sns.histplot(x=sizes, bins=bins, stat='density', color=define_color([save_name])[save_name])
+        plt.xlabel('Community size')
+        plt.ylabel('Frequency')
+        adapt_legend(plt.legend([save_name]))
+        plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}/community_size_hist.png'))
+        plt.close()
+
+        bins = np.linspace(0, 1, 50)
+        sns.histplot(x=modularities, bins=bins, stat='density', color=define_color([save_name])[save_name])
+        plt.xlabel('Modularity')
+        plt.ylabel('Frequency')
+        adapt_legend(plt.legend([save_name]))
+        plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}/modularity_hist.png'))
         plt.close()
 
 def plot_edges(num_edges, save_name):
