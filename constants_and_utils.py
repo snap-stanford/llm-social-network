@@ -2,7 +2,7 @@ import networkx as nx
 import numpy as np
 import matplotlib.pyplot as plt
 import os
-import openai
+from openai import OpenAI
 import random
 import json
 from PIL import Image
@@ -16,8 +16,11 @@ PATH_TO_SAVED_PLOTS = PATH_TO_FOLDER + '/plots'  # folder holding plots, eg, net
 PATH_TO_STATS_FILES = PATH_TO_FOLDER + '/stats'  # folder holding stats files, eg, proportion of nodes in giant component
 DEFAULT_TEMPERATURE = 0.8
 SHOW_PLOTS = False
-OPEN_API_KEY = os.getenv("OPENAI_API_KEY")
+CLIENT = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
+##########################################
+# functions to draw and save networks
+##########################################
 def draw_and_save_network_plot(G, save_prefix):
     """
     Draw network, save figure.
@@ -54,34 +57,6 @@ def save_network(G, save_prefix):
     print('Saving adjlist in ', graph_path)
     nx.write_adjlist(G, graph_path)
 
-def extract_gpt_output(response, savename=None):
-    """
-    Extract output message from GPT, check for finish reason.
-    """
-
-    if savename is not None:
-        # read json in savename
-        # if file exists
-        if os.path.exists(savename):
-            with open(savename) as f:
-                data = json.load(f)
-        else:
-            data = {"prompt_tokens": 0, "completion_tokens": 0}
-
-        data["prompt_tokens"] += response.usage.prompt_tokens
-        data["completion_tokens"] += response.usage.completion_tokens
-
-
-        # save to savename
-        with open(savename, 'w') as f:
-            json.dump(data, f)
-
-    response = response.choices[0]
-    finish_reason = response.finish_reason
-    if finish_reason != 'stop':
-        raise Exception(f'Response stopped for reason {finish_reason}')
-    return response.message.content
-
 def get_node_from_string(s):
     """
     If it is a persona of the form "<name> - <description>", get name; else, assume to be name.
@@ -107,31 +82,6 @@ def shuffle_dict(dict):
         shuffled_dict[item] = dict[item]
         
     return shuffled_dict
-
-def compute_token_cost(savepath, nr_networks, model='gpt-3.5-turbo'):
-
-    prompt_tokens = []
-    completion_tokens = []
-    for i in range(nr_networks):
-        with open(f'{savepath}-{i}.json') as f:
-            data = json.load(f)
-            prompt_tokens.append(data['prompt_tokens'])
-            completion_tokens.append(data['completion_tokens'])
-
-    # print averages and std
-    print(f'Files in {savepath}: {nr_networks}')
-    print(f'Prompt tokens: {np.mean(prompt_tokens)} +- {np.std(prompt_tokens)}')
-    print(f'Completion tokens: {np.mean(completion_tokens)} +- {np.std(completion_tokens)}')
-
-    # pricing
-    if model == 'gpt-3.5-turbo':
-        prompt_cost = 0.0005/1000
-        completion_cost = 0.0015/1000
-        costs = [prompt_cost*pt + completion_cost*ct for pt, ct in zip(prompt_tokens, completion_tokens)]
-        print(f'Cost in dollars: {np.mean(costs)} +- {np.std(costs)}')
-
-    else:
-        print("Model cost unknown")
 
 def combine_plots(folders, plot_names):
     for j, plot_name in enumerate(plot_names):
@@ -169,8 +119,6 @@ def load_and_draw_network(path_prefix, nr_networks):
     plotting.plot_nr_edges(nr_edges, f'{network_name}')
 
 def draw_list_of_networks(list_of_G, network_name):
-
-
     nr_edges = []
     for i in range(len(list_of_G)):
         G = list_of_G[i]
@@ -181,6 +129,83 @@ def draw_list_of_networks(list_of_G, network_name):
             os.makedirs(os.path.join(PATH_TO_SAVED_PLOTS, f'{network_name}/drawn/'))
         draw_and_save_network_plot_no_labels(G, f'{network_name}/drawn/{i}')
     plotting.plot_nr_edges(nr_edges, f'{network_name}')
+    
+##########################################
+# functions to interact with GPT
+##########################################
+def get_gpt_response(model, system_prompt, user_prompt, savename=None, verbose=False):
+    """
+    Call OpenAI API, check for finish reason; if all looks good, return response.
+    """
+    response = CLIENT.chat.completions.create(
+                model=model,
+                messages=[
+                    {
+                        "role": "system",
+                        "content": system_prompt
+                    },
+                    {
+                        "role": "user",
+                        "content": user_prompt
+                    },
+                ],
+                temperature=DEFAULT_TEMPERATURE)
+    
+    if savename is not None:
+        # read json in savename
+        # if file exists
+        if os.path.exists(savename):
+            with open(savename) as f:
+                data = json.load(f)
+        else:
+            data = {"prompt_tokens": 0, "completion_tokens": 0}
+
+        data["prompt_tokens"] += response.usage.prompt_tokens
+        data["completion_tokens"] += response.usage.completion_tokens
+
+        # save to savename
+        with open(savename, 'w') as f:
+            json.dump(data, f)
+
+    response = response.choices[0]
+    finish_reason = response.finish_reason
+    if finish_reason != 'stop':
+        raise Exception(f'Response stopped for reason {finish_reason}')
+        
+    if verbose:
+        print('SYSTEM:')
+        print(system_prompt)
+        print('\nUSER:')
+        print(user_prompt)
+        print('\nRESPONSE:')
+        print(response.message.content)
+    return response.message.content
+        
+        
+def compute_token_cost(savepath, nr_networks, model='gpt-3.5-turbo'):
+
+    prompt_tokens = []
+    completion_tokens = []
+    for i in range(nr_networks):
+        with open(f'{savepath}-{i}.json') as f:
+            data = json.load(f)
+            prompt_tokens.append(data['prompt_tokens'])
+            completion_tokens.append(data['completion_tokens'])
+
+    # print averages and std
+    print(f'Files in {savepath}: {nr_networks}')
+    print(f'Prompt tokens: {np.mean(prompt_tokens)} +- {np.std(prompt_tokens)}')
+    print(f'Completion tokens: {np.mean(completion_tokens)} +- {np.std(completion_tokens)}')
+
+    # pricing
+    if model == 'gpt-3.5-turbo':
+        prompt_cost = 0.0005/1000
+        completion_cost = 0.0015/1000
+        costs = [prompt_cost*pt + completion_cost*ct for pt, ct in zip(prompt_tokens, completion_tokens)]
+        print(f'Cost in dollars: {np.mean(costs)} +- {np.std(costs)}')
+
+    else:
+        print("Model cost unknown")
 
 if __name__ == '__main__':
 
