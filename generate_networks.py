@@ -35,14 +35,13 @@ def convert_persona_to_string(persona, demos_to_include, pid=None):
     return s    
 
 
-def get_system_prompt(method, demos_to_include, curr_persona=None):
+def get_system_prompt(method, demos_to_include, curr_persona=None, curr_friends=None):
     """
     Get content for system message.
     """
     assert method in {'global', 'local', 'sequential', 'iterative-add', 'iterative-drop'}
     # get commonly used strings
-    persona_format = get_persona_format(demos_to_include)
-    prompt_format = f'You will be provided a list of people in the network, where each person is described as \"{persona_format}\".'
+    persona_format = 'where each person is described as ' + get_persona_format(demos_to_include)
     prompt_extra = 'Do not include any other text in your response. Do not include any people who are not listed below.'
     if curr_persona is not None:
         assert method != 'global'
@@ -52,15 +51,17 @@ def get_system_prompt(method, demos_to_include, curr_persona=None):
         prompt_personal = f'You are {persona_str}.'
     
     if method == 'global':
-        prompt = 'Your task is to create a realistic social network. ' + prompt_format + ' Provide a list of friendship pairs in the format <ID>, <ID> with each pair separated by a newline. ' + prompt_extra
+        prompt = 'Your task is to create a realistic social network. You will be provided a list of people in the network, ' + persona_format + '. Provide a list of friendship pairs in the format <ID>, <ID> with each pair separated by a newline. ' + prompt_extra
     elif method == 'local':
-        prompt = prompt_personal + ' You are joining a social network.\n\n' + prompt_format + '\n\nWhich of these people will you become friends with? Provide a list of friends in the format <ID>, <ID>, <ID>, etc. ' + prompt_extra
+        prompt = prompt_personal + ' You are joining a social network.\n\nYou will be provided a list of people in the network, ' + persona_format + '.\n\nWhich of these people will you become friends with? Provide a list of friends in the format <ID>, <ID>, <ID>, etc. ' + prompt_extra
     elif method == 'sequential':
-        prompt = prompt_personal + ' You are joining a social network.\n\n'+ prompt_format
-        prompt += 'You will also be provided a list of current friendships, in the format <ID>, <ID> with each pair separated by a newline.'
+        prompt = prompt_personal + ' You are joining a social network.\n\nYou will be provided a list of people in the network, '+ persona_format + '. '
+        prompt += 'You will also be provided a list of existing friendship pairs in the network, in the format <ID>, <ID> with each pair separated by a newline.'
         prompt += '\n\nWhich of these people will you become friends with? Provide a list of friends in the format <ID>, <ID>, <ID>, etc. ' + prompt_extra
     elif method == 'iterative-add':
-        pass
+        prompt = prompt_personal + ' You are part of a social network and you want to make a new friend.\n\nYou will be provided a list of potential new friends, ' + persona_format + ', followed by a list of their friends' IDs. '
+        prompt += 'Keep in mind that you are already friends with IDs ' + ', '.join(curr_friends) + '. '
+        prompt += 'Which person in the list are you likeliest to befriend? Provide your answer in the form: {"new friend": ID, "reason": reason}. ' + prompt_extra
     else:  # iterative-drop
         pass
     return prompt 
