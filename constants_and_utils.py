@@ -12,7 +12,6 @@ import plotting
 
 PATH_TO_FOLDER = '.'
 PATH_TO_TEXT_FILES = PATH_TO_FOLDER + '/text-files'  # folder holding text files, typically GPT output
-PATH_TO_SAVED_PLOTS = PATH_TO_FOLDER + '/plots'  # folder holding plots, eg, network figures
 PATH_TO_STATS_FILES = PATH_TO_FOLDER + '/stats'  # folder holding stats files, eg, proportion of nodes in giant component
 DEFAULT_TEMPERATURE = 0.8
 SHOW_PLOTS = False
@@ -31,7 +30,7 @@ def draw_and_save_network_plot(G, save_prefix):
     axis.set_xlim([1.1*x for x in axis.get_xlim()])  # add padding so that node labels aren't cut off
     axis.set_ylim([1.1*y for y in axis.get_ylim()])
     plt.tight_layout()
-    fig_path = os.path.join(PATH_TO_SAVED_PLOTS, f'{save_prefix}.png')
+    fig_path = os.path.join(plotting.PATH_TO_SAVED_PLOTS, f'{save_prefix}.png')
     print('Saving network drawing in ', fig_path)
     plt.savefig(fig_path)
     plt.close()
@@ -45,7 +44,7 @@ def draw_and_save_network_plot_no_labels(G, save_prefix):
     # set small line width
     nx.draw_networkx(G, pos=nx.spring_layout(G, seed=0, k=2*1/np.sqrt(len(G.nodes()))), with_labels=False, node_size=15, width=0.1)
     plt.axis("off")
-    fig_path = os.path.join(PATH_TO_SAVED_PLOTS, f'{save_prefix}.png')
+    fig_path = os.path.join(plotting.PATH_TO_SAVED_PLOTS, f'{save_prefix}.png')
     plt.savefig(fig_path)
     plt.close()
 
@@ -95,7 +94,7 @@ def combine_plots(folders, plot_names):
 
         plt.tight_layout()
         # save combined plot
-        fig_path = os.path.join(os.path.join(PATH_TO_SAVED_PLOTS), f'{plot_name}_combined_plot.png')
+        fig_path = os.path.join(os.path.join(plotting.PATH_TO_SAVED_PLOTS), f'{plot_name}_combined_plot.png')
         # save plot
         print('Saving combined plot in ', fig_path)
         plt.savefig(fig_path)
@@ -113,8 +112,8 @@ def load_and_draw_network(path_prefix, nr_networks):
 
         network_name = path_prefix.split('/')[1]
         # make os path
-        if not os.path.exists(os.path.join(PATH_TO_SAVED_PLOTS, f'{network_name}/drawn')):
-            os.makedirs(os.path.join(PATH_TO_SAVED_PLOTS, f'{network_name}/drawn/'))
+        if not os.path.exists(os.path.join(plotting.PATH_TO_SAVED_PLOTS, f'{network_name}/drawn')):
+            os.makedirs(os.path.join(plotting.PATH_TO_SAVED_PLOTS, f'{network_name}/drawn/'))
         draw_and_save_network_plot_no_labels(G, f'{network_name}/drawn/{i}')
     plotting.plot_nr_edges(nr_edges, f'{network_name}')
 
@@ -125,8 +124,8 @@ def draw_list_of_networks(list_of_G, network_name):
         nr_edges.append(len(G.edges()))
 
         # make os path
-        if not os.path.exists(os.path.join(PATH_TO_SAVED_PLOTS, f'{network_name}/drawn')):
-            os.makedirs(os.path.join(PATH_TO_SAVED_PLOTS, f'{network_name}/drawn/'))
+        if not os.path.exists(os.path.join(plotting.PATH_TO_SAVED_PLOTS, f'{network_name}/drawn')):
+            os.makedirs(os.path.join(plotting.PATH_TO_SAVED_PLOTS, f'{network_name}/drawn/'))
         draw_and_save_network_plot_no_labels(G, f'{network_name}/drawn/{i}')
     plotting.plot_nr_edges(nr_edges, f'{network_name}')
     
