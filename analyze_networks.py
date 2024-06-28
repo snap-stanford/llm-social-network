@@ -16,7 +16,7 @@ def load_list_of_graphs(prefix, start_seed, end_seed, directed=True):
     """
     list_of_G = []
     for s in range(start_seed, end_seed):
-        fn = os.path.join(PATH_TO_TEXT_FILES, f'{prefix}-{s}.adj')
+        fn = os.path.join(PATH_TO_TEXT_FILES, f'{prefix}_{s}.adj')
         if directed:
             G = nx.read_adjlist(fn, create_using=nx.DiGraph)
         else:
@@ -136,29 +136,26 @@ def compute_cross_proportions_within_demo(G, personas, demo_keys, demo):
 
 def summarize_network_metrics(list_of_G, personas, demo_keys, save_name, demos=True):
 
-    ### ---------------------------------- homophily ---------------------------------- ###
     if not os.path.exists(os.path.join(PATH_TO_STATS_FILES, f'{save_name}')):
         os.makedirs(os.path.join(PATH_TO_STATS_FILES, f'{save_name}'))
 
-    if demos: # compute homophily
-        homophily_metrics_df = pd.DataFrame({'graph_nr':[], 'demo':[], 'metric_value':[], 'save_name':[]})
+    ### ---------------------------------- homophily ---------------------------------- ###
+    if demos:
+        homophily_metrics_df = pd.DataFrame({'graph_nr':[], 'demo':[], '_metric_value':[], 'save_name':[]})
         for graph_nr, G in enumerate(list_of_G):
             homophily_metrics = list(compute_cross_proportions(G, personas, demo_keys))
             # concat with series
             homophily_metrics_df = pd.concat([homophily_metrics_df,
                                               pd.DataFrame({'graph_nr':graph_nr, 'demo':demo_keys,
-                                                            'metric_value':homophily_metrics,
+                                                            '_metric_value':homophily_metrics,
                                                             'save_name':[save_name]*len(demo_keys)})])
+        # save homophily metrics dataframe in stats
+        fn = f'{save_name}/homophily.csv'
+        homophily_metrics_df.to_csv(os.path.join(PATH_TO_STATS_FILES, fn), index=False)
+        print('Saved homophily metrics to ' + fn)
 
-        # plot homophily
-        homophily_metrics_df = homophily_metrics_df.reset_index(drop=True)
-        plotting.plot_homophily(homophily_metrics_df, save_name)
-        # save homophily dataframe in stats
-        homophily_metrics_df.to_csv(os.path.join(PATH_TO_STATS_FILES, f'{save_name}/homophily.csv'))
-
-    ### ---------------------------------- network-level metrics ---------------------------------- ###
-
-    network_metrics_df = pd.DataFrame({'graph_nr':[], 'metric_name':[], 'metric_value':[], 'save_name':[]})
+    ### ---------------------------------- scalar network metrics ---------------------------------- ###
+    network_metrics_df = pd.DataFrame({'graph_nr':[], 'metric_name':[], '_metric_value':[], 'save_name':[]})
 
     network_metrics = ['density', 'avg_clustering_coef', 'prop_nodes_lcc', 'radius', 'diameter']
     network_func = [nx.density, nx.average_clustering, prop_nodes_in_giant_component, nx.radius, nx.diameter]
@@ -167,42 +164,32 @@ def summarize_network_metrics(list_of_G, personas, demo_keys, save_name, demos=T
         for metric_name, f in zip(network_metrics, network_func):
             if metric_name in ['radius', 'diameter']:
                 largest_cc = sorted(nx.connected_components(G.to_undirected()), key=len, reverse=True)[0]
-                metric_value = f(G.subgraph(largest_cc).to_undirected())
+                _metric_value = f(G.subgraph(largest_cc).to_undirected()) / len(G.nodes())
                 ### PLEASE NOTE LCC HERE
             else:
-                metric_value = f(G.to_undirected())
+                _metric_value = f(G.to_undirected())
 
             network_metrics_df = pd.concat([network_metrics_df, pd.DataFrame({'graph_nr':graph_nr,
                                                                               'metric_name':[metric_name],
-                                                                              'metric_value':[metric_value],
+                                                                              '_metric_value':[_metric_value],
                                                                               'save_name':[save_name]})])
-        density_value = nx.density(G.to_undirected())
-        network_metrics_df = pd.concat([network_metrics_df, pd.DataFrame({'graph_nr':graph_nr, 'metric_name':['density'],
-                                                                          'metric_value':[density_value],
-                                                                          'save_name':[save_name]})])
 
-
+    ### ---------------------------------- node-level network metrics ---------------------------------- ###
     node_metrics = ['degree_centrality', 'betweenness_centrality', 'closeness_centrality']
     node_func = [nx.degree_centrality, nx.betweenness_centrality, nx.closeness_centrality]
     for graph_nr, G in enumerate(list_of_G):
         for metric_name, f in zip(node_metrics, node_func):
-            metric_value = list(f(G.to_undirected()).values())
-            network_metrics_df = pd.concat([network_metrics_df, pd.DataFrame({'graph_nr':graph_nr,
-                                                                              'metric_name':[metric_name],
-                                                                              'metric_value':[metric_value],
-                                                                               'save_name':[save_name]})])
+            metric_dict = f(G.to_undirected())
+            temp_df = pd.DataFrame(metric_dict.items(), columns=['node', '_metric_value'])
+            temp_df['graph_nr'] = graph_nr
+            temp_df['metric_name'] = metric_name
+            temp_df['save_name'] = save_name
+            network_metrics_df = pd.concat([network_metrics_df, temp_df])
 
     # save network metrics dataframe in stats
-
-    # reindex
-    network_metrics_df = network_metrics_df.reset_index(drop=True)
-    network_metrics_df.to_csv(os.path.join(PATH_TO_STATS_FILES, f'{save_name}/network_metrics.csv'))
-    print("---------------------------------")
-    print("Saved network metrics to: ")
-    print( f'{save_name}/network_metrics.csv')
-
-    # plot network metrics
-    plotting.plot_network_metrics(network_metrics_df, save_name)
+    fn = f'{save_name}/network_metrics.csv'
+    network_metrics_df.to_csv(os.path.join(PATH_TO_STATS_FILES, fn), index=False)
+    print("Saved network metrics to " + fn)
 
 
 def parse():
