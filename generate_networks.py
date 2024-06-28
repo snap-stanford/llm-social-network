@@ -1,6 +1,7 @@
 from constants_and_utils import *
 import argparse
 import numpy as np
+import pandas as pd
 import time
 
 def get_persona_format(demos_to_include):
@@ -40,8 +41,9 @@ def get_system_prompt(method, demos_to_include, curr_persona=None, curr_friends=
     Get content for system message.
     """
     assert method in {'global', 'local', 'sequential', 'iterative-add', 'iterative-drop'}
-    # get commonly used strings
-    persona_format = 'where each person is described as ' + get_persona_format(demos_to_include)
+    # commonly used strings
+    persona_format = get_persona_format(demos_to_include)
+    persona_format = f'where each person is described as \"{persona_format}\"'
     prompt_extra = 'Do not include any other text in your response. Do not include any people who are not listed below.'
     if curr_persona is not None:
         assert method != 'global'
@@ -57,9 +59,9 @@ def get_system_prompt(method, demos_to_include, curr_persona=None, curr_friends=
     elif method == 'sequential':
         prompt = prompt_personal + ' You are joining a social network.\n\nYou will be provided a list of people in the network, '+ persona_format + '. '
         prompt += 'You will also be provided a list of existing friendship pairs in the network, in the format <ID>, <ID> with each pair separated by a newline.'
-        prompt += '\n\nWhich of these people will you become friends with? Provide a list of friends in the format <ID>, <ID>, <ID>, etc. ' + prompt_extra
+        prompt += '\n\nWhich of these people will you become friends with? Provide a list of *YOUR* friends in the format <ID>, <ID>, <ID>, etc. ' + prompt_extra
     elif method == 'iterative-add':
-        prompt = prompt_personal + ' You are part of a social network and you want to make a new friend.\n\nYou will be provided a list of potential new friends, ' + persona_format + ', followed by a list of their friends' IDs. '
+        prompt = prompt_personal + ' You are part of a social network and you want to make a new friend.\n\nYou will be provided a list of potential new friends, ' + persona_format + ', followed by a list of their friends\' IDs. '
         prompt += 'Keep in mind that you are already friends with IDs ' + ', '.join(curr_friends) + '. '
         prompt += 'Which person in the list are you likeliest to befriend? Provide your answer in the form: {"new friend": ID, "reason": reason}. ' + prompt_extra
     else:  # iterative-drop
@@ -118,7 +120,7 @@ def update_graph_from_response(method, response, G, curr_pid=None):
             id1, id2 = line.split(',')
             edges_found.append((id1.strip(), id2.strip()))
     elif method == 'local' or method == 'sequential':
-        assert len(lines) == 1
+        assert len(lines) == 1, f'Found more than one line in response for {method}'
         ids = lines[0].split(',')
         for pid in ids:
             edges_found.append((curr_pid, pid.strip()))
@@ -149,7 +151,7 @@ def update_graph_from_response(method, response, G, curr_pid=None):
 
 
 def repeat_prompt_until_parsed(model, system_prompt, user_prompt, method, G, 
-                               curr_pid=None, verbose=False, max_tries=3):
+                               curr_pid=None, verbose=False, max_tries=10):
     """
     Helper function to repeat API call and parsing until it works.
     """
@@ -159,9 +161,9 @@ def repeat_prompt_until_parsed(model, system_prompt, user_prompt, method, G,
             response = get_gpt_response(model, system_prompt, user_prompt, verbose=verbose)
             try:
                 G = update_graph_from_response(method, response, G, curr_pid=curr_pid)
-                return G, num_tries
-            except:
-                print('Failed to parse response')
+                return G, response, num_tries
+            except Exception as e:
+                print('Failed to parse response:', e)
                 print('SYSTEM:')
                 print(system_prompt)
                 print('\nUSER:')
@@ -169,8 +171,8 @@ def repeat_prompt_until_parsed(model, system_prompt, user_prompt, method, G,
                 print('\nRESPONSE:')
                 print(response)
                 num_tries += 1
-        except:
-            print('Failed to get response')
+        except Exception as e:
+            print('Failed to get response:', e)
             num_tries += 1
     raise Exception(f'Exceed max tries of {max_tries}')
     
@@ -183,12 +185,16 @@ def generate_network(method, demos_to_include, personas, order, model, verbose=F
     G = nx.Graph()
     G.add_nodes_from(order)
     total_num_tries = 0
+    total_input_toks = 0
+    total_output_toks = 0
     
     if method == 'global':
         system_prompt = get_system_prompt(method, demos_to_include)
         user_prompt = get_user_prompt(method, personas, order, demos_to_include)
-        G, num_tries = repeat_prompt_until_parsed(model, system_prompt, user_prompt, method, G, verbose=verbose)
+        G, response, num_tries = repeat_prompt_until_parsed(model, system_prompt, user_prompt, method, G, verbose=verbose)
         total_num_tries += num_tries
+        total_input_toks += len(system_prompt.split()) + len(user_prompt.split())
+        total_output_toks += len(response.split())
     
     elif method == 'local' or method == 'sequential':
         order2 = np.random.choice(order, size=len(order), replace=False)  # order of adding nodes
@@ -199,9 +205,11 @@ def generate_network(method, demos_to_include, personas, order, model, verbose=F
             else:  # otherwise, allow local or sequential
                 system_prompt = get_system_prompt(method, demos_to_include, curr_persona=personas[pid])
                 user_prompt = get_user_prompt(method, personas, order, demos_to_include, curr_pid=pid, G=G)
-            G, num_tries = repeat_prompt_until_parsed(model, system_prompt, user_prompt, method, G, 
+            G, response, num_tries = repeat_prompt_until_parsed(model, system_prompt, user_prompt, method, G, 
                                                       curr_pid=pid, verbose=verbose)
             total_num_tries += num_tries
+            total_input_toks += len(system_prompt.split()) + len(user_prompt.split())
+            total_output_toks += len(response.split())
             
     else:  # iterative
         # construct local network first 
@@ -211,7 +219,8 @@ def generate_network(method, demos_to_include, personas, order, model, verbose=F
             user_prompt = get_user_prompt('local', personas, order, demos_to_include, curr_pid=pid)
             response = get_gpt_response(model, system_prompt, user_prompt, verbose=verbose)
             G = update_graph_from_response('local', response, G, curr_pid=pid)
-    return G, total_num_tries
+        # TODO!!
+    return G, total_num_tries, total_input_toks, total_output_toks
    
 
 def parse_args():
@@ -223,6 +232,7 @@ def parse_args():
     parser.add_argument('--persona_fn', type=str, default='us_50.json')
     parser.add_argument('--demos_to_include', nargs='+', default=['gender', 'age', 'race/ethnicity', 'religion', 'political affiliation'])
     parser.add_argument('--num_networks', type=int, default=10)
+    parser.add_argument('--start_seed', type=int, default=0)  # set start seed to continue with new seeds
     parser.add_argument('--model', type=str, default='gpt-3.5-turbo')
     parser.add_argument('--verbose', action='store_true')
     args = parser.parse_args()
@@ -236,15 +246,24 @@ if __name__ == '__main__':
         personas = json.load(f)
     pids = list(personas.keys())
     print(f'Loaded {len(pids)} personas from {args.persona_fn}')
+    stats = []
     
-    for seed in range(args.num_networks):
+    end_seed = args.start_seed+args.num_networks
+    for seed in range(args.start_seed, end_seed):
         ts = time.time()
         np.random.seed(seed)
         order = np.random.choice(pids, size=len(pids), replace=False)  # order of printing personas
         print('Order:', order[:10])
-        G, num_tries = generate_network(args.method, args.demos_to_include, personas, order, args.model, verbose=args.verbose)
+        G, num_tries, input_toks, output_toks = generate_network(args.method, args.demos_to_include, 
+                                                    personas, order, args.model, verbose=args.verbose)
+        
         save_prefix = f'{args.method}_{args.model}_{seed}'
         save_network(G, save_prefix)
         draw_and_save_network_plot(G, save_prefix)
         duration = time.time()-ts
-        print(f'Seed {seed}: {len(G.edges())} edges, num tries={num_tries} [time={duration:.2f}s]')
+        print(f'Seed {seed}: {len(G.edges())} edges, num tries={num_tries}, input toks={input_toks}, output toks={output_toks} [time={duration:.2f}s]')
+        stats.append({'seed': seed, 'duration': duration, 'num_tries': num_tries, 
+                      'num_input_toks': input_toks, 'num_output_toks': output_toks})
+    stats_df = pd.DataFrame(stats, columns=['seed', 'duration', 'num_tries', 'num_input_toks', 'num_output_toks'])
+    stats_fn = os.path.join(PATH_TO_STATS_FILES, f'{args.method}_{args.model}', f'cost_stats_s{args.start_seed}-{end_seed-1}.csv')
+    stats_df.to_csv(stats_fn, index=False)  # 
