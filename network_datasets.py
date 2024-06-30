@@ -5,377 +5,264 @@ import xml.etree.ElementTree as ET
 from constants_and_utils import *
 
 PATH_TO_REAL_NETWORKS = os.path.join(PATH_TO_FOLDER, 'real_networks')
-DIRECTED_GRAPHS = ['attiro']
+NETWORKS_TO_SKIP = [
+    'BKFRAC',  # personal rankings of the remembered frequency of interactions
+    'BKHAMC',  # personal rankings of the remembered frequency of interactions
+    'BKOFFC',  # personal rankings of the remembered frequency of interactions
+    'BKTECC',  # personal rankings of the remembered frequency of interactions
+    'KAPFTI1', # instrumental (work-related) interactions
+    'KAPFTI2'  # instrumental (work-related) interactions
+                    ]
 
 # =============================================
 # all these networks are in DyNetML format
 # http://www.casos.cs.cmu.edu/projects/dynetml/
 # =============================================
 
-def load_50_women(year):
-    fn = os.path.join(PATH_TO_REAL_NETWORKS, 's50', f's50_d0{year}.xml')
-    G = nx.Graph()
+def make_graphs_from_dynetml_file(fn, val_cutoff=1):
+    """
+    DyNetML format of storing networks
+    http://www.casos.cs.cmu.edu/projects/dynetml/
+    """
+    assert fn.endswith('.xml')
+    fn_wo_path = fn.split('/')[-1]
     tree = ET.parse(fn)
     root = tree.getroot()
     metanetwork = root.find('MetaNetwork')
-    nodes = metanetwork.find('nodes').find('nodeclass').findall('node')
-    for el in nodes:
-        G.add_node(el.get('id'))
-    edges = metanetwork.find('networks').find('network').findall('link')
-    values = []
-    for el in edges: 
-        G.add_edge(el.get('source'), el.get('target'))
-        values.append(float(el.get('value')))
-    assert np.isclose(values, 1).all()  # all values should be 1.0
-    return G
+    nodeclass = metanetwork.find('nodes').findall('nodeclass')
+    assert len(nodeclass) == 1
+    nodeclass = nodeclass[0]
+    networks = metanetwork.find('networks').findall('network')
     
-    
-def load_attiro():
-    fn = os.path.join(PATH_TO_REAL_NETWORKS, 'attiro.xml')
-    return load_visiting_families(fn)
-    
-def load_san_juan():
-    fn = os.path.join(PATH_TO_REAL_NETWORKS, 'SanJuanSur.xml')
-    return load_visiting_families(fn)
-    
-def load_visiting_families(fn):
-    G = nx.DiGraph()
-    tree = ET.parse(fn)
-    root = tree.getroot()
-    values = []
-    for el in root.iter():  # depth-first search over elements
-        if el.tag == 'node':
-            G.add_node(el.get('id'))
-        elif el.tag == 'link':
-            G.add_edge(el.get('source'), el.get('target'))
-            values.append(float(el.get('value')))  # ignore value, 1-3 all mean visits
-    assert np.isin(values, [1, 2, 3]).all()
-    return G
+    graphs = {}
+    for n in networks:
+        if n.get('id', 'ID') not in NETWORKS_TO_SKIP:
+            key = fn_wo_path + '_' + n.get('id', 'ID')
+            if n.get('isDirected', 'false') == 'true':
+                G = nx.DiGraph()
+            else:
+                G = nx.Graph()
+            for el in nodeclass.findall('node'):
+                G.add_node(el.get('id'))
+            values = []
+            for el in n.findall('link'):
+                val = float(el.get('value'))
+                values.append(val)
+                if val >= val_cutoff:
+                    G.add_edge(el.get('source'), el.get('target'))
+            print(f'{key}: {len(G.nodes)} nodes, {len(G.edges)} edges, directed: {nx.is_directed(G)}, density: {nx.density(G):.3f}, seen values: {set(values)}')
+            graphs[key] = G
+    return graphs
 
 
-def load_bk_frat():
-    fn = os.path.join(PATH_TO_REAL_NETWORKS, 'bkfrat.xml')
-    return load_bk(fn)
+def make_graphs_from_paj_file(fn, directed=True, val_cutoff=1, color=None):
+    """
+    paj format of storing networks 
+    """
+    assert fn.endswith('.paj')
+    with open(fn, 'r') as f:
+        lines = f.readlines()
+    # partition into networks
+    graphs = {}
+    start_idx = -1
+    key = ''
+    in_network = False 
+    for i, l in enumerate(lines):
+        l = l.strip()
+        if l.startswith('*Network') and l.endswith('.net'):
+            start_idx = i 
+            key = l.split()[-1]
+            in_network = True 
+        elif in_network and l == '':  # empty line 
+            G = make_graph_from_net_file(lines[start_idx:i], key=key, 
+                    directed=directed, val_cutoff=val_cutoff, color=color)
+            graphs[key] = G
+            in_network = False 
+    return graphs 
 
-def load_bk(fn):
-    G = nx.DiGraph()
-    tree = ET.parse(fn)
-    root = tree.getroot()
-    values = []
-    for el in root.iter():  # depth-first search over elements
-        if el.tag == 'node':
-            G.add_node(el.get('id'))
-        elif el.tag == 'link':
-            G.add_edge(el.get('source'), el.get('target'))
-            values.append(float(el.get('value')))  # ignore value, 1-3 all mean visits
-    assert np.isin(values, [1, 2, 3]).all()
-    return G
-    
-def load_network_from_xml(fn):
-    if fn in DIRECTED_GRAPHS:
+
+def make_graph_from_net_file(input, key='.net', directed=True, 
+                             val_cutoff=1, color=None):
+    """
+    net format of storing networks
+    """
+    if type(input) == str:
+        assert input.endswith('.net')
+        with open(input, 'r') as f:
+            lines = f.readlines()
+    else:
+        assert type(input) == list 
+        lines = input 
+    if color is not None:
+        print('Only keeping edges with color', color)
+        assert color in ['Red', 'Blue']
+
+    if directed:
         G = nx.DiGraph()
     else:
         G = nx.Graph()
-    # network is in DyNetML format: http://www.casos.cs.cmu.edu/projects/dynetml/
-    tree = ET.parse(os.path.join(PATH_TO_REAL_NETWORKS, fn))
-    root = tree.getroot(tree)
-    for el in root.iter():  # depth-first search over elements
-        if el.tag == 'node':
-            G.add_node(el.get('id'))
-        elif el.tag == 'link':
-            G.add_edge(el.get('source'), el.get('target'))
+    in_vertices = False
+    in_edges = False
+    values = []
+    for line in lines:
+        if line.startswith('*Vertices'):
+            in_vertices = True 
+            in_edges = False 
+        elif line.startswith('*Arcs') or line.startswith('*Edges'):
+            in_vertices = False 
+            in_edges = True 
+        elif line.startswith('*'):  # new section
+            in_vertices = False 
+            in_edges = False
+        elif in_vertices:
+            elements = line.split()
+            G.add_node(elements[0].strip())
+        elif in_edges:
+            elements = line.split()
+            v1 = elements[0].strip()
+            v2 = elements[1].strip()
+            val = float(elements[2].strip())
+            values.append(val)
+            if val >= val_cutoff:
+                if color is not None:
+                    c = elements[-1].strip()
+                    assert c in ['Red', 'Blue']
+                    if c == color: 
+                        G.add_edge(v1, v2)
+                else:
+                    G.add_edge(v1, v2)
+    
+    print(f'{key}: {len(G.nodes)} nodes, {len(G.edges)} edges, directed: {nx.is_directed(G)}, density: {nx.density(G):.3f}, seen values: {set(values)}')
     return G
 
-    
-def create_moreno_graphs_girls():
-    fn = os.path.join(PATH_TO_REAL_NETWORKS, 'moreno_vdb', 'out.moreno_vdb_vdb')
-    graphs = {}
-    graphs['moreno girls graph'] = nx.DiGraph()
 
+def load_moreno_graph(fn):
+    """
+    Load graph from Moreno.
+    """
     with open(fn, 'r') as f:
-        edges = f.readlines()
-        for edge in edges:
-            data = edge.split(' ')
-            if (data[0] != '%') and int(data[2]) >= 1:
-                graphs['moreno girls graph'].add_edges_from([(data[0], data[1])])
+        lines = f.readlines()
+    G = nx.DiGraph()
+    values = []
+    for line in lines:
+        elements = line.split()
+        if (elements[0] != '%'):
+            if len(elements) > 2:
+                val = float(elements[2])
+                values.append(val)
+                if val > 0:
+                    G.add_edge(elements[0], elements[1])
+            else:
+                G.add_edge(elements[0], elements[1])
+    print(f'{len(G.nodes)} nodes, {len(G.edges)} edges, directed: {nx.is_directed(G)}, density: {nx.density(G):.3f}, seen values: {set(values)}')
+    return G
 
-    return graphs
-    
-# def create_moreno_graphs_boys():
-#     fn = PATH_TO_FOLDER + '/real_networks/moreno_highschool/out.moreno_highschool_highschool'
-#     graphs = {}
-#     graphs['moreno boys graph'] = nx.DiGraph()
-#
-#     with open(fn, 'r') as f:
-#         edges = f.readlines()
-#         for edge in edges:
-#             data = edge.split(' ')
-#             if (data[0] != '%'):
-#                 graphs['moreno boys graph'].add_weighted_edges_from([(data[0], data[1], data[2])])
-#
-#     return graphs
 
-def create_moreno_graphs_boys():
-    fn = os.path.join(PATH_TO_REAL_NETWORKS, 'moreno_highschool', 'out.moreno_highschool_highschool')
-    graphs = {}
-    graphs['moreno boys graph'] = nx.DiGraph()
-
-    with open(fn, 'r') as f:
-        edges = f.readlines()
-        for edge in edges:
-            data = edge.split(' ')
-            if (data[0] != '%'):
-                graphs['moreno boys graph'].add_edges_from([(data[0], data[1])])
-
-    return graphs
-    
-def create_hitech_graphs():
-    fn = os.path.join(PATH_TO_REAL_NETWORKS, 'hiTech/Hi-tech.net')
-    graphs = {}
-    graphs['hitech graph'] = nx.DiGraph()
-    
-    with open(fn, 'r') as f:
-        edges = f.readlines()
-        for edge in edges[38:185]:
-            u1, u2 = edge[6:].split('  ', 1)
-            u1 = u1.strip()
-            u2 = u2.strip()
-            u2 = u2.split(' ')[0]
-            graphs['hitech graph'].add_edges_from([(u1, u2)])
-            
-    return graphs
-    
-def create_prison_graphs():
-    fn = os.path.join(PATH_TO_REAL_NETWORKS, 'prison.xml')
-    graphs = {}
-    graphs['prison graph'] = nx.DiGraph()
-    
-    with open(fn, 'r') as f:
-        content = f.readlines()[0]
-        start = 0
-        while (True):
-            start = content.find("link", start) + 1
-            if (start == 0):
-                break
-            src_str = content.find("source", start)
-            tgt_str = content.find("target", start)
-            typ_str = content.find("type", start)
-            
-            src = content[src_str:tgt_str].split('"')[1]
-            tgt = content[tgt_str:typ_str].split('"')[1]
-            
-            graphs['prison graph'].add_edges_from([(src, tgt)])
-            
-    return graphs
-    
-def create_tailor_graphs():
-    fn = os.path.join(PATH_TO_REAL_NETWORKS, 'kaptail 2.xml')
-    graphs = {}
-    
-    with open(fn, 'r') as f:
-        content = f.readlines()[0]
-        networks = ['KAPFTS1', 'KAPFTS2', 'KAPFTI1',] # loading only the first two 'KAPFTI2', '</MetaNetwork>']
-        start = 0
-        i = 0
-        while (i < len(networks) -1):
-            graphs[networks[i]] = nx.DiGraph()
-            start = content.find(networks[i])
-            
-            while (start < content.find(networks[i + 1])):
-                start = content.find("link", start) + 1
-                if (start == 0):
-                    break
-                src_str = content.find("source", start)
-                tgt_str = content.find("target", start)
-                typ_str = content.find("type", start)
-                value_str = content.find("value", start)
-                end_str = content.find("/>", start)
-            
-                src = content[src_str:tgt_str].split('"')[1]
-                tgt = content[tgt_str:typ_str].split('"')[1]
-                
-                if (content[value_str:end_str].split('"')[1] == "1.0000"):
-                    graphs[networks[i]].add_edges_from([(src, tgt)])
-            
-            i += 1
-            
-    return graphs
-    
-# def create_sawmill_graphs():
-#     fn = PATH_TO_FOLDER + '/real_networks/sawmill/Sawmill.net'
-#     graphs = {}
-#     graphs['sawmill graph'] = nx.DiGraph()
-#
-#     with open(fn, 'r') as f:
-#         edges = f.readlines()
-#         for edge in edges[39:101]:
-#             u1, u2 = edge[6:].split('  ', 1)
-#             u1 = u1.strip()
-#             u2 = u2.strip()
-#             u2 = u2.split(' ')[0]
-#             graphs['sawmill graph'].add_edges_from([(u1, u2)])
-#
-#     return graphs
-    
-
-    
-# def create_bktec_graphs():
-#     fn = PATH_TO_FOLDER + '/real_networks/bktec.xml'
-#     graphs = {}
-#
-#     with open(fn, 'r') as f:
-#         content = f.readlines()[0]
-#         networks = ['BKTECB', 'BKTECC']
-#         start = 0
-#         graphs[networks[0]] = nx.DiGraph()
-#         start = content.find(networks[0])
-#
-#         while (start < content.find(networks[1])):
-#             start = content.find("link", start) + 1
-#             if (start == 0):
-#                 break
-#             src_str = content.find("source", start)
-#             tgt_str = content.find("target", start)
-#             typ_str = content.find("type", start)
-#             value_str = content.find("value", start)
-#             end_str = content.find("/>", start)
-#
-#             src = content[src_str:tgt_str].split('"')[1]
-#             tgt = content[tgt_str:typ_str].split('"')[1]
-#
-#             if ((content[value_str:end_str].split('"')[1] != "1")):
-#                 graphs[networks[0]].add_edges_from([(src, tgt)])
-#
-#     return graphs
-    
-def create_dining_graphs():
-    fn = PATH_TO_FOLDER + '/real_networks/dining 2.xml'
-    graphs = {}
-    graphs['dining graph'] = nx.DiGraph()
-    
-    with open(fn, 'r') as f:
-        content = f.readlines()[0]
-        start = 0
-        while (True):
-            start = content.find("link", start) + 1
-            if (start == 0):
-                break
-            src_str = content.find("source", start)
-            tgt_str = content.find("target", start)
-            typ_str = content.find("type", start)
-            
-            src = content[src_str:tgt_str].split('"')[1]
-            tgt = content[tgt_str:typ_str].split('"')[1]
-            
-            graphs['dining graph'].add_edges_from([(src, tgt)])
-            
-    return graphs
-    
-def create_galesburg_graphs():
-    fn = PATH_TO_FOLDER + '/real_networks/Galesburg2.paj'
-    graphs = {}
-    graphs['galesburg graph'] = nx.DiGraph()
-    
-    with open(fn, 'r') as f:
-        edges = f.readlines()
-        for edge in edges[34:112]:
-            u1, u2 = edge[5:].split('   ', 1)
-            u1 = u1.strip()
-            u2 = u2.strip()
-            u2 = u2.split(' ')[0]
-            graphs['galesburg graph'].add_edges_from([(u1, u2)])
-    return graphs
-    
-def create_pilot_graphs():
-    fn = PATH_TO_FOLDER + '/real_networks/Flying_teams.xml'
-    graphs = {}
-    graphs['pilot graph'] = nx.DiGraph()
-    start = 0
-    
-    with open(fn, 'r') as f:
-        content = f.readlines()[0]
-        start = content.find("link", start) + 1
-        while (start != 0):
-            src_str = content.find("source", start)
-            tgt_str = content.find("target", start)
-            typ_str = content.find("type", start)
-            value_str = content.find("value", start)
-            end_str = content.find("/>", start)
-        
-            src = content[src_str:tgt_str].split('"')[1]
-            tgt = content[tgt_str:typ_str].split('"')[1]
-            
-            if ((content[value_str:end_str].split('"')[1] == "1")):
-                graphs['pilot graph'].add_edges_from([(src, tgt)])
-            
-            start = content.find("link", start) + 1
-
-    return graphs
+def load_real_network(name):
+    """
+    Maps each network to our process for loading it.
+    """
+    if name.startswith('50women'):
+        year = int(name[-1])
+        assert year in [1, 2, 3]
+        fn = os.path.join(PATH_TO_REAL_NETWORKS, 's50', f's50_d0{year}.xml')
+        graphs = make_graphs_from_dynetml_file(fn)
+        G = graphs[f's50_d0{year}.xml_network']
+    elif name == 'attiro':
+        fn = os.path.join(PATH_TO_REAL_NETWORKS, 'attiro.xml')
+        graphs = make_graphs_from_dynetml_file(fn)
+        G = graphs['attiro.xml_test']
+    elif name == 'san_juan':
+        fn = os.path.join(PATH_TO_REAL_NETWORKS, 'SanJuanSur.paj')
+        graphs = make_graphs_from_paj_file(fn, directed=True)
+        G = graphs['SanJuanSur.net']
+    elif name.startswith('bk'):
+        fn = os.path.join(PATH_TO_REAL_NETWORKS, f'{name}.xml')
+        graphs = make_graphs_from_dynetml_file(fn)
+        print(graphs.keys())
+        G = graphs[f'{name}.xml_{name[:5].upper()}B']
+    elif name == 'camp':
+        fn = os.path.join(PATH_TO_REAL_NETWORKS, 'camp92.xml')
+        graphs = make_graphs_from_dynetml_file(fn)
+        G = graphs['camp92.xml_agent x agent']
+    elif name == 'dining':
+        fn = os.path.join(PATH_TO_REAL_NETWORKS, 'dining.xml')
+        graphs = make_graphs_from_dynetml_file(fn)
+        G = graphs['dining.xml_test']
+    elif name == 'flying':
+        fn = os.path.join(PATH_TO_REAL_NETWORKS, 'Flying_teams.paj')
+        graphs = make_graphs_from_paj_file(fn)
+        G = graphs['Flying_teams.net']
+    elif name.startswith('galesburg'):
+        num = int(name[-1])
+        assert num in [1, 2]
+        if num == 1:
+            fn = os.path.join(PATH_TO_REAL_NETWORKS, 'Galesburg.paj')
+            graphs = make_graphs_from_paj_file(fn, directed=True, color='Blue')
+            G = graphs['Galesburg.net']
+        else:
+            fn = os.path.join(PATH_TO_REAL_NETWORKS, 'Galesburg2.paj')
+            graphs = make_graphs_from_paj_file(fn, directed=True)
+            G = graphs['Galesburg_friends.net']
+    elif name == 'hi-tech':
+        fn = os.path.join(PATH_TO_REAL_NETWORKS, 'Hi-tech.xml')
+        graphs = make_graphs_from_dynetml_file(fn)
+        G = graphs['Hi-tech.xml_test']
+    elif name == 'kapmine':
+        fn = os.path.join(PATH_TO_REAL_NETWORKS, 'kapmine.xml')
+        graphs = make_graphs_from_dynetml_file(fn)
+        G = graphs['kapmine.xml_KAPFMU']
+    elif name.startswith('kaptail'):
+        num = int(name[-1])
+        assert num in [1, 2]
+        fn = os.path.join(PATH_TO_REAL_NETWORKS, 'kaptail.xml')
+        graphs = make_graphs_from_dynetml_file(fn)
+        G = graphs[f'kaptail.xml_KAPFTS{num}']
+    elif name.startswith('korea'):
+        num = int(name[-1])
+        assert num in [1, 2]
+        fn = os.path.join(PATH_TO_REAL_NETWORKS, 'Korea', 'Korea.paj')
+        graphs = make_graphs_from_paj_file(fn)
+        G = graphs[f'Korea{num}.net']
+    elif name == 'moreno_freshmen':
+        fn = os.path.join(PATH_TO_REAL_NETWORKS, 'moreno_vdb', 'out.moreno_vdb_vdb')
+        G = load_moreno_graph(fn)
+    elif name == 'moreno_girls':
+        fn = os.path.join(PATH_TO_REAL_NETWORKS, 'moreno_highschool', 'out.moreno_highschool_highschool')
+        G = load_moreno_graph(fn)
+    elif name == 'moreno_taro':
+        fn = os.path.join(PATH_TO_REAL_NETWORKS, 'moreno_taro', 'out.moreno_taro_taro')
+        G = load_moreno_graph(fn)
+    elif name == 'modmath':
+        fn = os.path.join(PATH_TO_REAL_NETWORKS, 'ModMath.paj')
+        graphs = make_graphs_from_paj_file(fn)
+        G = graphs['ModMath_directed.net']
+    elif name == 'prison':
+        fn = os.path.join(PATH_TO_REAL_NETWORKS, 'prison.xml')
+        graphs = make_graphs_from_dynetml_file(fn)
+        G = graphs['prison.xml_ID']
+    elif name == 'sawmill':
+        fn = os.path.join(PATH_TO_REAL_NETWORKS, 'sawmill', 'Sawmill.net')
+        G = make_graph_from_net_file(fn, directed=False)
+    elif name == 'strike':
+        fn = os.path.join(PATH_TO_REAL_NETWORKS, 'strike.paj')
+        graphs = make_graphs_from_paj_file(fn, directed=False)
+        G = graphs['Strike.net']
+    elif name == 'student':
+        fn = os.path.join(PATH_TO_REAL_NETWORKS, 'Student_government.xml')
+        graphs = make_graphs_from_dynetml_file(fn)
+        G = graphs['Student_government.xml_test']
+    elif name == 'thuroff':
+        fn = os.path.join(PATH_TO_REAL_NETWORKS, 'thuroff.xml')
+        graphs = make_graphs_from_dynetml_file(fn)
+        G = graphs['thuroff.xml_THURM']
+    elif name == 'karate':
+        fn = os.path.join(PATH_TO_REAL_NETWORKS, 'karate.xml')
+        graphs = make_graphs_from_dynetml_file(fn)
+        G = graphs['karate.xml_agent x agent']
+    return G 
     
     
-# def create_mexico_graphs():
-#     fn = PATH_TO_FOLDER + '/real_networks/mexican_power.paj'
-#     graphs = {}
-#     graphs['mexico graph'] = nx.DiGraph()
-#
-#     with open(fn, 'r') as f:
-#         edges = f.readlines()
-#         for edge in edges[39:156]:
-#             u1, u2 = edge[5:].split('  ', 1)
-#             u1 = u1.strip()
-#             u2 = u2.strip()
-#             u2 = u2.split(' ')[0]
-#             graphs['mexico graph'].add_edges_from([(u1, u2)])
-#
-#     return graphs
-    
-# def create_southern_graphs():
-#     fn = PATH_TO_FOLDER + '/real_networks/opsahl-southernwomen/out.opsahl-southernwomen'
-#     graphs = {}
-#     graphs['southern graph'] = nx.DiGraph()
-#
-#     with open(fn, 'r') as f:
-#         edges = f.readlines()
-#         for edge in edges:
-#             data = edge.split(' ')
-#             if (data[0] != '%'):
-#                 graphs['southern graph'].add_edges_from([(data[0], data[1])])
-#
-#     return graphs
-    
-def create_taro_graphs():
-    fn = PATH_TO_FOLDER + '/real_networks/moreno_taro/out.moreno_taro_taro'
-    graphs = {}
-    graphs['taro graph'] = nx.DiGraph()
-    
-    with open(fn, 'r') as f:
-        edges = f.readlines()
-        for edge in edges:
-            data = edge.split(' ')
-            if (data[0] != '%'):
-                graphs['taro graph'].add_edges_from([(data[0], data[1])])
-    
-    return graphs
-    
-def create_karate_graphs():
-    fn = PATH_TO_FOLDER + '/real_networks/karate/karate.gml'
-    graphs = {}
-    graphs['karate graph'] = nx.DiGraph()
-    
-    with open(fn, 'r') as f:
-        edges = f.readlines()
-        src = 0
-        tgt = 0
-        for edge in edges:
-            source_index = edge.find("source")
-            target_index = edge.find("target")
-            if (source_index != -1):
-                src = edge[(source_index + 7):]
-            if (target_index != -1):
-                tgt = edge[(target_index + 7):]
-                graphs['karate graph'].add_edges_from([(src, tgt)])
-    
-    return graphs
     
 # def create_jazz_graphs():
 #     fn = PATH_TO_FOLDER + '/real_networks/jazz.net'
