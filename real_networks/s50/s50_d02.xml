@@ -1,0 +1,182 @@
+<?xml version="1.0" standalone="yes"?>
+
+<DynamicNetwork>
+    <MetaNetwork id="s50_d02 - 1">
+        <documents></documents>
+        <nodes>
+            <nodeclass type="Agent" id="source nodes">
+                <node id="1"></node>
+                <node id="2"></node>
+                <node id="3"></node>
+                <node id="4"></node>
+                <node id="5"></node>
+                <node id="6"></node>
+                <node id="7"></node>
+                <node id="8"></node>
+                <node id="9"></node>
+                <node id="10"></node>
+                <node id="11"></node>
+                <node id="12"></node>
+                <node id="13"></node>
+                <node id="14"></node>
+                <node id="15"></node>
+                <node id="16"></node>
+                <node id="17"></node>
+                <node id="18"></node>
+                <node id="19"></node>
+                <node id="20"></node>
+                <node id="21"></node>
+                <node id="22"></node>
+                <node id="23"></node>
+                <node id="24"></node>
+                <node id="25"></node>
+                <node id="26"></node>
+                <node id="27"></node>
+                <node id="28"></node>
+                <node id="29"></node>
+                <node id="30"></node>
+                <node id="31"></node>
+                <node id="32"></node>
+                <node id="33"></node>
+                <node id="34"></node>
+                <node id="35"></node>
+                <node id="36"></node>
+                <node id="37"></node>
+                <node id="38"></node>
+                <node id="39"></node>
+                <node id="40"></node>
+                <node id="41"></node>
+                <node id="42"></node>
+                <node id="43"></node>
+                <node id="44"></node>
+                <node id="45"></node>
+                <node id="46"></node>
+                <node id="47"></node>
+                <node id="48"></node>
+                <node id="49"></node>
+                <node id="50"></node>
+            </nodeclass>
+        </nodes>
+        <networks>
+            <network sourceType="Agent" source="source nodes" targetType="Agent" target="source nodes" id="network">
+                <link source="1" target="10" type="double" value="1.0"></link>
+                <link source="1" target="14" type="double" value="1.0"></link>
+                <link source="1" target="33" type="double" value="1.0"></link>
+                <link source="2" target="26" type="double" value="1.0"></link>
+                <link source="3" target="4" type="double" value="1.0"></link>
+                <link source="3" target="9" type="double" value="1.0"></link>
+                <link source="4" target="3" type="double" value="1.0"></link>
+                <link source="5" target="4" type="double" value="1.0"></link>
+                <link source="5" target="17" type="double" value="1.0"></link>
+                <link source="6" target="8" type="double" value="1.0"></link>
+                <link source="8" target="6" type="double" value="1.0"></link>
+                <link source="9" target="3" type="double" value="1.0"></link>
+                <link source="10" target="1" type="double" value="1.0"></link>
+                <link source="10" target="11" type="double" value="1.0"></link>
+                <link source="10" target="14" type="double" value="1.0"></link>
+                <link source="10" target="33" type="double" value="1.0"></link>
+                <link source="11" target="1" type="double" value="1.0"></link>
+                <link source="11" target="10" type="double" value="1.0"></link>
+                <link source="11" target="19" type="double" value="1.0"></link>
+                <link source="11" target="26" type="double" value="1.0"></link>
+                <link source="11" target="30" type="double" value="1.0"></link>
+                <link source="12" target="15" type="double" value="1.0"></link>
+                <link source="12" target="26" type="double" value="1.0"></link>
+                <link source="12" target="42" type="double" value="1.0"></link>
+                <link source="12" target="44" type="double" value="1.0"></link>
+                <link source="14" target="1" type="double" value="1.0"></link>
+                <link source="14" target="10" type="double" value="1.0"></link>
+                <link source="14" target="11" type="double" value="1.0"></link>
+                <link source="15" target="36" type="double" value="1.0"></link>
+                <link source="16" target="15" type="double" value="1.0"></link>
+                <link source="16" target="26" type="double" value="1.0"></link>
+                <link source="16" target="42" type="double" value="1.0"></link>
+                <link source="17" target="4" type="double" value="1.0"></link>
+                <link source="17" target="5" type="double" value="1.0"></link>
+                <link source="17" target="22" type="double" value="1.0"></link>
+                <link source="17" target="24" type="double" value="1.0"></link>
+                <link source="17" target="32" type="double" value="1.0"></link>
+                <link source="18" target="35" type="double" value="1.0"></link>
+                <link source="19" target="30" type="double" value="1.0"></link>
+                <link source="19" target="36" type="double" value="1.0"></link>
+                <link source="19" target="41" type="double" value="1.0"></link>
+                <link source="21" target="19" type="double" value="1.0"></link>
+                <link source="21" target="31" type="double" value="1.0"></link>
+                <link source="21" target="40" type="double" value="1.0"></link>
+                <link source="22" target="17" type="double" value="1.0"></link>
+                <link source="23" target="19" type="double" value="1.0"></link>
+                <link source="24" target="17" type="double" value="1.0"></link>
+                <link source="24" target="22" type="double" value="1.0"></link>
+                <link source="24" target="28" type="double" value="1.0"></link>
+                <link source="25" target="24" type="double" value="1.0"></link>
+                <link source="25" target="27" type="double" value="1.0"></link>
+                <link source="25" target="28" type="double" value="1.0"></link>
+                <link source="25" target="32" type="double" value="1.0"></link>
+                <link source="26" target="7" type="double" value="1.0"></link>
+                <link source="26" target="16" type="double" value="1.0"></link>
+                <link source="26" target="42" type="double" value="1.0"></link>
+                <link source="27" target="17" type="double" value="1.0"></link>
+                <link source="27" target="28" type="double" value="1.0"></link>
+                <link source="28" target="24" type="double" value="1.0"></link>
+                <link source="28" target="27" type="double" value="1.0"></link>
+                <link source="29" target="30" type="double" value="1.0"></link>
+                <link source="29" target="33" type="double" value="1.0"></link>
+                <link source="29" target="42" type="double" value="1.0"></link>
+                <link source="30" target="19" type="double" value="1.0"></link>
+                <link source="30" target="29" type="double" value="1.0"></link>
+                <link source="30" target="41" type="double" value="1.0"></link>
+                <link source="31" target="32" type="double" value="1.0"></link>
+                <link source="31" target="37" type="double" value="1.0"></link>
+                <link source="32" target="31" type="double" value="1.0"></link>
+                <link source="32" target="37" type="double" value="1.0"></link>
+                <link source="33" target="10" type="double" value="1.0"></link>
+                <link source="33" target="29" type="double" value="1.0"></link>
+                <link source="33" target="30" type="double" value="1.0"></link>
+                <link source="34" target="4" type="double" value="1.0"></link>
+                <link source="34" target="39" type="double" value="1.0"></link>
+                <link source="34" target="43" type="double" value="1.0"></link>
+                <link source="35" target="6" type="double" value="1.0"></link>
+                <link source="35" target="28" type="double" value="1.0"></link>
+                <link source="36" target="15" type="double" value="1.0"></link>
+                <link source="36" target="30" type="double" value="1.0"></link>
+                <link source="36" target="38" type="double" value="1.0"></link>
+                <link source="36" target="41" type="double" value="1.0"></link>
+                <link source="37" target="21" type="double" value="1.0"></link>
+                <link source="37" target="31" type="double" value="1.0"></link>
+                <link source="37" target="32" type="double" value="1.0"></link>
+                <link source="37" target="34" type="double" value="1.0"></link>
+                <link source="37" target="35" type="double" value="1.0"></link>
+                <link source="38" target="41" type="double" value="1.0"></link>
+                <link source="39" target="34" type="double" value="1.0"></link>
+                <link source="39" target="43" type="double" value="1.0"></link>
+                <link source="40" target="45" type="double" value="1.0"></link>
+                <link source="40" target="46" type="double" value="1.0"></link>
+                <link source="40" target="47" type="double" value="1.0"></link>
+                <link source="41" target="19" type="double" value="1.0"></link>
+                <link source="41" target="30" type="double" value="1.0"></link>
+                <link source="41" target="36" type="double" value="1.0"></link>
+                <link source="42" target="15" type="double" value="1.0"></link>
+                <link source="42" target="26" type="double" value="1.0"></link>
+                <link source="43" target="39" type="double" value="1.0"></link>
+                <link source="44" target="7" type="double" value="1.0"></link>
+                <link source="44" target="16" type="double" value="1.0"></link>
+                <link source="45" target="40" type="double" value="1.0"></link>
+                <link source="45" target="46" type="double" value="1.0"></link>
+                <link source="45" target="47" type="double" value="1.0"></link>
+                <link source="46" target="40" type="double" value="1.0"></link>
+                <link source="46" target="45" type="double" value="1.0"></link>
+                <link source="46" target="47" type="double" value="1.0"></link>
+                <link source="46" target="49" type="double" value="1.0"></link>
+                <link source="47" target="40" type="double" value="1.0"></link>
+                <link source="47" target="45" type="double" value="1.0"></link>
+                <link source="47" target="46" type="double" value="1.0"></link>
+                <link source="48" target="46" type="double" value="1.0"></link>
+                <link source="48" target="49" type="double" value="1.0"></link>
+                <link source="49" target="46" type="double" value="1.0"></link>
+                <link source="49" target="48" type="double" value="1.0"></link>
+                <link source="50" target="23" type="double" value="1.0"></link>
+            </network>
+        </networks>
+    </MetaNetwork>
+</DynamicNetwork>
+

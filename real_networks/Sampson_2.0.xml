@@ -1,0 +1,66 @@
+<DynamicNetwork>
+<MetaNetwork>
+<nodes>
+<nodeclass type="agent">
+<node id="John"/>
+<node id="Bosco"/>
+<node id="Gregory"/>
+<node id="Basil"/>
+<node id="Peter"/>
+<node id="Bonaventure"/>
+<node id="Berthold"/>
+<node id="Mark"/>
+<node id="Victor"/>
+<node id="Ambrose"/>
+<node id="Ramuald"/>
+<node id="Louis"/>
+<node id="Winfrid"/>
+<node id="Amand"/>
+<node id="Hugh"/>
+<node id="Boniface"/>
+<node id="Albert"/>
+<node id="Elias"/>
+</nodeclass>
+</nodes>
+<networks>
+<network sourceType="agent" targetType="agent" id="test" isDirected="true">
+<link source="John" target="Gregory" type="double" value="1"/>
+<link source="John" target="Berthold" type="double" value="-1"/>
+<link source="Bosco" target="John" type="double" value="1"/>
+<link source="Bosco" target="Basil" type="double" value="-1"/>
+<link source="Gregory" target="John" type="double" value="1"/>
+<link source="Gregory" target="Basil" type="double" value="-1"/>
+<link source="Basil" target="Bosco" type="double" value="-1"/>
+<link source="Basil" target="Peter" type="double" value="1"/>
+<link source="Peter" target="Basil" type="double" value="1"/>
+<link source="Bonaventure" target="Gregory" type="double" value="-1"/>
+<link source="Bonaventure" target="Basil" type="double" value="1"/>
+<link source="Berthold" target="Bosco" type="double" value="1"/>
+<link source="Berthold" target="Basil" type="double" value="-1"/>
+<link source="Mark" target="Bosco" type="double" value="-1"/>
+<link source="Mark" target="Basil" type="double" value="1"/>
+<link source="Victor" target="Gregory" type="double" value="-1"/>
+<link source="Victor" target="Mark" type="double" value="1"/>
+<link source="Ambrose" target="Basil" type="double" value="1"/>
+<link source="Ramuald" target="Bosco" type="double" value="-1"/>
+<link source="Ramuald" target="Mark" type="double" value="1"/>
+<link source="Louis" target="John" type="double" value="1"/>
+<link source="Winfrid" target="Bosco" type="double" value="-1"/>
+<link source="Winfrid" target="Elias" type="double" value="1"/>
+<link source="Amand" target="John" type="double" value="1"/>
+<link source="Amand" target="Basil" type="double" value="-1"/>
+<link source="Hugh" target="Bosco" type="double" value="1"/>
+<link source="Hugh" target="Winfrid" type="double" value="-1"/>
+<link source="Boniface" target="Bosco" type="double" value="1"/>
+<link source="Boniface" target="Basil" type="double" value="-1"/>
+<link source="Albert" target="Bonaventure" type="double" value="-1"/>
+<link source="Albert" target="Elias" type="double" value="1"/>
+<link source="Elias" target="Mark" type="double" value="-1"/>
+<link source="Elias" target="Albert" type="double" value="1"/>
+<properties>
+<property category="" name="file" type="string" value="C:\Oleg\Data\Sampson\Sampson.dl"/>
+</properties>
+</network>
+</networks>
+</MetaNetwork>
+</DynamicNetwork>

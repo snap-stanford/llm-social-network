@@ -8,8 +8,6 @@ from openai import OpenAI
 
 from constants_and_utils import *
 
-client = OpenAI(api_key=OPEN_API_KEY)
-
 NAMES_TEMPERATURE = 1.2
 
 DEMO_DESCRIPTIONS = {'gender': 'Woman, Man, or Nonbinary',
@@ -28,8 +26,6 @@ GENERIC = {'name': 'John Smith',
 GENERATING PERSONAS WITH GPT
 """
 
-
-client = OpenAI(api_key="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" )
 
 # def generate_personas(n, demos_to_include, fn, save_response=True):
 #     """
@@ -124,17 +120,6 @@ client = OpenAI(api_key="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" )
 #     print(demo_keys)
 #     return personas, demo_keys
 
-
-def convert_persona_to_string(name, personas, demos_to_include):
-    """
-    Generate string for persona, specifying which demographics to include (if any).
-    """
-
-    s = f'{name} '
-    for d in demos_to_include:
-        s += f'{d} {personas[name][d]}, '
-
-    return s[:-2]  # remove trailing comma
 
 """
 GENERATING PERSONAS PROGRAMMATICALLY
@@ -406,7 +391,7 @@ def generate_interests(personas, demos, model):
             prompt += demo + ': ' + str(personas[name][demo]) + '\n'
         prompt += 'interests: '
 
-        response = client.chat.completions.create(
+        response = CLIENT.chat.completions.create(
             model=model,
             messages=[
                 {
@@ -559,7 +544,7 @@ if __name__ == '__main__':
                      counts[last_name] += 1
                 else:
                      counts[last_name] = 1
-                personas_for_saving[f'{personas[person]["name"].replace(' ', '-')}'] = personas[person]
+                personas_for_saving[f'{personas[person]["name"].replace(" ", "-")}'] = personas[person]
                 del personas[person]['name']
 
             # save to json

@@ -4,74 +4,52 @@ import numpy as np
 import os
 import seaborn as sns
 import matplotlib.ticker as ticker
-
-from constants_and_utils import *
+import pandas as pd
 
 # set paper context, font scale 2, white background
 sns.set_theme(context='paper', style='white', palette='pastel', font='sans-serif', font_scale=1.5)
 # set default figure size
 plt.rcParams['figure.figsize'] = [12, 6]
 
+PATH_TO_SAVED_PLOTS = './plots'  # folder holding plots, eg, network figures
+GRAPH_TYPES = ['real', 'global', 'local', 'sequential', 'iterative']
 
 def define_color(save_names):
     """
-    Create a color palette dictionary based on conditions for save_names.
+    Create a color palette dictionary mapping save_name to color.
     """
     # Define your base palettes
     pastel_palette = sns.color_palette("pastel")
 
     # Map each save_name to a specific color
-    color_map = {}
-    for name in save_names:
-        if "real" in name and ("llm-as-agent" in name or "one-by-one" in name or "all-at-once" in name):
-            color_map[name] = pastel_palette[4]
-        elif "llm-as-agent" in name:
-            r, g, b = pastel_palette[0]
-            if "interest" in name:
-                color_map[name] = (r,g,0.85)
-            else:
-                color_map[name] = (r,g,1)
-        elif "one-by-one" in name:
-            color_map[name] = pastel_palette[1]
-        elif "all-at-once" in name:
-            color_map[name] = pastel_palette[2]
-        elif "real" in name:
-            color_map[name] = pastel_palette[3]
-        elif "literature" in name:
-            color_map[name] = pastel_palette[5]
-
+    color_map = {name: pastel_palette[custom_sort_key(name)] for name in save_names}
     return color_map
 
 def adapt_legend(legend):
+    """
+    Modify text in legend.
+    """
     legend.set_title(None)
     for text in legend.get_texts():
-        if 'llm-as-agent' in text.get_text():
-            if 'interest' in text.get_text():
-                text.set_text('Local w/ interests')
-            else:
-                text.set_text('Local')
-        elif 'one-by-one' in text.get_text():
-            text.set_text('Sequential')
-        elif 'all-at-once' in text.get_text():
-            text.set_text('Global')
-        elif 'real' in text.get_text():
-            text.set_text('Real')
-        elif 'literature' in text.get_text():
-            text.set_text('Literature')
+        t = text.get_text()
+        for key in GRAPH_TYPES:
+            if key in t:
+                if 'interest' in t:
+                    text.set_text(key.capitalize() + ' w/ interests')
+                else:
+                    text.set_text(key.capitalize())
 
 def get_pallete(df):
+    """
+    Helper function to return color pallete dictionary.
+    """
     return define_color(df['save_name'].unique())
 
-
 def custom_sort_key(x):
-    if "llm-as-agent" in x:
-        return 3
-    elif "one-by-one" in x:
-        return 4
-    elif "all-at-once" in x:
-        return 2
-    else:
-        return 1
+    for idx, graph_type in enumerate(GRAPH_TYPES):
+        if graph_type in x:
+            return idx
+    return len(GRAPH_TYPES)  # all other names
 
 def change_order(df):
     df['sort_order'] = df['save_name'].apply(custom_sort_key)
@@ -79,31 +57,61 @@ def change_order(df):
     return df_sorted
 
 
-
-def plot_homophily(homophily_metrics_df, save_name):
-
-    if not os.path.exists(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}')):
-        os.makedirs(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}'))
-
-    # plot homophily
-
-
-    sns.boxplot(x='demo', y='metric_value', data=homophily_metrics_df, hue="save_name", palette=get_pallete(homophily_metrics_df))
-    sns.stripplot(x='demo', y='metric_value', data=homophily_metrics_df, size=4, color=".3")
-    plt.xlabel('Demographic Category')
-    plt.ylabel('Observed/expected cross relations')
-    legend = plt.legend()
+def make_plot(network_metrics_df, save_name=None, plot_type='default', plot_homophily=False,
+              x_to_keep=None, figsize=None):
+    """
+    Make plot of network metrics.
+    """
+    assert plot_type in ['default', 'bar']
+    assert '_metric_value' in network_metrics_df.columns
+    
+    plt.figure(figsize=figsize)
+    if plot_homophily:
+        x_name = 'demo'
+        x_label = 'Demographic category'
+        y_label = 'Observed/expected cross relations'
+    else:
+        x_name = 'metric_name'
+        x_label = 'Network metric'
+        y_label = 'Value'
+        orig_len = len(network_metrics_df)
+        network_metrics_df = network_metrics_df[pd.isnull(network_metrics_df.node)]
+        print(f'Dropping node-level stats: kept {len(network_metrics_df)} out of {orig_len} rows')
+    
+    if x_to_keep is not None:
+        orig_len = len(network_metrics_df)
+        network_metrics_df = network_metrics_df[network_metrics_df[x_name].isin(x_to_keep)]
+        print(f'Keeping rows in {x_to_keep}: kept {len(network_metrics_df)} out of {orig_len} rows')
+        
+    # default is SE + data points
+    if plot_type == 'default':
+        sns.stripplot(data=network_metrics_df, x=x_name, y='_metric_value',
+                      hue='save_name', palette=get_pallete(network_metrics_df), dodge=0.5,
+                      alpha=0.5, zorder=1)
+        sns.pointplot(data=network_metrics_df, x=x_name, y='_metric_value', errorbar='se',
+                      hue='save_name', color='black', dodge=0.6, 
+                      capsize=0.05, join=False, zorder=2)  # use zorder to determine which plot ends up on top
+    else:
+        sns.barplot(data=network_metrics_df, x=x_name, y='_metric_value', 
+                    hue="save_name", palette=get_pallete(network_metrics_df))
+    
+    legend = plt.legend(bbox_to_anchor=(1.2, 1))
     adapt_legend(legend)
-    plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}/homophily.png'))
-    plt.close()
-
-    sns.barplot(x='demo', y='metric_value', data=homophily_metrics_df, hue="save_name", palette=get_pallete(homophily_metrics_df))
-    plt.xlabel('Demographic Category')
-    plt.ylabel('Observed/expected cross relations')
-    legend = plt.legend()
-    adapt_legend(legend)
-    plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}/homophily_bar.png'))
-    plt.close()
+    if len(network_metrics_df[x_name].unique()) > 1:
+        plt.xlabel(x_label)
+    else:
+        plt.xlabel('')
+    plt.ylabel(y_label)
+    
+    if save_name is None:
+        plt.show()
+    else: 
+        save_path = os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}')
+        if not os.path.exists(save_path):
+            os.makedirs(save_path)
+        plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}/homophily.png'))
+        plt.close()
+        
 
 def plot_comparison_homophily(homophily_metrics_df, save_name):
 
@@ -202,53 +210,52 @@ def plot_comparison(network_metrics_df, save_name):
         plt.close()
 
 
-def plot_network_metrics(network_metrics_df, save_name):
-
-    if not os.path.exists(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}')):
-        os.makedirs(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}'))
+def plot_network_metrics(network_metrics_df, save_name=None):
+    if save_name is not None:
+        save_path = os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}')
+        if not os.path.exists(save_path):
+            os.makedirs(save_path)
 
     network_metrics_df = change_order(network_metrics_df)
 
-    # plot ['density', 'avg_clustering_coef', 'prop_nodes_lcc'] as bars on one plot
+    # plot scalar metrics
+    curr_metrics = ['density', 'avg_clustering_coef', 'prop_nodes_lcc', 'radius', 'diameter']
     sns.barplot(x='metric_name', y='metric_value',
-                data=network_metrics_df[network_metrics_df['metric_name'].isin(['density', 'avg_clustering_coef', 'prop_nodes_lcc'])],
+                data=network_metrics_df[network_metrics_df['metric_name'].isin(curr_metrics)],
                 hue='save_name', palette=get_pallete(network_metrics_df))
     plt.xlabel('Network Metric')
     plt.ylabel('Value')
     adapt_legend(plt.legend())
-    plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}/network_metrics_bar.png'))
-    plt.close()
+    if save_name is None:
+        plt.show()
+    else:
+        plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}/network_metrics_bar.png'))
+        plt.close()
 
-    # plot ['radius', 'diameter'] as bars on one plot
-    sns.barplot(x='metric_name', y='metric_value',
-                data=network_metrics_df[network_metrics_df['metric_name'].isin(['radius', 'diameter'])], hue='save_name', palette=get_pallete(network_metrics_df))
-    plt.xlabel('Network Metric')
-    plt.ylabel('Value')
-    adapt_legend(plt.legend())
-    plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}/network_metrics_bar2.png'))
-    plt.close()
-
-    # plot histograms of centralities over all nodes
+    # plot histograms of distribution metrics
     node_metrics = ['degree_centrality', 'betweenness_centrality', 'closeness_centrality']
     for metric in node_metrics:
-
         # get all values with metric_name = metric
         metric_df = network_metrics_df[network_metrics_df['metric_name'] == metric]
-        values = np.concatenate(metric_df['metric_value'].values).flatten()
-        # set x axis to (0,1)
-        plt.xlim(0, 0.85)
-        bins = np.linspace(0, 0.85, 50)
-        if metric == 'degree_centrality':
-            bins = np.linspace(0, 0.85, 25)
-        if metric == 'betweenness_centrality':
-            bins = np.linspace(0, 0.5, 25)
-            plt.xlim(0, 0.5)
-        sns.histplot(x=values.tolist(), bins=bins, stat='density', color=get_pallete(network_metrics_df)[save_name])
-        plt.xlabel(metric.replace('_', ' ').capitalize())
-        plt.ylabel('Frequency')
-        adapt_legend(plt.legend([save_name]))
-        plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}/{metric}_hist.png'))
-        plt.close()
+        for graph_name, graph_df in metric_df.groupby('save_name'):
+            values = graph_df['metric_value'].values  # num_graphs x num_nodes
+            print(len(values))
+            if metric == 'betweenness_centrality':
+                bins = np.linspace(0, 0.5, 25)
+                plt.xlim(0, 0.5)
+            else:
+                bins = np.linspace(0, 0.85, 25)
+                plt.xlim(0, 0.85)
+            sns.histplot(x=values, bins=bins, stat='density', color=get_pallete(network_metrics_df)[graph_name])
+            plt.xlabel(metric.replace('_', ' ').capitalize())
+            plt.ylabel('Frequency')
+            plt.title(graph_name)
+#             adapt_legend(plt.legend([save_name]))
+            if save_name is None:
+                plt.show()
+            else:
+                plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}/{graph_name}_{metric}_hist.png'))
+                plt.close()
 
 def plot_communities(counts, sizes, modularities, save_name):
 

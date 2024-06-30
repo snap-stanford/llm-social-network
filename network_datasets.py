@@ -1,24 +1,94 @@
 import networkx as nx
 import os
-import matplotlib.pyplot as plt
-import numpy as np
-import pandas as pd
-from scipy import stats
-from scipy.spatial import distance
-import scipy.special
-import json
-import pandas as pd
-from ast import literal_eval
+import xml.etree.ElementTree as ET
 
-import plotting
 from constants_and_utils import *
-from generate_personas import *
-from analyze_networks import *
+
+PATH_TO_REAL_NETWORKS = os.path.join(PATH_TO_FOLDER, 'real_networks')
+DIRECTED_GRAPHS = ['attiro']
+
+# =============================================
+# all these networks are in DyNetML format
+# http://www.casos.cs.cmu.edu/projects/dynetml/
+# =============================================
+
+def load_50_women(year):
+    fn = os.path.join(PATH_TO_REAL_NETWORKS, 's50', f's50_d0{year}.xml')
+    G = nx.Graph()
+    tree = ET.parse(fn)
+    root = tree.getroot()
+    metanetwork = root.find('MetaNetwork')
+    nodes = metanetwork.find('nodes').find('nodeclass').findall('node')
+    for el in nodes:
+        G.add_node(el.get('id'))
+    edges = metanetwork.find('networks').find('network').findall('link')
+    values = []
+    for el in edges: 
+        G.add_edge(el.get('source'), el.get('target'))
+        values.append(float(el.get('value')))
+    assert np.isclose(values, 1).all()  # all values should be 1.0
+    return G
+    
+    
+def load_attiro():
+    fn = os.path.join(PATH_TO_REAL_NETWORKS, 'attiro.xml')
+    return load_visiting_families(fn)
+    
+def load_san_juan():
+    fn = os.path.join(PATH_TO_REAL_NETWORKS, 'SanJuanSur.xml')
+    return load_visiting_families(fn)
+    
+def load_visiting_families(fn):
+    G = nx.DiGraph()
+    tree = ET.parse(fn)
+    root = tree.getroot()
+    values = []
+    for el in root.iter():  # depth-first search over elements
+        if el.tag == 'node':
+            G.add_node(el.get('id'))
+        elif el.tag == 'link':
+            G.add_edge(el.get('source'), el.get('target'))
+            values.append(float(el.get('value')))  # ignore value, 1-3 all mean visits
+    assert np.isin(values, [1, 2, 3]).all()
+    return G
 
 
+def load_bk_frat():
+    fn = os.path.join(PATH_TO_REAL_NETWORKS, 'bkfrat.xml')
+    return load_bk(fn)
 
+def load_bk(fn):
+    G = nx.DiGraph()
+    tree = ET.parse(fn)
+    root = tree.getroot()
+    values = []
+    for el in root.iter():  # depth-first search over elements
+        if el.tag == 'node':
+            G.add_node(el.get('id'))
+        elif el.tag == 'link':
+            G.add_edge(el.get('source'), el.get('target'))
+            values.append(float(el.get('value')))  # ignore value, 1-3 all mean visits
+    assert np.isin(values, [1, 2, 3]).all()
+    return G
+    
+def load_network_from_xml(fn):
+    if fn in DIRECTED_GRAPHS:
+        G = nx.DiGraph()
+    else:
+        G = nx.Graph()
+    # network is in DyNetML format: http://www.casos.cs.cmu.edu/projects/dynetml/
+    tree = ET.parse(os.path.join(PATH_TO_REAL_NETWORKS, fn))
+    root = tree.getroot(tree)
+    for el in root.iter():  # depth-first search over elements
+        if el.tag == 'node':
+            G.add_node(el.get('id'))
+        elif el.tag == 'link':
+            G.add_edge(el.get('source'), el.get('target'))
+    return G
+
+    
 def create_moreno_graphs_girls():
-    fn = PATH_TO_FOLDER + '/real_networks/moreno_vdb/out.moreno_vdb_vdb'
+    fn = os.path.join(PATH_TO_REAL_NETWORKS, 'moreno_vdb', 'out.moreno_vdb_vdb')
     graphs = {}
     graphs['moreno girls graph'] = nx.DiGraph()
 
@@ -46,7 +116,7 @@ def create_moreno_graphs_girls():
 #     return graphs
 
 def create_moreno_graphs_boys():
-    fn = PATH_TO_FOLDER + '/real_networks/moreno_highschool/out.moreno_highschool_highschool'
+    fn = os.path.join(PATH_TO_REAL_NETWORKS, 'moreno_highschool', 'out.moreno_highschool_highschool')
     graphs = {}
     graphs['moreno boys graph'] = nx.DiGraph()
 
@@ -60,7 +130,7 @@ def create_moreno_graphs_boys():
     return graphs
     
 def create_hitech_graphs():
-    fn = PATH_TO_FOLDER + '/real_networks/hiTech/Hi-tech.net'
+    fn = os.path.join(PATH_TO_REAL_NETWORKS, 'hiTech/Hi-tech.net')
     graphs = {}
     graphs['hitech graph'] = nx.DiGraph()
     
@@ -76,7 +146,7 @@ def create_hitech_graphs():
     return graphs
     
 def create_prison_graphs():
-    fn = PATH_TO_FOLDER + '/real_networks/prison.xml'
+    fn = os.path.join(PATH_TO_REAL_NETWORKS, 'prison.xml')
     graphs = {}
     graphs['prison graph'] = nx.DiGraph()
     
@@ -99,7 +169,7 @@ def create_prison_graphs():
     return graphs
     
 def create_tailor_graphs():
-    fn = PATH_TO_FOLDER + '/real_networks/kaptail 2.xml'
+    fn = os.path.join(PATH_TO_REAL_NETWORKS, 'kaptail 2.xml')
     graphs = {}
     
     with open(fn, 'r') as f:
@@ -147,28 +217,7 @@ def create_tailor_graphs():
 #
 #     return graphs
     
-def create_attiro_graphs():
-    fn = PATH_TO_FOLDER + '/real_networks/attiro.xml'
-    graphs = {}
-    graphs['attiro graph'] = nx.DiGraph()
-    
-    with open(fn, 'r') as f:
-        content = f.readlines()[0]
-        start = 0
-        while (True):
-            start = content.find("link", start) + 1
-            if (start == 0):
-                break
-            src_str = content.find("source", start)
-            tgt_str = content.find("target", start)
-            typ_str = content.find("type", start)
-            
-            src = content[src_str:tgt_str].split('"')[1]
-            tgt = content[tgt_str:typ_str].split('"')[1]
-            
-            graphs['attiro graph'].add_edges_from([(src, tgt)])
-            
-    return graphs
+
     
 # def create_bktec_graphs():
 #     fn = PATH_TO_FOLDER + '/real_networks/bktec.xml'
@@ -263,21 +312,6 @@ def create_pilot_graphs():
 
     return graphs
     
-def create_sanjuan_graphs():
-    fn = PATH_TO_FOLDER + '/real_networks/SanJuanSur.paj'
-    graphs = {}
-    graphs['san juan graph'] = nx.DiGraph()
-    
-    with open(fn, 'r') as f:
-        edges = f.readlines()
-        for edge in edges[78:277]:
-            u1, u2 = edge[5:].split('  ', 1)
-            u1 = u1.strip()
-            u2 = u2.strip()
-            u2 = u2.split(' ')[0]
-            graphs['san juan graph'].add_edges_from([(u1, u2)])
-    
-    return graphs
     
 # def create_mexico_graphs():
 #     fn = PATH_TO_FOLDER + '/real_networks/mexican_power.paj'
@@ -560,189 +594,189 @@ def create_karate_graphs():
 #     plt.show()
 
 
-def get_divs(df_one, df_two, divs, names, metrics, metric, name):
+# def get_divs(df_one, df_two, divs, names, metrics, metric, name):
 
 
-    for i in range(len(df_one)):
-        for j in range(0, len(df_two)):
-            values_1 = df_one.iloc[i]['metric_value']
-            values_2 = df_two.iloc[j]['metric_value']
+#     for i in range(len(df_one)):
+#         for j in range(0, len(df_two)):
+#             values_1 = df_one.iloc[i]['metric_value']
+#             values_2 = df_two.iloc[j]['metric_value']
 
-            # find max
-            max_val = max(max(values_1), max(values_2))
-            min_val = min(min(values_1), min(values_2))
+#             # find max
+#             max_val = max(max(values_1), max(values_2))
+#             min_val = min(min(values_1), min(values_2))
 
-            num_bins = 8
+#             num_bins = 8
 
-            # create bins
-            bins = np.linspace(min_val, max_val, num_bins)
+#             # create bins
+#             bins = np.linspace(min_val, max_val, num_bins)
 
-            # create histograms
-            hist_1, _ = np.histogram(values_1, bins, density=True)
-            hist_2, _ = np.histogram(values_2, bins, density=True)
+#             # create histograms
+#             hist_1, _ = np.histogram(values_1, bins, density=True)
+#             hist_2, _ = np.histogram(values_2, bins, density=True)
 
-            # calculate jensen-shannon divergence
-            divs.append(distance.jensenshannon(hist_1, hist_2))
-            metrics.append(metric)
-            names.append(f'{name}')
+#             # calculate jensen-shannon divergence
+#             divs.append(distance.jensenshannon(hist_1, hist_2))
+#             metrics.append(metric)
+#             names.append(f'{name}')
 
-    return divs, metrics, names
-
-
-def compare_networks(generated_names, real=True):
-    # load stats/{name}_network_metrics.json and join for all names
-    if real:
-        list_of_names = ['real'] + generated_names
-    else:
-        list_of_names = generated_names
-    dfs = []
-    for name in list_of_names:
-        with open('stats/' + name + '/network_metrics.csv', 'r') as f:
-            dfs.append(pd.read_csv(f, index_col=0))
-
-    # create one df from dfs
-    data = pd.concat(dfs, axis=0)
-
-    data.to_csv('stats/compare_networks.csv')
-    plotting.plot_comparison(data, '-'.join(list_of_names))
-
-def compare_homophily(generated_names, add_literature=False):
-    # load stats/{name}_network_metrics.json and join for all names
-    list_of_names =  generated_names
-
-    dfs = []
-    for name in list_of_names:
-        with open('stats/' + name + '/homophily.csv', 'r') as f:
-            dfs.append(pd.read_csv(f, index_col=0))
-
-    if add_literature:
-        data = pd.DataFrame({'graph_nr': [0, 0, 0, 0, 0],
-                             'demo': ['gender', 'race/ethnicity', 'age', 'religion', 'political affiliation'],
-                             'metric_value': [0.92, 0.434, 0.6, 0.704, 0.536], 'save_name': ['literature']*5})
-
-        dfs.append(data)
-
-    if add_literature:
-        list_of_names.append('literature')
-    data = pd.concat(dfs, axis=0)
-
-    # reindex
-    data.reset_index(drop=True, inplace=True)
-    data.to_csv('stats/compare_homophily.csv')
-    plotting.plot_comparison_homophily(data, '-'.join(list_of_names))
-
-def compare_networks_divs(generated_name):
-
-    list_of_names = ['real', generated_name]
-    dfs = []
-    for name in list_of_names:
-        with open('stats/' + name + '/network_metrics.csv', 'r') as f:
-            dfs.append(pd.read_csv(f, index_col=0))
-
-    # create one df from dfs
-    data = pd.concat(dfs, axis=0)
-
-    list_of_names = ['real', generated_name]
-
-    divs = []
-    names = []
-    metrics = []
+#     return divs, metrics, names
 
 
-    for node_metric in ['degree_centrality', 'betweenness_centrality', 'closeness_centrality']:
+# def compare_networks(generated_names, real=True):
+#     # load stats/{name}_network_metrics.json and join for all names
+#     if real:
+#         list_of_names = ['real'] + generated_names
+#     else:
+#         list_of_names = generated_names
+#     dfs = []
+#     for name in list_of_names:
+#         with open('stats/' + name + '/network_metrics.csv', 'r') as f:
+#             dfs.append(pd.read_csv(f, index_col=0))
+
+#     # create one df from dfs
+#     data = pd.concat(dfs, axis=0)
+
+#     data.to_csv('stats/compare_networks.csv')
+#     plotting.plot_comparison(data, '-'.join(list_of_names))
+
+# def compare_homophily(generated_names, add_literature=False):
+#     # load stats/{name}_network_metrics.json and join for all names
+#     list_of_names =  generated_names
+
+#     dfs = []
+#     for name in list_of_names:
+#         with open('stats/' + name + '/homophily.csv', 'r') as f:
+#             dfs.append(pd.read_csv(f, index_col=0))
+
+#     if add_literature:
+#         data = pd.DataFrame({'graph_nr': [0, 0, 0, 0, 0],
+#                              'demo': ['gender', 'race/ethnicity', 'age', 'religion', 'political affiliation'],
+#                              'metric_value': [0.92, 0.434, 0.6, 0.704, 0.536], 'save_name': ['literature']*5})
+
+#         dfs.append(data)
+
+#     if add_literature:
+#         list_of_names.append('literature')
+#     data = pd.concat(dfs, axis=0)
+
+#     # reindex
+#     data.reset_index(drop=True, inplace=True)
+#     data.to_csv('stats/compare_homophily.csv')
+#     plotting.plot_comparison_homophily(data, '-'.join(list_of_names))
+
+# def compare_networks_divs(generated_name):
+
+#     list_of_names = ['real', generated_name]
+#     dfs = []
+#     for name in list_of_names:
+#         with open('stats/' + name + '/network_metrics.csv', 'r') as f:
+#             dfs.append(pd.read_csv(f, index_col=0))
+
+#     # create one df from dfs
+#     data = pd.concat(dfs, axis=0)
+
+#     list_of_names = ['real', generated_name]
+
+#     divs = []
+#     names = []
+#     metrics = []
 
 
-        # within real networks
-        only_real = data[data['save_name'] == 'real']
-        real_metric = only_real[only_real['metric_name'] == node_metric]
-        real_metric.loc[:, 'metric_value'] = real_metric['metric_value'].apply(literal_eval)
-
-        divs, metris, names = get_divs(real_metric, real_metric, divs, names, metrics, node_metric, f'inter-{list_of_names[0]}')
-
-        # within generated networks
-        only_generated = data[data['save_name'] == generated_name]
-        generated_metric = only_generated[only_generated['metric_name'] == node_metric]
-        generated_metric.loc[:, 'metric_value'] = generated_metric['metric_value'].apply(literal_eval)
-
-        divs, metrics, names = get_divs(generated_metric, generated_metric, divs, names, metrics, node_metric, f'inter-{list_of_names[1]}')
-
-        # between real and generated
-        divs, metrics, names = get_divs(real_metric, generated_metric, divs, names, metrics, node_metric, f'{list_of_names[0]}-{list_of_names[1]}')
-
-        # plot
-    divs_df = pd.DataFrame({'divs': divs, 'save_name': names, 'metric_name': metrics})
-
-    plotting.plot_divs(divs_df, '-'.join(list_of_names))
+#     for node_metric in ['degree_centrality', 'betweenness_centrality', 'closeness_centrality']:
 
 
+#         # within real networks
+#         only_real = data[data['save_name'] == 'real']
+#         real_metric = only_real[only_real['metric_name'] == node_metric]
+#         real_metric.loc[:, 'metric_value'] = real_metric['metric_value'].apply(literal_eval)
 
+#         divs, metris, names = get_divs(real_metric, real_metric, divs, names, metrics, node_metric, f'inter-{list_of_names[0]}')
 
-if __name__ == '__main__':
-    graph_dict = {}
-    graph_dict.update(create_hitech_graphs())
-    graph_dict.update(create_prison_graphs())
-    graph_dict.update(create_galesburg_graphs())
-    graph_dict.update(create_moreno_graphs_boys())
-    graph_dict.update(create_karate_graphs())
-    graph_dict.update(create_tailor_graphs())
-    graph_dict.update(create_moreno_graphs_girls())
+#         # within generated networks
+#         only_generated = data[data['save_name'] == generated_name]
+#         generated_metric = only_generated[only_generated['metric_name'] == node_metric]
+#         generated_metric.loc[:, 'metric_value'] = generated_metric['metric_value'].apply(literal_eval)
 
-    # graph_dict.update(create_pilot_graphs())
-    # graph_dict.update(create_attiro_graphs())
-    # graph_dict.update(create_dining_graphs())
-    # graph_dict.update(create_sanjuan_graphs())
-    # graph_dict.update(create_taro_graphs())
+#         divs, metrics, names = get_divs(generated_metric, generated_metric, divs, names, metrics, node_metric, f'inter-{list_of_names[1]}')
+
+#         # between real and generated
+#         divs, metrics, names = get_divs(real_metric, generated_metric, divs, names, metrics, node_metric, f'{list_of_names[0]}-{list_of_names[1]}')
+
+#         # plot
+#     divs_df = pd.DataFrame({'divs': divs, 'save_name': names, 'metric_name': metrics})
+
+#     plotting.plot_divs(divs_df, '-'.join(list_of_names))
 
 
 
-    list_of_G_real_networks = [G.to_undirected(reciprocal=False) for G in graph_dict.values()]
-    print("Real")
-    count_communities(list_of_G_real_networks, 'real')
-    print("Number of real networks:", len(list_of_G_real_networks))
-    draw_list_of_networks(list_of_G_real_networks, 'real')
-    summarize_network_metrics(list_of_G_real_networks, None, None, save_name="real", demos=False)
 
-    list_names = ['llm-as-agent-for_us_50-gpt-3.5-turbo', 'all-at-once-for_us_50-gpt-3.5-turbo', 'one-by-one-for_us_50-gpt-3.5-turbo'] #, 'llm-as-agent-for_us_50-with-interests-gpt-3.5-turbo'] # SET
-    nr_networks = [100,100,100,30] # set
+# if __name__ == '__main__':
+#     graph_dict = {}
+#     graph_dict.update(create_hitech_graphs())
+#     graph_dict.update(create_prison_graphs())
+#     graph_dict.update(create_galesburg_graphs())
+#     graph_dict.update(create_moreno_graphs_boys())
+#     graph_dict.update(create_karate_graphs())
+#     graph_dict.update(create_tailor_graphs())
+#     graph_dict.update(create_moreno_graphs_girls())
 
-    for ind, generations in enumerate(list_names):
-        list_of_G_llm = load_list_of_graphs(generations, 0, nr_networks[ind])
-
-        # if no edges remove from list
-        list_of_G_llm = [G for G in list_of_G_llm if G.number_of_edges() > 0]
-        print(generations)
-        count_communities(list_of_G_llm, generations)
-        print(len(list_of_G_llm))
-        fn = os.path.join(PATH_TO_TEXT_FILES, 'us_50.json') # SET
-        with open(fn, 'r') as f:
-            personas = json.load(f)
-        demo_keys = ['gender', 'race/ethnicity', 'age', 'religion', 'political affiliation']
-        summarize_network_metrics(list_of_G_llm, personas, demo_keys, save_name=generations)
-        compare_networks_divs(generations)
+#     # graph_dict.update(create_pilot_graphs())
+#     # graph_dict.update(create_attiro_graphs())
+#     # graph_dict.update(create_dining_graphs())
+#     # graph_dict.update(create_sanjuan_graphs())
+#     # graph_dict.update(create_taro_graphs())
 
 
-    compare_networks(list_names)
-    compare_networks(list_names, real=False)
-    compare_homophily(list_names)
-    compare_homophily(list_names, add_literature=True)
+
+#     list_of_G_real_networks = [G.to_undirected(reciprocal=False) for G in graph_dict.values()]
+#     print("Real")
+#     count_communities(list_of_G_real_networks, 'real')
+#     print("Number of real networks:", len(list_of_G_real_networks))
+#     draw_list_of_networks(list_of_G_real_networks, 'real')
+#     summarize_network_metrics(list_of_G_real_networks, None, None, save_name="real", demos=False)
+
+#     list_names = ['llm-as-agent-for_us_50-gpt-3.5-turbo', 'all-at-once-for_us_50-gpt-3.5-turbo', 'one-by-one-for_us_50-gpt-3.5-turbo'] #, 'llm-as-agent-for_us_50-with-interests-gpt-3.5-turbo'] # SET
+#     nr_networks = [100,100,100,30] # set
+
+#     for ind, generations in enumerate(list_names):
+#         list_of_G_llm = load_list_of_graphs(generations, 0, nr_networks[ind])
+
+#         # if no edges remove from list
+#         list_of_G_llm = [G for G in list_of_G_llm if G.number_of_edges() > 0]
+#         print(generations)
+#         count_communities(list_of_G_llm, generations)
+#         print(len(list_of_G_llm))
+#         fn = os.path.join(PATH_TO_TEXT_FILES, 'us_50.json') # SET
+#         with open(fn, 'r') as f:
+#             personas = json.load(f)
+#         demo_keys = ['gender', 'race/ethnicity', 'age', 'religion', 'political affiliation']
+#         summarize_network_metrics(list_of_G_llm, personas, demo_keys, save_name=generations)
+#         compare_networks_divs(generations)
 
 
-    combine_plots(['plots/real', 'plots/all-at-once-for_us_50-gpt-3.5-turbo', 'plots/llm-as-agent-for_us_50-gpt-3.5-turbo', 'plots/one-by-one-for_us_50-gpt-3.5-turbo', ],
-                  ['betweenness_centrality_hist.png', 'degree_centrality_hist.png', 'closeness_centrality_hist.png', 'community_count_hist.png', 'community_size_hist.png'
-                   ,'modularity_hist.png'])
+#     compare_networks(list_names)
+#     compare_networks(list_names, real=False)
+#     compare_homophily(list_names)
+#     compare_homophily(list_names, add_literature=True)
 
 
-    # load_and_draw_network('text-files/all-at-once-for_us_50-gpt-3.5-turbo', nr_networks[0])
-    # load_and_draw_network('text-files/llm-as-agent-for_us_50-gpt-3.5-turbo', nr_networks[0])
-    # load_and_draw_network('text-files/one-by-one-for_us_50-gpt-3.5-turbo', nr_networks[0])
+#     combine_plots(['plots/real', 'plots/all-at-once-for_us_50-gpt-3.5-turbo', 'plots/llm-as-agent-for_us_50-gpt-3.5-turbo', 'plots/one-by-one-for_us_50-gpt-3.5-turbo', ],
+#                   ['betweenness_centrality_hist.png', 'degree_centrality_hist.png', 'closeness_centrality_hist.png', 'community_count_hist.png', 'community_size_hist.png'
+#                    ,'modularity_hist.png'])
 
-#     print("--------CROSS COMPARISON--------")
-#     funcs = [nx.density, nx.average_clustering, prop_nodes_in_giant_component, nx.degree_centrality, nx.betweenness_centrality, nx.closeness_centrality, nx.triangles]
-#     func_labels = ['density', 'clustering coef', 'prop nodes in LCC', 'degree cent.', 'betweenness cent.', 'closeness cent.', 'triangle part.']
-#     compare_graph_lists(list_of_G, test_G, funcs, func_labels, method='Jensen-Shannon')
-# #    print("--------WITHIN REAL NETWORKS--------")
-# #    compare_graph_lists_jss(list_of_G, list_of_G, funcs, func_labels)
-# #    print("--------WITHIN GENERATED GRAPHS--------")
-# #    compare_graph_lists_jss(test_G, test_G, funcs, func_labels)
-# #    summarize_network_metrics(list_of_G, funcs, func_labels)
-# #    summarize_network_metrics(test_G, funcs, func_labels)
+
+#     # load_and_draw_network('text-files/all-at-once-for_us_50-gpt-3.5-turbo', nr_networks[0])
+#     # load_and_draw_network('text-files/llm-as-agent-for_us_50-gpt-3.5-turbo', nr_networks[0])
+#     # load_and_draw_network('text-files/one-by-one-for_us_50-gpt-3.5-turbo', nr_networks[0])
+
+# #     print("--------CROSS COMPARISON--------")
+# #     funcs = [nx.density, nx.average_clustering, prop_nodes_in_giant_component, nx.degree_centrality, nx.betweenness_centrality, nx.closeness_centrality, nx.triangles]
+# #     func_labels = ['density', 'clustering coef', 'prop nodes in LCC', 'degree cent.', 'betweenness cent.', 'closeness cent.', 'triangle part.']
+# #     compare_graph_lists(list_of_G, test_G, funcs, func_labels, method='Jensen-Shannon')
+# # #    print("--------WITHIN REAL NETWORKS--------")
+# # #    compare_graph_lists_jss(list_of_G, list_of_G, funcs, func_labels)
+# # #    print("--------WITHIN GENERATED GRAPHS--------")
+# # #    compare_graph_lists_jss(test_G, test_G, funcs, func_labels)
+# # #    summarize_network_metrics(list_of_G, funcs, func_labels)
+# # #    summarize_network_metrics(test_G, funcs, func_labels)
