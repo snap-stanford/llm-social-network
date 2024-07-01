@@ -89,8 +89,8 @@ def make_plot(network_metrics_df, save_name=None, plot_type='default', plot_homo
                       hue='save_name', palette=get_pallete(network_metrics_df), dodge=0.5,
                       alpha=0.5, zorder=1)
         sns.pointplot(data=network_metrics_df, x=x_name, y='_metric_value', errorbar='se',
-                      hue='save_name', color='black', dodge=0.6, 
-                      capsize=0.05, join=False, zorder=2)  # use zorder to determine which plot ends up on top
+                      hue='save_name', palette='dark:black', dodge=0.6, legend=False,
+                      capsize=0.05, linestyle='none', zorder=2)  # use zorder to determine which plot ends up on top
     else:
         sns.barplot(data=network_metrics_df, x=x_name, y='_metric_value', 
                     hue="save_name", palette=get_pallete(network_metrics_df))
