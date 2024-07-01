@@ -15,7 +15,13 @@ PATH_TO_TEXT_FILES = PATH_TO_FOLDER + '/text-files'  # folder holding text files
 PATH_TO_STATS_FILES = PATH_TO_FOLDER + '/stats'  # folder holding stats files, eg, proportion of nodes in giant component
 DEFAULT_TEMPERATURE = 0.8
 SHOW_PLOTS = False
-CLIENT = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
+# os.system('source ~/.bash-profile')
+# api_key = os.getenv("OPENAI_API_KEY")
+with open('api-key.txt', 'r') as f:
+    api_key = f.readlines()[0].strip()
+assert api_key is not None
+CLIENT = OpenAI(api_key=api_key)
 
 ##########################################
 # functions to draw and save networks
@@ -132,22 +138,13 @@ def draw_list_of_networks(list_of_G, network_name):
 ##########################################
 # functions to interact with GPT
 ##########################################
-def get_gpt_response(model, system_prompt, user_prompt, savename=None, verbose=False):
+def get_gpt_response(model, messages, savename=None, verbose=False):
     """
     Call OpenAI API, check for finish reason; if all looks good, return response.
     """
     response = CLIENT.chat.completions.create(
                 model=model,
-                messages=[
-                    {
-                        "role": "system",
-                        "content": system_prompt
-                    },
-                    {
-                        "role": "user",
-                        "content": user_prompt
-                    },
-                ],
+                messages=messages,
                 temperature=DEFAULT_TEMPERATURE)
     
     if savename is not None:
@@ -172,11 +169,11 @@ def get_gpt_response(model, system_prompt, user_prompt, savename=None, verbose=F
         raise Exception(f'Response stopped for reason {finish_reason}')
         
     if verbose:
-        print('SYSTEM:')
-        print(system_prompt)
-        print('\nUSER:')
-        print(user_prompt)
-        print('\nRESPONSE:')
+        for m in messages:
+            print(m['role'].upper())
+            print(m['content'])
+            print()
+        print('\nRESPONSE')
         print(response.message.content)
     return response.message.content
         

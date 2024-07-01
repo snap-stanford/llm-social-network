@@ -70,7 +70,7 @@ def get_system_prompt(method, personas, demos_to_include, curr_pid=None, G=None,
     elif method == 'iterative-add':
         prompt = prompt_personal + ' You are part of a social network and you want to make a new friend.\n\nYou will be provided a list of potential new friends, ' + persona_format + ', followed by a list of their friends\' IDs. '
         curr_friends = ', '.join(list(G.neighbors(curr_pid)))
-        prompt += 'Keep in mind that you are already friends with IDs ' + curr_friends + '\n\nWhich person in the list are you likeliest to befriend? '
+        prompt += 'Keep in mind that you are already friends with IDs ' + curr_friends + '\n\nWhich person in this list are you likeliest to befriend? '
         if include_reason:
             prompt += 'Provide your answer in JSON form: {\"new friend\": <ID>, \"reason\": <reason for adding friend>}. '
         else:
@@ -121,7 +121,7 @@ def get_user_prompt(method, personas, order, demos_to_include, curr_pid=None, G=
     
     elif method == 'iterative-add':
         friends = set(G.neighbors(curr_pid))
-        nonfriends = sorted(set(G.nodes()) - friends)
+        nonfriends = sorted(set(G.nodes()) - friends - {curr_pid})
         sample = np.random.choice(nonfriends, size=5, replace=False)
         for cand in sample:
             persona = convert_persona_to_string(personas[cand], demos_to_include, pid=cand)
@@ -171,7 +171,6 @@ def update_graph_from_response(method, response, G, curr_pid=None, include_reaso
             edges_found.append((curr_pid, str(resp[key])))
         else:
             assert len(lines) == 1, f'Found more than one line in response for {method}'
-            assert lines[0].strip('.').isnumeric()
             edges_found.append((curr_pid, lines[0].strip('.')))
     
     orig_len = len(edges_found)
@@ -201,21 +200,27 @@ def repeat_prompt_until_parsed(model, system_prompt, user_prompt, method, G,
     """
     Helper function to repeat API call and parsing until it works.
     """
+    messages = [
+        {"role": "system", "content": system_prompt},
+        {"role": "user", "content": user_prompt},
+    ]
     num_tries = 1
     while num_tries <= max_tries:
         try:
-            response = get_gpt_response(model, system_prompt, user_prompt, verbose=verbose)
+            response = get_gpt_response(model, messages, verbose=verbose)
             try:
                 G = update_graph_from_response(method, response, G, curr_pid=curr_pid)
                 return G, response, num_tries
             except Exception as e:
                 print('Failed to parse response:', e)
-                print('SYSTEM:')
-                print(system_prompt)
-                print('\nUSER:')
-                print(user_prompt)
+                for m in messages:
+                    print(m['role'].upper())
+                    print(m['content'])
+                    print()
                 print('\nRESPONSE:')
                 print(response)
+                messages.append({"role": "assistant", "content": response})
+                messages.append({"role": "user", "content": "That\'s not a valid response. Respond in the exact format required in the system instructions."})
         except Exception as e:
             print('Failed to get response:', e)
         num_tries += 1
@@ -310,6 +315,7 @@ def parse_args():
     parser.add_argument('--num_networks', type=int, default=10)
     parser.add_argument('--start_seed', type=int, default=0)  # set start seed to continue with new seeds
     parser.add_argument('--model', type=str, default='gpt-3.5-turbo')
+    parser.add_argument('--num_iter', type=int, default=3)  # only used when method is iterative
     parser.add_argument('--verbose', action='store_true')
     args = parser.parse_args()
     return args
@@ -331,7 +337,7 @@ if __name__ == '__main__':
         order = np.random.choice(pids, size=len(pids), replace=False)  # order of printing personas
         print('Order:', order[:10])
         G, num_tries, input_toks, output_toks = generate_network(args.method, args.demos_to_include, 
-                                                    personas, order, args.model, verbose=args.verbose)
+                                personas, order, args.model, num_iter=args.num_iter, verbose=args.verbose)
         
         save_prefix = f'{args.method}_{args.model}_{seed}'
         save_network(G, save_prefix)
