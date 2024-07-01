@@ -19,7 +19,7 @@ NETWORKS_TO_SKIP = [
 # http://www.casos.cs.cmu.edu/projects/dynetml/
 # =============================================
 
-def make_graphs_from_dynetml_file(fn, val_cutoff=1):
+def make_graphs_from_dynetml_file(fn, min_val=1, max_val=1e10):
     """
     DyNetML format of storing networks
     http://www.casos.cs.cmu.edu/projects/dynetml/
@@ -48,14 +48,14 @@ def make_graphs_from_dynetml_file(fn, val_cutoff=1):
             for el in n.findall('link'):
                 val = float(el.get('value'))
                 values.append(val)
-                if val >= val_cutoff:
+                if val >= min_val and val <= max_val:
                     G.add_edge(el.get('source'), el.get('target'))
             print(f'{key}: {len(G.nodes)} nodes, {len(G.edges)} edges, directed: {nx.is_directed(G)}, density: {nx.density(G):.3f}, seen values: {set(values)}')
             graphs[key] = G
     return graphs
 
 
-def make_graphs_from_paj_file(fn, directed=True, val_cutoff=1, color=None):
+def make_graphs_from_paj_file(fn, directed=True, min_val=1, max_val=1e10, color=None):
     """
     paj format of storing networks 
     """
@@ -75,14 +75,14 @@ def make_graphs_from_paj_file(fn, directed=True, val_cutoff=1, color=None):
             in_network = True 
         elif in_network and l == '':  # empty line 
             G = make_graph_from_net_file(lines[start_idx:i], key=key, 
-                    directed=directed, val_cutoff=val_cutoff, color=color)
+                    directed=directed, min_val=min_val, max_val=max_val, color=color)
             graphs[key] = G
             in_network = False 
     return graphs 
 
 
 def make_graph_from_net_file(input, key='.net', directed=True, 
-                             val_cutoff=1, color=None):
+                             min_val=1, max_val=1e10, color=None):
     """
     net format of storing networks
     """
@@ -123,7 +123,7 @@ def make_graph_from_net_file(input, key='.net', directed=True,
             v2 = elements[1].strip()
             val = float(elements[2].strip())
             values.append(val)
-            if val >= val_cutoff:
+            if val >= min_val and val <= max_val:
                 if color is not None:
                     c = elements[-1].strip()
                     assert c in ['Red', 'Blue']
@@ -178,12 +178,12 @@ def load_real_network(name):
         G = graphs['SanJuanSur.net']
     elif name.startswith('bk'):
         fn = os.path.join(PATH_TO_REAL_NETWORKS, f'{name}.xml')
-        graphs = make_graphs_from_dynetml_file(fn)
+        graphs = make_graphs_from_dynetml_file(fn, min_val=4)
         print(graphs.keys())
         G = graphs[f'{name}.xml_{name[:5].upper()}B']
     elif name == 'camp':
         fn = os.path.join(PATH_TO_REAL_NETWORKS, 'camp92.xml')
-        graphs = make_graphs_from_dynetml_file(fn)
+        graphs = make_graphs_from_dynetml_file(fn, min_val=1, max_val=3)
         G = graphs['camp92.xml_agent x agent']
     elif name == 'dining':
         fn = os.path.join(PATH_TO_REAL_NETWORKS, 'dining.xml')
@@ -260,7 +260,7 @@ def load_real_network(name):
         fn = os.path.join(PATH_TO_REAL_NETWORKS, 'karate.xml')
         graphs = make_graphs_from_dynetml_file(fn)
         G = graphs['karate.xml_agent x agent']
-    return G 
+    return G
     
     
     
