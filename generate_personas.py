@@ -5,6 +5,7 @@ import math
 import argparse
 import json
 from openai import OpenAI
+import re
 
 from constants_and_utils import *
 
@@ -15,117 +16,15 @@ DEMO_DESCRIPTIONS = {'gender': 'Woman, Man, or Nonbinary',
                      'age': '18-65',
                      'religion': 'Protestant, Catholic, Jewish, Muslim, Hindu, Buddhist, or Unreligious',
                      'political affiliation': 'Democrat, Republican, Independent'}
-GENERIC = {'name': 'John Smith',
-           'gender': 'Man',
-           'age': '35',
-           'race/ethnicity': 'White',
-           'religion': 'Protestant',
-           'political affiliation': 'Moderate'}
-           
-"""
-GENERATING PERSONAS WITH GPT
-"""
-
-
-# def generate_personas(n, demos_to_include, fn, save_response=True):
-#     """
-#     Generate n random personas: name, gender, age, ethnicity, religion, political association.
-#     """
-#     # there should be some randomness in responses, since temperature > 0
-#     prompt = f'Provide a list of {n} different names (first and last), along with their '
-#     demo_disc = [f'{d} ({DEMO_DESCRIPTIONS[d]})' for d in demos_to_include]
-#     prompt += ', '.join(demo_disc) + '. Do not generate the same name twice.\n'
-#     generic_demos = [GENERIC[d] for d in demos_to_include]
-#     # give example format
-#     # starting with 0 usually means GPT will still generate n, not n-1 personas
-#     prompt += '0. ' + GENERIC['name'] + ' - ' + ', '.join(generic_demos) + '\n'
-#     print('PROMPT')
-#     print(prompt)
-#     response = openai.ChatCompletion.create(
-#         model="gpt-3.5-turbo",
-#         messages=[{"role": "system", "content": prompt}],
-#         temperature=DEFAULT_TEMPERATURE)
-#     response = extract_gpt_output(response)
-#     print('RESPONSE')
-#     print(response)
-#
-#     if save_response:
-#         # prepend key to response
-#         key = 'Name - ' + ', '.join(demos_to_include) + '\n'
-#         response = key + response
-#         # save generated response in text file
-#         print('Saving personas in', fn)
-#         with open(fn, 'w') as f:
-#             f.write(response)
-
-
-# def load_personas_as_dict(fn, verbose=True):
-#     # load from json
-#     assert os.path.isfile(fn)
-#     # read json
-#     with open(fn, 'r') as f:
-#         personas_json = json.load(f)
-#
-#
-#
-#     return personas, demo_keys
-
-
-# def load_personas_as_dict(fn, verbose=True):
-#     """
-#     Load personas as dict of name : gender, age, etc.
-#     """
-#     assert os.path.isfile(fn)
-#     with open(fn, 'r') as f:
-#         lines = f.readlines()
-#     #assert lines[0].startswith('Name - ') commenting out for personas without names
-#     demo_keys = lines[0].split(' - ')[1].strip()
-#     demo_keys = demo_keys.split(', ')
-#     personas = {}
-#     for l in lines[1:]:
-#         l = l.strip()
-#         if '.' in l:  # drop leading number and period
-#             i, l = l.split('. ', 1)
-#         if '-' in l:
-#             name, demos = l.split(' - ')
-#         else:
-#             name = str(i)
-#             demos = l
-#         if name in personas:  # only add new names
-#             if personas[name] == demos:
-#                 if verbose:
-#                     print(f'Warning: found duplicate of {name} with same demographics')
-#             elif personas[name] != demos:
-#                 if verbose:
-#                     print(f'Warning: found duplicate of {name} with different demographics')
-#         else:
-#             demo_vals = demos.split(', ')
-#             if len(demo_vals) != len(demo_keys):  # check that all demographics are present
-#                 if verbose:
-#                     print(f'Warning: incomplete demographics for {name}')
-#             else:
-#                 valid_values = True
-#                 # check if demographic values are valid
-#                 for d, v in zip(demo_keys, demo_vals):
-#                     if d != 'age' and v not in DEMO_DESCRIPTIONS[d]:
-#                         valid_values = False
-#                         if verbose:
-#                             print(f'Warning: invalid demographic value for {name}, {d}={v}')
-#                 if valid_values:  # passed all checks
-#                     personas[name] = demo_vals
-#     print(f'Loaded {len(personas)} distinct personas with demo keys', demo_keys)
-#     print("personas")
-#     print(personas)
-#     print("demo keys")
-#     print(demo_keys)
-#     return personas, demo_keys
-
 
 """
 GENERATING PERSONAS PROGRAMMATICALLY
 """
     
 def us_population(i):
+    """
+    Sample demographics for ONE persona, following joint distributions of US population.
+    """
     person = {}
     
     # GENDER, RACE, and AGE
@@ -371,198 +270,150 @@ def us_population(i):
     del person['race']
     
     return person
-    
-# def format_person(person, i, demos):
-#     """
-#     Format programmatically generated persona as a string.
-#     """
-#     person_as_str = str(i) + '. '
-#     for demo in demos:
-#         person_as_str += str(person[demo]) + ', '
-#     person_as_str = person_as_str[:len(person_as_str)-2]
-#     person_as_str += '\n'
-#     return person_as_str
 
-def generate_interests(personas, demos, model):
-    for name in personas:
-        prompt = 'Please describe in one short sentence a specific interest of person' + name + 'Use gerund phrases:\n'
-        print(personas[name])
-        for demo in demos:
-            prompt += demo + ': ' + str(personas[name][demo]) + '\n'
-        prompt += 'interests: '
 
-        response = CLIENT.chat.completions.create(
-            model=model,
-            messages=[
-                {
-                    "role": "user",
-                    "content": prompt
-                }
-            ],
-            temperature=NAMES_TEMPERATURE)
-        response = extract_gpt_output(response)
+def convert_persona_to_string(persona, demos_to_include, pid=None):
+    """
+    Convert pid (an int) and persona (a dictionary) into a string.
+    """
+    if pid is None:
+        s = ''
+    else:
+        s = f'{pid}. '
+    if 'name' in demos_to_include:
+        name = persona['name']
+        s += f'{name} - '
+    for demo in demos_to_include:
+        if demo != 'name':
+            if demo == 'age':
+                s += f'age {persona[demo]}, '  # specify age so GPT doesn't get number confused with ID
+            else:
+                s += f'{persona[demo]}, '
+    s = s[:-2]  # remove trailing ', '
+    return s  
 
-        personas[name]['interests'] = response
 
-    return personas
-    
-def generate_names(personas, demos, model):
-
+def generate_names(personas, demos, model, verbose=False):
+    """
+    Generate names, using GPT, for a list of personas.
+    """
     for nr in personas:
-        prompt = 'Generate a name (first name last name) for someone with the following demographic information: '
-        # print(demos)
+        prompt = 'Generate a name for someone with the following demographics:\n'
         for demo in demos:
-            prompt += f'{demo}: {personas[nr][demo]}, '
-        prompt = prompt + "name: "
-        # print(prompt)
-        # print("-------------------")
-
-
-        max_tries = 10
-        i = 1
-        while i <= max_tries :
-            print('Persona ' + nr + '; Attempt ' + str(i))
-
-            try:
-                response = client.chat.completions.create(
-                    model= model,
-                    messages=[
-                        {
-                            "role": "user",
-                            "content": prompt
-                        }
-                    ],
-                    temperature=NAMES_TEMPERATURE)
-                response = extract_gpt_output(response)
-                generated_name = response.split(':')[0]
-                assert len(generated_name.split(' ')) == 2
-                assert '-' not in generated_name
-                personas[nr]['name'] = generated_name
-                break
-
-            except Exception as e:
-                print('Error:', e)
-                i += 1
-                continue
-
-    
+            prompt += f'{demo}: {personas[nr][demo]}\n'
+        prompt += 'Answer by providing ONLY their first and last name, in the format "FIRSTNAME LASTNAME".'
+        name, _, _ = repeat_prompt_until_parsed(model, None, prompt, parse_name_response, {}, max_tries=3,
+                                                temp=NAMES_TEMPERATURE,  verbose=verbose)
+        personas[nr]['name'] = name
+        print(convert_persona_to_string(personas[nr], demos, pid=nr), personas[nr]['name'])
     return personas
 
-# def generate_interests(personas):
-#     for name in personas:
-#         prompt = 'Please complete the interests of ' + name + ':\n'
-#         demos == personas[name]
-#         for demo_val in demos:
-#             prompt += demo_val + ': ' + demos[demo_val] + '\n'
-#         prompt += 'interests: '
-#
-#         response = openai.ChatCompletion.create(
-#             model="gpt-3.5-turbo",
-#             messages=[{"role": "system", "content": prompt}],
-#             temperature=DEFAULT_TEMPERATURE)
-#         response = extract_gpt_output(response)
-#         print('RESPONSE')
-#         print(response)
-#         demos['interests'] = response
-#         personas[name] = demos
-#
-#     # evaluate_interests(personas)
-#
-#     return personas
+def parse_name_response(response):
+    words = re.findall('[a-zA-Z]+', response)
+    if len(words) == 2:
+        return words[0].capitalize(), words[1].capitalize()
+    else:
+        raise Exception('Response contains more than two words')
 
 
-# def save_one_persona(person, i, name, fn, demos):
-#     with open(fn, 'a') as f:
-#         formatted = format_person(person, i, demos)
-#         # find location of the first dot .
-#         ind_dot = formatted.find('.')
-#         added_name = f'{formatted[:ind_dot+1]} {name} -{formatted[ind_dot+1:]}'  # add nrs not names, for compatibility
-#         f.write(added_name)
-
+def generate_interests(personas, demos, model, verbose=False):
+    """
+    Generate interests, using GPT, for a list of personas.
+    """
+    for nr in personas:
+        prompt = f'Describe a specific interest of someone with the following demographics:\n'
+        for demo in demos:
+            prompt += f'{demo}: {personas[nr][demo]}\n'
+        prompt += 'Answer by providing ONLY their interest in one short sentence.'
+        interests, _, _ = repeat_prompt_until_parsed(model, None, prompt, parse_interest_response, {}, max_tries=3,
+                                                     temp=NAMES_TEMPERATURE, verbose=verbose)
+        personas[nr]['interests'] = interests
+        print(convert_persona_to_string(personas[nr], demos, pid=nr), personas[nr]['interests'])
+    return personas
     
+def parse_interest_response(response):
+    response = response.strip()
+    toks = response.split()
+    if len(toks) > 100:
+        raise Exception('Interests are too long')
+    return response
+
+
 def parse():
     # Create the parser
     parser = argparse.ArgumentParser(description='Process command line arguments.')
     
     # Add arguments
-    parser.add_argument('--number_of_people', type=int, help='How many people would you like to generate?')
-    parser.add_argument('--generating_method', type=str, choices=['us', 'GPT'], help='Generate programatically or with GPT?')
-    parser.add_argument('--file_name', type=str, help='What is the name of the file where you would like to save the personas?')
-    parser.add_argument('--include_names',  action='store_true', default=False, help='Would you like to add names to the personas?')
-
-    parser.add_argument('--include_interests',  action='store_true', default=False, help='Would you like to add interests to the personas?')
+    parser.add_argument('number_of_people', type=int, help='How many people would you like to generate?')
+    parser.add_argument('save_name', type=str, help='What is the name of the file where you would like to save the personas?')
+    parser.add_argument('--include_names',  action='store_true', help='Would you like to add names to the personas?')
+    parser.add_argument('--include_interests',  action='store_true', help='Would you like to add interests to the personas?')
     parser.add_argument('--model', type=str, default='gpt-3.5-turbo', help='Which model would you like to use for generating names/interests?')
 
-    # Parse the arguments
-    args = parser.parse_args()
-
-    # Print the arguments
-    print("Number of personas", args.number_of_people)
-    print("Generation method", args.generating_method)
-    print("File destination", args.file_name)
-    
+    args = parser.parse_args()    
     return args
+
 
 if __name__ == '__main__':
     args = parse()
     # generate personas with GPT
     n = args.number_of_people
-    fn = os.path.join(PATH_TO_TEXT_FILES, args.file_name)
+    save_name = args.save_name
     demos_to_include = ['gender', 'race/ethnicity', 'age', 'religion', 'political affiliation']
 
+    # generate demographics
+    personas = {}
+    for i in range(n):
+        personas[i] = us_population(i)
+    
+    # generate names
+    if args.include_names:
+        save_name += '_w_names'
+        personas = generate_names(personas, demos_to_include, args.model)
 
-    if args.generating_method == 'GPT':
-        print("Generating personas with GPT not supported yet")
-        quit()
-        # generate_personas(n, demos_to_include, fn, save_response=True)
-        # print(load_personas_as_dict(fn))
-    else:
-        personas = {}
-        i = 1
+    # generate interests
+    if args.include_interests:
+        save_name += '_w_interests'
+        personas = generate_interests(personas, demos_to_include, args.model)
 
-        while i <= n:
-            person = us_population(i)
-            personas[str(i)] = person
-            i += 1
+    # save json
+    fn = os.path.join(PATH_TO_TEXT_FILES, save_name + '.json')
+    with open(fn, 'w') as f:
+        json.dump(personas, f)
 
-        # save json
-        with open(fn, 'w') as f:
-            json.dump(personas, f)
+    # if args.include_names:
+    #     fn = fn[:-5] + "_with_names.json"
 
+    #     personas = generate_names(personas, demos_to_include, args.model)
 
-        if args.include_names:
-            fn = fn[:-5] + "_with_names.json"
+    #     # count all unique last names in personas[person]['name']
+    #     counts = {}
+    #     personas_for_saving = {}
+    #     for person in personas:
+    #         last_name = personas[person]['name'].split(' ')[1]
+    #         if last_name in counts:
+    #                 counts[last_name] += 1
+    #         else:
+    #                 counts[last_name] = 1
+    #         personas_for_saving[f'{personas[person]["name"].replace(" ", "-")}'] = personas[person]
+    #         del personas[person]['name']
 
-            personas = generate_names(personas, demos_to_include, args.model)
+    #     # save to json
+    #     with open(fn, 'w') as f:
+    #         json.dump(personas_for_saving, f)
 
-            # count all unique last names in personas[person]['name']
-            counts = {}
-            personas_for_saving = {}
-            for person in personas:
-                last_name = personas[person]['name'].split(' ')[1]
-                if last_name in counts:
-                     counts[last_name] += 1
-                else:
-                     counts[last_name] = 1
-                personas_for_saving[f'{personas[person]["name"].replace(" ", "-")}'] = personas[person]
-                del personas[person]['name']
+    #     personas = personas_for_saving
 
-            # save to json
-            with open(fn, 'w') as f:
-                json.dump(personas_for_saving, f)
+    #     # print counts in sorted order
+    #     print(sorted(counts.items(), key=lambda x: x[1], reverse=True))
 
-            personas = personas_for_saving
+    # if args.include_interests:
+    #     fn = fn[:-5] + "_with_interests.json"
 
-            # print counts in sorted order
-            print(sorted(counts.items(), key=lambda x: x[1], reverse=True))
-
-        if args.include_interests:
-            fn = fn[:-5] + "_with_interests.json"
-
-            # save json file
-            personas = generate_interests(personas, demos_to_include, args.model)
-            with open(fn, 'w') as f:
-                json.dump(personas, f)
+    #     # save json file
+    #     personas = generate_interests(personas, demos_to_include, args.model)
+    #     with open(fn, 'w') as f:
+    #         json.dump(personas, f)
 
     # pass arguments: # of people, save path
 #
