@@ -7,6 +7,7 @@ import random
 import json
 from PIL import Image
 import os
+import time
 
 import plotting
 
@@ -138,14 +139,14 @@ def draw_list_of_networks(list_of_G, network_name):
 ##########################################
 # functions to interact with GPT
 ##########################################
-def get_gpt_response(model, messages, savename=None, verbose=False):
+def get_gpt_response(model, messages, savename=None, temp=DEFAULT_TEMPERATURE, verbose=False):
     """
     Call OpenAI API, check for finish reason; if all looks good, return response.
     """
     response = CLIENT.chat.completions.create(
                 model=model,
                 messages=messages,
-                temperature=DEFAULT_TEMPERATURE)
+                temperature=temp)
     
     if savename is not None:
         # read json in savename
@@ -177,7 +178,45 @@ def get_gpt_response(model, messages, savename=None, verbose=False):
         print(response.message.content)
     return response.message.content
         
-        
+
+def repeat_prompt_until_parsed(model, system_prompt, user_prompt, parse_method,
+                               parse_args, max_tries=10, temp=DEFAULT_TEMPERATURE, verbose=False):
+    """
+    Helper function to repeat API call and parsing until it works.
+    Works with any generic parse_method, where 'response' must be one of its args,
+    and additional parse_args.
+    """
+    messages = []
+    if system_prompt is not None:
+        messages.append({"role": "system", "content": system_prompt})
+    assert user_prompt is not None
+    messages.append({"role": "user", "content": user_prompt})
+    
+    num_tries = 1
+    while num_tries <= max_tries:
+        try:
+            response = get_gpt_response(model, messages, temp=temp, verbose=verbose)
+            try:
+                parse_args['response'] = response
+                parse_out = parse_method(**parse_args)
+                return parse_out, response, num_tries
+            except Exception as e:
+                print('Failed to parse response:', e)
+                for m in messages:
+                    print(m['role'].upper())
+                    print(m['content'])
+                    print()
+                print('\nRESPONSE:')
+                print(response)
+                messages.append({"role": "assistant", "content": response})
+                messages.append({"role": "user", "content": f"Invalid response: {e}!"})
+        except Exception as e:
+            print('Failed to get response:', e)
+        num_tries += 1
+        time.sleep(1)
+    raise Exception(f'Exceed max tries of {max_tries}')
+       
+
 def compute_token_cost(savepath, nr_networks, model='gpt-3.5-turbo'):
 
     prompt_tokens = []
