@@ -281,7 +281,7 @@ def convert_persona_to_string(persona, demos_to_include, pid=None):
     else:
         s = f'{pid}. '
     if 'name' in demos_to_include:
-        name = persona['name']
+        name = ' '.join(persona['name'])
         s += f'{name} - '
     for demo in demos_to_include:
         if demo != 'name':
