@@ -81,12 +81,11 @@ def prop_nodes_in_giant_component(G):
     return len(largest_cc) / len(G.nodes())
 
 def shuffle_dict(dict):
-    temp = list(dict.keys())
-    random.shuffle(temp)
+    keys = list(dict.keys())
+    random.shuffle(keys)
     shuffled_dict = {}
-    for item in temp:
+    for item in keys:
         shuffled_dict[item] = dict[item]
-        
     return shuffled_dict
 
 def combine_plots(folders, plot_names):
