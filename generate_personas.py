@@ -1,186 +1,75 @@
 import os
-import openai
-import random
-import math
 import argparse
 import json
 from openai import OpenAI
 import re
+import pickle
+import pandas as pd 
+from collections import Counter
 
 from constants_and_utils import *
 
 NAMES_TEMPERATURE = 1.2
 
-DEMO_DESCRIPTIONS = {'gender': 'Woman, Man, or Nonbinary',
-                    'race/ethnicity': 'White, Black, Latino, Asian, Native American/Alaska Native, or Native Hawaiian',
-                     'age': '18-65',
-                     'religion': 'Protestant, Catholic, Jewish, Muslim, Hindu, Buddhist, or Unreligious',
-                     'political affiliation': 'Democrat, Republican, Independent'}
-
 """
 GENERATING PERSONAS PROGRAMMATICALLY
 """
-    
-def us_population(i):
+def get_gender_race_age_cdf():
+    """
+    Get CDF of US distribution, by gender, race, and age.
+    From US Census, June 2023
+    https://www2.census.gov/programs-surveys/popest/technical-documentation/file-layouts/2020-2023/NC-EST2023-ALLDATA.pdf
+    https://www2.census.gov/programs-surveys/popest/datasets/2020-2023/national/asrh/ 
+    """
+    with open('nc-est2023-alldata-r-file07.csv') as f:
+        df = pd.read_csv(f)
+    df = df[(df['MONTH'] == 6) & (df['YEAR'] == 2023)]
+    assert len(df) == 102
+    # total_pop = df[df['AGE'] == 999]
+    # assert len(total_pop) == 1
+    # total_pop = total_pop.iloc[0]['TOT_POP']
+
+    triplet2ct = {}
+    races = ['White', 'Black', 'American Indian/Alaska Native', 'Asian', 'Native Hawaiian/Pacific Islander', 'Hispanic']
+    genders = ['Man', 'Woman']  # Nonbinary added later
+    for _, row in df.iterrows():  # by age
+        if (row['AGE'] != 999) and (row['AGE'] >= 18):  # skip children
+            age = row['AGE']
+            prefixes = ['NHWA', 'NHBA', 'NHIA', 'NHAA', 'NHNA', 'H']
+            for pre, race in zip(prefixes, races):
+                postfixes = ['MALE', 'FEMALE']
+                for post, gender in zip(postfixes, genders):
+                    triplet2ct[(gender, race, age)] = row[f'{pre}_{post}']
+    assert len(triplet2ct) == (101 * len(races) * len(genders))
+
+    sorted_triplets = sorted(triplet2ct.keys(), key=lambda x: triplet2ct[x], reverse=True)  # sort by largest to smallest triplet
+    print(sorted_triplets[:5])
+    print(sorted_triplets[-5:])
+    counts = [triplet2ct[t] for t in sorted_triplets]
+    cdf = np.cumsum(np.array(counts) / np.sum(counts))
+    assert np.isclose(cdf[-1], 1.)
+    cdf[-1] = 1.
+    return sorted_triplets, cdf 
+
+
+def generate_persona(seed, sorted_triplets, cdf):
     """
     Sample demographics for ONE persona, following joint distributions of US population.
     """
+    np.random.seed(seed)
     person = {}
     
-    # GENDER, RACE, and AGE
-    
-    random.seed(7*i + 0)
-    race = random.random()
-    
-    random.seed(7*i + 1)
-    gender = random.random()
-    
-    random.seed(7*i + 2)
-    age_group = random.random()
-    
-    random.seed(7*i + 3)
-    age = random.random()
-    
-    if (race < 0.191):
-        person['race'] = 'Latino'
-        age_group = age_group * 0.66 + 0.34
-        if (age_group < 0.38):
-            person['age'] = 18 + math.floor(3 * age)
-        elif (age_group < 0.63):
-            person['age'] = 22 + math.floor(15 * age)
-        elif (age_group < 0.84):
-            person['age'] = 38 + math.floor(15 * age)
-        elif (age_group < 0.97):
-            person['age'] = 54 + math.floor(18 * age)
-        else:
-            person['age'] = 73 + math.floor(5 * age)
-    
-    elif (race < 0.785):
-        age_group = age_group * 0.8 + 0.2
-        person['race'] = 'White'
-        if (age_group < 0.23):
-            person['age'] = 18 + math.floor(3 * age)
-        elif (age_group < 0.43):
-            person['age'] = 22 + math.floor(15 * age)
-        elif (age_group < 0.63):
-            person['age'] = 38 + math.floor(15 * age)
-        elif (age_group < 0.89):
-            person['age'] = 54 + math.floor(18 * age)
-        else:
-            person['age'] = 73 + math.floor(5 * age)
-    
-    elif (race < 0.921):
-        age_group = age_group * 0.78 + 0.28
-        person['race'] = 'Black'
-        if (age_group < 0.31):
-            person['age'] = 18 + math.floor(3 * age)
-        elif (age_group < 0.55):
-            person['age'] = 22 + math.floor(15 * age)
-        elif (age_group < 0.75):
-            person['age'] = 38 + math.floor(15 * age)
-        elif (age_group < 0.95):
-            person['age'] = 54 + math.floor(18 * age)
-        else:
-            person['age'] = 73 + math.floor(5 * age)
-            
-        if (person['age'] < 18):
-            if (gender < 0.49):
-                person['gender'] = 'Woman'
-            else:
-                person['gender'] = 'Man'
-        elif (person['age'] < 34):
-            if (gender < 0.5):
-                person['gender'] = 'Woman'
-            else:
-                person['gender'] = 'Man'
-        elif (person['age'] < 54):
-            if (gender < 0.53):
-                person['gender'] = 'Woman'
-            else:
-                person['gender'] = 'Man'
-        else:
-            if (gender < 0.6):
-                person['gender'] = 'Woman'
-            else:
-                person['gender'] = 'Man'
-    
-    elif (race < 0.934):
-        age_group = age_group * 0.72 + 0.28
-        person['race'] = 'Native American/Alaska Native'
-        if (age_group < 0.32):
-            person['age'] = 18 + math.floor(3 * age)
-        elif (age_group < 0.56):
-            person['age'] = 22 + math.floor(15 * age)
-        elif (age_group < 0.75):
-            person['age'] = 38 + math.floor(15 * age)
-        elif (age_group < 0.95):
-            person['age'] = 54 + math.floor(18 * age)
-        else:
-            person['age'] = 73 + math.floor(5 * age)
-    
-    elif (race < 0.997):
-        age_group = age_group * 0.79 + 0.21
-        person['race'] = 'Asian'
-        if (age_group < 0.25):
-            person['age'] = 18 + math.floor(3 * age)
-        elif (age_group < 0.52):
-            person['age'] = 22 + math.floor(15 * age)
-        elif (age_group < 0.75):
-            person['age'] = 38 + math.floor(15 * age)
-        elif (age_group < 0.94):
-            person['age'] = 54 + math.floor(18 * age)
-        else:
-            person['age'] = 73 + math.floor(5 * age)
-    
-    else:
-        age_group = age_group * 0.73 + 0.27
-        person['race'] = 'Native Hawaiian'
-        if (age_group < 0.31):
-            person['age'] = 18 + math.floor(3 * age)
-        elif (age_group < 0.58):
-            person['age'] = 22 + math.floor(15 * age)
-        elif (age_group < 0.79):
-            person['age'] = 38 + math.floor(15 * age)
-        elif (age_group < 0.96):
-            person['age'] = 54 + math.floor(18 * age)
-        else:
-            person['age'] = 73 + math.floor(5 * age)
-    
-    if (person['race'] != 'Black'):
-        if (person['age'] < 29):
-            if (gender < 0.49):
-                person['gender'] = 'Woman'
-            else:
-                person['gender'] = 'Man'
-        elif (person['age'] < 59):
-            if (gender < 0.5):
-                person['gender'] = 'Woman'
-            else:
-                person['gender'] = 'Man'
-        elif (person['age'] < 65):
-            if (gender < 0.51):
-                person['gender'] = 'Woman'
-            else:
-                person['gender'] = 'Man'
-        elif (person['age'] < 75):
-            if (gender < 0.53):
-                person['gender'] = 'Woman'
-            else:
-                person['gender'] = 'Man'
-        elif (person['age'] < 80):
-            if (gender < 0.55):
-                person['gender'] = 'Woman'
-            else:
-                person['gender'] = 'Man'
-        else:
-            if (gender < 0.64):
-                person['gender'] = 'Woman'
-            else:
-                person['gender'] = 'Man'
-        
-    random.seed(7*i + 4)
-    nonbinary = random.random()
-    
+    # GENDER, RACE, and AGE - based on US Census
+    triplet_rand = np.random.random()
+    for triplet, cutoff in zip(sorted_triplets, cdf):
+        if triplet_rand <= cutoff:
+            gender, race, age = triplet
+            person['gender'] = gender 
+            person['race'] = race 
+            person['age'] = age 
+            break
+    # add nonbinary - from Pew 
+    nonbinary = np.random.random()
     if ((person['age'] < 18) and (nonbinary < 0.03)):
         person['gender'] = 'Nonbinary'
     elif ((person['age'] < 49) and (nonbinary < 0.013)):
@@ -188,11 +77,9 @@ def us_population(i):
     elif nonbinary < 0.001:
         person['gender'] = 'Nonbinary'
     
-    # RELIGIOUS AFFILIATION
-    
-    random.seed(7*i + 5)
-    religion = random.random()
-    
+    # RELIGION - from Statista
+    # https://www.statista.com/statistics/749128/religious-identity-of-adults-in-the-us-by-race-and-ethnicity/
+    religion = np.random.random()
     if (person['race'] == 'White'):
         if (religion < 0.49):
             person['religion'] = 'Protestant'
@@ -215,7 +102,7 @@ def us_population(i):
         else:
             person['religion'] = 'Unreligious'
             
-    elif (person['race'] == 'Latino'):
+    elif (person['race'] == 'Hispanic'):
         if (religion < 0.26):
             person['religion'] = 'Protestant'
         elif (religion < 0.76):
@@ -223,7 +110,7 @@ def us_population(i):
         else:
             person['religion'] = 'Unreligious'
     
-    else:
+    elif (person['race'] in ['Asian', 'Native Hawaiian/Pacific Islander']):
         if (religion < 0.16):
             person['religion'] = 'Protestant'
         elif (religion < 0.30):
@@ -236,34 +123,74 @@ def us_population(i):
             person['religion'] = 'Hindu'
         else:
             person['religion'] = 'Unreligious'
-            
-    # POLITICAL AFFILIATION
-    random.seed(7*i + 6)
-    politics = random.random()
     
+    else:
+        # from https://www.prri.org/research/2020-census-of-american-religion
+        assert person['race'] == 'American Indian/Alaska Native'
+        if (religion < 0.47):
+            person['religion'] = 'Protestant'
+        elif (religion < 0.58):
+            person['religion'] = 'Catholic'
+        elif (religion < 0.60):
+            person['religion'] = 'Christian'
+        else:
+            person['religion'] = 'Unreligious'
+
+    # POLITICAL AFFILIATION - from Pew
+    # https://www.pewresearch.org/politics/2024/04/09/partisanship-by-race-ethnicity-and-education/#partisanship-by-race-and-gender 
+    politics = np.random.random()
     person['political affiliation'] = 'Independent'
-    if (person['religion'] == 'Jewish'):
-        politics -= 0.15
-    elif (person['religion'] == 'Unreligious'):
-        politics -= 0.18
-    
-    if (person['race'] == 'White'):
-        if (person['religion'] == 'Protestant'):
-            politics += 0.11
-        if (politics < 0.43 - 6 * (age / 85)):
-            person['political affiliation'] = 'Democrat'
-        elif (politics < 0.89):
+    if person['race'] == 'White':
+        if person['gender'] == 'Man':
+            if politics < 0.6:
+                person['political affiliation'] = 'Republican'
+            elif politics < 0.99:
+                person['political affiliation'] = 'Democrat'
+        else:
+            if politics < 0.53:
+                person['political affiliation'] = 'Republican'
+            elif politics < 0.96:
+                person['political affiliation'] = 'Democrat'
+    elif person['race'] == 'Black':
+        if person['gender'] == 'Man':
+            if politics < 0.15:
+                person['political affiliation'] = 'Republican'
+            elif politics < 0.96:
+                person['political affiliation'] = 'Democrat'
+        else:
+            if politics < 0.10:
+                person['political affiliation'] = 'Republican'
+            elif politics < 0.94:
+                person['political affiliation'] = 'Democrat'
+    elif person['race'] == 'Hispanic':
+        if person['gender'] == 'Man':
+            if politics < 0.39:
+                person['political affiliation'] = 'Republican'
+            elif politics < 1:
+                person['political affiliation'] = 'Democrat'
+        else:
+            if politics < 0.32:
+                person['political affiliation'] = 'Republican'
+            elif politics < 0.92:
+                person['political affiliation'] = 'Democrat'
+    elif person['race'] in ['Asian', 'Native Hawaiian/Pacific Islander']:
+        if person['gender'] == 'Man':
+            if politics < 0.39:
+                person['political affiliation'] = 'Republican'
+            elif politics < 1:
+                person['political affiliation'] = 'Democrat'
+        else:
+            if politics < 0.36:
+                person['political affiliation'] = 'Republican'
+            elif politics < 1:
+                person['political affiliation'] = 'Democrat'
+    else:
+        # https://www.brookings.edu/articles/native-americans-support-democrats-over-republicans-across-house-and-senate-races/
+        assert person['race'] == 'American Indian/Alaska Native'
+        if politics < 0.4:
             person['political affiliation'] = 'Republican'
-    if (person['race'] == 'Black'):
-        if (politics < 0.8):
+        elif politics < 0.96:
             person['political affiliation'] = 'Democrat'
-        elif (politics < 0.91):
-            person['political affiliation'] = 'Republican'
-    if (person['race'] == 'Latino'):
-        if (politics < 0.56):
-            person['political affiliation'] = 'Democrat'
-        elif (politics < 0.82):
-            person['political affiliation'] = 'Republican'
 
     # rename 'race' key to 'race/ethnicity'
     person['race/ethnicity'] = person['race']
@@ -287,6 +214,8 @@ def convert_persona_to_string(persona, demos_to_include, pid=None):
         if demo != 'name':
             if demo == 'age':
                 s += f'age {persona[demo]}, '  # specify age so GPT doesn't get number confused with ID
+            elif demo == 'interests' and len(demos_to_include) > 1:
+                s += f'interests include: {persona[demo]}, '
             else:
                 s += f'{persona[demo]}, '
     s = s[:-2]  # remove trailing ', '
@@ -321,23 +250,151 @@ def generate_interests(personas, demos, model, verbose=False):
     Generate interests, using GPT, for a list of personas.
     """
     for nr in personas:
-        prompt = f'Describe a specific interest of someone with the following demographics:\n'
-        for demo in demos:
+        prompt = f'In 8-12 words, describe the interests of someone with the following demographics:\n'
+        rand_order = np.random.choice(len(demos), replace=False, size=len(demos))  # shuffle order of demographics
+        for idx in rand_order:
+            demo = demos[idx]
             prompt += f'{demo}: {personas[nr][demo]}\n'
-        prompt += 'Answer by providing ONLY their interest in one short sentence.'
+        prompt += 'Answer by providing ONLY their interests. Do not include filler like "She enjoys" or "He has a keen interest in".'
         interests, _, _ = repeat_prompt_until_parsed(model, None, prompt, parse_interest_response, {}, max_tries=3,
                                                      temp=NAMES_TEMPERATURE, verbose=verbose)
         personas[nr]['interests'] = interests
-        print(convert_persona_to_string(personas[nr], demos, pid=nr), personas[nr]['interests'])
+        print(convert_persona_to_string(personas[nr], demos + ['interests'], pid=nr))
     return personas
     
 def parse_interest_response(response):
-    response = response.strip()
+    response = response.strip().strip('.')
     toks = response.split()
+    if toks[0].lower() in ['he', 'she', 'they']:
+        raise Exception('Do not include filler. Provide ONLY their interest as one phrase.')
     if len(toks) > 100:
         raise Exception('Interests are too long')
     return response
 
+def get_interest_embeddings(persona_fn, model='text-embedding-3-small'):
+    """
+    Get text embeddings for each generated interest.
+    """
+    fn = os.path.join(PATH_TO_TEXT_FILES, persona_fn)
+    with open(fn) as f:
+        personas = json.load(f)
+    save_name = os.path.join(PATH_TO_TEXT_FILES, f'{persona_fn[:-5]}_{model}.pkl')
+    print('Will save embeddings in ', save_name)
+    
+    embs = {}
+    for key in personas:
+        text = personas[key]['interests']
+        emb = CLIENT.embeddings.create(input = [text], model=model).data[0].embedding
+        embs[key] = np.array(emb)
+        print(key)
+    with open(save_name, 'wb') as f:
+        pickle.dump(embs, f)
+    return embs
+
+
+def get_interest_similarities(demo, personas, embs, min_sims=30):
+    """
+    Compute cosine similarity between interests for pairs from same group
+    vs. different group.
+    demo: demographic variable, eg, 'gender', 'race/ethnicity'
+
+    Cosine similarity is recommended by OpenAI for measuring distance:
+    # We recommend cosine similarity. The choice of distance function typically doesn’t matter much.
+    # OpenAI embeddings are normalized to length 1, which means that:
+    # Cosine similarity can be computed slightly faster using just a dot product
+    """
+    assert set(personas.keys()) == set(embs.keys())
+    # n = len(personas.keys())
+    # all_embs = np.concatenate([embs[k].reshape(1, -1) for k in embs], axis=0)
+    # print(all_embs.shape)
+    # assert len(all_embs) == n
+    # all_sims = all_embs @ all_embs.T 
+    # all_sims = np.triu(all_sims, 1)  # zero out diagonal and bottom triangle
+    # all_sims = all_sims.flatten()
+    # all_sims = all_sims[~np.isclose(all_sims, 0)]  # remove 0 entries 
+    # assert len(all_sims) == (n*(n-1))/2
+    # avg_sim = np.mean(all_sims)
+    # print('Avg similarity:', avg_sim)
+
+    vals = [personas[k][demo] for k in personas]
+    val_counts = Counter(vals)
+    print(val_counts)
+    unique_vals = [v for (v, _) in val_counts.most_common()]  # in order from most to least common
+    group2embs = {v:[] for v in unique_vals}  # map group (e.g., 'woman') to interest embedding 
+    for key in personas:
+        v = personas[key][demo]
+        group2embs[v].append(embs[key])
+    
+    same_group = []
+    diff_group = []
+    pair_to_sims = {}
+    for id, v1 in enumerate(unique_vals):
+        embs1 = np.array(group2embs[v1])
+        n1 = len(embs1)
+        # compute similarity within group
+        sims = embs1 @ embs1.T 
+        sims = np.triu(sims, 1)  # zero out diagonal and bottom triangle
+        sims = sims.flatten() #  / avg_sim
+        sims = sims[~np.isclose(sims, 0)]  # remove 0 entries 
+        assert len(sims) == (n1*(n1-1))/2
+        same_group.append(sims)
+        if len(sims) >= min_sims:
+            pair_to_sims[(v1, v1)] = sims
+        else:
+            print(f'Not saving {v1}, {v1}, only {len(sims)} pairs')
+
+        # compute similarity with other groups
+        if id < len(unique_vals)-1:
+            for v2 in unique_vals[id+1:]:
+                embs1 = np.array(group2embs[v1])
+                embs2 = np.array(group2embs[v2])
+                sims = (embs1 @ embs2.T).flatten() #  / avg_sim
+                diff_group.append(sims)
+                if len(sims) >= min_sims:
+                    pair_to_sims[(v1, v2)] = sims
+                else:
+                    print(f'Not saving {v1}, {v2}, only {len(sims)} pairs')
+    
+    same_group = np.concatenate(same_group)
+    diff_group = np.concatenate(diff_group)
+    return same_group, diff_group, pair_to_sims
+
+def make_demographic_scatter_plot(demo, personas, x, y, save_plot=True, interests_args='', group2color=None, cutoff=1):
+    assert len(x) == len(y)
+    assert len(personas) == len(x)
+    if demo == 'age':
+        plt.figure(figsize=(4.5,4))
+        c = [personas[k]['age'] for k in personas]
+        plt.scatter(x, y, c=c)
+        plt.colorbar()
+    else:
+        plt.figure(figsize=(4,4))
+        group2idx = {}
+        for nr in personas:
+            v = personas[nr][demo]
+            group2idx[v] = group2idx.get(v, []) + [int(nr)]
+        
+        group_order = sorted(group2idx.keys(), key=lambda x: len(group2idx[x]), reverse=True)
+        for group in group_order:
+            idx = group2idx[group]
+            if len(idx) >= cutoff:
+                x_gr = np.array(x)[idx]
+                y_gr = np.array(y)[idx]
+                if group2color is not None:
+                    plt.scatter(x_gr, y_gr, label=group, color=group2color[group])
+                else:
+                    plt.scatter(x_gr, y_gr, label=group)
+            else:
+                print('Dropping', group)
+        plt.legend(bbox_to_anchor=(1, 1))
+    plt.grid(alpha=0.2)
+    plt.title(demo.capitalize(), fontsize=16)
+    if save_plot:
+        fn = f'plots/interests{interests_args}-viz-{demo[:4]}.pdf'
+        print(fn)
+        plt.savefig(fn, bbox_inches='tight')
+    else:
+        plt.show()
 
 def parse():
     # Create the parser
@@ -360,11 +417,13 @@ if __name__ == '__main__':
     n = args.number_of_people
     save_name = args.save_name
     demos_to_include = ['gender', 'race/ethnicity', 'age', 'religion', 'political affiliation']
+    # demos_to_include = ['gender', 'race/ethnicity']  # TEMPORARY
 
     # generate demographics
+    sorted_triplets, cdf = get_gender_race_age_cdf()
     personas = {}
     for i in range(n):
-        personas[i] = us_population(i)
+        personas[i] = generate_persona(i, sorted_triplets, cdf)
     
     # generate names
     if args.include_names:
