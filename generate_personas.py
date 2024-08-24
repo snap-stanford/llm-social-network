@@ -10,7 +10,9 @@ from collections import Counter
 from constants_and_utils import *
 
 NAMES_TEMPERATURE = 1.2
-
+PATH_TO_DEMOGRAPHC_DATA = './us_demographics'
+RACES = ['White', 'Black', 'American Indian/Alaska Native', 'Asian', 'Native Hawaiian/Pacific Islander', 'Hispanic']
+GENDERS = ['Man', 'Woman', 'Nonbinary']
 """
 GENERATING PERSONAS PROGRAMMATICALLY
 """
@@ -21,26 +23,21 @@ def get_gender_race_age_cdf():
     https://www2.census.gov/programs-surveys/popest/technical-documentation/file-layouts/2020-2023/NC-EST2023-ALLDATA.pdf
     https://www2.census.gov/programs-surveys/popest/datasets/2020-2023/national/asrh/ 
     """
-    with open('nc-est2023-alldata-r-file07.csv') as f:
-        df = pd.read_csv(f)
+    fn = os.path.join(PATH_TO_DEMOGRAPHC_DATA, 'nc-est2023-alldata-r-file07.csv')
+    df = pd.read_csv(fn)
     df = df[(df['MONTH'] == 6) & (df['YEAR'] == 2023)]
     assert len(df) == 102
-    # total_pop = df[df['AGE'] == 999]
-    # assert len(total_pop) == 1
-    # total_pop = total_pop.iloc[0]['TOT_POP']
 
     triplet2ct = {}
-    races = ['White', 'Black', 'American Indian/Alaska Native', 'Asian', 'Native Hawaiian/Pacific Islander', 'Hispanic']
-    genders = ['Man', 'Woman']  # Nonbinary added later
+    prefixes = ['NHWA', 'NHBA', 'NHIA', 'NHAA', 'NHNA', 'H']
+    postfixes = ['MALE', 'FEMALE']
     for _, row in df.iterrows():  # by age
-        if (row['AGE'] != 999) and (row['AGE'] >= 18):  # skip children
+        if row['AGE'] != 999:
             age = row['AGE']
-            prefixes = ['NHWA', 'NHBA', 'NHIA', 'NHAA', 'NHNA', 'H']
-            for pre, race in zip(prefixes, races):
-                postfixes = ['MALE', 'FEMALE']
-                for post, gender in zip(postfixes, genders):
+            for pre, race in zip(prefixes, RACES):
+                for post, gender in zip(postfixes, GENDERS):
                     triplet2ct[(gender, race, age)] = row[f'{pre}_{post}']
-    assert len(triplet2ct) == (101 * len(races) * len(genders))
+    assert len(triplet2ct) == (101 * len(RACES) * len(GENDERS[:-1])), len(triplet2ct)
 
     sorted_triplets = sorted(triplet2ct.keys(), key=lambda x: triplet2ct[x], reverse=True)  # sort by largest to smallest triplet
     print(sorted_triplets[:5])
@@ -65,7 +62,7 @@ def generate_persona(seed, sorted_triplets, cdf):
         if triplet_rand <= cutoff:
             gender, race, age = triplet
             person['gender'] = gender 
-            person['race'] = race 
+            person['race/ethnicity'] = race 
             person['age'] = age 
             break
     # add nonbinary - from Pew 
@@ -80,7 +77,7 @@ def generate_persona(seed, sorted_triplets, cdf):
     # RELIGION - from Statista
     # https://www.statista.com/statistics/749128/religious-identity-of-adults-in-the-us-by-race-and-ethnicity/
     religion = np.random.random()
-    if (person['race'] == 'White'):
+    if (person['race/ethnicity'] == 'White'):
         if (religion < 0.49):
             person['religion'] = 'Protestant'
         elif (religion < 0.69):
@@ -92,7 +89,7 @@ def generate_persona(seed, sorted_triplets, cdf):
         else:
             person['religion'] = 'Unreligious'
             
-    elif (person['race'] == 'Black'):
+    elif (person['race/ethnicity'] == 'Black'):
         if (religion < 0.68):
             person['religion'] = 'Protestant'
         elif (religion < 0.75):
@@ -102,7 +99,7 @@ def generate_persona(seed, sorted_triplets, cdf):
         else:
             person['religion'] = 'Unreligious'
             
-    elif (person['race'] == 'Hispanic'):
+    elif (person['race/ethnicity'] == 'Hispanic'):
         if (religion < 0.26):
             person['religion'] = 'Protestant'
         elif (religion < 0.76):
@@ -110,7 +107,7 @@ def generate_persona(seed, sorted_triplets, cdf):
         else:
             person['religion'] = 'Unreligious'
     
-    elif (person['race'] in ['Asian', 'Native Hawaiian/Pacific Islander']):
+    elif (person['race/ethnicity'] in ['Asian', 'Native Hawaiian/Pacific Islander']):
         if (religion < 0.16):
             person['religion'] = 'Protestant'
         elif (religion < 0.30):
@@ -126,7 +123,7 @@ def generate_persona(seed, sorted_triplets, cdf):
     
     else:
         # from https://www.prri.org/research/2020-census-of-american-religion
-        assert person['race'] == 'American Indian/Alaska Native'
+        assert person['race/ethnicity'] == 'American Indian/Alaska Native'
         if (religion < 0.47):
             person['religion'] = 'Protestant'
         elif (religion < 0.58):
@@ -140,7 +137,7 @@ def generate_persona(seed, sorted_triplets, cdf):
     # https://www.pewresearch.org/politics/2024/04/09/partisanship-by-race-ethnicity-and-education/#partisanship-by-race-and-gender 
     politics = np.random.random()
     person['political affiliation'] = 'Independent'
-    if person['race'] == 'White':
+    if person['race/ethnicity'] == 'White':
         if person['gender'] == 'Man':
             if politics < 0.6:
                 person['political affiliation'] = 'Republican'
@@ -151,7 +148,7 @@ def generate_persona(seed, sorted_triplets, cdf):
                 person['political affiliation'] = 'Republican'
             elif politics < 0.96:
                 person['political affiliation'] = 'Democrat'
-    elif person['race'] == 'Black':
+    elif person['race/ethnicity'] == 'Black':
         if person['gender'] == 'Man':
             if politics < 0.15:
                 person['political affiliation'] = 'Republican'
@@ -162,7 +159,7 @@ def generate_persona(seed, sorted_triplets, cdf):
                 person['political affiliation'] = 'Republican'
             elif politics < 0.94:
                 person['political affiliation'] = 'Democrat'
-    elif person['race'] == 'Hispanic':
+    elif person['race/ethnicity'] == 'Hispanic':
         if person['gender'] == 'Man':
             if politics < 0.39:
                 person['political affiliation'] = 'Republican'
@@ -173,7 +170,7 @@ def generate_persona(seed, sorted_triplets, cdf):
                 person['political affiliation'] = 'Republican'
             elif politics < 0.92:
                 person['political affiliation'] = 'Democrat'
-    elif person['race'] in ['Asian', 'Native Hawaiian/Pacific Islander']:
+    elif person['race/ethnicity'] in ['Asian', 'Native Hawaiian/Pacific Islander']:
         if person['gender'] == 'Man':
             if politics < 0.39:
                 person['political affiliation'] = 'Republican'
@@ -186,16 +183,11 @@ def generate_persona(seed, sorted_triplets, cdf):
                 person['political affiliation'] = 'Democrat'
     else:
         # https://www.brookings.edu/articles/native-americans-support-democrats-over-republicans-across-house-and-senate-races/
-        assert person['race'] == 'American Indian/Alaska Native'
+        assert person['race/ethnicity'] == 'American Indian/Alaska Native'
         if politics < 0.4:
             person['political affiliation'] = 'Republican'
         elif politics < 0.96:
             person['political affiliation'] = 'Democrat'
-
-    # rename 'race' key to 'race/ethnicity'
-    person['race/ethnicity'] = person['race']
-    del person['race']
-    
     return person
 
 
@@ -210,16 +202,37 @@ def convert_persona_to_string(persona, demos_to_include, pid=None):
     if 'name' in demos_to_include:
         name = ' '.join(persona['name'])
         s += f'{name} - '
-    for demo in demos_to_include:
+    for pos, demo in enumerate(demos_to_include):
         if demo != 'name':
             if demo == 'age':
                 s += f'age {persona[demo]}, '  # specify age so GPT doesn't get number confused with ID
-            elif demo == 'interests' and len(demos_to_include) > 1:
+            elif demo == 'interests' and pos > 0:  # not first demo
                 s += f'interests include: {persona[demo]}, '
             else:
                 s += f'{persona[demo]}, '
     s = s[:-2]  # remove trailing ', '
     return s  
+
+
+def assign_persona_to_model(persona, demos_to_include):
+    """
+    Describe persona in second person: "You are..."
+    """
+    s = 'You are '
+    persona_str = convert_persona_to_string(persona, demos_to_include)
+    if 'name' in demos_to_include:
+        s += persona_str
+    else:
+        first_demo = demos_to_include[0]
+        if first_demo in ['gender', 'political affiliation']:  # noun
+            article = 'an' if persona[first_demo].lower()[0] in ['a', 'e', 'i', 'o', 'u'] else 'a'
+            s += article + ' ' + persona_str
+        elif first_demo in ['race/ethnicity', 'age', 'religion']:  # adjective
+            s += persona_str 
+        else:
+            assert first_demo == 'interests'
+            s += 'interested in ' + persona_str
+    return s
 
 
 def generate_names(personas, demos, model, verbose=False):
@@ -419,8 +432,10 @@ if __name__ == '__main__':
     demos_to_include = ['gender', 'race/ethnicity', 'age', 'religion', 'political affiliation']
     # demos_to_include = ['gender', 'race/ethnicity']  # TEMPORARY
 
-    # generate demographics
+    # get distributions from US Census data
     sorted_triplets, cdf = get_gender_race_age_cdf()
+
+    # generate persona demographics
     personas = {}
     for i in range(n):
         personas[i] = generate_persona(i, sorted_triplets, cdf)
