@@ -1,8 +1,10 @@
 import networkx as nx
 import os
+import pandas as pd
 import xml.etree.ElementTree as ET
 
 from constants_and_utils import *
+from analyze_networks import compute_exp_cross_from_group_counts
 
 PATH_TO_REAL_NETWORKS = os.path.join(PATH_TO_FOLDER, 'real_networks')
 NETWORKS_TO_SKIP = [
@@ -260,10 +262,122 @@ def load_real_network(name):
         fn = os.path.join(PATH_TO_REAL_NETWORKS, 'karate.xml')
         graphs = make_graphs_from_dynetml_file(fn)
         G = graphs['karate.xml_agent x agent']
+    else:
+        raise Exception('Unknown network name: ' + name)
     return G
     
-    
-    
+def load_real_homophily(same_group=True):
+    """
+    Load real levels of homophily.
+    """
+    real_df = []
+    # Laniado et al, Tuenti data
+    num_cross =  256894050  # friendship
+    num_mm = 135064946
+    num_ff = 143740462     
+    total_edges = num_cross + num_mm + num_ff 
+    prop_cross = num_cross / total_edges
+    counts = {'Man': 4899659, 'Woman': 4784975}
+    exp_cross = compute_exp_cross_from_group_counts(counts)
+    if same_group:
+        val = (1-prop_cross) / (1-exp_cross)
+    else:
+        val = prop_cross / exp_cross
+    real_df.append({'demo': 'gender', '_metric_value': val, 'save_name': 'laniado-friend'})
+    num_cross = 27346769
+    num_mm =  12236165
+    num_ff = 22698114
+    total_edges = num_cross + num_mm + num_ff 
+    prop_cross = num_cross / total_edges
+    if same_group:
+        val = (1-prop_cross) / (1-exp_cross)
+    else:
+        val = prop_cross / exp_cross
+    real_df.append({'demo': 'gender', '_metric_value': val, 'save_name': 'laniado-interaction'})
+
+    # Smith et al., GSS data
+    prop_cross = .098  
+    exp_cross = .387
+    if same_group:
+        val = (1-prop_cross) / (1-exp_cross)
+    else:
+        val = prop_cross / exp_cross
+    real_df.append({'demo': 'race/ethnicity', '_metric_value': val, 'save_name': 'gss-2004'})
+    prop_cross = .290  
+    exp_cross = .658
+    if same_group:
+        val = (1-prop_cross) / (1-exp_cross)
+    else:
+        val = prop_cross / exp_cross
+    real_df.append({'demo': 'religion', '_metric_value': val, 'save_name': 'gss-2004'})
+    prop_cross = .433 
+    exp_cross = .492
+    if same_group:
+        val = (1-prop_cross) / (1-exp_cross)
+    else:
+        val = prop_cross / exp_cross
+    real_df.append({'demo': 'gender', '_metric_value': val, 'save_name': 'gss-2004'})
+    prop_cross = 11.150
+    exp_cross = 18.584
+    if same_group:
+        pass
+    else:
+        real_df.append({'demo': 'age', '_metric_value': prop_cross / exp_cross, 'save_name': 'gss-2004'})
+
+    # Thelwall, MySpace
+    counts = {'Asian': 30, 'Black': 128, 'East Indian': 3, 'Latino': 144, 'Middle Eastern': 3, 'Native American': 18, 'Other': 45, 
+              'Pacific Islander': 13, 'White': 498}
+    num_edges = np.sum(list(counts.values()))
+    assert num_edges == 882, num_edges
+    exp_cross = compute_exp_cross_from_group_counts(counts)
+    num_cross = num_edges - (16 + 98 + 100 + 3 + 7 + 4 + 412)  # add up the diagonal
+    prop_cross = num_cross / num_edges
+    if same_group:
+        val = (1-prop_cross) / (1-exp_cross)
+    else:
+        val = prop_cross / exp_cross
+    real_df.append({'demo': 'race/ethnicity', '_metric_value': val, 'save_name': 'myspace'})
+    counts = {'Catholic': 128, 'Protestant': 14, 'Christian - other': 272, 'Muslim': 19, 'Wiccan': 6, 'Agnostic': 30, 'Atheist': 45, 'Other': 42}
+    num_edges = np.sum(list(counts.values()))
+    # assert num_edges == 582, num_edges
+    exp_cross = compute_exp_cross_from_group_counts(counts)
+    num_cross = num_edges - (65 + 1 + 191 + 16 + 2 + 2 + 7 + 6)  # add up the diagonal
+    prop_cross = num_cross / num_edges
+    if same_group:
+        val = (1-prop_cross) / (1-exp_cross)
+    else:
+        val = prop_cross / exp_cross
+    real_df.append({'demo': 'religion', '_metric_value': val, 'save_name': 'myspace'})
+    counts = {'Man': 1082, 'Woman': 1484}
+    num_edges = np.sum(list(counts.values()))
+    assert num_edges == 2566, num_edges
+    exp_cross = compute_exp_cross_from_group_counts(counts)
+    num_cross = num_edges - (555 + 706)  # add up the diagonal
+    prop_cross = num_cross / num_edges
+    if same_group:
+        val = (1-prop_cross) / (1-exp_cross)
+    else:
+        val = prop_cross / exp_cross
+    real_df.append({'demo': 'gender', '_metric_value': val, 'save_name': 'myspace'})
+
+    # Halberstam and Knight, Twitter network
+    num_nodes = 2246079
+    counts = {'Liberal': round(num_nodes * .3606), 'Conservative': round(num_nodes * .6394)}
+    exp_cross = compute_exp_cross_from_group_counts(counts)
+    num_ll = counts['Liberal'] * 58.576 * .6711  # num voters * avg num followees * % followees
+    num_cl = counts['Liberal'] * 58.576 * .3289
+    num_lc = counts['Conservative'] * 68.486 * .2025
+    num_cc = counts['Conservative'] * 68.486 * .7975
+    prop_cross = (num_cl + num_lc) / (num_ll + num_cl + num_lc + num_cc)
+    if same_group:
+        val = (1-prop_cross) / (1-exp_cross)
+    else:
+        val = prop_cross / exp_cross
+    real_df.append({'demo': 'political affiliation', '_metric_value': val, 'save_name': 'twitter'})
+
+    real_df = pd.DataFrame(real_df, columns=['save_name', 'demo', '_metric_value']).sort_values('demo')
+    return real_df 
+
 # def create_jazz_graphs():
 #     fn = PATH_TO_FOLDER + '/real_networks/jazz.net'
 #     graphs = {}
