@@ -409,6 +409,38 @@ def make_demographic_scatter_plot(demo, personas, x, y, save_plot=True, interest
     else:
         plt.show()
 
+def parse_reason(model, reason, demos_to_include, verbose=False):
+    """
+    Classify free-text reason into list of demographic variables.
+    """
+    def parse_classification(response, demos_to_include):
+        if response.startswith('Answer:'):
+            response = response[len('Answer:'):]
+        groups = response.split(',')
+        kept_groups = []
+        for g in groups:
+            g = g.lower().strip()
+            assert g in demos_to_include
+            kept_groups.append(g)
+        return kept_groups
+
+    system = 'You will be given a reason why someone is friends with someone else. Select which demographic variables, out of {'
+    system += ', '.join(demos_to_include)
+    system += '}, are provided as the reason for friendship. You must select at least one and can select multiple. Format your answer as a comma-separated list.'
+    system += '\n\nExample: "I appreciate the diversity in age and race but also share the same political affiliation as a Democrat"'
+    system += '\nAnswer: political affiliation'
+    system += '\n\nExample: "As a fellow unreligious individual and Democrat, I feel a connection with this young man"'
+    system += '\nAnswer: religion, political affiliation, age, gender'
+    if verbose:
+        print(system)
+    try:
+        parse_out, _, _ = repeat_prompt_until_parsed(model, system, reason, parse_classification,
+                                        {'demos_to_include': demos_to_include}, max_tries=3, temp=DEFAULT_TEMPERATURE, verbose=False)
+        return parse_out
+    except:
+        print('Could not classify:', reason)
+        return None 
+
 def parse():
     # Create the parser
     parser = argparse.ArgumentParser(description='Process command line arguments.')
