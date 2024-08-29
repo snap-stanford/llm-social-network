@@ -1,74 +1,33 @@
-# Zero-shot Social Network Generation
+# Generating social networks with LLMs
+This repo contains code and results for the paper "LLMs generate structurally realistic social networks but overestimate political homophily" by Serina Chang*, Alicja Chaszczewicz*, Emma Wang, Maya Josifovska, Emma Pierson, and Jure Leskovec.
+
+## Prerequisites 
+To run OpenAI models, you will need an OpenAI API key. To run Llama, Gemma, or other open-source models, you will need a Llama API key. See how API keys are fetched from `api-key.txt` in `constants_and_utils.py`.
 
 ## Generate personas
-
-To generate a list of 50 personas programmatically (no generation) and save it to a file called us_50.json, run the following command.
+To sample 50 personas and save it to a file called us_50.json, run the following command.
 This does *not* include names nor interests.
 
-```python generate_personas.py --number_of_people 50  --generating_method us --file_name us_50.json```
+```python generate_personas.py 50 --save_name us_50```
 
 If you would like to generate names and/or interests (based on demographics):
 
-```python generate_personas.py --number_of_people 50  --generating_method us --file_name us_50.json --include_names --include_interests --model gpt-3.5-turbo```
+```python generate_personas.py 50  --save_name us_50 --include_names --include_interests```
 
-The resulting files will be: `us_50.json`, `us_50_with_names.json`, and `us_50_with_names_and_interests.json`
+The resulting files will be: `us_50.json`, `us_50_with_names.json`, and `us_50_with_names_and_interests.json`. You can also specify which LLM to use with `--model`. 
 
-
-## LLM as Agent
-
-### Prompt
-You are name Maggie-Franklin gender Woman, race/ethnicity White, age 46, religion Protestant, political affiliation Democrat. Which of the following people would you become friends with?
-
-name Sunita-Patel gender Woman, race/ethnicity Asian, age 41, religion Hindu, political affiliation Independent 
-
-name Jennifer-Davis gender Woman, race/ethnicity White, age 35, religion Protestant, political affiliation Republican 
-
-[...]
-
-### Generation
-
-``` python llm-as-agent.py --persona_fn us_50_with_names_with_interests.json --save_prefix llm-as-agent-us-50 --num_networks 10 --perspective second --model gpt-3.5-turbo ```
-
-By default, ['gender', 'race/ethnicity', 'age', 'religion', 'political affiliation'] are included (and name if in the file, otherwise just person number)
-
-If you want to include interests or other demographics, you can specify them with the `--demos_to_include` argument. For example, to include interests run
-
-``` python llm-as-agent.py --persona_fn us_50_with_names_with_interests.json --save_prefix llm-as-agent-us-50 --num_networks 10 --perspective second --model gpt-3.5-turbo --demos_to_include 'gender' 'race/ethnicity' 'age' 'religion' 'political affiliation' 'interests' ```
-
-## All at Once
-
-### Prompt
-Create a realistic social network between the following list of 50 people. Provide a list of friendship pairs in the format ('Sophiaaa Rodriguez', 'Eleanor Harriss'). Do not include any other text in your response. Do not include any people who are not listed below.
-
-name Antonio-Rodriguez gender Man, race/ethnicity Latino, age 29, religion Catholic, political affiliation Republican
-
-name Jasmine-Thompson gender Woman, race/ethnicity Black, age 26, religion Protestant, political affiliation Democrat
-
-[...]
-
-### Generation
-
-``` python all-at-once.py --persona_fn us_50_with_names_with_interests.json --save_prefix all-at-once-us-50 --num_networks 10 --model gpt-3.5-turbo ```
+`generate_personas.py` also has functions for analyzing the personas and interests, such as `get_interest_embeddings()` and `parse_reason()`.
 
 
-## One by One
+## Generate networks
+To generate networks, run something like the following command.
 
-### Prompt
+```python generate_networks.py global --model gpt-3.5-turbo --num_networks 30```
 
-You are person Bethany-Mitchell - gender Woman, race/ethnicity White, age 34, religion Unreligious, political affiliation Republican
-Which of the following people will you become friends with? Provide a list of numbers separated by commas. Do not provide demographics.
-Maggie-Thompson gender Woman, race/ethnicity White, age 75, religion Protestant, political affiliation Republican
-Bethany-Mitchell gender Woman, race/ethnicity White, age 34, religion Unreligious, political affiliation Republican
-[...]
+This will generate 30 networks using the Global method, using GPT-3.5 Turbo. The networks will be saved as adjacency lists as `global_gpt-3.5-turbo_SEED.adj`, for SEED from 0 to 29, under `PATH_TO_TEXT_FILES` (defined in `constants_and_utils.py`). The visualized network is also saved under `PATH_TO_SAVED_PLOTS` (defined in `plotting.py`) and the summary of the costs (number of tokens, number of tries, time duration) is saved as `cost_stats_s0-29.csv` under `PATH_TO_STATS_FILES/global_gpt-3.5-turbo` (defined in `constants_and_utils.py`).
 
-Existing friendships are:
-(Linda-Reynolds, Rebecca-Thompson)
-(Rebecca-Thompson, Luciana-Rodriguez)
-[...]
+You can vary which LLM to use with `--model` and how many networks are generated with `--num_networks`. Other important arguments include `--persona_fn` (which file to get personas from) and `--include_interests` (whether to include interests, which need to be included in the persona file if so). See `parse_args()` in `generate_networks.py` for a full list of arguments.
 
-Example response format: name1, name2, name3
-Your friends:
+To try other prompting methods, replace `global` with `local`, `sequential`, or `iterative`. These methods also come with the added option of `--include_reason`, where the model is prompted to generate a short reason for each friend it selects. If `--include_reason` is included, the generated reasons for each network will be saved as `METHOD_MODEL_SEED_reasons.json` (e.g., `local_gpt-4o_0_reasons.json`) under `PATH_TO_TEXT_FILES`.
 
-### Generation
-
-``` python one_by_one.py --persona_fn us_50_with_names_with_interests.json --save_prefix one-by-one-us-50 --num_networks 10 --model gpt-3.5-turbo ```
+To analyze the generated networks, see `analyze_networks.py` and `plotting.py`.
