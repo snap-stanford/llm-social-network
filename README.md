@@ -28,7 +28,7 @@ This will generate 30 networks using the Global method, using GPT-3.5 Turbo. The
 
 You can vary which LLM to use with `--model` and how many networks are generated with `--num_networks`. Other important arguments include `--persona_fn` (which file to get personas from) and `--include_interests` (whether to include interests, which need to be included in the persona file if so). See `parse_args()` in `generate_networks.py` for a full list of arguments.
 
-To try other prompting methods, replace `global` with `local`, `sequential`, or `iterative`. These methods also come with the added option of `--include_reason`, where the model is prompted to generate a short reason for each friend it selects. If `--include_reason` is included, the generated reasons for each network will be saved as `METHOD_MODEL_SEED_reasons.json` (e.g., `local_gpt-4o_0_reasons.json`) under `PATH_TO_TEXT_FILES`.
+To try other prompting methods, replace `global` with `local`, `sequential`, or `iterative`. These methods also come with the added option of `--include_reason`, where the model is prompted to generate a short reason for each friend it selects. If `--include_reason` is included, the generated reasons for each network will be saved as `METHOD_MODEL_w_reason_SEED_reasons.json` (e.g., `sequential_gpt-3.5-turbo_w_reason_0_reasons.json`) under `PATH_TO_TEXT_FILES`.
 
 To analyze the generated networks, see `analyze_networks.py` and `plotting.py`.
 
