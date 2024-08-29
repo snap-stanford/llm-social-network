@@ -31,3 +31,6 @@ You can vary which LLM to use with `--model` and how many networks are generated
 To try other prompting methods, replace `global` with `local`, `sequential`, or `iterative`. These methods also come with the added option of `--include_reason`, where the model is prompted to generate a short reason for each friend it selects. If `--include_reason` is included, the generated reasons for each network will be saved as `METHOD_MODEL_SEED_reasons.json` (e.g., `local_gpt-4o_0_reasons.json`) under `PATH_TO_TEXT_FILES`.
 
 To analyze the generated networks, see `analyze_networks.py` and `plotting.py`.
+
+## Our results
+You can find our generated networks and generated personas (with interests) in `text-files`.
