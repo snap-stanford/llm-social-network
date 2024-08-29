@@ -6,23 +6,33 @@ import numpy as np
 import pandas as pd
 import json
 import seaborn as sns
+from scipy.stats import ks_2samp
+import time
 
 import plotting
 from constants_and_utils import *
 from generate_personas import *
 
-def load_list_of_graphs(prefix, start_seed, end_seed, directed=True):
+def load_list_of_graphs(prefix, start_seed, end_seed, directed=True, include_ts=False):
     """
     Load list of graphs from adjlist. By default, assume directed graphs.
     """
     list_of_G = []
+    min_time, max_time = None, None
     for s in range(start_seed, end_seed):
         fn = os.path.join(PATH_TO_TEXT_FILES, f'{prefix}_{s}.adj')
+        mod = time.ctime(os.path.getmtime(fn))  # last modified time
+        if (min_time is None) or (mod < min_time):
+            min_time = mod 
+        elif (max_time is None) or (mod > max_time):
+            max_time = mod 
         if directed:
             G = nx.read_adjlist(fn, create_using=nx.DiGraph)
         else:
             G = nx.read_adjlist(fn)
         list_of_G.append(G)
+    if include_ts:
+        return list_of_G, min_time, max_time
     return list_of_G
 
 def get_edge_proportions(list_of_G):
@@ -176,12 +186,14 @@ def summarize_network_metrics(list_of_G, personas, demo_keys, save_name, demos=T
     if demos:
         homophily_metrics_df = pd.DataFrame({'graph_nr':[], 'demo':[], '_metric_value':[], 'save_name':[]})
         for graph_nr, G in enumerate(list_of_G):
-            homophily_metrics = list(compute_same_proportions(G, personas, demo_keys))
+            same_homophily = list(compute_same_proportions(G, personas, demo_keys, ratio=True))
+            same_df = pd.DataFrame({'graph_nr':graph_nr, 'demo':demo_keys, 'metric_name': 'same_ratio',
+                                    '_metric_value':same_homophily, 'save_name':[save_name]*len(demo_keys)})
+            cross_homophily = list(compute_cross_proportions(G, personas, demo_keys, ratio=True))
+            cross_df = pd.DataFrame({'graph_nr':graph_nr, 'demo':demo_keys, 'metric_name': 'cross_ratio',
+                                    '_metric_value':cross_homophily, 'save_name':[save_name]*len(demo_keys)})
             # concat with series
-            homophily_metrics_df = pd.concat([homophily_metrics_df,
-                                              pd.DataFrame({'graph_nr':graph_nr, 'demo':demo_keys,
-                                                            '_metric_value':homophily_metrics,
-                                                            'save_name':[save_name]*len(demo_keys)})])
+            homophily_metrics_df = pd.concat([homophily_metrics_df, same_df, cross_df])
         # save homophily metrics dataframe in stats
         fn = f'{save_name}/homophily.csv'
         homophily_metrics_df.to_csv(os.path.join(PATH_TO_STATS_FILES, fn), index=False)
@@ -320,6 +332,17 @@ def plot_expected_vs_observed_age_gaps(list_of_G, personas):
     # plt.vlines([np.mean(obs_gaps)], ymin, ymax, color='tab:orange', label=f'obs mean={np.mean(obs_gaps):0.3f}')
     plt.legend()
 
+def compare_network_metrics(network_df, metric_name, save_name):
+    """
+    Get quantitative comparison of real and generated networks.
+    """
+    real_vals = network_df[(network_df.save_name == 'real') & (network_df.metric_name == metric_name)]['_metric_value'].values
+    gen_vals = network_df[(network_df.save_name == save_name) & (network_df.metric_name == metric_name)]['_metric_value'].values
+    print(f'Found {len(real_vals)} real and {len(gen_vals)} generated values')
+    mean_diff = np.abs(np.mean(real_vals)-np.mean(gen_vals))
+    mean_diff_norm = mean_diff / np.std(real_vals)
+    res = ks_2samp(real_vals, gen_vals)
+    return mean_diff, mean_diff_norm, res.statistic, res.pvalue
 
 def parse():
     # Create the parser
