@@ -12,8 +12,17 @@ sns.set_theme(context='paper', style='white', palette='pastel', font='sans-serif
 plt.rcParams['figure.figsize'] = [12, 6]
 
 PATH_TO_SAVED_PLOTS = './plots'  # folder holding plots, eg, network figures
-GRAPH_TYPES = ['real', 'global', 'local', 'sequential', 'iterative']
+GRAPH_TYPES = ['real', 'global', 'local', 'sequential'] #  'iterative']
 
+def parse_save_name(save_name):
+    elements = save_name.split('_', 2)
+    if len(elements) == 2:
+        method, model = elements 
+        ext = None
+    else:
+        method, model, ext = elements
+    return method, model, ext 
+    
 def define_color(save_names):
     """
     Create a color palette dictionary mapping save_name to color.
@@ -25,19 +34,38 @@ def define_color(save_names):
     color_map = {name: pastel_palette[custom_sort_key(name)] for name in save_names}
     return color_map
 
-def adapt_legend(legend):
+def get_short_name(save_name, include_model=False):
+    """
+    Helper function to get short name for save name.
+    """
+    if save_name == 'real':
+        return 'Real'
+    method, model, ext = parse_save_name(save_name)
+    if method == 'sequential':
+        method = 'seq.'
+    if ext is None:
+        name = method.capitalize()        
+    else:
+        if ext == 'ALL_SHUFFLED':
+            name = method.capitalize() + ', ' + 'shuffled'  
+        else:
+            name = method.capitalize() + ', ' + ext.replace('_', ' ').lower()
+    if include_model:
+        model_el = model.split('-')
+        name += f' (GPT-{model_el[1]})'
+    return name
+
+def adapt_legend(legend, mapper=None, include_model=False):
     """
     Modify text in legend.
     """
     legend.set_title(None)
     for text in legend.get_texts():
         t = text.get_text()
-        for key in GRAPH_TYPES:
-            if key in t:
-                if 'interest' in t:
-                    text.set_text(key.capitalize() + ' w/ interests')
-                else:
-                    text.set_text(key.capitalize())
+        if mapper is None:
+            text.set_text(get_short_name(t, include_model=include_model))
+        else:
+            text.set_text(mapper[t])
 
 def get_pallete(df):
     """
@@ -46,19 +74,83 @@ def get_pallete(df):
     return define_color(df['save_name'].unique())
 
 def custom_sort_key(x):
+    if 'SHUFFLED' in x:
+        return 1 + len(GRAPH_TYPES)
+    if 'interests' in x:
+        return len(GRAPH_TYPES)
     for idx, graph_type in enumerate(GRAPH_TYPES):
         if graph_type in x:
             return idx
-    return len(GRAPH_TYPES)  # all other names
+    return len(GRAPH_TYPES)+2  # all other names
 
 def change_order(df):
     df['sort_order'] = df['save_name'].apply(custom_sort_key)
     df_sorted = df.sort_values(by=['sort_order', 'save_name'])
     return df_sorted
 
+def plot_metrics_separately(network_metrics_df, save_name=None, plot_type='default', x_to_keep=None, 
+                            simplify_legend=True, legend_mapper=None, palette=None, dodge=0.6):   
+    """
+    Make plot of network metrics with separate plot per metric.
+    """
+    assert plot_type in ['default', 'bar']
+    assert '_metric_value' in network_metrics_df.columns
+    assert 'metric_name' in network_metrics_df.columns
+    
+    orig_len = len(network_metrics_df)
+    network_metrics_df = network_metrics_df[pd.isnull(network_metrics_df.node)]
+    print(f'Dropping node-level stats: kept {len(network_metrics_df)} out of {orig_len} rows')
+    if x_to_keep is not None:
+        orig_len = len(network_metrics_df)
+        network_metrics_df = network_metrics_df[network_metrics_df['metric_name'].isin(x_to_keep)]
+        print(f'Keeping rows in {x_to_keep}: kept {len(network_metrics_df)} out of {orig_len} rows')
+    
+    if x_to_keep is None:
+        x_to_keep = network_metrics_df.metric_name.unique()
+    num_plots = len(x_to_keep)
+    fig, axes = plt.subplots(1, num_plots, figsize=(num_plots*3, 2.5))
+    fig.subplots_adjust(wspace=0.3)
+    if palette is None:
+        palette = get_pallete(network_metrics_df)
+    for ax, x_name in zip(axes, x_to_keep):
+        kept_df = network_metrics_df[network_metrics_df.metric_name == x_name]
+        include_legend = x_name == x_to_keep[-1]
+        if plot_type == 'default':
+            ax = sns.stripplot(ax=ax, data=kept_df, x='metric_name', y='_metric_value',
+                        hue='save_name', palette=palette, dodge=dodge, alpha=0.8, zorder=1, legend=include_legend)
+            ax = sns.pointplot(ax=ax, data=kept_df, x='metric_name', y='_metric_value', errorbar='se',
+                        hue='save_name', palette='dark:black', dodge=dodge, legend=False,
+                            capsize=0.05, linestyle='none', zorder=2)  # use zorder to determine which plot ends up on top
+        else:
+            sns.barplot(ax=ax, data=kept_df, x='metric_name', y='_metric_value', 
+                        hue="save_name", palette=palette)
+        ymin, ymax = ax.get_ylim()
+        ax.set_ylim(ymin, min(ymax, 2))
+        if include_legend:
+            legend = plt.legend(bbox_to_anchor=(1, 1), fontsize=18)
+        ax.tick_params(axis='x', labelsize=18)
+        ax.set_ylabel('')
+        ax.set_xlabel('')
+        ax.grid(alpha=0.2)
 
-def make_plot(network_metrics_df, save_name=None, plot_type='default', plot_homophily=False,
-              x_to_keep=None, figsize=None):
+    if legend_mapper is not None:
+        adapt_legend(legend, mapper=legend_mapper)
+    elif simplify_legend:
+        save_names = network_metrics_df['save_name'].unique()
+        models = [parse_save_name(n)[1] for n in save_names if n != 'real']
+        if len(set(models)) > 1:
+            adapt_legend(legend, include_model=True)
+        else:
+            adapt_legend(legend, include_model=False)          
+    
+    if save_name is not None:
+        plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, save_name), bbox_inches='tight')
+    plt.show()
+
+
+def make_plot(network_metrics_df, save_name=None, plot_type='default', plot_homophily=False, homophily_metric='same_ratio',
+              x_to_keep=None, figsize=None, y_lim=None, simplify_legend=True, legend_mapper=None, legend_pos=None, 
+              palette=None, dodge=0.6):
     """
     Make plot of network metrics.
     """
@@ -68,8 +160,14 @@ def make_plot(network_metrics_df, save_name=None, plot_type='default', plot_homo
     plt.figure(figsize=figsize)
     if plot_homophily:
         x_name = 'demo'
-        x_label = 'Demographic category'
-        y_label = 'Observed/expected cross relations'
+        x_label = 'Demographic variable'
+        network_metrics_df = network_metrics_df[network_metrics_df.metric_name == homophily_metric]
+        if homophily_metric == 'same_ratio':
+            y_label = 'Observed/expected same-group relations'
+        elif homophily_metric == 'cross_ratio':
+            y_label = 'Observed/expected cross-group relations'
+        else:
+            y_label = 'Homophily'
     else:
         x_name = 'metric_name'
         x_label = 'Network metric'
@@ -82,35 +180,53 @@ def make_plot(network_metrics_df, save_name=None, plot_type='default', plot_homo
         orig_len = len(network_metrics_df)
         network_metrics_df = network_metrics_df[network_metrics_df[x_name].isin(x_to_keep)]
         print(f'Keeping rows in {x_to_keep}: kept {len(network_metrics_df)} out of {orig_len} rows')
-        
+    
+    if palette is None:
+        palette = get_pallete(network_metrics_df)
     # default is SE + data points
     if plot_type == 'default':
         sns.stripplot(data=network_metrics_df, x=x_name, y='_metric_value',
-                      hue='save_name', palette=get_pallete(network_metrics_df), dodge=0.5,
-                      alpha=0.5, zorder=1)
+                      hue='save_name', palette=palette, dodge=dodge, alpha=0.8, legend=True, zorder=1)
         sns.pointplot(data=network_metrics_df, x=x_name, y='_metric_value', errorbar='se',
-                      hue='save_name', palette='dark:black', dodge=0.6, legend=False,
+                      hue='save_name', palette='dark:black', dodge=dodge, legend=False,
                       capsize=0.05, linestyle='none', zorder=2)  # use zorder to determine which plot ends up on top
     else:
         sns.barplot(data=network_metrics_df, x=x_name, y='_metric_value', 
-                    hue="save_name", palette=get_pallete(network_metrics_df))
+                    hue="save_name", palette=palette)
     
-    legend = plt.legend(bbox_to_anchor=(1.2, 1))
-    adapt_legend(legend)
     if len(network_metrics_df[x_name].unique()) > 1:
         plt.xlabel(x_label)
     else:
         plt.xlabel('')
     plt.ylabel(y_label)
+    if y_lim is not None:
+        plt.ylim(y_lim)
+    if plot_homophily:
+        xmin, xmax = plt.xlim()
+        plt.hlines([1.0], xmin, xmax, color='grey', linestyle='dashed')  # draw line at 1 for homophily  
+    plt.grid(alpha=0.2)
+
+    if (len(network_metrics_df['save_name'].unique()) > 5) or (legend_pos is not None):
+        print('setting legend pos')
+        if legend_pos is None:
+            legend_pos = (1,1)
+        # move legend outside the plot if there are too many things in legend
+        legend = plt.legend(bbox_to_anchor=legend_pos)
+    else:
+        legend = plt.legend()
+    if legend_mapper is not None:
+        adapt_legend(legend, mapper=legend_mapper)
+    elif simplify_legend:
+        save_names = network_metrics_df['save_name'].unique()
+        models = [parse_save_name(n)[1] for n in save_names if n != 'real']
+        if len(set(models)) > 1:
+            adapt_legend(legend, include_model=True)
+        else:
+            adapt_legend(legend, include_model=False)          
     
-    if save_name is None:
-        plt.show()
-    else: 
-        save_path = os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}')
-        if not os.path.exists(save_path):
-            os.makedirs(save_path)
-        plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}/homophily.png'))
-        plt.close()
+    if save_name is not None:
+        plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, save_name), bbox_inches='tight')
+    plt.show()
         
 
 def plot_comparison_homophily(homophily_metrics_df, save_name):
@@ -123,15 +239,15 @@ def plot_comparison_homophily(homophily_metrics_df, save_name):
     # plot homophily
     sns.boxplot(x='demo', y='metric_value', data=homophily_metrics_df, hue='save_name', palette=get_pallete(homophily_metrics_df))
     # sns.stripplot(x='demo', y='metric_value', data=homophily_metrics_df, hue='save_name', size=4, palette='dark:.3')
-    plt.xlabel('Demographic Category')
-    plt.ylabel('Observed/expected cross relations')
+    plt.xlabel('Demographic variable')
+    plt.ylabel('Observed/expected same-group relations')
     adapt_legend(plt.legend())
     plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}/homophily.png'))
     plt.close()
 
     sns.barplot(x='demo', y='metric_value', hue='save_name', data=homophily_metrics_df, palette=get_pallete(homophily_metrics_df))
     plt.xlabel('Demographic Category')
-    plt.ylabel('Observed/expected cross relations')
+    plt.ylabel('Observed/expected same-group relations')
     adapt_legend(plt.legend())
     plt.savefig(os.path.join(PATH_TO_SAVED_PLOTS, f'{save_name}/homophily_bar.png'))
     plt.close()
