@@ -1,8 +1,0 @@
-{
-  "index": 0,
-  "message": {
-    "role": "assistant",
-    "content": "- Emma Johnson, Olivia Chen\n- Olivia Chen, Emma Johnson\n- Olivia Chen, Lion Thompson\n- Olivia Chen, Jackson Smith\n- Olivia Chen, Abigail Thompson\n- Olivia Chen, Alexander Patel\n- Olivia Chen, Matthew Wilson\n- Olivia Chen, Grace Johnson\n- Olivia Chen, Chloe Thompson\n- Olivia Chen, Scarlett Brown\n- Olivia Chen, Samuel Davis\n- Olivia Chen, Xavier Johnson\n- Noah Martinez, Ava Rodriguez\n- Noah Martinez, Henry Davis\n- Noah Martinez, James Lee\n- Noah Martinez, Paige Wilson\n- Noah Martinez, Madeline Thompson\n- Noah Martinez, Sebastian Nguyen\n- Noah Martinez, Sophia Wilson\n- Noah Martinez, Michael Garc\u00eda\n- Noah Martinez, Melissa Brown\n- Noah Martinez, Ian White\n- Olivia Chen, Henry Davis\n- Liam Thompson, Ava Rodriguez\n- Liam Thompson, Emily Peterson\n- Liam Thompson, Jayden Johnson\n- Liam Thompson, Leah James\n- Liam Thompson, Emma King\n- Liam Thompson, Sierra White\n- Liam Thompson, Grace Anderson\n- Liam Thompson, Katherine Lee\n- Liam Thompson, Julian Thompson\n- Liam Thompson, Landon Jones\n- Liam Thompson, Daniel Everett\n- Liam Thompson, Peter Young\n- Liam Thompson, Piper Adams\n- Ava Rodriguez, \u201c...\n(1980 characters remaining)"
-  },
-  "finish_reason": "stop"
-}

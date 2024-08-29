@@ -1,8 +1,0 @@
-{
-  "index": 0,
-  "message": {
-    "role": "assistant",
-    "content": "- Emma Johnson, Noah Martinez\n- Olivia Chen, Emma Wilson\n- Olivia Chen, Benjamin Kim\n- Lucas Lee, Benjamin Kim\n- Lucas Lee, Henry Davis\n- Isabella Wright, Charlotte Johnson\n- Isabella Wright, Benjamin Kim\n- Sofia Rodriguez, Noah Martinez\n- Sofia Rodriguez, Valerie Adams\n- Charlott Johnson, Isabella Wright\n- Charlotte Johnson, Daniel Davis\n- Aiden Patel, Sofia Nguyen\n- Michael Smith, Emma Johnson\n- Emma Wilson, Stella Brown\n- Evelyn Chen, Isaac Jackson\n- Evelyn Chen, David Kim"
-  },
-  "finish_reason": "stop"
-}

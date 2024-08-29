@@ -1,8 +1,0 @@
-{
-  "index": 0,
-  "message": {
-    "role": "assistant",
-    "content": "(Daniel Lee, Ethan Kim)\n(Harper Baker, Benjamin Scott)\n(Joshua Wu, Benjamin Hernandez)\n(Mason Mitchell, Elijah Scott)\n(Emma Lopez, Ava Ramirez)\n(Noah Roberts, Jacob Davis)\n(Alexander Turner, Mia Smith)\n(William Martinez, Sophia Smith)\n(Emily Davis, Ethan Wilson)\n(Sophia Torres, Sofia Lopez)\n(Daniel Wu, Mia Wright)\n(Alexander Scott, Ava Gonzalez)\n(Emily Hernandez, Benjamin Thompson)\n(Sofia Johnson, Elijah Turner)"
-  },
-  "finish_reason": "stop"
-}

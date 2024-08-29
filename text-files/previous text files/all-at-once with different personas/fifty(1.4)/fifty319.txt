@@ -1,8 +1,0 @@
-{
-  "index": 0,
-  "message": {
-    "role": "assistant",
-    "content": "- Emma Johnson, Olivia Chen\n- Emma Johnson, Henry Davis\n- Emma Johnson, Emily Nguyen\n- Emma Johnson, Grace Johnson\n- Emma Johnson, Madison Chen\n- Emma Johnson, Natalie Nguyen\n- Noah Martinez, Ava Rodriguez\n- Noah Martinez, Ethan Davis\n- Noah Martinez, Joseph Jackson\n- Noah Martinez, Andrew Smith\n- Olivia Chen, Emma Johnson\n- Olivia Chen, Sophia Nguyen\n- Olivia Chen, Ethan Davis\n- Olivia Chen, Emily Nguyen\n- Olivia Chen, Grace Johnson\n"
-  },
-  "finish_reason": "stop"
-}

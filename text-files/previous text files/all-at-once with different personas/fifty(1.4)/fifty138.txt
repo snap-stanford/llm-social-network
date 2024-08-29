@@ -1,8 +1,0 @@
-{
-  "index": 0,
-  "message": {
-    "role": "assistant",
-    "content": "- Emma Johnson, Olivia Chen\n- Emma Johnson, Michael Smith\n- Noah Martinez, Benjamin Kim\n- Noah Martinez, Amelia Garcia\n- Noah Martinez, Oliva Chen\n- Lucas Lee, Hannah Thompson\n- Isabella Wright, Olivia Chen\n- Sophia Nguyen, Amelia Garcia\n- Sophia Nguyen, Mia Brown\n- Lucia Mercado, Joe Aguilar\n- Johannes Lingel, Patrizio Martini-Ohema\n- Martha Cookerly, Augustine Pierre\n- Genevi\u00e9ve de Jacques, Verony Fryckenboth\n- Suzanne Colfrey, George Courtdayle\n- Annefleur van Stolkum, Astrid Hockerzijl\n- Delicia Citrinredigerers\u00e4rkte, Eva Himmlersjobb\n- Peach Meowbride, Barbara Alvernshed"
-  },
-  "finish_reason": "stop"
-}

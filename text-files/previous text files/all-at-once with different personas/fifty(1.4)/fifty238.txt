@@ -1,8 +1,0 @@
-{
-  "index": 0,
-  "message": {
-    "role": "assistant",
-    "content": "- Emma Johnson, Olivia Chen   (both young, white, Protestant, and liberal)\n- Noah Martinez, Ava Rodriguez   (both Latino, Catholic, and conservative)\n- Liam Thompson, Benjamin Kim   (both moderate Christians)\n- Lucas Lee, Xavier Patel   (both young Asian males)\n- Isabella Wright, Sophia Nguyen   (both young Asian females)\n- Emily Nguyen, Madison Chen   (both young Asian females)\n- Charlotte Johnson, Ethan Davis   (both young white conservatives)\n- Mia Brown, Hannah Thompson   (both young black females)\n- Aiden Patel, Joel Jackson   (both young Asian males)\n- Amelia Garcia, Sofia Rodriguez   (both Latinos and conservative)\n- Cooper Lee, Scarlett Brown   (both of color and independent)\n- Benjamin Johnson, Henry Davis   (both black and liberal)\n- Michael Smith, Joseph Jackson   (both young, white, and independent)\n- Evelyn Chen, Zoe Johnson   (both of Asian descent)\n- William Johnson, Isaac Jackson   (both black and liberal)\n- Abel Davis, Samuel Davis   (both young, black, Muslim males)\n- Elizabeth Martinez, Lily Rodriguez   (both Latino and conservative)\n- Grace Johnson, Chloe Thompson   (both young, white, Protestant women)\n- David Kim, John Thompson   (Asian and moderate)"
-  },
-  "finish_reason": "stop"
-}

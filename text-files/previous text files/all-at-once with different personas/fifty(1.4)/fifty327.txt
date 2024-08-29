@@ -1,8 +1,0 @@
-{
-  "index": 0,
-  "message": {
-    "role": "assistant",
-    "content": "- Emma Johnson, Olivia Chen\n- Emma Johnson, Mia Brown\n- Emma Johnson, Rodrigo Perez\n- Emma Johnson, Jenna Johnson\n- Noah Martinez, Olivia Chen\n- Noah Martinez, Aiden Patel\n- Noah Martinez, Omar Rodriguez\n- Noah Martinez, Amelia Garcia\n- Olivia Chen , Liam Thompson\n- Olivia Chen , Isabella Wright\n- Olivia Chen , Avery Brown\n- Olivia Chen , Natalie Nguyen\n- Liam Thompson, Ethan Davis\n...\n(I consider factors to start unfriend relationships with \"Connected\")\n- Olivia Chen, Rodrigo Perez"
-  },
-  "finish_reason": "stop"
-}

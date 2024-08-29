@@ -1,8 +1,0 @@
-{
-  "index": 0,
-  "message": {
-    "role": "assistant",
-    "content": "- Emma Wilson, Lucas Lee\n- Emma Wilson, Sophia Lee\n- Emma Wilson, Oliver Jackson\n- Emma Wilson, James Lee\n- Emma Wilson, Joseph Jackson\n- Emma Wilson, Chloe Thompson\n- Emma Wilson, Lily Rodriguez\n- Emma Wilson, Christopher Lee\n- Emma Wilson, Charlote Johnson\n- Emma Wilson, Hannah Thompson\n- Emma Wilson, Natalie Nguyen\n- Emma Wilson, Joshua Wilson\n- Emma Wilson, Zoe Johnson\n- Emma Wilson, Isaac Jackson\n\n- Lucy Roberts, Lily Rodriguez\n- Lucy Roberts, Nathaniel Kelly\n- Lucy Roberts, Elijah Phillips \n- Lucy Roberts, Matthew Moore"
-  },
-  "finish_reason": "stop"
-}

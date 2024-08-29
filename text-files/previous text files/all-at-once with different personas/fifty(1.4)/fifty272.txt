@@ -1,8 +1,0 @@
-{
-  "index": 0,
-  "message": {
-    "role": "assistant",
-    "content": "- Emma Johnson, Lucas Lee"
-  },
-  "finish_reason": "stop"
-}

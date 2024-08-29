@@ -1,8 +1,0 @@
-{
-  "index": 0,
-  "message": {
-    "role": "assistant",
-    "content": "1. Emma Wilson, Sofia Lee\n2. Olivia Martinez, Ethan Thompson\n3. Maya Nguyen, Gabriela Hernandez\n4. Samuel Davis, Daniel Lee\n5. Sophia Clark, Jackson Mitchell\n6. Isabella Rodriguez, David Kim\n7. Mia Thompson, Jacob Ramirez\n8. Ava Patel, Lucas Chen\n9. Matthew Foster, Amelia Wright\n10. Elijah Scott, Camila Gonzalez\n11. Joshua Wu, Harper Baker\n12. Michael Roberts, Penelope Lopez\n13. Matthew Nguyen, Charlotte Thompson\n14. Noah Hill, Valentina Torres\n15. Daniel Kim, Grace Mitchell\n16. Benjamin Hernandez, Luna Patel\n17. Christopher Turner, Victoria Smith\n18. Ryan Martinez, Harper Johnson\n19. Elijah Davis, Penelope Rodriguez\n20. Andrew Chen, Mia Wilson\n21. Alexander Clark, Emily Nguyen\n22. Elijah Thompson, Sofia Rivera\n23. James Lee, Ava Martin\n24. Mason Mitchell, Emma Lopez\n25. Ethan Kim, Mia Baker\n26. Noah Roberts, Sofia Torres\n27. Daniel Johnson, Olivia Thompson\n28. Jacob Davis, Isabella Gonzalez\n29. Ethan Wu, Ava Wright\n30. Michael Scott, Sofia Lopez\n31. Noah Kim, Emily Hernandez\n32. Alexander Turner, Mia Smith\n33. William Martinez, Emma Johnson\n34. Elijah Wilson, Sofia Rodriguez\n35. David Chen, Olivia Wilson\n36. Benjamin Scott, Ava Turner\n37. Samuel Lee, Ethan Johnson\n38. Emma Gonzalez, Daniel Wu\n39. Alexander Roberts, Sophia Smith\n40. Samuel Martinez, Emily Davis\n41. Benjamin Turner, Olivia Torres\n42. Mia Wright, Alexander Scott\n43. Ava Ramirez, Sofia Baker\n44. Ethan Wilson, Mia Gonzalez\n45. Olivia Smith, Alexander Davis\n46. Emma Hernandez, Benjamin Thompson\n47. Sofia Johnson, Elijah Turner\n48. Mia Torres, Penelope Lopez"
-  },
-  "finish_reason": "stop"
-}

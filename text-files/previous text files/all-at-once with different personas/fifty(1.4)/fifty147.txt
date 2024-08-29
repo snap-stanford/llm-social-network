@@ -1,8 +1,0 @@
-{
-  "index": 0,
-  "message": {
-    "role": "assistant",
-    "content": "- Emma Johnson, Noah Martinez\n- Emma Johnson, Jackson Smith\n- Emma Johnson, Grace Johnson\n- Emma Johnson, Erin Garcia\n- Emma Johnson, Jeremy Martinez\n- Emma Johnson, Lily Rodriguez\n- Emma Johnson, Zoe Johnson\n- Emma Johnson, Ben Johnson\n- Emma Johnson, Andrew Smith\n- Chol\u00e9 Thompson,Joshua Alice\n- Harmony Grlesia Bordeaux Douglas Qian Li Katrina Hicks Aurora Ames Richard Owens\n......\n(Huge Shortages of Foot)\n- Benedchen,Simano Valrask\n- Thorbin Freer Nord Trine Femi Azimeh Jasper Contrarsi Ronaldo Pong Aurelio Chikabuk Korabora Sokovardarzu Sindar Scrapperli Tiin Lee Palimaoval Redbrown Hamiltonov Warlodles Nanjihoi Yong Zolstead\n \n695 Forbidden Candy Vegan Jenn\u012ffer M\u0117\n........."
-  },
-  "finish_reason": "stop"
-}

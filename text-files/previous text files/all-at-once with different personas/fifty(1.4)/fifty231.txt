@@ -1,8 +1,0 @@
-{
-  "index": 0,
-  "message": {
-    "role": "assistant",
-    "content": "- Emma Johnson, Noah Martinez\n- Emma Johnson, James Lee\n- Noah Martinez, Olivia Chen\n- Noah Martinez, Mia Brown\n- Olivia Chen, Lucas Lee\n- Olivia Chen, Isabella Wright\n- Mia Brown, Ava Rodriguez\n- Mia Brown, Benjamin Kim\n- Lucas Lee, Charlotte Johnson\n- Lucas Lee, Emily Nguyen\n- Benjamin Kim, Evelyn Chen\n- Benjamin Kim, Alexander Patel\n- Isabella Wright, Liam Thompson\n- Isabella Wright, Sophia Nguyen\n- Ava Rodriguez, Benjamin Johnson\n- Ava Rodriguz, William Johnson\n- Liam Thompson, Grace Johnson\n- Liam Thompson, Madison Chen\n- Sophia Nguyen, Abigail Thompson\n- Sophia Nguyen, Nathan Nguyen\n- Jackson Smith, Caroline Smith\n- Jackson Smith, Alex Smith\n- Caroline Smith, Benjamin Peterson\n- Caralice Smith, Nicole Peterson\nJoe Peterson, Matthew Wilson Cosby,\nMaria Cesero\nTravis Smith Chloe Thompson Wendy Gill Isabel McCasslan Chloe Wellington Bo Stafford Chloe Williamson Chloe Quaide Joshua Terreur Eli Haji Erica Tint Kyle Wardlaw Cynthia Khan Nandan K Khatri Michelles Ramendrajit Franco Urbane T Buitenberg Altun Omar Toba Hillstrom Kim Mortensen Mort Hazel Leslie Paltius Destino Dan Hut\nOzen Shan Gerald H Vernon-II Keinin ono`on Ronald Hale Jr Louis Coffie Silgie Thompson Ritchie Mi Ntamav\n\n- Jessica Park, Cara Harris"
-  },
-  "finish_reason": "stop"
-}

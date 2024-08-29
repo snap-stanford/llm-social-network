@@ -1,8 +1,0 @@
-{
-  "index": 0,
-  "message": {
-    "role": "assistant",
-    "content": "- Mia Brown, Natalie Nguyen\n - Sophia Nguyen, Emily Nguyen\n - Michael Smith, Matthew Wilson\n - Benjamin Johnson, Lily Rodriguez\n - Andrew Smith, Benjamin Kim\n - Madison Chen, Olivia Chen\n - Charlotte Johnson, Ethan Davis\n \n(This is just a small subset of the possible friendship pairs. There are many other possible combinations.)"
-  },
-  "finish_reason": "stop"
-}

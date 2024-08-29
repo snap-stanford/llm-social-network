@@ -1,8 +1,0 @@
-{
-  "index": 0,
-  "message": {
-    "role": "assistant",
-    "content": "(Ethan Thompson, Olivia Martinez)\n(Maya Nguyen, Jacob Ramirez)\n(Gabriela Hernandez, Sofia Silva)\n(Daniel Lee, Mia Thompson)\n(Sophia Clark, Lucas Chen)\n(Jackson Mitchell, Samuel Davis)\n(Isabella Rodriguez, Ava Patel)\n(David Kim, Sofia Lopez)\n(Matthew Foster, Benjamin Hernandez)\n(Noah Hill, Valentina Torres)\n(Daniel Kim, Amelia Wright)\n(Grace Mitchell, Joshua Wu)\n(Luna Patel, Charlotte Thompson)\n(Ryan Martinez, Harper Baker)\n(Elijah Davis, Penelope Lopez)\n(Andrew Chen, Mia Wilson)\n(Alexander Clark, Emily Nguyen)\n(Elijah Thompson, Benjamin Thompson)\n(Emma Lopez, Sofia Rivera)\n(James Lee, Mason Mitchell)\n(Emma Wilson, Olivia Thompson)\n(Noah Roberts, Penelope Rodriguez)\n(Alexander Turner, Mia Smith)\n(William Martinez, Emma Johnson)\n(Elijah Wilson, Sofia Rodriguez)\n(David Chen, Olivia Wilson)\n(Benjamin Scott, Ava Turner)\n(Samuel Lee, Isabella Martin)\n(Ethan Johnson, Ava Wright)\n(Emma Gonzalez, Michael Scott)\n(Daniel Wu, Alexander Roberts)\n(Sophia Smith, Samuel Martinez)\n(Emily Davis, Emma Hernandez)\n(Benjamin Turner, Olivia Torres)\n(Ava Ramirez, Sofia Baker)\n(Ethan Wilson, Mia Gonzalez)"
-  },
-  "finish_reason": "stop"
-}

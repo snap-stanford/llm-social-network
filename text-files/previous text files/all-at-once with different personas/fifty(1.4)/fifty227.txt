@@ -1,8 +1,0 @@
-{
-  "index": 0,
-  "message": {
-    "role": "assistant",
-    "content": "- Emma Johnson, Noah Martinez\n- Emma Johnson, Olivia Chen\n- Emma Johnson, Isabella Wright\n- Ethan Davis, Hannah Thompson\n- Lucas Lee, Olivia Chen\n- Lucas Lee, Liam Thompson\n- Lucas Lee, Charlotte Johnson\n- Hannah Thompson, Abigail Thompson\n- Henry Davis, Benjamin Johnson\n- Henry Davis, Samuel Davis\n- Elizabeth Martinez, Natalie Nguyen\n- Abigail Thompson, Charlotte Johnson\n- Michael Smith, Ava Rodriguez\n- Sofia Rodriguez, Chropher Lee\n- Zoe Johnson, Matthew Wilson\n- Amelia Garcia, Ava Rodriguez\n- Harper Thompson, Ashley Campbell\n- Harper Thompson, Arionna Rivera\n- Harper Thompson, Gavin Mitchell\n- Harper Thompson, Reese McDonald\n- Lily Yang, Tyson Rae\n- Lily Yang, Van Morales\n- Lily Yang, Georgia Sanderson\n- Makayla Jones, Emma Avery\n- Makayla Jones, Gracie Singh\n- Vianna Baker, Ada Mcknelly\n- Aleyna Buranchithantaruxxuliak, Angel Szabrowski-Gjerstad\n\n- Lincoln Tinline, Rohan Sarin"
-  },
-  "finish_reason": "stop"
-}

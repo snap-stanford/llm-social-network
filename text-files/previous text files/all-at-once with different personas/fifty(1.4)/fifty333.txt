@@ -1,8 +1,0 @@
-{
-  "index": 0,
-  "message": {
-    "role": "assistant",
-    "content": "- Emma Johnson, Henry Davis\n- Olivia Chen, Nataliage Nguyen\n- Sophia Nguyen, Charlotte Johnson\n- Isabella Wright, Ava Rodriguez\n- Mia Brown, Olivia Chen\n- Lucas Lee, Matthew Wilson\n- Jackson Smith, Benjamin Kim\n- Amelia Garcia, Joanna Morgan\n- Emily Nguyen, Ashley Patterson\n- Grace Johnson, Emma Wilson\n- Joseph Jackson, Madison Chen\n- Chloe Thompson, Harper Thompson\n- Zoey Martinez, Isabel Contreras\n- Madison Chen, Mia Brown"
-  },
-  "finish_reason": "stop"
-}

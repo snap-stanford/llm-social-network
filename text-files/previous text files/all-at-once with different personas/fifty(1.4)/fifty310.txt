@@ -1,8 +1,0 @@
-{
-  "index": 0,
-  "message": {
-    "role": "assistant",
-    "content": "- Emma Johnson, Olivia Chen \n- Emma Johnson, Sophia Nguyen \n- Emma Johnson, Mia Brown \n- Olivia Chen, Ethan Davis \n- Olivia Chen, Lucas Lee \n- Olivia Chen, Harrison Kim \n- Sophia Nguyen, Olivia Chen \n- Sophia Nguyen, Henry Davis \n- Lucas Lee, Ethan Davis \n- Lucas Lee, Harrison Kim \n- Isabella Wright, Mia Brown \n- Isabella Wright, Amelia Garcia \n- Isabella Wright, Zoe Johnson \n- Ethan Davis, Liam Thomas \n- Ethan Davis, Emma Johnson \n- Sophia Nguyen, Evelyn Chen \n- Sophia Nguyen, Ethan Patel \n- Jackson Smith, Michael Smith \n- Jackson Smith, Charlotte Johnson \n- Slater Miller, Aiden Pratt \n- James Johnson, Oscar White \n- Gabriella Ta or, Jonathan Be Nute n \n- Mia Thompson, Harrison Choen son \n- Alexis Langele, Castlio Ramsey \n- Megan Hit Pon, Marcos Barcaserp \n- SiSey Kiers"
-  },
-  "finish_reason": "stop"
-}

@@ -1,8 +1,0 @@
-{
-  "index": 0,
-  "message": {
-    "role": "assistant",
-    "content": "- Emma Johnson, Liam Thompson\n- Olivia Chen, Lucas Lee\n- Sophia Lee, Sophia Nguyen\n- Jackson Smith, William Johnson\n- Mia Brown, James Lee\n- Mia Brown, Daniel Davis\n- Benjamin Kim, Emily Nguyen\n- Grace Johnson, Benjamin Johnson\n- Matthew Wilson, Hannah Thompson\n- Alexander Patel, Ethan Patel"
-  },
-  "finish_reason": "stop"
-}

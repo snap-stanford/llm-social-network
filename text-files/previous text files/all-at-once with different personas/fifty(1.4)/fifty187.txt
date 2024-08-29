@@ -1,8 +1,0 @@
-{
-  "index": 0,
-  "message": {
-    "role": "assistant",
-    "content": "- Emma Johnson, Mia Brown\n- Emma Johnson, Amelia Garcia\n- Emma Johnson, Oliver Jackson\n- Emma Johnson, Alexander Patel\n- Emma Johnson, Madison Chen\n- Emma Johnson, Lily Rodriguez\n- Emma Johnson, Zoey Martinez\n- Noah Martinez, Ava Rodriguez\n- Noah Martinez, Ethan Davis\n- Noah Martinez, Amelia Garcia\n- Noah Martinez, Sofia Rodriguez\n- Noah Martinez, Matthew Wilson\n- Olivia Chen, Bella Wright\n- Olivia Chen, Mia Brown\n- Olivia Chen, Henry Davis\n- Olivia Chen, Alexander Patel\n- Olivia Chen, Hannah Thompson\n- Olivia Chen, Madison Chen\n- Liam Thompson, Benjamin Kim\n- Liam Thompson, Andrew Smith\n- Liam Thompson, Abigail Thompson\n- Liam Thompson, Chloe Thompson\n- Ava Rodriguez, Bella Wright\n- Ava Rodriguez, Mia Brown\n- Ava Rodriguez, Aiden Patel\n- Ava Rodriguez, Chloe Thompson\n- Ava Rodriguez, Zoey Martinez\n- Lucas Lee, Benjamin Kim\n- Lucas Lee, Henry Davis\n- Isabella Wright, Mia Brown\n- Sophia Nygugen, Bella Wright\n- Sophia Nygugen, Mia Brown\n- Sophia Ngueyn, Jonathan Patel\n- Sophia Ngueyn, Isabella Wright\n- Sophia Ngueyn, Henry Davis\n- Sophia Nguyen, Natalie Nguyen\n- Jackson Smith, Aiden Patel\n- Jackson Smith, Grace Johnson\n- Jackson Smith, Matthew Wilson\n- Jackson Smith, Jonathan Patel\n- Mia Brown, Aiden Patel\n- Mia Brown, Joan Diego\n- Benjamin Patel, Matthew Wilson\n- Aiden Patel, Grace Johnson\n- Aiden Patel, Natalie Nguyen\n- Aiden Patel, Sean Wallace\n- Aiden Patel, Jonas Vasquez\n- Charlotte Johnson, Jacob Martin\n- Benjamin Kim, Jonathan Patel\n- Oliver Jackson, Aaron Harrison\n- Oliver Jackson, Cody Foster\n- Olivia Griffith, Hannah Thompson\n-Cordelia Hill, Zoey Alvarez\n-sofia tal, Owert Appleton"
-  },
-  "finish_reason": "stop"
-}

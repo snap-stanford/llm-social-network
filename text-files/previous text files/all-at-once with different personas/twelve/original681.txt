@@ -1,8 +1,0 @@
-{
-  "index": 0,
-  "message": {
-    "role": "assistant",
-    "content": "13. Emma Thompson, Ethan Kim\n14. Emma Thompson, Hannah Smith\n15. Emma Thompson, Sofia Rodriguez\n16. Emma Thompson, Alejandro Ramirez\n17. Emma Thompson, Mia Green\n18. Emma Thompson, Carlos Santos\n19. Emma Thompson, Malikah Hussein\n20. Emma Thompson, Lily Wong\n21. Emma Thompson, Malik Johnson\n22. Emma Thompson, Ryan Chen\n23. Emma Thompson, Xavier Littlebear\n24. Malik Johnson, Sofia Rodriguez\n25. Malik Johnson, Alejandro Ramirez\n26. Malik Johnson, Carlos Santos\n27. Malik Johnson, Lily Wong\n28. Malik Johnson, Malikah Hussein\n29. Malik Johnson, Ryan Chen\n30. Malik Johnson, Xavier Littlebear\n31. Sofia Rodriguez, Alejandro Ramirez\n32. Sofia Rodriguez, Carlos Santos\n33. Sofia Rodriguez, Lily Wong\n34. Sofia Rodriguez, Ryan Chen\n35. Sofia Rodriguez, Xavier Littlebear\n36. Sofia Rodriguez, Mia Green\n37. Sofia Rodriguez, Hannah Smith\n38. Sofia Rodriguez, Malikah Hussein\n39. Sofia Rodriguez, Ethan Kim\n40. Ryan Chen, Xavier Littlebear\n41. Ryan Chen, Mia Green\n42. Ryan Chen, Hannah Smith\n43. Ryan Chen, Malikah Hussein\n44. Ryan Chen, Ethan Kim\n45. Xavier Littlebear, Mia Green\n46. Xavier Littlebear, Hannah Smith\n47. Xavier Littlebear, Malikah Hussein\n48. Xavier Littlebear, Ethan Kim\n49. Lily Wong, Mia Green\n50. Lily Wong, Hannah Smith\n51. Lily Wong, Malikah Hussein\n52. Lily Wong, Ethan Kim\n53. Alejandro Ramirez, Carlos Santos\n54. Alejandro Ramirez, Malikah Hussein\n55. Alejandro Ramirez, Ethan Kim\n56. Mia Green, Hannah Smith\n57. Mia Green, Malikah Hussein\n58. Mia Green, Ethan Kim\n59. Hannah Smith, Malikah Hussein\n60. Hannah Smith, Ethan Kim\n61. Malikah Hussein, Ethan Kim"
-  },
-  "finish_reason": "stop"
-}

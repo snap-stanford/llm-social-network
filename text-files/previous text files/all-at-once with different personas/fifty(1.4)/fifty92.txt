@@ -1,8 +1,0 @@
-{
-  "index": 0,
-  "message": {
-    "role": "assistant",
-    "content": "- Emma Johnson, Olivia Chen\n- Noah Martinez, Ava Rodriguez\n- Noah Martinez, Sophia Nguyen\n- Olivia Chen, Sophia Nguyen\n- Olivia Chen, Evelyn Chen\n- Olivia Chen, Emily Nguyen\n- Liam Thompson, Jackson Smith\n- Ava Rodriguez, Elizabeth Martinez\n- Ava Rodriguez, Noah Martinez\n- Lucas Lee, Benjamin Kim\n- Lucas Lee, Samuel Davis\n- Ethan Davis, Benjamin Kim\n- Ethan Davis, Hannah Thompson\n- Sophia Nguyen, Noah Martinez\n- Sophia Nguyen, Olivia Chen\n- Mia Brown, Isabella Wright\n- Mia Brown, Aiden Patel\n- Aiden Patel, Michael Smith\n- Aiden Patel, Ethan Pate\n- Noah Martinez, Lauren McCoy\n- Ethan Patel, Philippe Richard\n- Martin Kingchai/Epoch Koosiyanotin III (not possible to determine speakers gender based on names), Young-joo Kim"
-  },
-  "finish_reason": "stop"
-}

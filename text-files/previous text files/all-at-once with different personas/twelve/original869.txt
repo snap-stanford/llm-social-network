@@ -1,8 +1,0 @@
-{
-  "index": 0,
-  "message": {
-    "role": "assistant",
-    "content": "1. Emma Thompson - Sophia Lee\n2. Malik Johnson - Lily Wong\n3. Sofia Rodriguez - Alejandro Ramirez\n4. Ryan Chen - Ethan Kim\n5. Mia Green - Hannah Smith\n6. Xavier Littlebear - Carlos Santos\n7. Lily Wong - Sofia Rodriguez\n8. Alejandro Ramirez - Mia Green\n9. Hannah Smith - Emma Thompson\n10. Malikah Hussein - Malik Johnson\n11. Ethan Kim - Xavier Littlebear\n12. Carlos Santos - Ryan Chen"
-  },
-  "finish_reason": "stop"
-}

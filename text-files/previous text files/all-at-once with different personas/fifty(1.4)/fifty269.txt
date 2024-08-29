@@ -1,8 +1,0 @@
-{
-  "index": 0,
-  "message": {
-    "role": "assistant",
-    "content": "- Emma Johnson, Noah Martinez\n- Emma Johnson, Ava Rodriguez\n- Emma Johnson, Isabella Wright\n- Emma Johnson, Sophia Nguyen\n- Emma Johnson, Jackson Smith\n- Emma Johnson, Charlotte Johnson\n- Emma Johnson, Henry Davis\n- Emma Johnson, Michael Smith\n- Noah Martinez, Olivia Chen\n- Noah Martinez, Liam Thompson\n- Noah Martinez, Benjamin Kim\n- Noah Martinez, David Kim\n- Noah Martinez, Daniel Davis\n- Noah Martinez, Matthew Wilson\n- Noah Martinez, Zoe Johnson\n- Olivia Chen, Mia Brown\n- Olivia Chen, Grace Johnson\n- Liam Thompson, Aiden Patel\n- Liam Thompson, Oliver Jackson\n- Liam Thompson, Benjamin Kim\n- Lucas Lee, Sophia Nguyen\n- Lucas Lee, William Johnson\n- Isabella Wright,Henry Davis\n- Ava Rodriguez, Amelia Garcia\n- Ava Rodriguez, Sofia Rodriguez\n- Ava Rodriguez, David Kim\n- Ava Rodriguez, Matthew Wilson\n- Ava Rodriguez, Zoe Johnson\n- Sophia Nguyen, Emily Nguyen\n- Sophia Nguyen, Amanda Wilson\n- Sophia Nguyen, Adele Wright\n- Sophia Nguyen, Jacob Brown\n- Sophia Nguyen, Matthew Nguyen\n- Jackson Smith, Natalie Nguyen\n- Jackson Smith, Isaac Jackson\n- Charlotte Johnson, Emily Nguyen\n- Charlotte Johnson, Amanda Wilson\n- Emily Nguyen, Grace Johnson\n- Emily Nguyen, Zoe Johnson\n- Grace Johnson, Zoey Martinez\n- Zoey Martinez, Lily Rodriguez\n- Lucas Lee, Charlotte Wilson\n- Samuel Davis, Victoria Garcia\n- Daniel Davis, Oliver Jackson\n- Victoria Garcia, Sara Wilson\n- Amanda Wilson, Steven Martinez\n- Addisonin Bennett, Dylan \"dustthrasher1234\" Sudberry"
-  },
-  "finish_reason": "stop"
-}

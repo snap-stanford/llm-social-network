@@ -1,8 +1,0 @@
-{
-  "index": 0,
-  "message": {
-    "role": "assistant",
-    "content": "1. Alex Johnson, Emma Wilson\n2. Olivia Martinez, Ethan Thompson\n3. Maya Nguyen, Samuel Davis\n4. Gabriela Hernandez, Daniel Lee\n5. Sophia Clark, Jackson Mitchell\n6. Isabella Rodriguez, David Kim\n7. Mia Thompson, Jacob Ramirez\n8. Ava Patel, Matthew Foster\n9. Sofia Silva, Lucas Chen\n10. Amelia Wright, Elijah Scott\n11. Camila Gonzalez, Joshua Wu\n12. Harper Baker, Michael Roberts\n13. Penelope Lopez, Matthew Nguyen\n14. Charlotte Thompson, Noah Hill\n15. Valentina Torres, Daniel Kim\n16. Grace Mitchell, Benjamin Hernandez\n17. Luna Patel, Christopher Turner\n18. Victoria Smith, Ryan Martinez\n19. Harper Johnson, Elijah Davis\n20. Penelope Rodriguez, Sofia Rivera\n21. Andrew Chen, James Lee\n22. Emily Nguyen, Ava Martin\n23. Mason Mitchell, Emma Lopez\n24. Ethan Kim, Mia Baker\n25. Noah Roberts, Sofia Torres\n26. Daniel Johnson, Olivia Thompson\n27. Jacob Davis, Isabella Gonzalez\n28. Ethan Wu, Ava Wright\n29. Michael Scott, Sofia Lopez\n30. Noah Kim, Emily Hernandez\n31. Alexander Turner, Mia Smith\n32. William Martinez, Emma Johnson\n33. Elijah Wilson, Sofia Rodriguez\n34. David Chen, Olivia Wilson\n35. Benjamin Scott, Ava Turner\n36. Samuel Lee, David Chen\n37. Benjamin Turner, Samuel Lee\n38. Alexander Scott, Ethan Johnson\n39. Sofia Baker, Emma Gonzalez\n40. Ethan Wilson, Daniel Wu\n41. Mia Gonzalez, Alexander Roberts\n42. Olivia Smith, Sophia Smith\n43. Alexander Davis, Samuel Martinez\n44. Emma Hernandez, Emily Davis\n45. Benjamin Thompson, Olivia Torres\n46. Sofia Johnson, Mia Wright\n47. Elijah Turner, Alexander Scott\n48. Mia Torres, Ava Ramirez"
-  },
-  "finish_reason": "stop"
-}

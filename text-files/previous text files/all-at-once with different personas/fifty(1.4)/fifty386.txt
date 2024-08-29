@@ -1,8 +1,0 @@
-{
-  "index": 0,
-  "message": {
-    "role": "assistant",
-    "content": "- Emma Johnson, Noah Martinez\n- Emma Johnson, Sophie Nguyen\n- EMma Johnson, Benjamin Kim\n- Emma Johnson, Elizabeth Martinez\n- Emma Johnson, William Johnson\n- Emma Johnson, Henry Davis\n- Emma Johnson, Matthew Wilson\n- Emma Johnson, Lily Rodriguez\n- Noah Martinez, Ava Rodriguez\n- Noah Martinez, Oliver Jackson\n- Noah Martinez, Madison Chen\n- Olivia Chen, Sophia Nguyen\n- Olivia Chen, Evelyn Chen\n- Liam Thompson, Lucas Lee\n- Olivia Chen, Daniel Davis\n- Madison Chen, Scarlett Brown\n- Steven Zlocka and Aurora Yiron\n+Ethan Davis, Elizabeth Martinez\n- Ava Rodriguez and Nessys Blossom, and Pen Chappelle\n- Mikhail Widucterman and Oliva Backer"
-  },
-  "finish_reason": "stop"
-}

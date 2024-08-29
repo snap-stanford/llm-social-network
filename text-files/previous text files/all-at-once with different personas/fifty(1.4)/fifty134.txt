@@ -1,8 +1,0 @@
-{
-  "index": 0,
-  "message": {
-    "role": "assistant",
-    "content": "- Emma Johnson, James Lee\n- Olivia Chen, Grace Johnson \n- Liam Thompson, Charlotte Johnson\n- Ava Rodriguez, Sofia Rodriguez\n- Lucas Lee, Christopher Lee\n- Isabella Wright, William Johnson\n- Ethan Davis, Benjamin Johnson\n- Sophia Nguyen, Hugo Thompson\n- Jackson Smith, Chloe Thompson\n- Mia Brown, Natalie Nguyen\n- Aiden Patel, Ethan Patel\n- Benjamin Kim, David Kim\n- Harper Thompson, Hannah Thompson\n- Henry Davis, Samuel Davis\n- Elizabeth Martinez, Zoey Martinez\n- Michael Smith, Alexander Patel\n- Evelyn Chen, Madison Chen\n- William Johnson, Grace Johnson\n- Sofia Rodriguez, Lily Rodriguez\n- James Lee, Matthew Wilson\n- Abigail Thompson, Emily Nguyen \n- Daniel Davis, Henry Davis\n- Emily Nguyen, Hannah Nguyen    \n- Matthew  Wilson, Joseph Jackson \n- Scarlett Brown, Avery Brown   \n- Alexander Patel, Elena Johnson\n- Joseph Jackson, Elena Johnson\n- Grace Johnson, Chloe Johnson    \n- Victoria Garcia, Madison Johnson   \n- William Johnson, Emily Rosrez     \n- Karen Brown Chen Lee\n- Marialiv Christiansen Isabella Chatersone \n- Ary-eric-JPLito Sofia Zhou SindiOmayra Miller BurnettFa Cotsaq Zaca Ryuni Rey?Farhana\n- Jiang Ming Jake Thomas John Joseph Knag MuRen Wu, Ethan Pote *\n-WHS OE CHO SeanClari JoshVin ClaireAdam, WashingtonMom Flores YinnoBeaB \n- Bec, LaurenJackson Jul Jo Ann Dawnra SilSanders, Sam Graves JamesMartin Suzana AlasadVal\n-Wito Johkan Diego Wilson Ruby Tate Budah Jefferson Aly Gill Mohammed Scheid Abdulla Aleksyy Ben-Law-Jacob LeoWei, \u2013 AbrahamJoy Mustaf MeiJing Shaffer EthanLiberal Samantha Sirakis Jackson"
-  },
-  "finish_reason": "stop"
-}

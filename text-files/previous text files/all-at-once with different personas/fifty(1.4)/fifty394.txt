@@ -1,8 +1,0 @@
-{
-  "index": 0,
-  "message": {
-    "role": "assistant",
-    "content": "Charlotte Johnson, Liam Thompson\nAiden Patel, Olivian Chen\nMia Brown, Noah Martinez\nIsabella Wright, Emma Johnson\nLucas Lee, Benjamin Kim \nJames Lee, Johnston Patel \nAmelia Grayeci, Jack Gilmantha\nLiam Sherwoodoseventhallewriterbegan throughcanhelles\nSchultz Johnions-Levi Hamiltonaitithinceter."
-  },
-  "finish_reason": "stop"
-}

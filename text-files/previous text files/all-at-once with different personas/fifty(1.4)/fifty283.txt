@@ -1,8 +1,0 @@
-{
-  "index": 0,
-  "message": {
-    "role": "assistant",
-    "content": "- Charlotte Johnson, Lucas Lee\n- Benjamin Kim, Olivia Chen\n- Emily Nguyen, Madison Chen\n- William Johnson, Sophia Nguyen \n- Aiden Patel, Andrew Smith\n- Daniel Davis, Samuel Davis"
-  },
-  "finish_reason": "stop"
-}

@@ -1,8 +1,0 @@
-{
-  "index": 0,
-  "message": {
-    "role": "assistant",
-    "content": "- Emma Johnson, Olivia Chen\n- Olivia Chen, Emma Johnson\n- Olivia Chen, Lily Rodriguez\n- Ava Rodriguez, Olivia Chen\n- Sofia Rodriguez, Ava Rodriguez\n- Amelia Garcia, Ava Rodriguez\n- Benjamin Kim, Olivia Chen\n- Amelia Garcia, Elizabeth Martinez\n- Benjamin Johnson, Ethan Davis\n- Samuel Davis, Sasha Garcia\n- Emma Wilson, Jacob Rodriguez, Mia Brown, Isabella Wright\n- Daniel Davis, Henry Davis\n- Alexander Patel, Aiden Patel\n- Isabella Wright, Ava Rodriguez\n- Zoey Martinez, William Johnson\n- Noah Martinez, Matthew Wilson, Zoe Johnson\n- Liam Thompson, Noah Mandoria\n- Hannah Thompson, Liam Thompson\n- Avery Brown, Charlotte Wilson\n- Evan Tran, Claire Cooper, Harper Thompson)"
-  },
-  "finish_reason": "stop"
-}

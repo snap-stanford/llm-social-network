@@ -1,8 +1,0 @@
-{
-  "index": 0,
-  "message": {
-    "role": "assistant",
-    "content": "- Emma Johnson, Olivia Chen\n- Noah Martinez, Ava Rodriguez\n- Lucas Lee, Isabella Wright\n- Ethan Davis, Amelia Garcia\n- Lucia Rodriguez, Esther Davis\n- Noah Thompson, Mia Martinez\n- Chloe Thompson, Sophia Nguyen\n- Victoria Garcia, Leah Jackson\n- Zion Smith, Aiden Kim\n- Oliver Brown, Skyla Sanchez\n- Maya Lee, Kayla Johnson\n- Eli Rodriguez, Cecilia Davis\n- Max Thompson, Layla Williams\n- Lucia Nguyen, Harper Martinez\n- Ivy Smith, Caleb Davis\n- Henry Davis, Natalie Nguyen\n- Isaac Kim, Noah Wilson\n- Julia Thompson, Adrian Garcia\n- Xavier Jackson, Lincoln Thomas"
-  },
-  "finish_reason": "stop"
-}

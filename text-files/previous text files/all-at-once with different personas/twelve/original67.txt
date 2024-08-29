@@ -1,8 +1,0 @@
-{
-  "index": 0,
-  "message": {
-    "role": "assistant",
-    "content": "(Ethan Kim, Ryan Chen)\n(Malikah Hussein, Sofia Rodriguez)\n(Emma Thompson, Lily Wong)\n(Sofia Rodriguez, Alejandro Ramirez)\n(Malik Johnson, Emma Wilson)\n(Ryan Chen, Xavier Littlebear)\n(Mia Green, Hannah Smith)\n(Xavier Littlebear, Carlos Santos)"
-  },
-  "finish_reason": "stop"
-}

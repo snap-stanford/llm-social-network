@@ -1,8 +1,0 @@
-{
-  "index": 0,
-  "message": {
-    "role": "assistant",
-    "content": "- Emma Johnson, Liam Thompson\n- Emma Johnson, Charlotte Johnson\n- Emma Johnson, Sophia Nguyen\n- Emma Johnson, Olivia Chen\n- Emma Johnson, Emily Nguyen\n- Emma Johnson, Alison Chen\n- Emma Johnson, William Johnson\n- Emma Johnson, Mia Brown\n- Emma Johnson, William Johnson\n- Emma Johnson, Mia Brown\n- Emma Johnson, Daniel Davis\n- Emma Johnson, Madison Chen\n- Emma Johnson, Lily Rodriguez\n- Emma Johnson, Benjamin Johnson\n- Emma Johnson, Arthur Rodriguez\n- Noah Martinez, Olivia Chen\n- Noah Martinez, Ethan Davis\n- Noah Martinez, Benjamin Kim\n- Noah Martinez, Eden Davis\n- Noah Martinez, Matthew Wilson\n- Noah Martinez, Christopher Lee\n- Olivia Chen, Noah Martinez\n- Olivia Chen, Amanda Chen\n- Olivia Chen, Sl Walsh\n- Olivia Chen, Jenny Laneras\n- Olivia Chen, John Sweitz\n- Olivia Chen, Olivia Chen\n- Olivia Chen, Elliott Wang\n- Olivia Chen, Stephan Carpenter\n- Olivia Chen, Tien Nguyen\n- Olivia Chen, Audry Nguyen\n- Olivia Chen, Kiara Pualrino/Meyers\n- Olivia Chen, Casey Kerl\n- Jacod Rothochobar, Olivia Chen\n- Liaz Sophia Gray, Olivia Chen"
-  },
-  "finish_reason": "stop"
-}

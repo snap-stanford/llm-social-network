@@ -1,8 +1,0 @@
-{
-  "index": 0,
-  "message": {
-    "role": "assistant",
-    "content": "- Alex Johnson, Maya Nguyen\n- Olivia Martinez, Gabriela Hernandez\n- Ethan Thompson, Daniel Lee\n- Samuel Davis, Jackson Mitchell\n- Sophia Clark, Mia Thompson\n- Isabella Rodriguez, Penelope Lopez\n- David Kim, Ava Patel\n- Jacob Ramirez, Valentina Torres\n- Matthew Foster, Harper Baker\n- Sofia Silva, Amelia Wright\n- Elijah Scott, Camila Gonzalez\n- Joshua Wu, Michael Roberts\n- Harper Johnson, Matthew Nguyen\n- Elijah Davis, Charlotte Thompson\n- Noah Hill, Luna Patel\n- Christopher Turner, Victoria Smith\n- Ryan Martinez, Elijah Thompson\n- Sofia Rivera, Sofia Torres\n- James Lee, Emma Lopez\n- Mason Mitchell, Ethan Kim\n- Mia Baker, Noah Roberts\n- Sofia Torres, Daniel Johnson\n- Olivia Thompson, Jacob Davis\n- Isabella Gonzalez, Ava Wright\n- Ethan Wu, Michael Scott\n- Emily Hernandez, Sofia Lopez\n- Alexander Turner, David Chen\n- Mia Smith, Olivia Wilson\n- William Martinez, Benjamin Scott\n- Emma Johnson, Ava Turner\n- Elijah Wilson, Samuel Lee\n- Sofia Rodriguez, Ava Martin\n- David Chen, Olivia Wilson\n- Benjamin Scott, Ava Turner\n- Samuel Lee, Benjamin Scott\n- Isabella Martin, Ethan Johnson\n- Ethan Johnson, Emma Gonzalez\n- Emma Gonzalez, Alexander Davis\n- Alexander Davis, Emma Hernandez\n- Benjamin Thompson, Sofia Johnson\n- Sofia Johnson, Elijah Turner\n- Elijah Turner, Mia Torres"
-  },
-  "finish_reason": "stop"
-}

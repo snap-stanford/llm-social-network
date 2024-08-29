@@ -1,8 +1,0 @@
-{
-  "index": 0,
-  "message": {
-    "role": "assistant",
-    "content": "- Emma Johnson, Noah Davis\n- Michael Smith, Ethan Wilson\n- Sophia Rodriguez, Ava Harris\n- Olivia Martinez, Benjamin Anderson\n- Liam Thompson, Charlotte Thomas\n- Ava Harris, Emma Perez\n- Noah Davis, James Robinson\n- Isabella Brown, Elizabeth Scott\n- Mason Taylor, Joseph King\n- Mia Wilson, Ava Thomas\n- Benjamin Anderson, William Garcia\n- Charlotte Thomas, Oliver Martin\n- Alexander Jackson, Sofia Lewis\n- Amelia Nguyen, Henry Allen\n- James Robinson, Emma Johnson\n- Harper Clark, Daniel Walker\n- Daniel Walker, Sophia Johnson\n- Sofia Lewis, Benjamin Campbell\n- Matthew Turner, Ava Rodriguez\n- Ava Rodriguez, Abigail Young\n- William Garcia, Mia Green\n- Abigail Young, Olivia Anderson\n- Oliver Martin, Liam Martinez\n- Emily Hill, Noah Davis\n- Henry Allen, Mia Wilson\n- Elizabeth Scott, Sofia Baker\n- Joseph King, Samuel Wright\n- Sofia Baker, Jacob Mitchell\n- Samuel Wright, Olivia Morris\n- Mia Green, Benjamin Robinson\n- David Adams, Charlotte Thomas\n- Ava Thomas, Alexander Jackson\n- Jacob Mitchell, Amelia Nguyen\n- Olivia Morris, Harper Clark\n- Benjamin Campbell, Matthew Turner\n- Emma Perez, Ava Rodriguez\n- Michael Turner, William Garcia\n- Sophia Johnson, Abigail Young\n- Ethan Wilson, Oliver Martin\n- Olivia Anderson, Emily Hill\n- Liam Martinez, Henry Allen\n- Ava Thompson, Elizabeth Scott\n- Noah Davis, Joseph King\n- Isabella Clark, Sofia Baker\n- Mason Young, Samuel Wright\n- Mia Taylor, Mia Green\n- Benjamin Robinson, David Adams"
-  },
-  "finish_reason": "stop"
-}

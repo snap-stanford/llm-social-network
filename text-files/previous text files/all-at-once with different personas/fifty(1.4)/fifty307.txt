@@ -1,8 +1,0 @@
-{
-  "index": 0,
-  "message": {
-    "role": "assistant",
-    "content": "- Emma Johnson, Ava Rodriguez\n- Noah Martinez, Olivia Chen\n- Olivia Chen, Benjamin Kim\n- Lucas Lee, Charlotte Johnson\n- Isabella Wright, Emma Johnson\n- Ethan Davis, William Johnson\n- Ireland Franklin, Sophia Nguyen\n- Colin Nguyen, Charlotte Johnson\n- Jackson Smith, James Lee\n- Mia Brown, Mia Brown\n- Stephanie Wilson, Bryce Michel\n- David Wilson, Eryn Nikolajieva\n- Charles Olsen, Meghan Darling\n- Igor Boticky, Pet Johnnyhands\n- Alex Bluaich, Jacob Roundupsteam\n- Lucas Pigorell, Sean Drutzher\n- Kristen Bonizio, Josh Kennyanadian\n- Laura Fabilush, Sean Lappondrum\n- Yuvar DermalloidklusterbashzontiniummitzylepetergreenclickytottygeenaviashiettwanstationslegavordollpwypeitenSidaniasatiagara, Siamat PalmvikienenPicaZolutesonarino\n- Mona Patinee,Ramavand CarmelaalhzardarthorphwiviajahIghayneBagwolsisycoperfirefaceflowizardollpig\n\n-Kiley Martin, Jacob Rounduppeat"
-  },
-  "finish_reason": "stop"
-}

@@ -1,8 +1,0 @@
-{
-  "index": 0,
-  "message": {
-    "role": "assistant",
-    "content": "-Matthew Wilson, Grace Johnson\n-Matthew Wilson, Emma Wilson\n-Matthew Wilson, Joseph Jackson\n-Matthew Wilson, James Lee\n-Matthew Wilson, Elizabeth Martinez\n-Joseph Jackson, Lola"
-  },
-  "finish_reason": "stop"
-}

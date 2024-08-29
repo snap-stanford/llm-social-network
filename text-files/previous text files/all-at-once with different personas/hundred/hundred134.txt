@@ -1,8 +1,0 @@
-{
-  "index": 0,
-  "message": {
-    "role": "assistant",
-    "content": "(Daniel Kim, Sophia Lee)\n(Joshua Wu, Mia Wilson)\n(Emily Nguyen, Sofia Rivera)\n(Noah Kim, Emily Hernandez)\n(Daniel Wu, Emma Hernandez)\n(Sofia Baker, Emma Gonzalez)\n(Alexander Scott, Sophia Smith)\n(Ava Ramirez, Olivia Torres)\n(Ava Martin, Isabella Martin)\n(Elijah Wilson, Olivia Smith)\n(Alexander Davis, Mia Wright)\n(Sofia Johnson, Emma Hernandez)"
-  },
-  "finish_reason": "stop"
-}

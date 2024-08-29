@@ -1,8 +1,0 @@
-{
-  "index": 0,
-  "message": {
-    "role": "assistant",
-    "content": "(Ema Thompson, Mia Green)\n(Emma Thompson, Hannah Smith)\n(Emma Thompson, Sofia Rodriguez)\n(Emma Thompson, Carlos Santos)\n(Emma Thompson, Malik Johnson)\n(Emma Thompson, Lily Wong)\n(Emma Thompson, Alejandro Ramirez)\n(Emma Thompson, Malikah Hussein)\n(Malik Johnson, Hannah Smith)\n(Malik Johnson, Sofia Rodriguez)\n(Malik Johnson, Carlos Santos)\n(Malik Johnson, Lily Wong)\n(Malik Johnson, Alejandro Ramirez)\n(Malik Johnson, Malikah Hussein)\n(Sofia Rodriguez, Hannah Smith)\n(Sofia Rodriguez, Carlos Santos)\n(Sofia Rodriguez, Alejandro Ramirez)\n(Ryan Chen, Mia Green)\n(Ryan Chen, Hannah Smith)\n(Ryan Chen, Carlos Santos)\n(Ryan Chen, Lily Wong)\n(Ryan Chen, Alejandro Ramirez)\n(Ryan Chen, Ethan Kim)\n(Mia Green, Hannah Smith)\n(Mia Green, Sofia Rodriguez)\n(Mia Green, Carlos Santos)\n(Mia Green, Lily Wong)\n(Mia Green, Alejandro Ramirez)\n(Mia Green, Malikah Hussein)\n(Xavier Littlebear, Hannah Smith)\n(Xavier Littlebear, Sofia Rodriguez)\n(Xavier Littlebear, Carlos Santos)\n(Xavier Littlebear, Alejandro Ramirez)\n(Xavier Littlebear, Malikah Hussein)\n(Lily Wong, Sofia Rodriguez)\n(Lily Wong, Carlos Santos)\n(Lily Wong, Alejandro Ramirez)\n(Lily Wong, Malikah Hussein)\n(Alejandro Ramirez, Hannah Smith)\n(Alejandro Ramirez, Sofia Rodriguez)\n(Alejandro Ramirez, Carlos Santos)\n(Alejandro Ramirez, Malikah Hussein)\n(Hannah Smith, Sofia Rodriguez)\n(Hannah Smith, Carlos Santos)\n(Hannah Smith, Malikah Hussein)\n(Malikah Hussein, Sofia Rodriguez)\n(Malikah Hussein, Carlos Santos)"
-  },
-  "finish_reason": "stop"
-}

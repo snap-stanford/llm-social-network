@@ -1,8 +1,0 @@
-{
-  "index": 0,
-  "message": {
-    "role": "assistant",
-    "content": "(Some potential friendship pairs could include:)\n\nEmma Wilson, Mia Green\nEmma Thompson, Hannah Smith\nEmma Thompson, Mia Green\nMalik Johnson, Malikah Hussein\nMalik Johnson, Alejandro Ramirez\nMalik Johnson, Carlos Santos\nSofia Rodriguez, Alejandro Ramirez\nSofia Rodriguez, Carlos Santos\nRyan Chen, Ethan Kim\nRyan Chen, Lily Wong\nRyan Chen, Xavier Littlebear\nMia Green, Hannah Smith\nMia Green, Xavier Littlebear\nXavier Littlebear, Hannah Smith\nLily Wong, Ethan Kim\nLily Wong, Alejandro Ramirez\nAlejandro Ramirez, Carlos Santos\nMalikah Hussein, Sofia Rodriguez\nMalikah Hussein, Lily Wong\nEthan Kim, Carlos Santos\nCarlos Santos, Sofia Rodriguez"
-  },
-  "finish_reason": "stop"
-}

@@ -1,8 +1,0 @@
-{
-  "index": 0,
-  "message": {
-    "role": "assistant",
-    "content": "- Emma Johnson, Olivia Chen\n- Olivia Chen, Liam Thompson\n- Liam Thompson, Lucas Lee\n- Lucas Lee, Sophia Nguyen\n- Sophia Nguyen, Ava Rodriguez\n- Ava Rodriguez, Isabella Wright\n- Isabella Wright, Mia Brown\n- Mia Brown, Evelyn Chen\n- Evelyn Chen, William Johnson\n- William Johnson, Matthew Wilson\n- Matthew Wilson, Scarlett Brown\n- Scarlett Brown, Joseph Jackson\n- Joseph Jackson, Dino Stefani\n- David Kim, Zoey Martinez\n- Zoey Martinez, Ethan Davis\n- Ethan Davis, Charlotte Johnson\n- Charlotte Johnson, Benjamin Kim\n- Benjamin Kim, Harper Thompson\n- Harper Thompson, Lindsey Manson\n- Daniel Davis, Samuel Davis\n- Samuel Davis, Gordon Sutter\n- Gabriel Phillips, Christian Hernandez"
-  },
-  "finish_reason": "stop"
-}
