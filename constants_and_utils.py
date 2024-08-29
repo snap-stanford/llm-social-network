@@ -20,9 +20,11 @@ SHOW_PLOTS = False
 # os.system('source ~/.bash-profile')
 # api_key = os.getenv("OPENAI_API_KEY")
 with open('api-key.txt', 'r') as f:
-    api_key = f.readlines()[0].strip()
-assert api_key is not None
-CLIENT = OpenAI(api_key=api_key)
+    lines = f.readlines()
+    openai_key = lines[0].strip()
+    assert len(openai_key) >= 10
+    llama_key = lines[1].strip()
+    assert len(llama_key) >= 10
 
 ##########################################
 # functions to draw and save networks
@@ -136,13 +138,18 @@ def draw_list_of_networks(list_of_G, network_name):
     plotting.plot_nr_edges(nr_edges, f'{network_name}')
     
 ##########################################
-# functions to interact with GPT
+# functions to interact with LLMs
 ##########################################
-def get_gpt_response(model, messages, savename=None, temp=DEFAULT_TEMPERATURE, verbose=False):
+def get_llm_response(model, messages, savename=None, temp=DEFAULT_TEMPERATURE, verbose=False):
     """
     Call OpenAI API, check for finish reason; if all looks good, return response.
     """
-    response = CLIENT.chat.completions.create(
+    if 'gpt' in model:
+        client = OpenAI(api_key=openai_key)
+    else:
+        client = OpenAI(api_key=llama_key, base_url = "https://api.llama-api.com")
+ 
+    response = client.chat.completions.create(
                 model=model,
                 messages=messages,
                 temperature=temp)
@@ -166,7 +173,10 @@ def get_gpt_response(model, messages, savename=None, temp=DEFAULT_TEMPERATURE, v
     response = response.choices[0]
     finish_reason = response.finish_reason
     if finish_reason != 'stop':
-        raise Exception(f'Response stopped for reason {finish_reason}')
+        if 'gpt' in model:
+            raise Exception(f'Finish reason: {finish_reason}\nResponse: {response.message.content}')
+        else:  # for some reason Llama produces max_token a lot even though the full answer is coming out
+            print(f'Warning: finish reason was {finish_reason}\nResponse: {response.message.content}')
         
     if verbose:
         for m in messages:
@@ -194,7 +204,7 @@ def repeat_prompt_until_parsed(model, system_prompt, user_prompt, parse_method,
     num_tries = 1
     while num_tries <= max_tries:
         try:
-            response = get_gpt_response(model, messages, temp=temp, verbose=verbose)
+            response = get_llm_response(model, messages, temp=temp, verbose=verbose)
             try:
                 parse_args['response'] = response
                 parse_out = parse_method(**parse_args)
