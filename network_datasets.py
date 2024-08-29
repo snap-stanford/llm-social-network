@@ -296,6 +296,35 @@ def load_real_homophily(same_group=True):
     real_df.append({'demo': 'gender', '_metric_value': val, 'save_name': 'laniado-interaction'})
 
     # Smith et al., GSS data
+    # 1985 GSS
+    prop_cross = .047  
+    exp_cross = .276
+    if same_group:
+        val = (1-prop_cross) / (1-exp_cross)
+    else:
+        val = prop_cross / exp_cross
+    real_df.append({'demo': 'race/ethnicity', '_metric_value': val, 'save_name': 'gss-1985'})
+    prop_cross = .241  
+    exp_cross = .535
+    if same_group:
+        val = (1-prop_cross) / (1-exp_cross)
+    else:
+        val = prop_cross / exp_cross
+    real_df.append({'demo': 'religion', '_metric_value': val, 'save_name': 'gss-1985'})
+    prop_cross = .403 
+    exp_cross = .498
+    if same_group:
+        val = (1-prop_cross) / (1-exp_cross)
+    else:
+        val = prop_cross / exp_cross
+    real_df.append({'demo': 'gender', '_metric_value': val, 'save_name': 'gss-1985'})
+    prop_cross = 11.792
+    exp_cross = 19.839
+    if same_group:
+        pass
+    else:
+        real_df.append({'demo': 'age', '_metric_value': prop_cross / exp_cross, 'save_name': 'gss-1985'})
+    # 2004 GSS
     prop_cross = .098  
     exp_cross = .387
     if same_group:
