@@ -33,4 +33,4 @@ To try other prompting methods, replace `global` with `local`, `sequential`, or 
 To analyze the generated networks, see `analyze_networks.py` and `plotting.py`.
 
 ## Our results
-You can find our generated networks and generated personas (with interests) in `text-files`.
+See `analyze_networks.ipynb` for our figures and tables. You can also find our generated networks and generated personas (with interests) in `text-files`.
