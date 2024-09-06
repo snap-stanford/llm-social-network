@@ -16,7 +16,7 @@ If you would like to generate names and/or interests (based on demographics):
 
 ```python generate_personas.py 50  --save_name us_50 --include_names --include_interests```
 
-The resulting files will be: `us_50.json`, `us_50_with_names.json`, and `us_50_with_names_and_interests.json`. You can also specify which LLM to use with `--model`. 
+With names and interests, the resulting filename will be `us_50_w_names_w_interests.json`. You can also specify which LLM to use with `--model`. In our experiments, we use the 50 personas saved under `text-files/us_50_gpt4o_w_interests.json`.
 
 `generate_personas.py` also has functions for analyzing the personas and interests, such as `get_interest_embeddings()` and `parse_reason()`.
 
