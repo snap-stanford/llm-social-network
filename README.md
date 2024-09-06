@@ -4,6 +4,8 @@ This repo contains code and results for the paper "LLMs generate structurally re
 ## Prerequisites 
 To run OpenAI models, you will need an OpenAI API key. To run Llama, Gemma, or other open-source models, you will need a Llama API key. See how API keys are fetched from `api-key.txt` in `constants_and_utils.py`.
 
+We used Python 3.10 in our experiments, see package requirements in `requirements.txt`.
+
 ## Generate personas
 To sample 50 personas and save it to a file called us_50.json, run the following command.
 This does *not* include names nor interests.
