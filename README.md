@@ -1,5 +1,5 @@
 # Generating social networks with LLMs
-This repo contains code and results for the paper "LLMs generate structurally realistic social networks but overestimate political homophily" by Serina Chang*, Alicja Chaszczewicz*, Emma Wang, Maya Josifovska, Emma Pierson, and Jure Leskovec.
+This repo contains code and results for the paper "LLMs generate structurally realistic social networks but overestimate political homophily" (under review).
 
 ## Prerequisites 
 To run OpenAI models, you will need an OpenAI API key. To run Llama, Gemma, or other open-source models, you will need a Llama API key. See how API keys are fetched from `api-key.txt` in `constants_and_utils.py`.
